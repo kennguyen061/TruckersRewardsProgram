@@ -4,7 +4,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end
+    exclude:
+      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/Sprint1_research
+    
 
 pool:
   vmImage: ubuntu-latest
@@ -18,4 +26,5 @@ steps:
 - script: |
     npm install
     npm run build
+  workingDirectory: 'S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end'
   displayName: 'npm install and build'
