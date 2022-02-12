@@ -6,25 +6,59 @@
 trigger:
   branches:
     include:
-      - main
+    - main
   paths:
     include:
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end
+    - $(Build.SourcesDirectory)/front-end
     exclude:
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/Sprint1_research
-    
+    - $(Build.SourcesDirectory)/Sprint1_research
 
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  workingDirectory: 'S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end'
-  displayName: 'npm install and build'
+stages:
+- stage: Lint
+  jobs:
+  - job: LintJS
+    displayName: Lint JavaScript
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: "10.x"
+      displayName: Install Node.js
+    - script: npx eslint --max-warnings=0 .
+      workingDirectory: $(Build.SourcesDirectory)/front-end
+      displayName: Run eslint
+  - job: LintPrettier
+    displayName: Lint Prettier
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: "14.x"
+      displayName: Install Node.js
+    - script: npx prettier --check .
+      workingDirectory: $(Build.SourcesDirectory)/front-end
+      displayName: Check Prettier Compliance
+- stage: Test
+  jobs:
+  - job: TestJS
+    displayName: Test JavaScript
+    pool:
+      vmImage: ubuntu-latest
+- stage: Build
+  jobs:
+  - job: BuildJS
+    displayName: Build JavaScript
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
+    - script: |
+        npm install
+        npm run build
+      workingDirectory: $(Build.SourcesDirectory)/front-end
+      displayName: 'npm install and build'
