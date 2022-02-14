@@ -12,6 +12,7 @@ trigger:
       - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end
     exclude:
       - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/Sprint1_research
+      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/api_calls
     
 
 pool:
