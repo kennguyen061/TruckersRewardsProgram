@@ -9,7 +9,9 @@ TODO: Guide users through getting your code up and running on their own system. 
 4.	API references
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+The repository contains a YAML schema reference for Azure Pipelines, a service that automatically builds and tests code projects. 
+This YAML schema configures the behavior for Azure Pipelines. Azure Pipelines should only trigger on commits to the application code; all other
+commits should be excluded from triggering Azure Pipelines.
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
