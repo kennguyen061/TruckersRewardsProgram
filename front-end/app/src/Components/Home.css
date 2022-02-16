@@ -1,0 +1,334 @@
+	.mediaViewInfo {
+		--web-view-name: Login Page;
+		--web-view-id: Login_Page;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Login_Page;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#Login_Page {
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		--web-view-name: Login Page;
+		--web-view-id: Login_Page;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#Rectangle_16 {
+		fill: rgba(255,255,255,1);
+	}
+	.Rectangle_16 {
+		filter: drop-shadow(0px 3px 80px rgba(0, 0, 0, 0.102));
+		position: absolute;
+		overflow: visible;
+		width: 1680px;
+		height: 1100px;
+		left: 245px;
+		top: 103px;
+	}
+	#winter-landscape-snow-zima-603 {
+		position: absolute;
+		width: 1055px;
+		height: 399px;
+		left: 254px;
+		top: 257px;
+		overflow: visible;
+	}
+	#Rectangle_17 {
+		opacity: 0.9;
+		fill: rgba(251,31,31,0.831);
+	}
+	.Rectangle_17 {
+		position: absolute;
+		overflow: visible;
+		width: 1031px;
+		height: 846px;
+		left: 240px;
+		top: 110px;
+	}
+	#WELCOME_TO_ROGERS_REWARDS {
+		left: 350px;
+		top: 613px;
+		position: absolute;
+		overflow: visible;
+		width: 704px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 43px;
+		color: rgba(255,255,255,1);
+	}
+	#Join_and_starting_gaining_poin {
+		left: 350px;
+		top: 710px;
+		position: absolute;
+		overflow: visible;
+		width: 395px;
+		height: 62px;
+		text-align: left;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+	}
+	#LOGIN_BELOW {
+		left: 1404px;
+		top: 413px;
+		position: absolute;
+		overflow: visible;
+		width: 159px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 25px;
+		color: rgba(0,0,0,1);
+	}
+	#Group_25 {
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		left: 1333px;
+		top: 480px;
+		overflow: visible;
+	}
+	#Rectangle_21 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(23,106,230,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_21 {
+		position: absolute;
+		overflow: visible;
+		width: 300px;
+		height: 60px;
+		left: 0px;
+		top: 0px;
+	}
+	#mail_1 {
+		position: absolute;
+		width: 22.506px;
+		height: 16px;
+		left: 26px;
+		top: 22px;
+		overflow: visible;
+	}
+	#Group_24 {
+		position: absolute;
+		width: 14.665px;
+		height: 4.644px;
+		left: 3.92px;
+		top: 7.714px;
+		overflow: visible;
+	}
+	#Path_13 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_13 {
+		overflow: visible;
+		position: absolute;
+		width: 4.901px;
+		height: 4.644px;
+		left: 9.764px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_14 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_14 {
+		overflow: visible;
+		position: absolute;
+		width: 4.903px;
+		height: 4.643px;
+		left: 0px;
+		top: 0.001px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_15 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_15 {
+		overflow: visible;
+		position: absolute;
+		width: 22.506px;
+		height: 16px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_16 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_16 {
+		overflow: visible;
+		position: absolute;
+		width: 21.539px;
+		height: 9.245px;
+		left: 0.478px;
+		top: 0.578px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_26 {
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		left: 1333px;
+		top: 568px;
+		overflow: visible;
+	}
+	#Rectangle_21_v {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(212,212,212,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_21_v {
+		position: absolute;
+		overflow: visible;
+		width: 300px;
+		height: 60px;
+		left: 0px;
+		top: 0px;
+	}
+	#PASSWORD {
+		opacity: 0.5;
+		left: 68px;
+		top: 20px;
+		position: absolute;
+		overflow: visible;
+		width: 90px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(0,0,0,1);
+		letter-spacing: 0.5px;
+	}
+	#padlock {
+		position: absolute;
+		width: 13.008px;
+		height: 16px;
+		left: 31px;
+		top: 22px;
+		overflow: visible;
+	}
+	#Group_27 {
+		position: absolute;
+		width: 13.008px;
+		height: 16px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Path_17 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_17 {
+		overflow: visible;
+		position: absolute;
+		width: 13.008px;
+		height: 16px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Path_18 {
+		fill: rgba(0,0,0,1);
+	}
+	.Path_18 {
+		overflow: visible;
+		position: absolute;
+		width: 3.267px;
+		height: 3.267px;
+		left: 4.871px;
+		top: 10.007px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_28 {
+		position: absolute;
+		width: 300px;
+		height: 60px;
+		left: 1333px;
+		top: 668px;
+		overflow: visible;
+	}
+	#Rectangle_21_ {
+		fill: rgba(23,106,230,1);
+	}
+	.Rectangle_21_ {
+		position: absolute;
+		overflow: visible;
+		width: 300px;
+		height: 60px;
+		left: 0px;
+		top: 0px;
+	}
+	#LOGIN {
+		left: 119px;
+		top: 15px;
+		position: absolute;
+		overflow: visible;
+		width: 63px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(255,255,255,1);
+		letter-spacing: 0.5px;
+	}
+	#Dont_have_account_Sign_up {
+		left: 1355px;
+		top: 882px;
+		position: absolute;
+		overflow: visible;
+		width: 260px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(112,112,112,1);
+	}
+	#EMAIL {
+		opacity: 0.5;
+		left: 1400px;
+		top: 500px;
+		position: absolute;
+		overflow: visible;
+		width: 49px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Avenir;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(0,0,0,1);
+		letter-spacing: 0.5px;
+	}
