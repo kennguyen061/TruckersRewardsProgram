@@ -8,6 +8,8 @@ EXAMPLE:
     <-Description......>
         <link>
 
-React Router: - Many guides are written for react router v5. Because we are using v6 this guide helps us use old guides get them to work in v6. - https://reactrouter.com/docs/en/v6/upgrading/v5#refactor-custom-routes
+React Router: 
+    - Many guides are written for react router v5. Because we are using v6 this guide helps us use old guides get them to work in v6. 
+        - https://reactrouter.com/docs/en/v6/upgrading/v5#refactor-custom-routes
 
 React:
