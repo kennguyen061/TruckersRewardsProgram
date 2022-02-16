@@ -1,5 +1,4 @@
-import { Route, Link, Routes } from "react-router-dom";
-import Home from "./Home.js";
+import { Link } from "react-router-dom";
 
 function Application() {
   return (
