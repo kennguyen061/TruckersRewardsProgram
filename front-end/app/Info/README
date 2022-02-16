@@ -1,0 +1,13 @@
+This is a doc is used to keep links to features we will be using again in the future.
+If you would like to document an article create or use the correct technology header then indent with a descripton
+followed by another line indented twice with the link.
+
+EXAMPLE:
+
+<Technology Name:>
+    <-Description......>
+        <link>
+
+React Router: - Many guides are written for react router v5. Because we are using v6 this guide helps us use old guides get them to work in v6. - https://reactrouter.com/docs/en/v6/upgrading/v5#refactor-custom-routes
+
+React:
