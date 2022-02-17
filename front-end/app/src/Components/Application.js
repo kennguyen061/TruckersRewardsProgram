@@ -14,7 +14,7 @@ function Application() {
     <div className="Container">
       <Navbar />
       <div>
-        <NewDriver>
+        <NewDriver onAddDriver={addDriverHandler}>
           <DriverForm />
         </NewDriver>
       </div>

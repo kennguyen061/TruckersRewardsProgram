@@ -79,6 +79,7 @@ const DriverForm = (props) => {
     setEnteredZip("");
     setEnteredPhoneNum("");
     setEnteredPassword("");
+    setReenteredPassword("");
   };
 
   return (

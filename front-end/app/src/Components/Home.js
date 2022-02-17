@@ -5,7 +5,7 @@ function Home() {
   return (
     <div className="Login_Page">
       <div className="Left-Component">
-        <label className="Main-Text">WELCOME TO RODGER'S REWARDS</label>
+        <label className="Main-Text">WELCOME TO ROGER'S REWARDS</label>
         <label className="Subtext">
           Join and start earning points for your drives today!
         </label>
