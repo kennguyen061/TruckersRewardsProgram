@@ -16,10 +16,10 @@
 }
 
 .NavBox {
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   display: flex;
-  background-color: #d5d8da34;
-  width: 100%;
+  background-color: #ffffffbb;
+  width: 97%;
   min-height: 4rem;
   justify-content: center;
   align-content: center;
@@ -27,4 +27,5 @@
   border-bottom-right-radius: 1em 1em;
   border-bottom-left-radius: 1em 1em;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  border: 0.2rem solid #0a93ee;
 }

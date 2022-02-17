@@ -38,7 +38,7 @@
 .Link-box {
   display: flex;
   min-height: 10vh;
-  background-color: rgba(88, 87, 87, 0.781);
+  background-color: rgb(8d918d);
   flex-direction: row;
   width: 37rem;
   height: 4rem;
@@ -48,7 +48,7 @@
 }
 
 .Container {
-  background-color: rgba(52, 116, 218, 0.76);
+  background-color: rgb(155, 155, 156);
   min-height: 100vh;
   display: flex;
   justify-content: center;
