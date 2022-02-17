@@ -18,7 +18,7 @@
 .NavBox {
   margin-top: 0.5rem;
   display: flex;
-  background-color: #d5d8da;
+  background-color: #d5d8da34;
   width: 100%;
   min-height: 4rem;
   justify-content: center;

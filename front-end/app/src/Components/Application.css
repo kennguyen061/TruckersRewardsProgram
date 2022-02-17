@@ -48,7 +48,7 @@
 }
 
 .Container {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(54, 123, 235, 0.637);
   min-height: 100vh;
   display: flex;
   justify-content: center;
