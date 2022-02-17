@@ -17,10 +17,20 @@ function Home() {
               <label className="Login-Header">BE ONE OF US!</label>
             </div>
             <div>
-              <input type={"email"} required className="EMAIL" />
+              <input
+                type={"email"}
+                required
+                className="EMAIL"
+                placeholder={"Enter Email"}
+              />
             </div>
             <div>
-              <input type={"password"} required className="PASSWORD" />
+              <input
+                type={"password"}
+                required
+                className="PASSWORD"
+                placeholder={"Enter Password"}
+              />
             </div>
             <div>
               {" "}
