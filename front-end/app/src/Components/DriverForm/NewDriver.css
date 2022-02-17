@@ -1,7 +1,7 @@
 .new-driver {
-  background-color: #a892ee;
+  background-color: #c6c5c959;
   padding: 1rem;
-  /*margin: 2rem auto;*/
+  margin: 3rem auto;
   width: 50rem;
   max-width: 95%;
   border-radius: 12px;
@@ -9,30 +9,30 @@
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
+.new-driver-label {
+  font: inherit;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.header {
+  margin-bottom: 1rem;
+}
+
 .new-driver button {
   font: inherit;
+  font-size: 20px;
   cursor: pointer;
   padding: 1rem 2rem;
-  border: 1px solid #40005d;
-  background-color: #40005d;
+  border: 1px solid #0a93ee;
+  background-color: #0a93ee;
   color: white;
   border-radius: 12px;
-  margin-right: 1rem;
+  margin-top: 1.5rem;
 }
 
 .new-driver button:hover,
 .new-driver button:active {
-  background-color: #510674;
-  border-color: #510674;
-}
-
-.new-driver button.alternative {
-  color: #220131;
-  border-color: transparent;
-  background-color: transparent;
-}
-
-.new-driver button.alternative:hover,
-.new-driver button.alternative:active {
-  background-color: #ddb3f8;
+  background-color: #0886da;
+  border-color: #0a93ee;
 }

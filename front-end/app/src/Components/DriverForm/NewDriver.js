@@ -11,8 +11,13 @@ const NewDriver = (props) => {
   };
 
   return (
-    <div className="new-driver">
-      <DriverForm onSaveDriverData={saveDriverDataHandler}></DriverForm>
+    <div>
+      <div className="new-driver">
+        <div className="header">
+          <label className="new-driver-label">New Driver Application</label>
+        </div>
+        <DriverForm onSaveDriverData={saveDriverDataHandler}></DriverForm>
+      </div>
     </div>
   );
 };

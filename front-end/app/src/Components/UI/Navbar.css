@@ -1,0 +1,29 @@
+.NavButton {
+  font: inherit;
+  font-weight: bold;
+  font-size: 35px;
+  cursor: pointer;
+  border: 1px solid #bfc3c500;
+  background-color: #00a5f700;
+  color: rgb(0, 0, 0);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.NavLink {
+  text-decoration: none;
+}
+
+.NavBox {
+  margin-top: 0.5rem;
+  display: flex;
+  background-color: #d5d8da;
+  width: 100%;
+  min-height: 4rem;
+  justify-content: center;
+  align-content: center;
+  border-radius: 1em 1em;
+  border-bottom-right-radius: 1em 1em;
+  border-bottom-left-radius: 1em 1em;
+}

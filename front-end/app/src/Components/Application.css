@@ -48,11 +48,12 @@
 }
 
 .Container {
-  background-color: darkgrey;
+  background-color: rgb(255, 255, 255);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .App-link {

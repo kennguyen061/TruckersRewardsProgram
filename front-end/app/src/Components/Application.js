@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import "./App.css";
+import "./Application.css";
+import DriverForm from "./DriverForm/DriverForm";
 import NewDriver from "./DriverForm/NewDriver";
+import Navbar from "./UI/Navbar";
 
 function Application() {
   const addDriverHandler = (driver) => {
@@ -11,17 +12,11 @@ function Application() {
 
   return (
     <div className="Container">
-      <div className="Card">
-        <h1 className="Title">Application</h1>
-        <div className="Link-box">
-          <Link to="/" className="App-link">
-            {" "}
-            Home{" "}
-          </Link>
-        </div>
-        <div className="Card">
-          <NewDriver onAddDriver={addDriverHandler} />
-        </div>
+      <Navbar />
+      <div>
+        <NewDriver>
+          <DriverForm />
+        </NewDriver>
       </div>
     </div>
   );
