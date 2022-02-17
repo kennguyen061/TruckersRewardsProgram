@@ -111,11 +111,12 @@
 }
 
 .EMAIL {
+  border: 1px solid #000000;
   margin-top: 2rem;
   border-radius: 50px;
   width: 17rem;
   height: 2rem;
-  border: 1px solid #bfc3c52d;
+  border: 3px solid #0a93ee;
 }
 
 .PASSWORD {
@@ -123,7 +124,7 @@
   border-radius: 25px;
   width: 17rem;
   height: 2rem;
-  border: 1px solid #bfc3c52d;
+  border: 3px solid #0a93ee;
 }
 
 .Cards {
@@ -157,11 +158,11 @@
   min-height: 20rem;
 }
 
-.Button {
+.Right-Component button {
   font: inherit;
   cursor: pointer;
   border: 1px solid #0a93ee;
-  background-color: #0a93ee;
+  background-color: #0a81cf;
   color: white;
   border-radius: 12px;
   margin-top: 3rem;
@@ -172,4 +173,23 @@
 
 .Link:hover {
   color: #00f;
+}
+
+.Right-Component button:hover,
+.Right-Component button:active {
+  background-color: #0886da;
+  border-color: #0a93ee;
+}
+
+::-webkit-input-placeholder {
+  font-size: 25px;
+}
+::-moz-placeholder {
+  font-size: 25px;
+}
+:-ms-input-placeholder {
+  font-size: 25px;
+}
+::placeholder {
+  font-size: 25px;
 }

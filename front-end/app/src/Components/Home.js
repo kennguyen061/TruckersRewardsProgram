@@ -21,7 +21,7 @@ function Home() {
                 type={"email"}
                 required
                 className="EMAIL"
-                placeholder={"Enter Email"}
+                placeholder={" Enter Email"}
               />
             </div>
             <div>
@@ -29,15 +29,12 @@ function Home() {
                 type={"password"}
                 required
                 className="PASSWORD"
-                placeholder={"Enter Password"}
+                placeholder={" Enter Password"}
               />
             </div>
             <div>
               {" "}
-              <button type="submit" className="Button">
-                {" "}
-                Login{" "}
-              </button>
+              <button type="submit"> Login </button>
             </div>
             <div>
               <label className="Sign_Up_Text">
