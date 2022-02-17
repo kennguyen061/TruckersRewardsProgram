@@ -1,18 +1,46 @@
 import { Link } from "react-router-dom";
-import "./App.css";
+import "./Home.css";
+
 function Home() {
   return (
-    <div className="Container">
-      <div className="Card">
-        <h1 className="Title">Home</h1>
-        <div className="Link-box">
-          <Link to="/" className="App-link">
-            {"Home"}
-          </Link>
-
-          <Link to="/Application" className="App-link">
-            {"App"}
-          </Link>
+    <div className="Login_Page">
+      <div className="Left-Component">
+        <label className="Main-Text">WELCOME TO RODGER'S REWARDS</label>
+        <label className="Subtext">
+          Join and start earning points for your drives today!
+        </label>
+      </div>
+      <div className="Right-Component">
+        <div className="Cards">
+          <div className="Cards-2">
+            <div>
+              <label className="Login-Header">BE ONE OF US!</label>
+            </div>
+            <div>
+              <input type={"email"} required className="EMAIL" />
+            </div>
+            <div>
+              <input type={"password"} required className="PASSWORD" />
+            </div>
+            <div>
+              {" "}
+              <button type="submit" className="Button">
+                {" "}
+                Login{" "}
+              </button>
+            </div>
+            <div>
+              <label className="Sign_Up_Text">
+                Don't have an account?{" "}
+                {
+                  <Link to="/Application" className="Link">
+                    {" "}
+                    Click Here{" "}
+                  </Link>
+                }
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
