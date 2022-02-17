@@ -111,6 +111,11 @@
 }
 
 .EMAIL {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
   border: 1px solid #000000;
   margin-top: 2rem;
   border-radius: 50px;
@@ -120,6 +125,11 @@
 }
 
 .PASSWORD {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
   border: 1px solid #000000;
   margin-top: 2rem;
   border-radius: 50px;
