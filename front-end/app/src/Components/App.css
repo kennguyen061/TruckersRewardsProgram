@@ -20,6 +20,7 @@
 
 .Card {
   margin-top: 10rem;
+  margin-bottom: 100rem;
   background-color: #2ed1fa;
   display: flex;
   flex-direction: column;
@@ -51,7 +52,7 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .App-link {
