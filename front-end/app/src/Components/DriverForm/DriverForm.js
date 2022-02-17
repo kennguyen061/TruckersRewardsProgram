@@ -88,7 +88,7 @@ const DriverForm = (props) => {
         <label>First Name</label>
         <input
           type={"text"}
-          placeholder={"  Homer"}
+          placeholder={"Homer"}
           value={enteredFirstName}
           required
           onChange={firstNameChangeHandler}
@@ -98,7 +98,7 @@ const DriverForm = (props) => {
         <label>Last Name</label>
         <input
           type={"text"}
-          placeholder={"  Simpson"}
+          placeholder={"Simpson"}
           value={enteredLastName}
           required
           onChange={lastNameChangeHandler}
@@ -109,7 +109,7 @@ const DriverForm = (props) => {
         <input
           type={"email"}
           value={enteredEmail}
-          placeholder={" user@email.com"}
+          placeholder={"user@email.com"}
           required
           onChange={emailChangeHandler}
         />
@@ -119,7 +119,7 @@ const DriverForm = (props) => {
         <input
           type={"text"}
           value={enteredStreet}
-          placeholder={" 742 Evergreen Terrace"}
+          placeholder={"742 Evergreen Ter."}
           required
           onChange={streetChangeHandler}
         />
@@ -129,7 +129,7 @@ const DriverForm = (props) => {
         <input
           type={"text"}
           value={enteredCity}
-          placeholder={" Springfield"}
+          placeholder={"Springfield"}
           required
           onChange={cityChangeHandler}
         />
@@ -153,7 +153,7 @@ const DriverForm = (props) => {
           minLength={"2"}
           maxLength={"2"}
           value={enteredZip}
-          placeholder={"  80085"}
+          placeholder={"80085"}
           required
           onChange={zipChangeHandler}
         />
@@ -163,7 +163,7 @@ const DriverForm = (props) => {
         <input
           type={"tel"}
           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          placeholder={" 939-555-0113"}
+          placeholder={"939-555-0113"}
           value={enteredPhoneNum}
           required
           onChange={phoneNumChangeHandler}
@@ -174,7 +174,7 @@ const DriverForm = (props) => {
         <input
           type={"password"}
           value={enteredPassword}
-          placeholder={" 4-8 Characters"}
+          placeholder={"4-8 Characters"}
           minLength="4"
           maxLength="8"
           required
@@ -186,7 +186,7 @@ const DriverForm = (props) => {
         <input
           type={"password"}
           value={reenteredPassword}
-          placeholder={" 4-8 Characters"}
+          placeholder={"4-8 Characters"}
           minLength="4"
           maxLength="8"
           required
