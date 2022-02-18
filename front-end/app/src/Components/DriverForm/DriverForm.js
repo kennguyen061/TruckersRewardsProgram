@@ -13,45 +13,6 @@ const DriverForm = (props) => {
   const [enteredPhoneNum, setEnteredPhoneNum] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [reenteredPassword, setReenteredPassword] = useState("");
-  const firstNameChangeHandler = (event) => {
-    setEnteredFirstName(event.target.value);
-  };
-
-  const lastNameChangeHandler = (event) => {
-    setEnteredLastName(event.target.value);
-  };
-
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-
-  const streetChangeHandler = (event) => {
-    setEnteredStreet(event.target.value);
-  };
-
-  const cityChangeHandler = (event) => {
-    setEnteredCity(event.target.value);
-  };
-
-  const stateChangeHandler = (event) => {
-    setEnteredState(event.target.value);
-  };
-
-  const zipChangeHandler = (event) => {
-    setEnteredZip(event.target.value);
-  };
-
-  const phoneNumChangeHandler = (event) => {
-    setEnteredPhoneNum(event.target.value);
-  };
-
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
-  };
-
-  const copyPasswordChangeHandler = (event) => {
-    setReenteredPassword(event.target.value);
-  };
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -82,125 +43,133 @@ const DriverForm = (props) => {
     setReenteredPassword("");
   };
 
-  return (
-    <form onSubmit={submitHandler}>
-      <div className="new-driver__control">
-        <label>First Name</label>
-        <input
-          type={"text"}
-          placeholder={"Homer"}
-          value={enteredFirstName}
-          required
-          onChange={firstNameChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Last Name</label>
-        <input
-          type={"text"}
-          placeholder={"Simpson"}
-          value={enteredLastName}
-          required
-          onChange={lastNameChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Email</label>
-        <input
-          type={"email"}
-          value={enteredEmail}
-          placeholder={"user@email.com"}
-          required
-          onChange={emailChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Street Address</label>
-        <input
-          type={"text"}
-          value={enteredStreet}
-          placeholder={"742 Evergreen Ter."}
-          required
-          onChange={streetChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>City</label>
-        <input
-          type={"text"}
-          value={enteredCity}
-          placeholder={"Springfield"}
-          required
-          onChange={cityChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>State(2 letters)</label>
-        <input
-          type={"text"}
-          minLength={"2"}
-          maxLength={"2"}
-          placeholder={" WA"}
-          value={enteredState}
-          required
-          onChange={stateChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Zip Code</label>
-        <input
-          type={"number"}
-          minLength={"2"}
-          maxLength={"2"}
-          value={enteredZip}
-          placeholder={"80085"}
-          required
-          onChange={zipChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Phone Number</label>
-        <input
-          type={"tel"}
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          placeholder={"939-555-0113"}
-          value={enteredPhoneNum}
-          required
-          onChange={phoneNumChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Password</label>
-        <input
-          type={"password"}
-          value={enteredPassword}
-          placeholder={"4-8 Characters"}
-          minLength="4"
-          maxLength="8"
-          required
-          onChange={passwordChangeHandler}
-        />
-      </div>
-      <div className="new-driver__control">
-        <label>Re-Enter Password</label>
-        <input
-          type={"password"}
-          value={reenteredPassword}
-          placeholder={"4-8 Characters"}
-          minLength="4"
-          maxLength="8"
-          required
-          onChange={copyPasswordChangeHandler}
-        />
-      </div>
-      <div className="new-driver__actions">
-        <button type="submit" disabled={enteredPassword !== reenteredPassword}>
-          {" "}
-          Create Account
-        </button>
-      </div>
-    </form>
-  );
+return(
+    <form method="POST" onSubmit={submitHandler}>
+        <div className="new-driver__control">
+            <label>First Name</label>
+            <input
+                type="text"
+                name="firstName"
+                placeholder="Homer"
+                value={enteredFirstName}
+                onChange={(event)=>setEnteredFirstName(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Last Name</label>
+            <input
+                type="text"
+                name="lastName"
+                placeholder="Simpson"
+                value={enteredLastName}
+                onChange={(event)=>setEnteredLastName(event.target.value)}
+                required
+            />
+        </div>
+        <div className ="new-driver__control">
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                value={enteredEmail}
+                placeholder="user@email.com"
+                onChange={(event)=>setEnteredEmail(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Street Address</label>
+            <input
+                type="text"
+                name="street"
+                value={enteredStreet}
+                placeholder="742 Evergreen Ter."
+                onChange={(event)=>setEnteredStreet(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>City</label>
+            <input
+                type="text"
+                name="city"
+                value={enteredCity}
+                placeholder="Springfield"
+                onChange={(event)=>setEnteredCity(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>State(2 letters)</label>
+            <input
+                type="text"
+                name="state"
+                minLength="2"
+                maxLength="2"
+                placeholder="WA"
+                value={enteredState}
+                onChange={(event)=>setEnteredState(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Zip Code</label>
+            <input
+                type="number"
+                name="zip"
+                minLength="2"
+                maxLength="2"
+                value={enteredZip}
+                placeholder="80085"
+                onChange={(event)=>setEnteredZip(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Phone Number</label>
+            <input
+                type="tel"
+                name="phoneNum"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                placeholder="939-555-0113"
+                value={enteredPhoneNum}
+                onChange={(event)=>setEnteredPhoneNum(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                value={enteredPassword}
+                placeholder="4-8 Characters"
+                minLength="4"
+                maxLength="8"
+                onChange={(event) => setEnteredPassword(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__control">
+            <label>Re-Enter Password</label>
+            <input
+                type="password"
+                value={reenteredPassword}
+                placeholder="4-8 Characters"
+                minLength="4"
+                maxLength="8"
+                onChange={(event) => setReenteredPassword(event.target.value)}
+                required
+            />
+        </div>
+        <div className = "new-driver__actions">
+            <button type = "submit" disabled = {enteredPassword !== reenteredPassword}>
+                {" "}
+                Create Account
+            </button>
+        </div>
+    </form>);
 };
 
 export default DriverForm;
