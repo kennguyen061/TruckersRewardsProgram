@@ -1,13 +1,13 @@
 .new-driver {
-  background-color: #ffffffbb;
+  background-color: #c0c0c000;
   padding: 1rem;
   margin: 3rem auto;
-  width: 50rem;
+  width: 65rem;
   max-width: 95%;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-  border: 0.2rem solid #0a93ee;
+  /*box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  border: 0.19rem solid #0a93ee;*/
 }
 
 .new-driver-label {
@@ -39,4 +39,11 @@
 .new-driver button:active {
   background-color: #0886da;
   border-color: #0a93ee;
+}
+
+.line_bold {
+  border: 1.5px solid #b6b6b6;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1;
 }

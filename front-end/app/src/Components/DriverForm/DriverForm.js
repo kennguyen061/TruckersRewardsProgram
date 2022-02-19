@@ -103,16 +103,7 @@ const DriverForm = (props) => {
           required
           onChange={lastNameChangeHandler}
         />
-      </div>
-      <div className="new-driver__control">
-        <label>Email</label>
-        <input
-          type={"email"}
-          value={enteredEmail}
-          placeholder={"user@email.com"}
-          required
-          onChange={emailChangeHandler}
-        />
+        <hr className="line" />
       </div>
       <div className="new-driver__control">
         <label>Street Address</label>
@@ -157,6 +148,17 @@ const DriverForm = (props) => {
           required
           onChange={zipChangeHandler}
         />
+        <hr className="line" />
+      </div>
+      <div className="new-driver__control">
+        <label>Email</label>
+        <input
+          type={"email"}
+          value={enteredEmail}
+          placeholder={"user@email.com"}
+          required
+          onChange={emailChangeHandler}
+        />
       </div>
       <div className="new-driver__control">
         <label>Phone Number</label>
@@ -168,6 +170,7 @@ const DriverForm = (props) => {
           required
           onChange={phoneNumChangeHandler}
         />
+        <hr className="line" />
       </div>
       <div className="new-driver__control">
         <label>Password</label>
@@ -192,6 +195,7 @@ const DriverForm = (props) => {
           required
           onChange={copyPasswordChangeHandler}
         />
+        <hr className="line" />
       </div>
       <div className="new-driver__actions">
         <button type="submit" disabled={enteredPassword !== reenteredPassword}>

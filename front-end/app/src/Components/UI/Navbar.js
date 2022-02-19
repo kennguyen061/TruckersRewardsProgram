@@ -4,6 +4,7 @@ import "./Navbar.css";
 function Navbar() {
   return (
     <div className="NavBox">
+      <h2 className="space" />
       <Link to="/" className="NavLink">
         {" "}
         <button type="button" className="NavButton">
