@@ -14,20 +14,27 @@ const DriverForm = (props) => {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [reenteredPassword, setReenteredPassword] = useState("");
 
-  const submitHandler = (event) => {
+const submitHandler = (event) => {
     event.preventDefault();
-
     const driverData = {
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-      email: enteredEmail,
-      street: enteredStreet,
-      city: enteredCity,
-      state: enteredState,
-      zip: enteredZip,
-      phoneNum: enteredPhoneNum,
-      password: enteredPassword,
+        firstName: enteredFirstName,
+        lastName: enteredLastName,
+        email: enteredEmail,
+        street: enteredStreet,
+        city: enteredCity,
+        state: enteredState,
+        zip: enteredZip,
+        phoneNum: enteredPhoneNum,
+        password: enteredPassword,
     };
+
+    fetch("http://localhost:8000/account/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(driverData)
+    }).then(() => {
+        console.log("account-creation request submitted")
+    })
 
     //change this
     props.onSaveDriverData(driverData);
@@ -44,7 +51,7 @@ const DriverForm = (props) => {
   };
 
 return(
-    <form method="POST" onSubmit={submitHandler}>
+    <form onSubmit={submitHandler}>
         <div className="new-driver__control">
             <label>First Name</label>
             <input
