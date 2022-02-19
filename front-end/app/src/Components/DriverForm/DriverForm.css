@@ -1,8 +1,5 @@
 .new-driver__controls {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  text-align: left;
 }
 
 .new-driver__control label {
@@ -19,11 +16,11 @@
   padding-right: 3px;
   padding-bottom: 5px;
   padding-left: 25px;
-  border: 1px solid #000000;
   border-radius: 50px;
   width: 17rem;
   height: 3rem;
   border: 3px solid #0a93ee;
+  margin-bottom: 1rem;
 }
 
 .new-driver__actions {

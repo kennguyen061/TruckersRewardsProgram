@@ -171,15 +171,16 @@
 
 .Right-Component button {
   font: inherit;
+  font-size: 30px;
   cursor: pointer;
   border: 1px solid #0a93ee;
   background-color: #0a81cf;
   color: white;
-  border-radius: 12px;
-  margin-top: 3rem;
-  width: 17rem;
-  height: 3rem;
-  margin-bottom: 8.5rem;
+  border-radius: 30px;
+  margin-top: 2rem;
+  width: 20rem;
+  height: 4rem;
+  margin-bottom: 5rem;
 }
 
 .Link:hover {
