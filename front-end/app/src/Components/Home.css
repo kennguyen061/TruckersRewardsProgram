@@ -75,21 +75,6 @@
   color: rgb(0, 0, 0);
 }
 
-#LOGIN_BELOW {
-  left: 1404px;
-  top: 413px;
-  position: absolute;
-  overflow: visible;
-  width: 159px;
-  white-space: nowrap;
-  text-align: center;
-  font-family: Avenir;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 25px;
-  color: rgba(0, 0, 0, 1);
-}
-
 .LOGIN {
   left: 119px;
   top: 15px;
