@@ -75,21 +75,6 @@
   color: rgb(0, 0, 0);
 }
 
-#LOGIN_BELOW {
-  left: 1404px;
-  top: 413px;
-  position: absolute;
-  overflow: visible;
-  width: 159px;
-  white-space: nowrap;
-  text-align: center;
-  font-family: Avenir;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 25px;
-  color: rgba(0, 0, 0, 1);
-}
-
 .LOGIN {
   left: 119px;
   top: 15px;
@@ -171,15 +156,16 @@
 
 .Right-Component button {
   font: inherit;
+  font-size: 30px;
   cursor: pointer;
   border: 1px solid #0a93ee;
   background-color: #0a81cf;
   color: white;
-  border-radius: 12px;
-  margin-top: 3rem;
-  width: 17rem;
-  height: 3rem;
-  margin-bottom: 8.5rem;
+  border-radius: 30px;
+  margin-top: 2rem;
+  width: 20rem;
+  height: 4rem;
+  margin-bottom: 5rem;
 }
 
 .Link:hover {

@@ -48,8 +48,9 @@
 }
 
 .Container {
-  background-color: rgba(155, 155, 180, 0.856);
-  min-height: 100vh;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

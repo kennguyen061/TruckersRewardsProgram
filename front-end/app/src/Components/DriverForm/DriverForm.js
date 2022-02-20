@@ -144,6 +144,7 @@ return(
                 onChange={(event)=>setEnteredPhoneNum(event.target.value)}
                 required
             />
+            <hr className="line" />
         </div>
         <div className = "new-driver__control">
             <label>Password</label>
@@ -169,6 +170,7 @@ return(
                 onChange={(event) => setReenteredPassword(event.target.value)}
                 required
             />
+            <hr className="line" />
         </div>
         <div className = "new-driver__actions">
             <button type = "submit" disabled = {enteredPassword !== reenteredPassword}>
