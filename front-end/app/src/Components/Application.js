@@ -6,8 +6,14 @@ import Navbar from "./UI/Navbar";
 function Application() {
   const addDriverHandler = (driver) => {
     console.log("in applicartion");
-    console.log(driver);
-    //this is where we would Post to the Server
+
+    fetch("http://localhost:8000/account/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(driver),
+    }).then(() => {
+      console.log("account-creation request submitted");
+    });
   };
 
   return (
