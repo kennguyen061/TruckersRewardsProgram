@@ -20,6 +20,14 @@ function Navbar() {
           Application{" "}
         </button>{" "}
       </Link>
+
+      <Link to="/Driver_Profile" className="NavLink">
+        {" "}
+        <button type="button" className="NavButton">
+          {" "}
+          Driver Profile{" "}
+        </button>{" "}
+      </Link>
     </div>
   );
 }

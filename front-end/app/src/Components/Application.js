@@ -5,7 +5,7 @@ import Navbar from "./UI/Navbar";
 
 function Application() {
   const addDriverHandler = (driver) => {
-    console.log("in applicartion");
+    console.log("in application");
 
     fetch("http://localhost:8000/account/create", {
       method: "POST",

@@ -1,0 +1,47 @@
+.Main-Text {
+  left: 40px;
+  top: 425px;
+  position: absolute;
+  overflow: visible;
+  width: 704px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 33px;
+  color: rgba(255, 255, 255, 1);
+}
+.Subtext {
+  left: 40px;
+  top: 503px;
+  position: absolute;
+  overflow: visible;
+  width: 500px;
+  height: 62px;
+  text-align: left;
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 1);
+}
+.Header {
+  background-color: #c0c0c000;
+  padding: 1rem;
+  font: inherit;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 1.5rem auto;
+  width: 65rem;
+  max-width: 95%;
+  border-radius: 12px;
+  text-align: center;
+}
+::placeholder {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
