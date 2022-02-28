@@ -1,16 +1,9 @@
-.Main-Text {
-  left: 40px;
-  top: 425px;
-  position: absolute;
-  overflow: visible;
-  width: 704px;
-  white-space: nowrap;
-  text-align: left;
-  font-family: "Montserrat", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 33px;
-  color: rgba(255, 255, 255, 1);
+.Login-Header {
+  font: inherit;
+  font-size: 40px;
+  font-weight: bold;
+  margin: auto;
+  width: 100%;
 }
 .Subtext {
   left: 40px;
@@ -25,18 +18,6 @@
   font-weight: normal;
   font-size: 22px;
   color: rgba(255, 255, 255, 1);
-}
-.Header {
-  background-color: #c0c0c000;
-  padding: 1rem;
-  font: inherit;
-  font-size: 40px;
-  font-weight: bold;
-  margin: 1.5rem auto;
-  width: 65rem;
-  max-width: 95%;
-  border-radius: 12px;
-  text-align: center;
 }
 ::placeholder {
   font-size: 25px;

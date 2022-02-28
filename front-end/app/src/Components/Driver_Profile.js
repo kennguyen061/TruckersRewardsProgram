@@ -8,12 +8,12 @@ function Driver_Profile() {
   return (
     <div className="Profile_Page">
       <Navbar />
-      <div className="Main Component">
-        <div className="Header">
-              <label className="Login-Header">Welcome Back First Last Name!</label>
-              <hr className="line_bold" />
-            </div>
+      <div className="Main_Component">
           <div className="Cards">
+            <div>
+            <label className="Login-Header">Welcome Back First Last Name!</label>
+            <hr className="line_bold" />
+            </div>
             <div>
             <label className="Name">Name</label>
             <hr className="line_bold" />
