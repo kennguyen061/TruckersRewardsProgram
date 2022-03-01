@@ -30,7 +30,9 @@ function NewNav() {
           <li>Apply</li>
         </Link>
         <li>Veiw Cattalog</li>
-        <li>Check Points</li>
+        <Link to="/main/points" smooth={true} duration={500}>
+          <li>Check Points</li>
+        </Link>
         <li>Log Behavior</li>
         <li>Other</li>
       </ul>
