@@ -34,6 +34,7 @@ router.get("/", (request, respsonse) => {
                 respsonse.send(false);
             }
         }
+    );
 });
 
 // create account
