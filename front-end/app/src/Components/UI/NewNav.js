@@ -50,10 +50,16 @@ function NewNav() {
 
       <div className={nav ? "small active" : "small"}>
         <ul className="small-menu">
-          <li>Home</li>
-          <li>Apply</li>
+          <Link to="/Main" smooth={true} duration={500}>
+            <li>Home</li>
+          </Link>
+          <Link to="/main/apply" smooth={true} duration={500}>
+            <li>Apply</li>
+          </Link>
           <li>Veiw Cattalog</li>
-          <li>Check Points</li>
+          <Link to="/main/points" smooth={true} duration={500}>
+            <li>Check Points</li>
+          </Link>
           <li>Log Behavior</li>
           <li>Other</li>
         </ul>
