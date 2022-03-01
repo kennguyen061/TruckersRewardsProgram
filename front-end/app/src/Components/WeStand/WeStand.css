@@ -1,0 +1,109 @@
+.WeStand img {
+  height: 100px;
+  width: 100px;
+}
+
+.WeStand {
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.WeStand .container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 1rem;
+  padding: 0 1rem;
+}
+
+.driverOfTheYear {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.WeStand .box {
+  display: flex;
+  max-width: 310px;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.promo {
+  width: 100%;
+  margin: 0.4rem 0;
+  margin-bottom: 4rem;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.promo h4 {
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+}
+
+.promo .timer {
+  padding: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.promo .offers {
+  background: #333;
+  color: #f5f5f5;
+  padding: 0.4rem 0;
+}
+
+.WeStand form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrap {
+  margin: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.WeStand input,
+select {
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+.WeStand .date {
+  display: flex;
+}
+.Westand button {
+  margin: 0.4rem;
+}
+
+@media screen and (max-width: 940px) {
+  .WeStand .container {
+    grid-template-columns: 1fr;
+  }
+
+  .driverOfTheYear {
+    grid-template-columns: 1fr;
+  }
+
+  .WeStand .right {
+    max-width: 100%;
+  }
+
+  .WeStand form {
+    width: 100%;
+  }
+
+  .WeStand .date {
+    flex-direction: column;
+  }
+}
