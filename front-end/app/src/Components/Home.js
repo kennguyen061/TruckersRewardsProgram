@@ -9,12 +9,13 @@ function Home() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(enteredEmail);
-    console.log(enteredPassword);
-
     if (enteredEmail === "test@test.com" && enteredPassword === "Test123") {
-      console.log("enterd");
-      navigate("../Driver_Profile", { replace: true });
+      console.log("entered");
+      navigate("../Driver_Profile", {
+        state: {
+          email: enteredEmail,
+        },
+      });
     }
   };
 
