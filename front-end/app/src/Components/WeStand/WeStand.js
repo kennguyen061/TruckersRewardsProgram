@@ -27,38 +27,48 @@ function WeStand() {
               <div>
                 <h3>We offer many oppertunities to earn points</h3>
                 <p>Get solid rewards for driving safe.</p>
-                <button>View Rewards</button>
+                <p>list reward catagories</p>
               </div>
             </div>
           </div>
         </div>
         <div className="right">
-          <div className="promo">
-            <h4 className="pass">
-              BUY THE BATTLE PASS TO UNLOCK AWESOME REWARDS!
-            </h4>
-            <p className="timer">12 Hours Left!</p>
-            <p className="offers">Veiw all bonuses</p>
+          <div>
+            <h3>We offer many oppertunities to earn points</h3>
+            <p>
+              Get solid rewards for driving safe. Bring in line with left, addd
+              list , delete duplicate in left
+            </p>
+            <p>list reward catagories</p>
           </div>
-          <form className="input-wrap">
-            <label>Card number</label>
-            <input type="text" />
-
-            <div className="CardInfo">
-              <div className="input-wrap">
-                <label>Experation Date</label>
-                <input type="date" />
-              </div>
-              <div className="input-wrap">
-                <label>CCV</label>
-                <input type="text" />
-              </div>
-            </div>
-            <button>Buy Now </button>
-          </form>
         </div>
       </div>
     </div>
   );
 }
 export default WeStand;
+
+/*
+<div className="right">
+  <div className="promo">
+    <h4 className="pass">BUY THE BATTLE PASS TO UNLOCK AWESOME REWARDS!</h4>
+    <p className="timer">12 Hours Left!</p>
+    <p className="offers">Veiw all bonuses</p>
+  </div>
+  <form className="input-wrap">
+    <label>Card number</label>
+    <input type="text" />
+
+    <div className="CardInfo">
+      <div className="input-wrap">
+        <label>Experation Date</label>
+        <input type="date" />
+      </div>
+      <div className="input-wrap">
+        <label>CCV</label>
+        <input type="text" />
+      </div>
+    </div>
+    <button>Buy Now </button>
+  </form>
+</div>;*/

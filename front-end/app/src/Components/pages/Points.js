@@ -1,5 +1,5 @@
 import "./Points.css";
-import NewNav from "../UI/NewNav";
+import NewNav from "../UI/HomeNav";
 import Footer from "../Footer/Footer";
 import PointsGraphic from "../PointsGraphic/PointsGraphic";
 
