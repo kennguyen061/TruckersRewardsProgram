@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS SPONSORORG (
 	SID int auto_increment NOT NULL unique,
     name varchar(20) NOT NULL,
     Driver_rules varchar(20) NOT NULL,
+	Conversion_scale FLOAT NOT NULL,
     primary key (SID)
     );
     
@@ -26,10 +27,16 @@ CREATE TABLE IF NOT EXISTS DRIVER (
     Address varchar(20) NOT NULL,
     Phone_number char(12) NOT NULL,
     VisibleFlag BIT NOT NULL,
-    SID int NOT NULL,
-    primary key (UID),
-    foreign key (SID) references SPONSORORG(SID)
+    primary key (UID)
     );
+    
+CREATE TABLE IF NOT EXISTS SPONSORANDDRIVER (
+	UID int,
+    SID int,
+    primary key (UID, SID),
+    foreign key (UID) references DRIVER(UID),
+    foreign key (SID) references SPONSORORG(SID)
+);
 
 CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (
 	WishlistID int auto_increment NOT NULL unique,
@@ -63,7 +70,6 @@ CREATE TABLE IF NOT EXISTS SPONSORACCT (
     
 CREATE TABLE IF NOT EXISTS POINTBALANCE (
 	PointID int auto_increment NOT NULL unique,
-    Conversion_scale FLOAT NOT NULL,
     Amount int NOT NULL,
     UID int NOT NULL,
     primary key (PointID),
