@@ -16,7 +16,7 @@ con.connect(function(err) {
     con.query('USE CPSC4910;');
 
     //Creates SPONSORORG Table
-    con.query('CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(20) NOT NULL,primary key (SID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(20) NOT NULL,Conversion_scale FLOAT NOT NULL,primary key (SID));', function(error, result, fields) {
         console.log(result);
     });
 
@@ -26,7 +26,12 @@ con.connect(function(err) {
     });
 
     //Creates DRIVER Table
-    con.query('CREATE TABLE IF NOT EXISTS DRIVER (UID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(20) NOT NULL,Password_hash varchar(255) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,SID int,primary key (UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS DRIVER (UID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(20) NOT NULL,Password_hash varchar(255) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,primary key (UID));', function(error, result, fields) {
+        console.log(result);
+    });
+
+    //Creates SPONSORANDDRIVER TABLE
+    con.query('CREATE TABLE IF NOT EXISTS SPONSORANDDRIVER (UID int,SID int,primary key (UID, SID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
         console.log(result);
     });
 
@@ -46,7 +51,7 @@ con.connect(function(err) {
     });
 
     //Creates POINTBALANCE Table
-    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCE (PointID int auto_increment NOT NULL unique,Conversion_scale FLOAT NOT NULL,Amount int NOT NULL,UID int NOT NULL,primary key (PointID),foreign key (UID) references DRIVER(UID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCE (PointID int auto_increment NOT NULL unique,Amount int NOT NULL,UID int NOT NULL,primary key (PointID),foreign key (UID) references DRIVER(UID));', function(error, result, fields) {
         console.log(result);
     });
 
