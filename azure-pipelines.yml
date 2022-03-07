@@ -10,9 +10,7 @@ trigger:
   paths:
     include:
       - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end
-    exclude:
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/Sprint1_research
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/api_calls
+
     
 
 pool:
@@ -25,8 +23,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    pwd
     npm install
     npm run build
-  workingDirectory: 'S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end'
+  workingDirectory: 'S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end/app'
   displayName: 'npm install and build'
