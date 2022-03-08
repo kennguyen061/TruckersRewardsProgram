@@ -10,9 +10,7 @@ trigger:
   paths:
     include:
       - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end
-    exclude:
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/Sprint1_research
-      - S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/api_calls
+
     
 
 pool:
@@ -21,11 +19,11 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - script: |
     npm install
     npm run build
-  workingDirectory: 'S22-Team01-Nguyen-Milford-Garcia-Mccoy-Faulk-Howes_new/front-end'
+  workingDirectory: $(Build.SourcesDirectory)/front-end/app
   displayName: 'npm install and build'
