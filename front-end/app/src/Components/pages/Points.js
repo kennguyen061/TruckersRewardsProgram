@@ -1,14 +1,15 @@
 import "./Points.css";
 import NewNav from "../UI/NewNav";
 import Footer from "../Footer/Footer";
-import PointsGraphic from "../PointsGraphic/PointsGraphic";
+import PointsOverTime from "../PointsGraphics/PointsOverTime";
+import ToGoal from "../PointsGraphics/ToGoal";
 
 function Points() {
   return (
-    <div>
+    <div className="page">
       <NewNav />
-      <PointsGraphic />
-
+      <ToGoal />
+      <PointsOverTime />
       <Footer />
     </div>
   );

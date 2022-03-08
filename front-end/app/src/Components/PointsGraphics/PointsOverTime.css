@@ -1,0 +1,25 @@
+.Graph {
+  height: 100%;
+  width: 80%;
+  background-color: #1f2025;
+  border-radius: 10px;
+  position: relative;
+  align-items: center;
+  top: 80px;
+  margin-bottom: 6rem;
+  left: 10%;
+
+  box-shadow: #fff;
+}
+
+.line-chart {
+  height: 100%;
+  width: 60%;
+  background-color: #1f2025;
+  border-radius: 10px;
+}
+
+.Graph h3 {
+  padding: 1rem 1rem;
+  color: #fff;
+}

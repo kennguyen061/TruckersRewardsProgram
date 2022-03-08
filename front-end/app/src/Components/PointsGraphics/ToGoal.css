@@ -1,0 +1,40 @@
+.progress-bar {
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.progress-bar .container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 1rem;
+  padding: 0 1rem;
+}
+
+.progress-bar .box {
+  width: 100%;
+  margin: 0.4rem 0;
+  margin-bottom: 4rem;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.total {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.box .tot {
+  padding: 0rem 1rem;
+  background: #333;
+}
+
+.box h2 {
+  color: #fff;
+}
+
+.box p {
+  color: #fff;
+}
