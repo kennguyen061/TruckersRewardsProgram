@@ -1,4 +1,4 @@
-import "./NewNav.css";
+import "./Nav.css";
 import { BiSearch } from "react-icons/bi";
 import { BsList, BsPerson, BsTruck } from "react-icons/bs";
 import {
@@ -23,18 +23,16 @@ function NewNav() {
         </h2>
       </div>
       <ul className="nav-menu">
-        <Link to="/Main" smooth={true} duration={500}>
+        <Link to="/Home" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
         <Link to="/main/apply" smooth={true} duration={500}>
           <li>Apply</li>
         </Link>
-        <li>Veiw Cattalog</li>
+        <li>Create Account</li>
         <Link to="/main/points" smooth={true} duration={500}>
-          <li>Check Points</li>
+          <li>Login</li>
         </Link>
-        <li>Log Behavior</li>
-        <li>Other</li>
       </ul>
       <div className="nav-icons">
         <BiSearch className="icon" style={{ marginRight: "1rem" }} />
@@ -50,18 +48,16 @@ function NewNav() {
 
       <div className={nav ? "small active" : "small"}>
         <ul className="small-menu">
-          <Link to="/Main" smooth={true} duration={500}>
+          <Link to="/Home" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
           <Link to="/main/apply" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
-          <li>Veiw Cattalog</li>
+          <li>Create Account</li>
           <Link to="/main/points" smooth={true} duration={500}>
-            <li>Check Points</li>
+            <li>Login</li>
           </Link>
-          <li>Log Behavior</li>
-          <li>Other</li>
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">

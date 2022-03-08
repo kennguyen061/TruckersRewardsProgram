@@ -1,7 +1,6 @@
 import "./Application.css";
 import DriverForm from "../DriverForm/DriverForm";
 import NewDriver from "../DriverForm/NewDriver";
-import Navbar from "../UI/Navbar";
 
 function Application() {
   const addDriverHandler = (driver) => {
@@ -18,7 +17,6 @@ function Application() {
 
   return (
     <div className="Container">
-      <Navbar />
       <div>
         <NewDriver onAddDriver={addDriverHandler}>
           <DriverForm />
