@@ -31,7 +31,7 @@ con.connect(function(err) {
     });
 
     //Creates SPONSORANDDRIVER TABLE
-    con.query('CREATE TABLE IF NOT EXISTS SPONSORANDDRIVER (UID int,SID int,primary key (UID, SID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS SPONSORANDDRIVER (UID int,SID int,primary key (UID, SID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORANDDRIVER(SID));', function(error, result, fields) {
         console.log(result);
     });
 
@@ -51,12 +51,12 @@ con.connect(function(err) {
     });
 
     //Creates POINTBALANCE Table
-    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCE (PointID int auto_increment NOT NULL unique,Amount int NOT NULL,UID int NOT NULL,primary key (PointID),foreign key (UID) references DRIVER(UID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCE (PointID int auto_increment NOT NULL unique, Amount int NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (PointID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORANDDRIVER(SID));', function(error, result, fields) {
         console.log(result);
     });
 
     //Creates POINTBALANCELOG Table
-    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCELOG (PlogID int auto_increment NOT NULL unique,Point_Update int NOT NULL, Update_Status varchar(20) NOT NULL,PointDate DATETIME NOT NULL,PointID int NOT NULL,SUID int NOT NULL,primary key (PlogID),foreign key (PointID) references POINTBALANCE(PointID),foreign key (SUID) references SPONSORACCT(SUID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS POINTBALANCELOG (PlogID int auto_increment NOT NULL unique,Point_Update int NOT NULL, Update_Status varchar(20) NOT NULL,PointDate DATETIME NOT NULL,PointID int NOT NULL,SID int NOT NULL,primary key (PlogID),foreign key (PointID) references POINTBALANCE(PointID),foreign key (SID) references SPONSOR(SID));', function(error, result, fields) {
         console.log(result);
     });
 

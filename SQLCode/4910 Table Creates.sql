@@ -72,8 +72,10 @@ CREATE TABLE IF NOT EXISTS POINTBALANCE (
 	PointID int auto_increment NOT NULL unique,
     Amount int NOT NULL,
     UID int NOT NULL,
+    SID int NOT NULL,
     primary key (PointID),
-    foreign key (UID) references DRIVER(UID)
+    foreign key (UID) references DRIVER(UID),
+    foreign key (SID) references SPONSORANDDRIVER(SID)
     );
     
 CREATE TABLE IF NOT EXISTS POINTBALANCELOG (
@@ -82,10 +84,10 @@ CREATE TABLE IF NOT EXISTS POINTBALANCELOG (
     Update_Status varchar(20) NOT NULL,
     PointDate DATETIME NOT NULL,
     PointID int NOT NULL,
-    SUID int NOT NULL,
+    SID int NOT NULL,
     primary key (PlogID),
     foreign key (PointID) references POINTBALANCE(PointID),
-    foreign key (SUID) references SPONSORACCT(SUID)
+    foreign key (SID) references POINTBALANCE(SID)
     );
     
 CREATE TABLE IF NOT EXISTS APPLICATION (

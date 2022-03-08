@@ -18,6 +18,19 @@ db.connect((error) => {
     console.log("Connected");
 });
 
+//Call this in the access account route based on success or faiure
+function loginattempt(email, loginstatus) {
+    connection.query("INSERT INTO LOGINATTEMPTS(Login_date, Username, Status) VALUES(CURRENT_TIMESTAMP(), ?, ?);",
+        [
+            email,
+            loginstatus
+        ],
+        (error, result) => {
+            if (error) throw error;
+        }
+    );
+}
+
 // access account
 router.get("/", (request, respsonse) => {
     console.log(request.body);
@@ -29,8 +42,10 @@ router.get("/", (request, respsonse) => {
             if (error) throw error;
             let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
             if (hash == result[0].Password_hash) {
+                loginattempt(request.body.email, "Success");
                 respsonse.send(true);
             } else {
+                loginattempt(request.body.email, "Failure");
                 respsonse.send(false);
             }
         }
