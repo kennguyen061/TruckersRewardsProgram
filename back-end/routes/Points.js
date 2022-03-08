@@ -48,10 +48,10 @@ function modifypoints(PointID, points) {
             }
         }
     );
-    currentPoints = currentPoints + points;
+    newPoints = currentPoints + points;
     db.query("UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?;",
         [
-            currentPoints,
+            newPoints,
             PointID
         ],
         (error, result) => {
