@@ -23,14 +23,14 @@ function NewNav() {
         </h2>
       </div>
       <ul className="nav-menu">
-        <Link to="/Home" smooth={true} duration={500}>
+        <Link to="/" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
-        <Link to="/main/apply" smooth={true} duration={500}>
+        <Link to="/Application" smooth={true} duration={500}>
           <li>Apply</li>
         </Link>
         <li>Create Account</li>
-        <Link to="/main/points" smooth={true} duration={500}>
+        <Link to="/points" smooth={true} duration={500}>
           <li>Login</li>
         </Link>
       </ul>
