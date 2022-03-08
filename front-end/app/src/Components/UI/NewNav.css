@@ -61,7 +61,7 @@ li {
 @media screen and (max-width: 940px) {
   .small {
     display: flex;
-
+    z-index: 2;
     flex-direction: column;
     width: 100%;
     top: -100vh;
