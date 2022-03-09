@@ -47,6 +47,8 @@ CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (
     
 CREATE TABLE IF NOT EXISTS WISHLISTITEM (
 	ItemID int auto_increment NOT NULL unique,
+    ItemName varchar(255),
+    Cost int,
     WishlistID int NOT NULL,
     primary key (ItemID),
     foreign key (WishlistID) references DRIVERWISHLIST(WishlistID)

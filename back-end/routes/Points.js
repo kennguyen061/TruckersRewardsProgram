@@ -35,7 +35,23 @@ const findPointID = (UID, SID) => {
         }
     }
     );
+    return PointID;
 };
+
+//Retrieve Current points of a PointID
+const getPoints = (PointID) => {
+    currentPoints = 0;
+    db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;",[PointID],
+    (error,result) => {
+        if (error) throw error;
+        if(result.length > 0) {
+            currentPoints = result[0];
+        }
+    }
+    );
+    return currentPoints;
+}
+
 
 function modifypoints(PointID, points) {
     currentPoints = 0;
@@ -56,7 +72,6 @@ function modifypoints(PointID, points) {
         ],
         (error, result) => {
             if (error) throw error;
-
         }
     );
 };

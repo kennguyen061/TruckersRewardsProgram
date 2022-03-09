@@ -17,3 +17,8 @@ WHERE UID = '' AND SID = '';
 
 -- Update PointBalancelog
 INSERT INTO POINTBALANCELOG(Point_Update, Update_Status, PointDate, PointID, SUID) VALUES('', 'trash driver', CURRENT_TIMESTAMP(), '', '');
+
+-- Retrieve Current Points
+SELECT Amount
+FROM POINTBALANCE
+WHERE PointID = '';
