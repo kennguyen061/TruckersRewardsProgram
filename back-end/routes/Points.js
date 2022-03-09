@@ -19,7 +19,6 @@ db.connect((error) => {
 
 //TODO: Function to Update PointBalance log entity to call in modify points function
 
-
 //Use this to fill in PointID in the following functions
 const findPointID = (UID, SID) => {
     PointID = 0
@@ -52,7 +51,7 @@ const getPoints = (PointID) => {
     return currentPoints;
 }
 
-
+//Modifies current points
 function modifypoints(PointID, points) {
     currentPoints = 0;
     db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;", 
@@ -75,3 +74,5 @@ function modifypoints(PointID, points) {
         }
     );
 };
+
+//TODO: WishlistItem functions
