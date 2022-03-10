@@ -17,7 +17,21 @@ db.connect((error) => {
     console.log("Connected");
 });
 
-//TODO: Function to Update PointBalance log entity to call in modify points function
+//Function to Update PointBalance log entity to call in modify points function
+function updatePointBalanceLog(currentPoints,Reason,PointID,SID) {
+    db.query("INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
+    [
+        currentPoints,
+        Reason,
+        PointID,
+        SID
+    ],
+    (error, result) => {
+        if (error) throw error;
+    }
+    );
+}
+
 
 //Use this to fill in PointID in the following functions
 const findPointID = (UID, SID) => {
@@ -52,7 +66,7 @@ const getPoints = (PointID) => {
 }
 
 //Modifies current points
-function modifypoints(PointID, points) {
+function modifypoints(PointID,points,Reason,SID) {
     currentPoints = 0;
     db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;", 
         [PointID],
@@ -72,6 +86,7 @@ function modifypoints(PointID, points) {
         (error, result) => {
             if (error) throw error;
             console.log(result);
+            updatePointBalanceLog(newPoints,Reason,PointID,SID);
         }
     );
 };
