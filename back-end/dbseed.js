@@ -36,7 +36,7 @@ con.connect(function(err) {
     });
 
     //Creates DRIVERWISHLIST Table
-    con.query('CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (WishlistID int auto_increment NOT NULL unique,UID int NOT NULL,primary key (WishlistID),foreign key (UID) references DRIVER(UID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (WishlistID int auto_increment NOT NULL unique,UID int NOT NULL,SID int NOT NULL,primary key (WishlistID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
         console.log(result);
     });
 

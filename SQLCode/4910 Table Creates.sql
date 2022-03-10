@@ -41,8 +41,10 @@ CREATE TABLE IF NOT EXISTS SPONSORANDDRIVER (
 CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (
 	WishlistID int auto_increment NOT NULL unique,
     UID int NOT NULL,
+    SID int NOT NULL,
     primary key (WishlistID),
-    foreign key (UID) references DRIVER(UID)
+    foreign key (UID) references DRIVER(UID),
+    foreign key (SID) references SPONSORORG(SID)
     );
     
 CREATE TABLE IF NOT EXISTS WISHLISTITEM (
