@@ -14,27 +14,27 @@ function Driver_Profile(props) {
             <label className="Login-Header">
               Welcome Back First Last Name!
             </label>
+            <hr className="line" />
+          </div>
+          <div>
+            <label className="Name">Name:</label>
             <hr className="line_bold" />
           </div>
           <div>
-            <label className="Name">Name</label>
+            <label className="Email">{"Email:"}</label>
             <hr className="line_bold" />
           </div>
           <div>
-            <label className="Email">{"Email: "}</label>
+            <label className="Address">Address:</label>
             <hr className="line_bold" />
           </div>
           <div>
-            <label className="Address">Address</label>
-            <hr className="line_bold" />
-          </div>
-          <div>
-            <label className="Phone_Number">Phone Number</label>
-            <hr className="line_bold" />
+            <label className="Phone">Phone Number:</label>
           </div>
         </div>
       </div>
     </div>
+    <Footer />
     </div>
   );
 }
