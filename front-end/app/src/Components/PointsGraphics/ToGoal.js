@@ -1,9 +1,12 @@
 import "./ToGoal.css";
-
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 function ProgressBar() {
-  var totalPoints = 1000;
+  var totalPoints = 2000;
   var goal = 9000;
-  var ratio = totalPoints / goal;
+  var ratio = (totalPoints / goal) * 100;
+  ratio = ratio - (ratio % 1);
+
   return (
     <div className="progress-bar">
       <div className="container">
@@ -18,7 +21,13 @@ function ProgressBar() {
             <div className="togoal">
               <div className="box">
                 <h2>How close you are to your goal.</h2>
-                <h2>{ratio}</h2>
+                <div className="featuredChart">
+                  <CircularProgressbar
+                    value={ratio}
+                    text={ratio + "%"}
+                    strokeWidth={10}
+                  />
+                </div>
               </div>
             </div>
           </div>
