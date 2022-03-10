@@ -6,12 +6,12 @@ function WeStand() {
     <div className="WeStand">
       <div className="container">
         <div className="left">
-          <h2>What We Belive In</h2>
+          <h2>What We Beleive In</h2>
           <p>
-            We the people at Roger's Rewards belive that it is important to
-            drive safe.This is just going to be some placeholder txt while
+            We at Roger's Rewards believe that it is important to
+            drive safe. This is just going to be some placeholder txt while
             someone figures out a good way to make it sound like we belive in
-            idk maybe put somehting about how to become driviver of the year.
+            idk maybe put somehting about how to become driver of the year.
           </p>
           <div className="driverOfTheYear">
             <div className="box">

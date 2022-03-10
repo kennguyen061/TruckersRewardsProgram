@@ -13,40 +13,6 @@
   }
 }
 
-.Title {
-  margin-top: 7rem;
-  margin-bottom: 3rem;
-}
-
-.Card {
-  margin-top: 10rem;
-  margin-bottom: 100rem;
-  background-color: #7ab0b9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: top;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  border-radius: 12px;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-  width: 35rem;
-  height: 50rem;
-  min-height: 20vh;
-}
-
-.Link-box {
-  display: flex;
-  min-height: 10vh;
-  background-color: rgb(8d918d);
-  flex-direction: row;
-  width: 37rem;
-  height: 4rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-}
-
 .Container {
   background-color: rgba(89, 167, 255, 0.781);
   height: 100%;
@@ -55,7 +21,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20px
+  padding-top: 3rem;
 }
 
 .App-link {
