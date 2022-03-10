@@ -19,9 +19,7 @@ function NewNav() {
       <div className={nav ? "navbar-bg" : "navbar"}>
         <div className="logo">
           <h2>
-          <Link to="/" smooth={true} duration={500}>
             Roger's Rewards <BsTruck className="icon" />
-            </Link>
           </h2>
         </div>
         <ul className="nav-menu">
@@ -31,10 +29,10 @@ function NewNav() {
           <Link to="/pages/application" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
+          <li>Create Account</li>
           <Link to="/main/points" smooth={true} duration={500}>
-            <li>Points</li>
+            <li>Login</li>
           </Link>
-          <li>Login</li>
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
@@ -58,10 +56,10 @@ function NewNav() {
             <Link to="/pages/application" smooth={true} duration={500}>
               <li>Apply</li>
             </Link>
+            <li>Create Account</li>
             <Link to="/main/points" smooth={true} duration={500}>
-              <li>Points</li>
+              <li>Login</li>
             </Link>
-            <li>Login</li>
           </ul>
           <div className="small-menu-bot">
             <div className="menu-icos">

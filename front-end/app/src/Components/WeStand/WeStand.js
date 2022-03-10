@@ -6,12 +6,11 @@ function WeStand() {
     <div className="WeStand">
       <div className="container">
         <div className="left">
-          <h2>What We Beleive In</h2>
+          <h2>Our Mission</h2>
           <p>
             We at Roger's Rewards believe that it is important to
-            drive safe. This is just going to be some placeholder txt while
-            someone figures out a good way to make it sound like we belive in
-            idk maybe put somehting about how to become driver of the year.
+            drive safe and to be rewarded for connecting everyone.
+            We have a simple idea, you drive safe, you earn points.
           </p>
           <div className="driverOfTheYear">
             <div className="box">
@@ -25,7 +24,7 @@ function WeStand() {
             </div>
             <div className="box">
               <div>
-                <h3>We offer many oppertunities to earn points</h3>
+                <h3>We offer many opportunities to earn points</h3>
                 <p>Get solid rewards for driving safe.</p>
                 <p>list reward catagories</p>
               </div>
@@ -34,7 +33,7 @@ function WeStand() {
         </div>
         <div className="right">
           <div>
-            <h3>We offer many oppertunities to earn points</h3>
+            <h3>We offer many opportunities to earn points</h3>
             <p>
               Get solid rewards for driving safe. Bring in line with left, addd
               list , delete duplicate in left
