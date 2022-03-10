@@ -48,13 +48,14 @@
 }
 
 .Container {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(89, 167, 255, 0.781);
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 20px
 }
 
 .App-link {

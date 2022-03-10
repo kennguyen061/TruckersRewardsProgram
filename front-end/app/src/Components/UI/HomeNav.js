@@ -23,10 +23,10 @@ function NewNav() {
         </h2>
       </div>
       <ul className="nav-menu">
-        <Link to="/Home" smooth={true} duration={500}>
+        <Link to="/" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
-        <Link to="/main/apply" smooth={true} duration={500}>
+        <Link to="/pages/application" smooth={true} duration={500}>
           <li>Apply</li>
         </Link>
         <li>Create Account</li>
@@ -36,7 +36,9 @@ function NewNav() {
       </ul>
       <div className="nav-icons">
         <BiSearch className="icon" style={{ marginRight: "1rem" }} />
-        <BsPerson className="icon" />
+        <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <BsPerson className="icon" />
+        </Link>
       </div>
       <div className="Hamburger" onClick={handlerNav}>
         {!nav ? (
@@ -51,7 +53,7 @@ function NewNav() {
           <Link to="/Home" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/main/apply" smooth={true} duration={500}>
+          <Link to="/pages/application" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
           <li>Create Account</li>
