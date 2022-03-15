@@ -1,0 +1,17 @@
+.carousel {
+  padding: 2rem 0;
+}
+
+.carousel img {
+  height: auto;
+  object-fit: cover;
+}
+
+.thumbs-wrapper,
+.carousel-status {
+  display: none;
+}
+
+.carousel img:hover {
+  cursor: not-allowed;
+}

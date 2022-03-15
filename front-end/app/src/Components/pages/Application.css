@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.Title {
+  margin-top: 7rem;
+  margin-bottom: 3rem;
+}
+
+.Card {
+  margin-top: 10rem;
+  margin-bottom: 100rem;
+  background-color: #7ab0b9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  width: 35rem;
+  height: 50rem;
+  min-height: 20vh;
+}
+
+.Link-box {
+  display: flex;
+  min-height: 10vh;
+  background-color: rgb(8d918d);
+  flex-direction: row;
+  width: 37rem;
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.Container {
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.App-link {
+  color: #ffffff;
+  margin-right: 1rem;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
