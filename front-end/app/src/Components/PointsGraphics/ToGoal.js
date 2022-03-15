@@ -1,6 +1,8 @@
 import "./ToGoal.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { PannelBar } from "./PannelBar";
+
 function ProgressBar() {
   var totalPoints = 2000;
   var goal = 9000;
@@ -35,7 +37,9 @@ function ProgressBar() {
         <div className="right">
           <div className="log">
             <div className="box">
-              <p>This will have the history of point transactions</p>
+              <div className="pannelBar">
+                <PannelBar />
+              </div>
             </div>
           </div>
         </div>
