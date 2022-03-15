@@ -1,6 +1,8 @@
 import './App.css';
 import 'bulma/css/bulma.min.css';
 import React, { useState, useEffect }  from 'react';
+import listing_details from './listing_details.js'
+import { BrowserRouter, Routes, Router } from "react-router-dom";
 import axios from "axios";
 
 //in order for api to work, go to this link: https://cors-anywhere.herokuapp.com and click temporary access
@@ -12,6 +14,7 @@ function App() {
   //used to grab the active listings
   const [listing, setlisting] = useState([]);
 
+
   //used for the search parameters 
   const [q, setQ] = useState("");
 
@@ -20,7 +23,7 @@ function App() {
 
   //used for the filtering using dropdown
   const [filterParam, setFilterParam] = useState("All");
-  
+
 
   
   const fetchHighData = async () => 
@@ -84,28 +87,16 @@ function App() {
   
 
   return (
+
     <div className="Catalog">
-
-      <div className="search-wrapper">
-        <label htmlFor="search-form">
-          <input
-            type="search"
-            name="search-form"
-            id="search-form"
-            className="search-input"
-            placeholder="Search for..."
-            value={q}
-            /*
-            // set the value of our useState q
-            //  anytime the user types in the search box
-            */
-            onChange={(e) => setQ(e.target.value)}
-            />
-            <span className="sr-only">Search here</span>
-        </label>
-      </div>  
-
-
+      <center><input className="search-input" 
+        type="search" 
+        style= {{marginTop:50, width: 500, height:35}}
+        placeholder=" Search for an item " 
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+      /></center>
+           
         <div className="buttons has-addons is-centered" style={{marginTop: 30}} >
           <button className="button" onClick={fetchData}> Sort by: Recent </button>
           <button className="button" onClick={fetchHighData}>Sort by: Highest Price</button>
@@ -126,22 +117,7 @@ function App() {
         </div>
  
       <div className = "columns" style={{marginTop:30, marginLeft:10, marginRight:10}}>
-
-      {/* <div class="column is-narrow">
-        <h3>Pick a Category:</h3>
-        <div className='btn-group' onChange={(e) => {setFilterParam(e.target.value);}}>
-          <button class="button is-responsive" style={{marginBottom: 10, marginTop:10}} value="Art & Collectibles"> Art & Collectibles</button>
-          <button class="button is-responsive" style={{marginBottom: 10}}> Jewelry </button>
-          <button class="button is-responsive" style={{marginBottom: 10}}>Home & Living </button>
-          <button class="button is-responsive" style={{marginBottom: 10}}> Craft Supplies & Tools </button>
-          <button class="button is-responsive" style={{marginBottom: 10}}>Clothing</button>
-          <button class="button is-responsive" style={{marginBottom: 10}}>Toys & Games </button>
-        </div>
-      </div> */}
-     
         <div className="column">   
-        {/* {listing.map((listing,index) => ( */}
-        {/* //{listing.map((listing,index) => ( */}
         
         {search(listing).map((listing) => (
        
@@ -153,6 +129,7 @@ function App() {
             <center><h2>Price: {listing.price}</h2></center>
             {/* <center><h2>Description: {listing.description}</h2></center> */}
 
+           
 
             {/* Potentially Star Rating */}
             <center>Rating: </center>
@@ -165,9 +142,11 @@ function App() {
         </div> 
         </div>
     </div>
+
   );
   
 }
 
 export default App;
+
 
