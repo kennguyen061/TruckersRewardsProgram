@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Components/pages/Home.js";
 import Application from "./Components/pages/Application.js";
 import Points from "./Components/pages/Points.js";
-import Profile from "./Components/pages/Driver_Profile";
+import Profile from "./Components/pages/Driver_Profile.js";
+import Login from "./Components/pages/Login.js";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/pages/application" element={<Application />} />
           <Route path="/pages/Driver_Profile" element={<Profile />} />
           <Route path="/main/points" element={<Points />} />
+          <Route path="/pages/Login" element={<Login />} />
         </Routes>
       </div>
     </div>
