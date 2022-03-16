@@ -4,7 +4,6 @@ import NewNav from "../UI/HomeNav";
 import Hero from "../Hero/Hero";
 import People from "../People/People";
 import WeStand from "../WeStand/WeStand";
-import GoRound from "../GoRound/GoRound";
 import Footer from "../Footer/Footer";
 
 function Home() {

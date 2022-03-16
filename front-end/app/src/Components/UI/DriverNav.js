@@ -1,4 +1,4 @@
-import "./Nav.css";
+import "./DriverNav.css";
 import { BiSearch } from "react-icons/bi";
 import { BsList, BsPerson, BsTruck } from "react-icons/bs";
 import {
@@ -29,9 +29,9 @@ function NewNav() {
           <Link to="/pages/application" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
-          <li>Create Account</li>
+          <li>Catalog</li>
           <Link to="/main/points" smooth={true} duration={500}>
-            <li>Login</li>
+            <li>Dashboard</li>
           </Link>
         </ul>
         <div className="nav-icons">
@@ -56,9 +56,9 @@ function NewNav() {
             <Link to="/pages/application" smooth={true} duration={500}>
               <li>Apply</li>
             </Link>
-            <li>Create Account</li>
+            <li>Catalog</li>
             <Link to="/main/points" smooth={true} duration={500}>
-              <li>Login</li>
+              <li>Dashboard</li>
             </Link>
           </ul>
           <div className="small-menu-bot">
