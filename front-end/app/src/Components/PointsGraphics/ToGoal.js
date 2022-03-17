@@ -1,7 +1,7 @@
 import "./ToGoal.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { PannelBar } from "./PannelBar";
+import PannelBar from "./PannelBar";
 
 function ProgressBar() {
   var totalPoints = 2000;
