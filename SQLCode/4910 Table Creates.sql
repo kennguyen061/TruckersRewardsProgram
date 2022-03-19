@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS APPLICATION (
     AppDate DATETIME NOT NULL,
     UID int NOT NULL,
     SID int NOT NULL,
+    Reason varchar(255),
     primary key (AppID),
     foreign key (UID) references DRIVER(UID),
     foreign key (SID) references SPONSORORG(SID)

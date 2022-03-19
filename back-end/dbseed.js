@@ -61,7 +61,7 @@ con.connect(function(err) {
     });
 
     //Creates APPLICATION Table
-    con.query('CREATE TABLE IF NOT EXISTS APPLICATION (AppID int auto_increment NOT NULL unique,AppStatus int NOT NULL,AppDate DATETIME NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (AppID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS APPLICATION (AppID int auto_increment NOT NULL unique,AppStatus int NOT NULL,AppDate DATETIME NOT NULL,UID int NOT NULL,SID int NOT NULL,Reason varchar(255),primary key (AppID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
         console.log(result);
     });
 
