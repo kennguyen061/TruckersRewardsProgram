@@ -17,53 +17,85 @@ db.connect((error) => {
     console.log("Connected");
 });
 
-//Function to Update PointBalance log entity to call in modify points function
-function updatePointBalanceLog(currentPoints,Reason,PointID,SID) {
+// access points
+router.get("/", (request, respsonse) => {
+    db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;", [PointID],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length > 0) {
+                console.log("Points accessed.")
+                response.send(result[0]);
+            }
+        }
+    );
+});
+
+// update points
+router.post("/update", (request, respsonse) => {
+
+    // select point ID
+    db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+        [
+            request.body.UID,
+            request.body.SID
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length > 0) {
+                Poin = result[0];
+            }
+        }
+    )
+
+    // insert new balance
     db.query("INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
-    [
-        currentPoints,
-        Reason,
-        PointID,
-        SID
-    ],
-    (error, result) => {
-        if (error) throw error;
-    }
+        [
+            request.body.currentPoints,
+            request.body.Reason,
+            request.body.PointID,
+            request.body.SID
+        ],
+        (error, result) => {
+            if (error) throw error;
+        }
     );
 }
 
+//Function to Update PointBalance log entity to call in modify points function
+// function updatePointBalanceLog(currentPoints, Reason, PointID, SID) {
+//    db.query("INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
+//    [
+//        currentPoints,
+//        Reason,
+//        PointID,
+//        SID
+//    ],
+//    (error, result) => {
+//        if (error) throw error;
+//    }
+//    );
+//}
 
-//Use this to fill in PointID in the following functions
-const findPointID = (UID, SID) => {
-    PointID = 0
-    db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
-    [   
-        UID,
-        SID
-    ],
-    (error, result) => {
-        if (error) throw error;
-        if(result.length > 0) {
-            PointID = result[0];
-        }
-    }
-    );
-    return PointID;
-};
+
+////Use this to fill in PointID in the following functions
+//const findPointID = (UID, SID) => {
+//    PointID = 0
+//    db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+//    [   
+//        UID,
+//        SID
+//    ],
+//    (error, result) => {
+//        if (error) throw error;
+//        if(result.length > 0) {
+//            PointID = result[0];
+//        }
+//    }
+//    );
+//    return PointID;
+//};
 
 //Retrieve Current points of a PointID
-const getPoints = (PointID) => {
-    currentPoints = 0;
-    db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;",[PointID],
-    (error,result) => {
-        if (error) throw error;
-        if(result.length > 0) {
-            currentPoints = result[0];
-        }
-    }
-    );
-    return currentPoints;
-}
 
 //Modifies current points
 function modifypoints(PointID,points,Reason,SID) {
@@ -90,59 +122,3 @@ function modifypoints(PointID,points,Reason,SID) {
         }
     );
 };
-
-//WISHLIST ITEM FUNCTIONS
-
-//Use this to find a wishlistID given a UID and SID
-const findWishlistID = (UID,SID) => {
-    PointID = 0
-    db.query("SELECT WishlistID FROM DRIVERWISHLIST WHERE UID = ? AND SID = ?;",
-    [   
-        UID,
-        SID
-    ],
-    (error, result) => {
-        if (error) throw error;
-        if(result.length > 0) {
-            PointID = result[0];
-        }
-    }
-    );
-    return PointID;
-}
-
-//Add an item to wishlist 
-function addtowishlist(WishlistID, ItemName, Cost) {
-    db.query("INSERT INTO WISHLISTITEM(WishlistID, ItemName, Cost) VALUES(?,?,?)", 
-    [
-        WishlistID,
-        ItemName,
-        Cost
-    ],
-    (error, result) => {
-        if (error) throw error;
-        console.log(result);
-    }
-    );
-}
-
-//Retrieve all wishlist items given a wishlist in an array
-const retrievewishlist = (WishlistID) => {
-    db.query("SELECT * FROM DRIVERWISHLIST WHERE WishlistID = ?",[WishlistID],
-    (error, result) => {
-        if (error) throw error;
-        Wishlist = result;
-        return Wishlist;
-    }
-    );
-}
-
-//Remove an item from the wishlist
-function removeitem(WishlistID, ItemName) {
-    db.query("DELETE FROM WISHLISTITEM WHERE WishlistID = ? AND ItemName = ?",[WishlistID, ItemName],
-    (error, result) => {
-        if (error) throw error;
-        console.log(result);
-    }       
-    );
-}

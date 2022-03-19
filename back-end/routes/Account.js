@@ -18,9 +18,9 @@ db.connect((error) => {
     console.log("Connected");
 });
 
-//Call this in the access account route based on success or faiure
+// record login attempt
 function loginattempt(email, loginstatus) {
-    connection.query("INSERT INTO LOGINATTEMPTS(Login_date, Username, Status) VALUES(CURRENT_TIMESTAMP(), ?, ?);",
+    db.query("INSERT INTO LOGINATTEMPTS(Login_date, Username, Status) VALUES(CURRENT_TIMESTAMP(), ?, ?);",
         [
             email,
             loginstatus
@@ -34,7 +34,7 @@ function loginattempt(email, loginstatus) {
 // access account
 router.get("/", (request, respsonse) => {
     console.log(request.body);
-    connection.query("SELECT Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
+    db.query("SELECT Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
         [
             request.body.email
         ],
@@ -57,7 +57,7 @@ router.post("/create", (request, respsonse) => {
     console.log(request.body);
     let salt = new Date();
     let hash = crypto.createHash("sha256").update(request.body.password + salt).digest("base64");
-    connection.query("INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?)",
+    db.query("INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?)",
         [
             request.body.firstName,
             request.body.lastName,
@@ -70,8 +70,8 @@ router.post("/create", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            console.log("account created");
-            respsonse.send("account created");
+            console.log("Account created.");
+            respsonse.send(result);
         }
     );
 });
@@ -79,13 +79,14 @@ router.post("/create", (request, respsonse) => {
 // read account
 router.get("/read", (request, respsonse) => {
     console.log(request.body);
-    connection.query("SELECT * FROM ? WHERE UID = ?",
+    db.query("SELECT * FROM ? WHERE UID = ?",
         [
             request.body.role,
             request.body.uid
         ],
         (error, result) => {
             if (error) throw error;
+            console.log("Account read.");
             respsonse.send(result);
         }
     );
@@ -93,25 +94,18 @@ router.get("/read", (request, respsonse) => {
 
 // update account
 router.post("/update", (request, respsonse) => {
-    //const UID = request.query.id;
-    //const role = request.query.role;
-    //const sql = "UPDATE " + role.toUpperCase + " SET {FILL VALUES} WHERE UID = " + UID + ";";
-    //connection.query(sql, (error, result) => {
-    //    if (error) throw error;
-    //    console.log("Account updated");
-    //});
 });
 
 // delete account
 router.post("/delete", (request, respsonse) => {
-    connection.query("UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
+    db.query("UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
         [
             request.body.role,
             request.body.uid
         ],
         (error, result) => {
             if (error) throw error;
-            console.log("account hidden");
+            console.log("Account hidden.");
         }
     );
 });
