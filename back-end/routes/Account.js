@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
+const { response } = require("express");
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -15,17 +16,16 @@ const db = mysql.createConnection({
 // connect to database
 db.connect((error) => {
     if (error) throw error;
-    console.log("Connected");
 });
 
 // record login attempt
-function loginattempt(email, loginstatus) {
+function loginAttempt(email, status) {
     db.query("INSERT INTO LOGINATTEMPTS(Login_date, Username, Status) VALUES(CURRENT_TIMESTAMP(), ?, ?);",
         [
             email,
-            loginstatus
+            status
         ],
-        (error, result) => {
+        (error) => {
             if (error) throw error;
         }
     );
@@ -33,23 +33,79 @@ function loginattempt(email, loginstatus) {
 
 // access account
 router.get("/", (request, respsonse) => {
-    console.log(request.body);
+
+    responseBody = {
+        exists: false,
+        role: null
+    }
+
+    // check against driver table
     db.query("SELECT Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
         [
             request.body.email
         ],
         (error, result) => {
             if (error) throw error;
+            if (result.length === 0) return;
             let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
-            if (hash == result[0].Password_hash) {
-                loginattempt(request.body.email, "Success");
-                respsonse.send(true);
-            } else {
-                loginattempt(request.body.email, "Failure");
-                respsonse.send(false);
+            if (hash === result[0].Password_hash) {
+                responseBody.exists = true;
+                responseBody.role = "Driver"
             }
         }
     );
+
+    if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+        response.send(responseBody)
+        return
+    }
+
+    // check against sponsor table
+    db.query("SELECT Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
+        [
+            request.body.email
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length === 0) return;
+            let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
+            if (hash === result[0].Password_hash) {
+                responseBody.exists = true;
+                responseBody.role = "Sponsor"
+            }
+        }
+    );
+
+    if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+        response.send(responseBody)
+        return
+    }
+
+    // check against admin table
+    db.query("SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
+        [
+            request.body.email
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length === 0) return;
+            let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
+            if (hash === result[0].Password_hash) {
+                responseBody.exists = true;
+                responseBody.role = "Admin"
+            }
+        }
+    );
+
+    if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+    } else {
+        loginAttempt(request.body.email, "Failure");
+    }
+
+    response.send(responseBody)
 });
 
 // create account
