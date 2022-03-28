@@ -1,0 +1,23 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+button:focus{
+  background:lightgreen;
+}
+
+.btn-group button {
+  display: block;
+}
+
+.buttons has-addons is-centered {
+  float:left
+}
+
+.select {
+  overflow: hidden;
+}
+
+::placeholder { 
+  font-size: large;
+  color: black;
+  
+}
