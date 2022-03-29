@@ -1,3 +1,5 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 button:focus{
   background:lightgreen;
 }
@@ -12,4 +14,10 @@ button:focus{
 
 .select {
   overflow: hidden;
+}
+
+::placeholder { 
+  font-size: large;
+  color: black;
+  
 }

@@ -1,15 +1,16 @@
-import './App.css';
+import './Catalog.css';
 import 'bulma/css/bulma.min.css';
 import React, { useState, useEffect }  from 'react';
-import listing_details from './listing_details.js'
-import { BrowserRouter, Routes, Router } from "react-router-dom";
+import {BrowserRouter as Router,Link, Outlet, } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 import axios from "axios";
 
 //in order for api to work, go to this link: https://cors-anywhere.herokuapp.com and click temporary access
 
 
 
-function App() {
+export default function Catalog() {
   
   //used to grab the active listings
   const [listing, setlisting] = useState([]);
@@ -82,71 +83,84 @@ function App() {
             )
         });
       }
-  });
-}
+    });
+  }
   
 
   return (
+      <div className="Catalog">
 
-    <div className="Catalog">
-      <center><input className="search-input" 
-        type="search" 
-        style= {{marginTop:50, width: 500, height:35}}
-        placeholder=" Search for an item " 
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-      /></center>
-           
+        <center><input className="search-input" 
+          type="search" 
+          style= {{marginTop:50, width: 500, height:35}}
+          placeholder=" Search for an item " 
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+        /></center>
+            
         <div className="buttons has-addons is-centered" style={{marginTop: 30}} >
           <button className="button" onClick={fetchData}> Sort by: Recent </button>
           <button className="button" onClick={fetchHighData}>Sort by: Highest Price</button>
           <button className="button" onClick={fetchLowData}>Sort by: Lowest Price</button>
 
           <div className="select" style={{marginLeft: 50, marginBottom:8}}>
-          <select onChange={(e) => {setFilterParam(e.target.value);}} className="custom-select" aria-label="Filter Countries By Region">
-            <option value="All">Filter By Category</option>
-            <option value="Art & Collectibles">Art & Collectibles</option>
-            <option value="Jewelry">Jewelry</option>
-            <option value="Home & Living">Home & Living</option>
-            <option value="Craft Supplies & Tools">Craft Supplies & Tools</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Toys & Games">Toys & Games</option>
-          </select>
-          <span className="focus"></span>
+            <select onChange={(e) => {setFilterParam(e.target.value);}} className="custom-select" aria-label="Filter Countries By Region">
+              <option value="All">Filter By Category</option>
+              <option value="Art & Collectibles">Art & Collectibles</option>
+              <option value="Jewelry">Jewelry</option>
+              <option value="Home & Living">Home & Living</option>
+              <option value="Craft Supplies & Tools">Craft Supplies & Tools</option>
+              <option value="Clothing">Clothing</option>
+              <option value="Toys & Games">Toys & Games</option>
+            </select>
+            <span className="focus"></span>
           </div>
         </div>
- 
-      <div className = "columns" style={{marginTop:30, marginLeft:10, marginRight:10}}>
-        <div className="column">   
+
         
-        {search(listing).map((listing) => (
-       
-          <div className="box">
-            <center><img src={listing.MainImage.url_170x135} alt ='listing1'></img> </center>
-            <center><h1 style={{fontSize: 15}}><strong>{listing.title} </strong></h1></center>
+      
 
-            {/* Convert to points */}
-            <center><h2>Price: {listing.price}</h2></center>
-            {/* <center><h2>Description: {listing.description}</h2></center> */}
+        {/* <center>
+          <h2>Price Range</h2>
+          <div class="control" style={{marginTop: 10}}>
+            <input class="input is-hovered" type="text" placeholder="Low" style= {{width: 100, height:35}}/>
+            <label for="high" style = {{marginLeft:10}}>  To  </label>
+            <input class="input is-hovered" name = "high" type="text" placeholder="High" style= {{marginLeft: 10, width: 100, height:35}}/>
 
-           
+          </div>     
+        </center> */}
+  
+        <div className = "columns" style={{marginTop:30, marginLeft:10, marginRight:10}}>
+          <div className="column">   
+          
+          {search(listing).map((listing) => (
+        
+            <div className="box">
+              <center><img src={listing.MainImage.url_170x135} alt ='listing1'></img> </center>
+              <Link to = {`/listing_details/${listing.listing_id}`}> <center><h1 style={{fontSize: 15}}><strong>{listing.title} </strong></h1></center></Link> 
 
-            {/* Potentially Star Rating */}
-            <center>Rating: </center>
+              {/* Convert to points */}
+              <center><h2>Price: {listing.price}</h2></center>
+              {/* <center><h2>Description: {listing.description}</h2></center> */}
 
-            <button className='button is-info' > Add to Cart </button>
-            <button className="button is-warning" style={{float: 'right'}}> Add to Wishlist</button>  
+              {/* Potentially Star Rating */}
+              <center>Rating: </center>
+
+              <button className='button is-info' > Add to Cart </button>
+              <button className="button is-warning" style={{float: 'right'}}> Add to Wishlist</button>  
+            </div>
+
+          ))}
+          </div> 
           </div>
+        <Outlet />
+      </div>
 
-        ))}
-        </div> 
-        </div>
-    </div>
 
-  );
+
+
+    );
   
 }
-
-export default App;
 
 
