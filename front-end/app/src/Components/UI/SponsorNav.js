@@ -1,4 +1,4 @@
-import "./Nav.css";
+import "./SponsorNav.css";
 import { BiSearch } from "react-icons/bi";
 import { BsList, BsPerson, BsTruck } from "react-icons/bs";
 import {
@@ -19,9 +19,7 @@ function NewNav() {
       <div className={nav ? "navbar-bg" : "navbar"}>
         <div className="logo">
           <h2>
-          <Link to="/" smooth={true} duration={500}>
             Roger's Rewards <BsTruck className="icon" />
-            </Link>
           </h2>
         </div>
         <ul className="nav-menu">
@@ -29,13 +27,11 @@ function NewNav() {
             <li>Home</li>
           </Link>
           <Link to="/pages/application" smooth={true} duration={500}>
-            <li>Apply</li>
+            <li>Reports</li>
           </Link>
+          <li>Catalog</li>
           <Link to="/main/points" smooth={true} duration={500}>
-            <li>Points</li>
-          </Link>
-          <Link to="/pages/Login" smooth={true} duration={500}>
-            <li>Login</li>
+            <li>Dashboard</li>
           </Link>
         </ul>
         <div className="nav-icons">
@@ -54,17 +50,15 @@ function NewNav() {
 
         <div className={nav ? "small active" : "small"}>
           <ul className="small-menu">
-            <Link to="/" smooth={true} duration={500}>
+            <Link to="/Home" smooth={true} duration={500}>
               <li>Home</li>
             </Link>
             <Link to="/pages/application" smooth={true} duration={500}>
-              <li>Apply</li>
+              <li>Reports</li>
             </Link>
+            <li>Catalog</li>
             <Link to="/main/points" smooth={true} duration={500}>
-              <li>Points</li>
-            </Link>
-            <Link to="/pages/Login" smooth={true} duration={500}>
-              <li>Login</li>
+              <li>Dashboard</li>
             </Link>
           </ul>
           <div className="small-menu-bot">
