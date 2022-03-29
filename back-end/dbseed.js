@@ -36,12 +36,12 @@ con.connect(function(err) {
     });
 
     //Creates DRIVERWISHLIST Table
-    con.query('CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (WishlistID int auto_increment NOT NULL unique,UID int NOT NULL,primary key (WishlistID),foreign key (UID) references DRIVER(UID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS DRIVERWISHLIST (WishlistID int auto_increment NOT NULL unique,UID int NOT NULL,SID int NOT NULL,primary key (WishlistID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
         console.log(result);
     });
 
     //Creates WISHLISTITEM Table
-    con.query('CREATE TABLE IF NOT EXISTS WISHLISTITEM (ItemID int auto_increment NOT NULL unique,WishlistID int NOT NULL,primary key (ItemID),foreign key (WishlistID) references DRIVERWISHLIST(WishlistID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS WISHLISTITEM (ItemID int auto_increment NOT NULL unique,ItemName varchar(255),Cost int,WishlistID int NOT NULL,primary key (ItemID),foreign key (WishlistID) references DRIVERWISHLIST(WishlistID));', function(error, result, fields) {
         console.log(result);
     });
 
@@ -61,7 +61,7 @@ con.connect(function(err) {
     });
 
     //Creates APPLICATION Table
-    con.query('CREATE TABLE IF NOT EXISTS APPLICATION (AppID int auto_increment NOT NULL unique,AppStatus int NOT NULL,AppDate DATETIME NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (AppID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
+    con.query('CREATE TABLE IF NOT EXISTS APPLICATION (AppID int auto_increment NOT NULL unique,AppStatus int NOT NULL,AppDate DATETIME NOT NULL,UID int NOT NULL,SID int NOT NULL,Reason varchar(255),primary key (AppID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));', function(error, result, fields) {
         console.log(result);
     });
 
