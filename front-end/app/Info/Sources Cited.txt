@@ -1,3 +1,4 @@
 ﻿Semi-Truck Clipart Source: https://flyclipart.com/semi-truck-free-to-use-clip-art-image-moving-truck-clipart-68927#
 AdobeXD Base Template for Login Page: https://www.xdguru.com/login-templates-xd/
 AdobeXD Base Template for Navigation Bar: https://www.xdguru.com/navigation-footers-xd/
+Notification Library for user warnings: https://github.com/fkhadra/react-toastify

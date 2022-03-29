@@ -5,6 +5,7 @@ import Application from "./Components/pages/Application.js";
 import Points from "./Components/pages/Points.js";
 import Profile from "./Components/pages/Driver_Profile.js";
 import Login from "./Components/pages/Login.js";
+import Wishlist from "./Components/pages/Wishlist.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/pages/Driver_Profile" element={<Profile />} />
           <Route path="/main/points" element={<Points />} />
           <Route path="/pages/Login" element={<Login />} />
+          <Route path="/pages/Wishlist" element={<Wishlist />} />
         </Routes>
       </div>
     </div>
