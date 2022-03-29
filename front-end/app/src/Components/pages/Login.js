@@ -1,9 +1,12 @@
 import { Link, Route } from "react-router-dom";
 import "./Login.css";
-import Main from "./Main";
+import NewNav from "../UI/HomeNav";
+import Footer from "../Footer/Footer";
 
 function Login() {
   return (
+    <div>
+    <NewNav />
     <div className="Login_Page">
       <div className="Left-Component">
         <label className="Main-Text">WELCOME TO ROGER'S REWARDS</label>
@@ -37,7 +40,7 @@ function Login() {
               {" "}
               <button
                 type="submit"
-                onClick={<Route path="/Main" element={<Main />} />}
+                onClick={<Route path="/" />}
               >
                 {" "}
                 Login{" "}
@@ -58,7 +61,10 @@ function Login() {
         </div>
       </div>
     </div>
+    <Footer />
+    </div>
   );
 }
 
-export default Main;
+export default Login;
+/*(export default Main;*/

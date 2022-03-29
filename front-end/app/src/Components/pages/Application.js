@@ -1,6 +1,8 @@
+import NewNav from "../UI/HomeNav";
 import "./Application.css";
 import DriverForm from "../DriverForm/DriverForm";
 import NewDriver from "../DriverForm/NewDriver";
+import Footer from "../Footer/Footer";
 
 function Application() {
   const addDriverHandler = (driver) => {
@@ -16,12 +18,16 @@ function Application() {
   };
 
   return (
-    <div className="Container">
-      <div>
-        <NewDriver onAddDriver={addDriverHandler}>
-          <DriverForm />
-        </NewDriver>
+    <div>
+      <NewNav />
+      <div className="Container">
+        <div>
+          <NewDriver onAddDriver={addDriverHandler}>
+            <DriverForm />
+          </NewDriver>
+        </div>
       </div>
+    <Footer />
     </div>
   );
 }
