@@ -2,25 +2,34 @@ import 'bulma/css/bulma.min.css';
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect }  from 'react';
 import ImageGallery from 'react-image-gallery';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 
 
 function Listing_details() {
     let {id}= useParams();
     const [listing, setlisting] = useState([]);
-    const [rating, setRating] = useState(0)
     let images = []
 
-    //catch Rating value
-    function handleRating(rate) {
-        setRating(rate);
-        // other logic
-    }
     
+    
+    const notify_cart = item => () =>{
+        // Calling toast method by passing string
+        //variables to add to the table are 
+        //item.listing_id
+        //item.title
+        //item.price (should be in points though)
+    
+        //make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
+    
+        toast('Product has been added to the cart')
+    }
 
     const fetchData = () => 
     {
         const etsy_url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/${id}?includes=Images&limit=10&api_key=dmmhikoeydunsffqrxyeubdv`
-       // const etsy_url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/993581906?includes=Images&limit=10&api_key=dmmhikoeydunsffqrxyeubdv`
         fetch(etsy_url)
         .then(response => {return response.json()})
         .then(data => { setlisting(data.results)})
@@ -30,7 +39,7 @@ function Listing_details() {
 
     useEffect(() => {
         fetchData()
-    }, []);
+    });
 
 // {listing.slice(0,5).map((listing,index) => (
     
@@ -90,7 +99,7 @@ function Listing_details() {
                           
 
                                 <h1 style={{fontSize: 25, fontWeight: "bold" }}>Price: {listing.price}</h1> <br></br>
-                                <button class="button is-large is-fullwidth is-rounded" styel>Add to Cart</button> <br></br>
+                                <button class="button is-large is-fullwidth is-rounded" onClick={notify_cart(listing)}>Add to Cart</button> <br></br>
                                 <button class="button is-large is-fullwidth is-rounded">Add to Wishlist</button><br></br>
 
 
