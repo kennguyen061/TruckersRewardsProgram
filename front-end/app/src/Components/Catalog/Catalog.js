@@ -137,7 +137,7 @@ export default function Catalog() {
         
             <div className="box">
               <center><img src={listing.MainImage.url_170x135} alt ='listing1'></img> </center>
-              <Link to = {`/listing_details/${listing.listing_id}`}> <center><h1 style={{fontSize: 15}}><strong>{listing.title} </strong></h1></center></Link> 
+              <Link to = {`/listing_details/${listing.listing_id}`}> <center><h1 style={{fontSize: 15}}><strong>{listing.title} </strong></h1></center></Link>
 
               {/* Convert to points */}
               <center><h2>Price: {listing.price}</h2></center>
