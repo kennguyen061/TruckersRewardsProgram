@@ -1,5 +1,5 @@
 import React from "react";
-import NewNav from "../UI/HomeNav";
+import NewNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 
 import "./Driver_Profile.css";

@@ -33,6 +33,9 @@ function NewNav() {
           <Link to="/main/points" smooth={true} duration={500}>
             <li>Dashboard</li>
           </Link>
+          <Link to="/pages/Wishlist" smooth={true} duration={500}>
+            <li>Wishlist</li>
+          </Link>
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
@@ -59,6 +62,9 @@ function NewNav() {
             <li>Catalog</li>
             <Link to="/main/points" smooth={true} duration={500}>
               <li>Dashboard</li>
+            </Link>
+            <Link to="/pages/Wishlist" smooth={true} duration={500}>
+              <li>Wishlist</li>
             </Link>
           </ul>
           <div className="small-menu-bot">
