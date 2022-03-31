@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bodyParser = require('body-parser');
-const { response } = require("express");
+const mysql = require('mysql');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -60,3 +60,5 @@ router.post("/remove", (request, respsonse) => {
         }
     );
 });
+
+module.exports = router;

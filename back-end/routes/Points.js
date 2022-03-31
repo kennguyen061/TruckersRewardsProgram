@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -45,7 +46,7 @@ router.post("/update", (request, respsonse) => {
                 Poin = result[0];
             }
         }
-    )
+    );
 
     // insert new balance
     db.query("INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
@@ -59,7 +60,7 @@ router.post("/update", (request, respsonse) => {
             if (error) throw error;
         }
     );
-}
+});
 
 //Function to Update PointBalance log entity to call in modify points function
 // function updatePointBalanceLog(currentPoints, Reason, PointID, SID) {
@@ -122,3 +123,5 @@ function modifypoints(PointID,points,Reason,SID) {
         }
     );
 };
+
+module.exports = router;

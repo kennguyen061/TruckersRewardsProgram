@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -16,6 +17,28 @@ db.connect((error) => {
     if (error) throw error;
     console.log("Connected");
 });
+
+//Checks if two months have passed for an application, use before create application if one already exists of same UID and SID?
+const checkapplicationtime = (UID,SID) => {
+    db.query("SELECT Appdate FROM Application WHERE UID = ? AND SID = ? AND CURRENT_TIMESTAMP() > (SELECT DATEADD(month,2,Appdate) FROM Application WHERE UID = ? AND SID = ?);",
+    [
+        UID,
+        SID,
+        UID,
+        SID
+    ],
+    (error, result) => {
+        if (error) throw error;
+        //if there is more than 1 result, then return true
+        if(result.length >= 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    )    
+}
 
 //Creates a new application, check 2 months
 function createApplication(UID, SID) {
@@ -129,3 +152,5 @@ const retrieveallSponsorApplications = (SID) => {
     }
     )
 }
+
+module.exports = router;

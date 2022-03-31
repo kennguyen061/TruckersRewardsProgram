@@ -1,10 +1,11 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
 const crypto = require('crypto');
-const { response } = require("express");
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+
 
 // specify database
 const db = mysql.createConnection({
@@ -20,6 +21,7 @@ db.connect((error) => {
 
 // record login attempt
 function loginAttempt(email, status) {
+
     db.query("INSERT INTO LOGINATTEMPTS(Login_date, Username, Status) VALUES(CURRENT_TIMESTAMP(), ?, ?);",
         [
             email,
@@ -36,11 +38,12 @@ router.get("/", (request, respsonse) => {
 
     responseBody = {
         exists: false,
+        id: null,
         role: null
     }
 
-    // check against driver table
-    db.query("SELECT Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
+    // check driver table
+    db.query("SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
         [
             request.body.email
         ],
@@ -50,7 +53,8 @@ router.get("/", (request, respsonse) => {
             let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
             if (hash === result[0].Password_hash) {
                 responseBody.exists = true;
-                responseBody.role = "Driver"
+                responseBody.id = result[0].UID;
+                responseBody.role = "DRIVER";
             }
         }
     );
@@ -61,7 +65,7 @@ router.get("/", (request, respsonse) => {
         return
     }
 
-    // check against sponsor table
+    // check sponsor table
     db.query("SELECT Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
         [
             request.body.email
@@ -72,7 +76,8 @@ router.get("/", (request, respsonse) => {
             let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
             if (hash === result[0].Password_hash) {
                 responseBody.exists = true;
-                responseBody.role = "Sponsor"
+                responseBody.id = result[0].SUID;
+                responseBody.role = "SPONSORACCT";
             }
         }
     );
@@ -83,7 +88,7 @@ router.get("/", (request, respsonse) => {
         return
     }
 
-    // check against admin table
+    // check admin table
     db.query("SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
         [
             request.body.email
@@ -94,7 +99,8 @@ router.get("/", (request, respsonse) => {
             let hash = crypto.createHash("sha256").update(request.body.password + result[0].Password_salt).digest("base64");
             if (hash === result[0].Password_hash) {
                 responseBody.exists = true;
-                responseBody.role = "Admin"
+                responseBody.id = result[0].A_ID;
+                responseBody.role = "ADMIN";
             }
         }
     );
@@ -108,12 +114,26 @@ router.get("/", (request, respsonse) => {
     response.send(responseBody)
 });
 
+
 // create account
 router.post("/create", (request, respsonse) => {
-    console.log(request.body);
+
+    // check if account already exists
+    db.query("SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
+        [
+            request.body.email
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result == 1) response.send(false);
+        }
+    );
+
+    // create hash and salt
     let salt = new Date();
     let hash = crypto.createHash("sha256").update(request.body.password + salt).digest("base64");
-    db.query("INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?)",
+
+    db.query("INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
         [
             request.body.firstName,
             request.body.lastName,
@@ -126,15 +146,15 @@ router.post("/create", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            console.log("Account created.");
-            respsonse.send(result);
+            respsonse.send(true);
         }
     );
 });
 
 // read account
 router.get("/read", (request, respsonse) => {
-    console.log(request.body);
+
+    // select record given uid
     db.query("SELECT * FROM ? WHERE UID = ?",
         [
             request.body.role,
@@ -142,18 +162,33 @@ router.get("/read", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            console.log("Account read.");
-            respsonse.send(result);
+            respsonse.send(JSON.stringify(result));
         }
     );
 });
 
 // update account
 router.post("/update", (request, respsonse) => {
+
+    db.query("UPDATE ? SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE UID = ?;",
+        [
+            request.body.role,
+            request.body.firstName,
+            request.body.lastName,
+            request.body.email,
+            request.body.street,
+            request.body.phoneNum
+        ],
+        (error, result) => {
+            if (error) throw error;
+            response.send(true);
+        }
+    );
 });
 
 // delete account
 router.post("/delete", (request, respsonse) => {
+
     db.query("UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
         [
             request.body.role,
@@ -161,7 +196,7 @@ router.post("/delete", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            console.log("Account hidden.");
+            response.send(true);
         }
     );
 });
