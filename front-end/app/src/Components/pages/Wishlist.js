@@ -16,21 +16,6 @@ function Wishlist(props) {
             </label>
             <hr className="line" />
           </div>
-          <div>
-            <label className="Name">Name:</label>
-            <hr className="line_bold" />
-          </div>
-          <div>
-            <label className="Email">{"Email:"}</label>
-            <hr className="line_bold" />
-          </div>
-          <div>
-            <label className="Address">Address:</label>
-            <hr className="line_bold" />
-          </div>
-          <div>
-            <label className="Phone">Phone Number:</label>
-          </div>
         </div>
       </div>
     </div>
