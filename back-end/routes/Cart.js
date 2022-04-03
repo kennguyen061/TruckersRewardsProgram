@@ -42,7 +42,7 @@ const getquantity = (UID, SID,ItemID) => {
     ],
     (error, result) => {
         if (error) throw error;
-        return result[0];
+        return result[0].Quantity;
     }
     )
 }

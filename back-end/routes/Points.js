@@ -25,7 +25,7 @@ router.get("/", (request, respsonse) => {
             if (error) throw error;
             if (result.length > 0) {
                 console.log("Points accessed.")
-                response.send(result[0]);
+                response.send(result[0].Amount);
             }
         }
     );
@@ -43,7 +43,7 @@ router.post("/update", (request, respsonse) => {
         (error, result) => {
             if (error) throw error;
             if (result.length > 0) {
-                Poin = result[0];
+                Poin = result[0].PointID;
             }
         }
     );
@@ -89,7 +89,7 @@ router.post("/update", (request, respsonse) => {
 //    (error, result) => {
 //        if (error) throw error;
 //        if(result.length > 0) {
-//            PointID = result[0];
+//            PointID = result[0].PointID;
 //        }
 //    }
 //    );
@@ -106,7 +106,7 @@ function modifypoints(PointID,points,Reason,SID) {
         (error, result) => {
             if (error) throw error;
             if(result.length > 0) {
-                currentPoints = result[0];
+                currentPoints = result[0].Amount;
             }
         }
     );
