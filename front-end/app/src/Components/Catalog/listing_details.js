@@ -45,7 +45,7 @@ function Listing_details() {
                 // if they do, increase the quantity by 1 of the current entry (UPDATE)
                 //1 for uid and sid are placeholder
                 //Retrieve old quantity (3rd index in table), increase it by one
-                newquantity = result[3] + 1;
+                newquantity = result[0].Quantity + 1;
                 db.query("UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = 1 AND SID = 1",
                 [
                     newquantity,
