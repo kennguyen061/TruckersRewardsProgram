@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require('cors');
-const mysql = require('mysql');
 const accountRoute = require("./routes/Account");
 const pointsRoute = require("./routes/Points");
 const wishListRoute = require("./routes/WishList");
@@ -13,11 +12,9 @@ app.use(cors({ origin: "*" }));
 app.use("/account", accountRoute);
 app.use("/points", pointsRoute);
 app.use("/wishlist", wishListRoute);
-app.use("/points", pointsRoute);
-app.use("/cart", cartRoute);
-
-
+app.use('/points', pointsRoute);
+app.use('/cart', cartRoute);
 
 app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
+    console.log("Sever running on port " + PORT);
 });
