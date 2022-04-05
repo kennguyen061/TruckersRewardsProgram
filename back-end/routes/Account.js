@@ -151,6 +151,42 @@ router.post("/create", (request, respsonse) => {
     );
 });
 
+// create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
+router.post("/createsponsorsubuser", (request, respsonse) => {
+
+    // check if account already exists
+    db.query("SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
+        [
+            request.body.email
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result == 1) response.send(false);
+        }
+    );
+
+    // create hash and salt
+    let salt = new Date();
+    let hash = crypto.createHash("sha256").update(request.body.password + salt).digest("base64");
+
+    db.query("INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+        [
+            request.body.firstName,
+            request.body.lastName,
+            request.body.email,
+            hash,
+            salt,
+            request.body.street,
+            request.body.phoneNum,
+            1
+        ],
+        (error, result) => {
+            if (error) throw error;
+            respsonse.send(true);
+        }
+    );
+});
+
 // read account
 router.get("/read", (request, respsonse) => {
 
