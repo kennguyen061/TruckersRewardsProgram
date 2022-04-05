@@ -13,11 +13,11 @@ app.use(cors({ origin: "*" }));
 app.use("/account", accountRoute);
 app.use("/points", pointsRoute);
 app.use("/wishlist", wishListRoute);
-app.use('/points', pointsRoute);
-app.use('/cart', cartRoute);
+app.use("/points", pointsRoute);
+app.use("/cart", cartRoute);
 
 
 
 app.listen(PORT, () => {
-    console.log("Sever running on port " + PORT);
+    console.log("Server running on port " + PORT);
 });
