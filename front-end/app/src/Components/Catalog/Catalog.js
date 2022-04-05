@@ -2,9 +2,11 @@ import './Catalog.css';
 import 'bulma/css/bulma.min.css';
 import React, { useState, useEffect }  from 'react';
 import {BrowserRouter as Router,Link, Outlet, } from "react-router-dom";
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
 import axios from "axios";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 
 //in order for api to work, go to this link: https://cors-anywhere.herokuapp.com and click temporary access
 
@@ -25,6 +27,29 @@ export default function Catalog() {
   //used for the filtering using dropdown
   const [filterParam, setFilterParam] = useState("All");
 
+  const notify_cart = item => () =>{
+    // Calling toast method by passing string
+    //variables to add to the table are 
+    //item.listing_id
+    //item.title
+    //item.price (should be in points though)
+
+    //make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
+
+    toast('Product has been added to the cart')
+  }
+
+  const notify_wishlist = item => () =>{
+    // Calling toast method by passing string
+    //variables to add to the table are 
+    //item.listing_id
+    //item.title
+    //item.price (should be in points though)
+
+    //make some conditional that checks if the driver already has that item on their wishlist, if they do don't add it
+
+    toast('Product has been added to your wishlist')
+  }
 
   
   const fetchHighData = async () => 
@@ -141,13 +166,9 @@ export default function Catalog() {
 
               {/* Convert to points */}
               <center><h2>Price: {listing.price}</h2></center>
-              {/* <center><h2>Description: {listing.description}</h2></center> */}
 
-              {/* Potentially Star Rating */}
-              <center>Rating: </center>
-
-              <button className='button is-info' > Add to Cart </button>
-              <button className="button is-warning" style={{float: 'right'}}> Add to Wishlist</button>  
+              <button className='button is-info'  onClick={notify_cart(listing)}> Add to Cart </button>
+              <button className="button is-warning" style={{float:'right'}} onClick={notify_wishlist(listing)} > Add to Wishlist</button>  
             </div>
 
           ))}
