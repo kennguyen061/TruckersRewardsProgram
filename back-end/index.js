@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const mysql = require('mysql');
 const accountRoute = require("./routes/Account");
 const pointsRoute = require("./routes/Points");
 const wishListRoute = require("./routes/WishList");
