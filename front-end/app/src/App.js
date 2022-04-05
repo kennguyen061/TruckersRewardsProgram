@@ -7,6 +7,7 @@ import Profile from "./Components/pages/Driver_Profile.js";
 import Login from "./Components/pages/Login.js";
 import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
+//import Catalog from "./Components/Catalog/Catalog.js";
 
 function App() {
   return (

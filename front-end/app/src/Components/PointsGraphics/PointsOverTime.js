@@ -31,10 +31,21 @@ var data = [
     name: "October",
     Points: 1500,
   },
+  {
+    name: "December",
+    Points: 5000,
+  },
 ];
 function PointsOverTime() {
   return (
     <div className="Graph">
+      <div className="dropdown">
+        <select>
+          <option Yearvalue="2020">2020</option>
+          <option Yearvalue="2021">2021</option>
+          <option YearValue="2022">2022</option>
+        </select>
+      </div>
       <h3>Points Over Time</h3>
       <ResponsiveContainer width="90%" aspect={3}>
         <LineChart
