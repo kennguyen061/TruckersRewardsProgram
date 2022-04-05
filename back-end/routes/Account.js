@@ -34,7 +34,7 @@ function loginAttempt(email, status) {
 }
 
 // access account
-router.get("/", (request, respsonse) => {
+router.get("/", (request, response) => {
 
     responseBody = {
         exists: false,
@@ -116,7 +116,7 @@ router.get("/", (request, respsonse) => {
 
 
 // create account
-router.post("/create", (request, respsonse) => {
+router.post("/create", (request, response) => {
 
     // check if account already exists
     db.query("SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
@@ -146,13 +146,13 @@ router.post("/create", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            respsonse.send(true);
+            response.send(true);
         }
     );
 });
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
-router.post("/createsponsorsubuser", (request, respsonse) => {
+router.post("/createsponsorsubuser", (request, response) => {
 
     // check if account already exists
     db.query("SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
@@ -182,13 +182,13 @@ router.post("/createsponsorsubuser", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            respsonse.send(true);
+            response.send(true);
         }
     );
 });
 
 // read account
-router.get("/read", (request, respsonse) => {
+router.get("/read", (request, response) => {
 
     // select record given uid
     db.query("SELECT * FROM ? WHERE UID = ?",
@@ -198,13 +198,13 @@ router.get("/read", (request, respsonse) => {
         ],
         (error, result) => {
             if (error) throw error;
-            respsonse.send(JSON.stringify(result));
+            response.send(JSON.stringify(result));
         }
     );
 });
 
 // update account
-router.post("/update", (request, respsonse) => {
+router.post("/update", (request, response) => {
 
     db.query("UPDATE ? SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE UID = ?;",
         [
@@ -223,7 +223,7 @@ router.post("/update", (request, respsonse) => {
 });
 
 // delete account
-router.post("/delete", (request, respsonse) => {
+router.post("/delete", (request, response) => {
 
     db.query("UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
         [

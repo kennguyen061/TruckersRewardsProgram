@@ -19,7 +19,7 @@ db.connect((error) => {
 });
 
 // access points
-router.get("/", (request, respsonse) => {
+router.get("/", (request, response) => {
     db.query("SELECT Amount FROM POINTBALANCE WHERE PointID = ?;", [PointID],
         (error, result) => {
             if (error) throw error;
@@ -32,7 +32,7 @@ router.get("/", (request, respsonse) => {
 });
 
 // update points
-router.post("/update", (request, respsonse) => {
+router.post("/update", (request, response) => {
 
     // select point ID
     db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
@@ -43,7 +43,7 @@ router.post("/update", (request, respsonse) => {
         (error, result) => {
             if (error) throw error;
             if (result.length > 0) {
-                Poin = result[0].PointID;
+                PointID = result[0].PointID;
             }
         }
     );
