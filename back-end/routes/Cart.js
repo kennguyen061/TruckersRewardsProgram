@@ -55,41 +55,42 @@ router.post("/remove", (request, response) => {
   );
 });
 
-//Gets the current quantity (used for changequantity function so I dont have to make add quantity and subtract quantity
-const getquantity = (UID, SID, ItemID) => {
-  db.query(
-    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [UID, SID, ItemID],
-    (error, result) => {
-      if (error) throw error;
-      return result[0].Quantity;
-    }
-  );
-};
+// //Gets the current quantity
+// const getquantity = (UID, SID, ItemID) => {
+//   db.query(
+//     "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//       return result[0].Quantity;
+//     }
+//   );
+// };
 
-function addquantity(UID, SID, ItemID) {
-  //calculate new quantity
-  currentquantity = getquantity(UID, SID, ItemID);
-  newQuantity = currentquantity + 1;
-  db.query(
-    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [newQuantity, UID, SID, ItemID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
+// function addquantity(UID, SID, ItemID) {
+//   //calculate new quantity
+//   currentquantity = getquantity(UID, SID, ItemID);
+//   newQuantity = currentquantity + 1;
+//   db.query(
+//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [newQuantity, UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//     }
+//   );
+// }
 
-function lowerquantity(UID, SID, ItemID) {
-  //calculate new quantity
-  currentquantity = getquantity(UID, SID, ItemID);
-  newQuantity = currentquantity - 1;
-  db.query(
-    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [newQuantity, UID, SID, ItemID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
+// function lowerquantity(UID, SID, ItemID) {
+//   //calculate new quantity
+//   currentquantity = getquantity(UID, SID, ItemID);
+//   newQuantity = currentquantity - 1;
+//   db.query(
+//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [newQuantity, UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//     }
+//   );
+// }
+
 module.exports = router;
