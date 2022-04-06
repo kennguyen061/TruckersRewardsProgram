@@ -18,17 +18,42 @@ db.connect((error) => {
   console.log("Connected");
 });
 
-//Retrieves all cart items of a user
-const retrievecart = (UID, SID) => {
+// access cart of a user
+router.get("/", (request, response) => {
   db.query(
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
-    [UID, SID],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      return result;
+      console.log("All cart items retrieved.");
+      response.send(result);
     }
   );
-};
+});
+
+// Add a cart item
+router.post("/update", (request, response) => {
+  db.query(
+    "INSERT INTO CARTITEM(UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?)",
+    [request.body.UID, request.body.SID, request.body.ItemName, request.body.Price, request.body.Quantity],
+    (error, result) => {
+      if (error) throw error;
+      console.log("Cart updated");
+    }
+  );
+});
+
+// remove wish list item
+router.post("/remove", (request, response) => {
+  db.query(
+    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemName = ?",
+    [request.body.UID, request.body.SID,request.body.ItemName],
+    (error, result) => {
+      if (error) throw error;
+      console.log("Cart item removed.");
+    }
+  );
+});
 
 //Gets the current quantity (used for changequantity function so I dont have to make add quantity and subtract quantity
 const getquantity = (UID, SID, ItemID) => {
@@ -41,26 +66,6 @@ const getquantity = (UID, SID, ItemID) => {
     }
   );
 };
-
-function addtocart(UID, SID, ItemName, Price, Quantity) {
-  db.query(
-    "INSERT INTO CARTITEM(UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?)",
-    [UID, SID, ItemName, Price, Quantity],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
-
-function removeitemfromcart(UID, SID, ItemName) {
-  db.query(
-    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemName = ?",
-    [UID, SID, ItemName],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
 
 function addquantity(UID, SID, ItemID) {
   //calculate new quantity
@@ -87,25 +92,4 @@ function lowerquantity(UID, SID, ItemID) {
     }
   );
 }
-
-function updateprice(UID, SID, ItemID, Price) {
-  db.query(
-    "UPDATE CARTITEM SET Price = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [Price, UID, SID, ItemID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
-
-function changename(UID, SID, ItemID, ItemName) {
-  db.query(
-    "UPDATE CARTITEM SET ItemName = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [ItemName, UID, SID, ItemID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
-
 module.exports = router;
