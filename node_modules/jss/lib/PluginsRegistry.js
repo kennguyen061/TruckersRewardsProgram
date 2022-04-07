@@ -1,0 +1,74 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Register a plugin, run a plugin.
+ *
+ * @api public
+ */
+var PluginsRegistry = function () {
+  function PluginsRegistry() {
+    _classCallCheck(this, PluginsRegistry);
+
+    this.registry = [];
+  }
+
+  /**
+   * Register plugin. Passed function will be invoked with a rule instance.
+   *
+   * @param {Function} fn
+   * @api public
+   */
+
+
+  _createClass(PluginsRegistry, [{
+    key: "use",
+    value: function use(fn) {
+      this.registry.push(fn);
+    }
+
+    /**
+     * Execute all registered plugins on all rules.
+     *
+     * @param {Rule|Array} rules
+     * @api public
+     */
+
+  }, {
+    key: "run",
+    value: function run(rules) {
+      if (Array.isArray(rules)) {
+        rules.forEach(this.runOne, this);
+        return;
+      }
+
+      this.runOne(rules);
+    }
+
+    /**
+     * Execute all registered plugins on one rule.
+     *
+     * @param {Rule} rule
+     * @api private
+     */
+
+  }, {
+    key: "runOne",
+    value: function runOne(rule) {
+      for (var index = 0; index < this.registry.length; index++) {
+        this.registry[index](rule);
+      }
+    }
+  }]);
+
+  return PluginsRegistry;
+}();
+
+exports["default"] = PluginsRegistry;
