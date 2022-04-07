@@ -1,12 +1,12 @@
 import React from "react";
-import NewNav from "../UI/HomeNav";
+import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 
 import "./Wishlist.css";
 function Wishlist(props) {
   return (
     <div>
-      <NewNav />
+      <DriverNav />
     <div className="Profile">
       <div className="Main_Component">
         <div className="Cards">

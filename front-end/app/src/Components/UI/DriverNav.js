@@ -33,7 +33,7 @@ function NewNav() {
               <li>Catalog</li>
           </Link>
           <Link to="/main/points" smooth={true} duration={500}>
-            <li>Dashboard</li>
+            <li>Points</li>
           </Link>
           <Link to="/pages/Wishlist" smooth={true} duration={500}>
             <li>Wishlist</li>
@@ -59,13 +59,13 @@ function NewNav() {
               <li>Home</li>
             </Link>
             <Link to="/pages/application" smooth={true} duration={500}>
-              <li>Apply</li>
+              <li>Sponsors</li>
             </Link>
             <Link to="/Catalog/Catalog" smooth={true} duration={500}>
               <li>Catalog</li>
             </Link>
             <Link to="/main/points" smooth={true} duration={500}>
-              <li>Dashboard</li>
+              <li>Points</li>
             </Link>
             <Link to="/pages/Wishlist" smooth={true} duration={500}>
               <li>Wishlist</li>

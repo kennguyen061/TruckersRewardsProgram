@@ -1,5 +1,5 @@
 import "./Points.css";
-import NewNav from "../UI/HomeNav";
+import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 import PointsOverTime from "../PointsGraphics/PointsOverTime";
 import ToGoal from "../PointsGraphics/ToGoal";
@@ -7,7 +7,7 @@ import ToGoal from "../PointsGraphics/ToGoal";
 function Points() {
   return (
     <div className="page">
-      <NewNav />
+      <DriverNav />
       <ToGoal />
       <PointsOverTime />
       <Footer />
