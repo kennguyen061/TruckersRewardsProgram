@@ -3,12 +3,10 @@ import "./Catalog.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
 import axios from "axios";
-import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Footer/Footer";
-toast.configure()
-
-
+toast.configure();
 
 //in order for api to work, go to this link: https://cors-anywhere.herokuapp.com and click temporary access
 
@@ -25,30 +23,29 @@ export default function Catalog() {
   //used for the filtering using dropdown
   const [filterParam, setFilterParam] = useState("All");
 
-
-  const notify_cart = item => () =>{
+  const notify_cart = (item) => () => {
     // Calling toast method by passing string
-    //variables to add to the table are 
+    //variables to add to the table are
     //item.listing_id
     //item.title
     //item.price (should be in points though)
 
     //make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
 
-    toast('Product has been added to the cart')
-  }
+    toast("Product has been added to the cart");
+  };
 
-  const notify_wishlist = item => () =>{
+  const notify_wishlist = (item) => () => {
     // Calling toast method by passing string
-    //variables to add to the table are 
+    //variables to add to the table are
     //item.listing_id
     //item.title
     //item.price (should be in points though)
 
     //make some conditional that checks if the driver already has that item on their wishlist, if they do don't add it
 
-    toast('Product has been added to your wishlist')
-  }
+    toast("Product has been added to your wishlist");
+  };
 
   const fetchHighData = async () => {
     const high_etsy_url =
@@ -86,19 +83,13 @@ export default function Catalog() {
       if (filterParam === "All") {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(q.toLowerCase()) > -1
+            item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
           );
         });
       } else if (item.taxonomy_path.includes(filterParam)) {
         return searchParam.some((newItem) => {
           return (
-            item[newItem]
-              .toString()
-              .toLowerCase()
-              .indexOf(q.toLowerCase()) > -1
+            item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
           );
         });
       }
@@ -119,21 +110,23 @@ export default function Catalog() {
         />
       </center>
 
-      
       <center>
-        <div className="buttons has-addons is-centered" style={{ marginTop: 30 }}>
-          <button className="button"  onClick={fetchData}>
+        <div
+          className="buttons has-addons is-centered"
+          style={{ marginTop: 30 }}
+        >
+          <button className="button" onClick={fetchData}>
             {" "}
             Sort by: Recent{" "}
           </button>
-          <button className="button"  onClick={fetchHighData}>
+          <button className="button" onClick={fetchHighData}>
             Sort by: Highest Price
           </button>
           <button className="button" onClick={fetchLowData}>
             Sort by: Lowest Price
           </button>
 
-        {/* <div className="select" style={{ marginLeft: 50, marginBottom: 8 }}>
+          {/* <div className="select" style={{ marginLeft: 50, marginBottom: 8 }}>
           <select
             onChange={(e) => {
               setFilterParam(e.target.value);
@@ -153,7 +146,7 @@ export default function Catalog() {
           </select>
           <span className="focus"></span>
         </div> */}
-      </div>
+        </div>
       </center>
 
       <div
@@ -162,13 +155,16 @@ export default function Catalog() {
       >
         <div className="column">
           {search(listing).map((listing) => (
-            <div className="box" style={{border:'2px solid black', backgroundColor: '#E2DBD9'}}>
+            <div
+              className="box"
+              style={{ border: "2px solid black", backgroundColor: "#E2DBD9" }}
+            >
               <center>
                 <img src={listing.MainImage.url_170x135} alt="listing1"></img>{" "}
               </center>
               <Link to={`/listing_details/${listing.listing_id}`}>
                 <center>
-                  <h1 style={{fontSize:25, color: 'blue'}}>
+                  <h1 style={{ fontSize: 25, color: "blue" }}>
                     <strong>{listing.title} </strong>
                   </h1>
                 </center>
@@ -176,12 +172,18 @@ export default function Catalog() {
 
               {/* Convert to points */}
               <center>
-                <h2 style={{color:'black'}}>Price: {listing.price}</h2>
+                <h2 style={{ color: "black" }}>Price: {listing.price}</h2>
               </center>
 
-            
-              <button className="button is-info" onClick={notify_cart(listing)}> Add to Cart </button>
-              <button className="button is-warning" onClick={notify_wishlist(listing)} style={{ float: "right" }}>
+              <button className="button is-info" onClick={notify_cart(listing)}>
+                {" "}
+                Add to Cart{" "}
+              </button>
+              <button
+                className="button is-warning"
+                onClick={notify_wishlist(listing)}
+                style={{ float: "right" }}
+              >
                 {" "}
                 Add to Wishlist
               </button>
