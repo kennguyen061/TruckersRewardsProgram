@@ -1,10 +1,11 @@
+import DriverNav from "../UI/DriverNav";
 import "./Catalog.css";
-//import "bulma/css/bulma.min.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
 import axios from "axios";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../Footer/Footer";
 toast.configure()
 
 
@@ -107,10 +108,11 @@ export default function Catalog() {
   return (
     <div className="Catalog">
       <center>
+        <DriverNav />
         <input
           className="search-input"
           type="search"
-          style={{ marginTop: 50, width: 500, height: 35 }}
+          style={{ marginTop: 100, width: 500, height: 35 }}
           placeholder="Search for an item "
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -188,6 +190,7 @@ export default function Catalog() {
         </div>
       </div>
       <Outlet />
+      <Footer />
     </div>
   );
 }
