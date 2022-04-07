@@ -81,6 +81,13 @@ function approveApplication(UID, SID) {
       if (error) throw error;
     }
   );
+  db.query(
+    "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?)",
+    [UID, SID],
+    (error, result) => {
+      if (error) throw error;
+    }
+  );
 }
 
 //Sponsors/admins rejecting applications with a reason
