@@ -108,12 +108,13 @@ CREATE TABLE IF NOT EXISTS APPLICATION (
     
 CREATE TABLE IF NOT EXISTS ORDERS (
 	OrderID int auto_increment NOT NULL unique,
-    OrderDate DATETIME NOT NULL,
-    Address varchar(20) NOT NULL,
-    UID int NOT NULL,
-    primary key (OrderID),
-    foreign key (UID) references DRIVER(UID)
-    );
+	OrderDate DATETIME NOT NULL,
+	Address varchar(20) NOT NULL,
+	UID int NOT NULL,
+	SID int NOT NULL,
+	primary key (OrderID),
+	foreign key (UID) references DRIVER(UID),
+	foreign key (SID) references SPONSORORG(SID));
     
 CREATE TABLE IF NOT EXISTS ITEM (
 	ItemID int auto_increment NOT NULL unique,
@@ -163,3 +164,5 @@ CREATE TABLE IF NOT EXISTS REPORTING (
 	foreign key (PwdChangeID) references PASSWORDCHANGES(PwdChangeID),
 	foreign key (AttemptID) references LOGINATTEMPTS(AttemptID)
     );
+    
+CREATE TABLE IF NOT EXISTS CARTITEM (ItemID int auto_increment NOT NULL,ItemName varchar(255) NOT NULL,Price float NOT NULL,Quantity int NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (ItemID),foreign key (UID) references DRIVER(UID), foreign key (SID) references SPONSORORG(SID));

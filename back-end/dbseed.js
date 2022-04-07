@@ -97,7 +97,7 @@ con.connect(function (err) {
 
   //Creates ORDERS Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS ORDERS (OrderID int auto_increment NOT NULL unique,OrderDate DATETIME NOT NULL,Address varchar(20) NOT NULL,UID int NOT NULL,primary key (OrderID),foreign key (UID) references DRIVER(UID));",
+    "CREATE TABLE IF NOT EXISTS ORDERS (OrderID int auto_increment NOT NULL unique,OrderDate DATETIME NOT NULL,Address varchar(20) NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (OrderID),foreign key (UID) references DRIVER(UID),foreign key (SID) references SPONSORORG(SID));",
     function (error, result, fields) {
       console.log(result);
     }
