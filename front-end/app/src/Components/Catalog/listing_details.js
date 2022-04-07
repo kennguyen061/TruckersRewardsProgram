@@ -1,4 +1,3 @@
-import 'bulma/css/bulma.min.css';
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect }  from 'react';
 import ImageGallery from 'react-image-gallery';

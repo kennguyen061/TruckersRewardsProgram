@@ -1,10 +1,13 @@
 import "./Catalog.css";
-import "bulma/css/bulma.min.scss";
+//import "bulma/css/bulma.min.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
 import axios from "axios";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
+
 
 //in order for api to work, go to this link: https://cors-anywhere.herokuapp.com and click temporary access
 
@@ -20,6 +23,31 @@ export default function Catalog() {
 
   //used for the filtering using dropdown
   const [filterParam, setFilterParam] = useState("All");
+
+
+  const notify_cart = item => () =>{
+    // Calling toast method by passing string
+    //variables to add to the table are 
+    //item.listing_id
+    //item.title
+    //item.price (should be in points though)
+
+    //make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
+
+    toast('Product has been added to the cart')
+  }
+
+  const notify_wishlist = item => () =>{
+    // Calling toast method by passing string
+    //variables to add to the table are 
+    //item.listing_id
+    //item.title
+    //item.price (should be in points though)
+
+    //make some conditional that checks if the driver already has that item on their wishlist, if they do don't add it
+
+    toast('Product has been added to your wishlist')
+  }
 
   const fetchHighData = async () => {
     const high_etsy_url =
@@ -83,25 +111,27 @@ export default function Catalog() {
           className="search-input"
           type="search"
           style={{ marginTop: 50, width: 500, height: 35 }}
-          placeholder=" Search for an item "
+          placeholder="Search for an item "
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
       </center>
 
-      <div className="buttons has-addons is-centered" style={{ marginTop: 30 }}>
-        <button className="button" onClick={fetchData}>
-          {" "}
-          Sort by: Recent{" "}
-        </button>
-        <button className="button" onClick={fetchHighData}>
-          Sort by: Highest Price
-        </button>
-        <button className="button" onClick={fetchLowData}>
-          Sort by: Lowest Price
-        </button>
+      
+      <center>
+        <div className="buttons has-addons is-centered" style={{ marginTop: 30 }}>
+          <button className="button"  onClick={fetchData}>
+            {" "}
+            Sort by: Recent{" "}
+          </button>
+          <button className="button"  onClick={fetchHighData}>
+            Sort by: Highest Price
+          </button>
+          <button className="button" onClick={fetchLowData}>
+            Sort by: Lowest Price
+          </button>
 
-        <div className="select" style={{ marginLeft: 50, marginBottom: 8 }}>
+        {/* <div className="select" style={{ marginLeft: 50, marginBottom: 8 }}>
           <select
             onChange={(e) => {
               setFilterParam(e.target.value);
@@ -120,18 +150,9 @@ export default function Catalog() {
             <option value="Toys & Games">Toys & Games</option>
           </select>
           <span className="focus"></span>
-        </div>
+        </div> */}
       </div>
-
-      {/* <center>
-          <h2>Price Range</h2>
-          <div class="control" style={{marginTop: 10}}>
-            <input class="input is-hovered" type="text" placeholder="Low" style= {{width: 100, height:35}}/>
-            <label for="high" style = {{marginLeft:10}}>  To  </label>
-            <input class="input is-hovered" name = "high" type="text" placeholder="High" style= {{marginLeft: 10, width: 100, height:35}}/>
-
-          </div>     
-        </center> */}
+      </center>
 
       <div
         className="columns"
@@ -139,14 +160,13 @@ export default function Catalog() {
       >
         <div className="column">
           {search(listing).map((listing) => (
-            <div className="box">
+            <div className="box" style={{border:'2px solid black', backgroundColor: '#E2DBD9'}}>
               <center>
                 <img src={listing.MainImage.url_170x135} alt="listing1"></img>{" "}
               </center>
               <Link to={`/listing_details/${listing.listing_id}`}>
-                {" "}
                 <center>
-                  <h1 style={{ fontSize: 15 }}>
+                  <h1 style={{fontSize:25, color: 'blue'}}>
                     <strong>{listing.title} </strong>
                   </h1>
                 </center>
@@ -154,15 +174,12 @@ export default function Catalog() {
 
               {/* Convert to points */}
               <center>
-                <h2>Price: {listing.price}</h2>
+                <h2 style={{color:'black'}}>Price: {listing.price}</h2>
               </center>
-              {/* <center><h2>Description: {listing.description}</h2></center> */}
 
-              {/* Potentially Star Rating */}
-              <center>Rating: </center>
-
-              <button className="button is-info"> Add to Cart </button>
-              <button className="button is-warning" style={{ float: "right" }}>
+            
+              <button className="button is-info" onClick={notify_cart(listing)}> Add to Cart </button>
+              <button className="button is-warning" onClick={notify_wishlist(listing)} style={{ float: "right" }}>
                 {" "}
                 Add to Wishlist
               </button>

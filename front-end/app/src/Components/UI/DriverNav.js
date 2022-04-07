@@ -29,7 +29,9 @@ function NewNav() {
           <Link to="/pages/application" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
-          <li>Catalog</li>
+          <Link to="/Catalog/Catalog" smooth={true} duration={500}>
+              <li>Catalog</li>
+          </Link>
           <Link to="/main/points" smooth={true} duration={500}>
             <li>Dashboard</li>
           </Link>
@@ -59,7 +61,9 @@ function NewNav() {
             <Link to="/pages/application" smooth={true} duration={500}>
               <li>Apply</li>
             </Link>
-            <li>Catalog</li>
+            <Link to="/Catalog/Catalog" smooth={true} duration={500}>
+              <li>Catalog</li>
+            </Link>
             <Link to="/main/points" smooth={true} duration={500}>
               <li>Dashboard</li>
             </Link>
