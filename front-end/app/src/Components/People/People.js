@@ -9,8 +9,8 @@ function People() {
   return (
     <div className="People">
       <div className="container">
-        <h1>Biggest Point Gainers of The Week</h1>
-        <p>Drive Safe Like Them</p>
+        <h1>Highest Point Earners of The Week</h1>
+        <p>Inspiring others to drive safe!</p>
         <div className="img-container">
           <img className="span img-grid-row-2" src={p4} alt="/" />
           <img src={p5} alt="/" />
