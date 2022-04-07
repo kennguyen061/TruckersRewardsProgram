@@ -38,7 +38,6 @@ function Footer() {
               <li>Policy</li>
               <li>Privacy</li>
               <li>Pricing</li>
-              <li>Contact</li>
             </ul>
           </div>
         </div>
