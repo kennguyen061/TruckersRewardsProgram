@@ -28,6 +28,30 @@ router.post("/removedriver", (request, response) => {
         response.send(true);
       }
     );
+    db.query(
+      "DELETE FROM DRIVERWISHLIST WHERE UID = ? AND SID = ?",
+      [request.body.UID, request.body.SID],
+      (error, result) => {
+        if (error) throw error;
+        response.send(true);
+      }
+    );
+    db.query(
+      "DELETE FROM POINTBALANCE WHERE UID = ? AND SID = ?",
+      [request.body.UID, request.body.SID],
+      (error, result) => {
+        if (error) throw error;
+        response.send(true);
+      }
+    );
+    db.query(
+      "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?",
+      [request.body.UID, request.body.SID],
+      (error, result) => {
+        if (error) throw error;
+        response.send(true);
+      }
+    );
   });
 
 module.exports = router;
