@@ -9,6 +9,7 @@ import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import Listing from "./Components/Catalog/listing_details.js";
+import Sponsor_Profile from "./Components/pages/Sponsor_Profile.js";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pages/Application" element={<Application />} />
           <Route path="/pages/Driver_Profile" element={<Profile />} />
+          <Route path="/pages/Sponsor_Profile" element={<Sponsor_Profile />} />
           <Route path="/main/points" element={<Points />} />
           <Route path="/pages/Login" element={<Login />} />
           <Route path="/pages/Wishlist" element={<Wishlist />} />

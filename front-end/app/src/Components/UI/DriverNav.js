@@ -12,11 +12,11 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function NewNav() {
+function DriverNav() {
   const [nav, setNav] = useState(false);
   const handlerNav = () => setNav(!nav);
   return (
-      <div className={nav ? "navbar-bg" : "navbar"}>
+      <div className={nav ? "navbar-bg" : "dnavbar"}>
         <div className="logo">
           <h2>
             Roger's Rewards <BsTruck className="icon" />
@@ -89,4 +89,4 @@ function NewNav() {
   );
 }
 
-export default NewNav;
+export default DriverNav;
