@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "stage-0",
+    "es2015"
+  ],
+  "plugins": [
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals",
+    "transform-inline-environment-variables",
+    "transform-flow-strip-types"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "rewire"
+      ]
+    }
+  }
+}

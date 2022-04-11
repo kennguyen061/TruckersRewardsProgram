@@ -23,3 +23,9 @@
   padding: 1rem 1rem;
   color: #fff;
 }
+
+.dropdown {
+  align-self: right;
+  padding: 1rem;
+  background-color: #1f2025;
+}

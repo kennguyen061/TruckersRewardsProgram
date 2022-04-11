@@ -1,22 +1,31 @@
-import "./PannelBar.css";
-import { ListGroup, ListGroupItem, Badge } from "reactstrap";
+import "./PannelBar";
+import Collapsible from "react-collapsible";
 
-function PannelBar() {
+function Accord() {
   return (
-    <div className="Pannel">
-      <ListGroup>
-        <ListGroupItem className="justify-content-between">
-          Point + <Badge pill>14 Notifications</Badge>
-        </ListGroupItem>
-        <ListGroupItem className="justify-content-between">
-          Point - <Badge pill>2 Notifications</Badge>
-        </ListGroupItem>
-        <ListGroupItem className="justify-content-between">
-          Reaction to Apeals <Badge pill>1 Notifications</Badge>
-        </ListGroupItem>
-      </ListGroup>
+    <div>
+      <Collapsible trigger="First">
+        <p>
+          This is the collapsible content. It can be any element or React
+          component you like.
+        </p>
+        <p>
+          It can even be another Collapsible component. Check out the next
+          section!
+        </p>
+      </Collapsible>
+      <Collapsible trigger="second">
+        <p>
+          This is the collapsible content. It can be any element or React
+          component you like.
+        </p>
+        <p>
+          It can even be another Collapsible component. Check out the next
+          section!
+        </p>
+      </Collapsible>
     </div>
   );
 }
 
-export default PannelBar;
+export default Accord;

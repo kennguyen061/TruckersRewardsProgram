@@ -23,20 +23,6 @@ code {
   padding: 0 1rem;
 }
 
-button {
-  background-image: linear-gradient(
-    45deg,
-    var(--primary-dark) 0%,
-    var(--primary-light) 100%
-  );
-  border: 1px solid var(--primary-dark);
-  color: #fff;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-}
-
 ul {
   list-style-type: none;
 }

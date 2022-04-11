@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    "benchmark/**",
+    "docs/**",
+    "dist/**",
+    "test/**",
+    "node_modules/**"
+  ],
+  "tests": [
+    "/tests"
+  ]
+}
