@@ -2,43 +2,43 @@ import ReportGenerator from "../ReportGenerator";
 
 import "./SponsorReport.css";
 
-const SponsorDriverApp = () => {
+const SponsorCurrentDrivers = () => {
   return (
     <ReportGenerator
-      title="Sponsor Driver Applications"
-      filename="Sponsor-Driver-Apps.pdf"
+      title="Sponsor Drivers"
+      filename="Sponsor-Current-Drivers.pdf"
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Driver Applications</h1>
-        <p>This is a report of all driver apps</p>
+        <h1>Sponsor Curent Drivers</h1>
+        <p>This is a report of all drivers</p>
         <table>
           <tr>
             <th>Driver</th>
-            <th>Application Status</th>
-            <th>Date Applied</th>
-            <th> Reason</th>
+            <th>Address</th>
+            <th>Phone number</th>
+            <th> Email</th>
           </tr>
 
           <tr>
             <td>Bob</td>
-            <td>Applied</td>
-            <td>9/1/11</td>
-            <td></td>
+            <td>111 One St Somewhere PA</td>
+            <td>888-888-8888</td>
+            <td>Bob@sposor.net</td>
           </tr>
 
           <tr>
-            <td>Phil</td>
-            <td>Accepted</td>
-            <td>9/1/11</td>
-            <td></td>
+            <td>Bob</td>
+            <td>111 One St Somewhere PA</td>
+            <td>888-888-8888</td>
+            <td>Bob@sposor.net</td>
           </tr>
 
           <tr>
-            <td>Marry</td>
-            <td>Rejected</td>
-            <td>9/1/11</td>
-            <td>Yo Momma Jokes</td>
+            <td>Bob</td>
+            <td>111 One St Somewhere PA</td>
+            <td>888-888-8888</td>
+            <td>Bob@sposor.net</td>
           </tr>
         </table>
       </div>
@@ -46,4 +46,4 @@ const SponsorDriverApp = () => {
   );
 };
 
-export default SponsorDriverApp;
+export default SponsorCurrentDrivers;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import html2PDF from "jspdf-html2canvas";
 import "./ReportGenerator.css";
-import NewNav from "../UI/HomeNav";
+import NewNav from "../UI/SponsorNav";
 
 const STATUS_PREVIEW = "preview";
 const STATUS_GENERATING = "generating";

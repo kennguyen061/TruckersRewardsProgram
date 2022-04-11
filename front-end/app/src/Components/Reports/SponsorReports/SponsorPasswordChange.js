@@ -2,43 +2,39 @@ import ReportGenerator from "../ReportGenerator";
 
 import "./SponsorReport.css";
 
-const SponsorDriverApp = () => {
+const SponsorPassword = () => {
   return (
     <ReportGenerator
-      title="Sponsor Driver Applications"
-      filename="Sponsor-Driver-Apps.pdf"
+      title="Sponsor Driver Password Changes"
+      filename="Sponsor-Driver-Password-Changes.pdf"
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Driver Applications</h1>
-        <p>This is a report of all driver apps</p>
+        <h1>Sponsor Driver Password Changes</h1>
+        <p>This is a report of all driver password changes </p>
         <table>
           <tr>
             <th>Driver</th>
-            <th>Application Status</th>
-            <th>Date Applied</th>
+            <th>Date Changed</th>
             <th> Reason</th>
           </tr>
 
           <tr>
             <td>Bob</td>
-            <td>Applied</td>
             <td>9/1/11</td>
-            <td></td>
+            <td>Locked out</td>
           </tr>
 
           <tr>
-            <td>Phil</td>
-            <td>Accepted</td>
+            <td>Bob</td>
             <td>9/1/11</td>
-            <td></td>
+            <td>Locked out</td>
           </tr>
 
           <tr>
-            <td>Marry</td>
-            <td>Rejected</td>
+            <td>Bob</td>
             <td>9/1/11</td>
-            <td>Yo Momma Jokes</td>
+            <td>Locked out</td>
           </tr>
         </table>
       </div>
@@ -46,4 +42,4 @@ const SponsorDriverApp = () => {
   );
 };
 
-export default SponsorDriverApp;
+export default SponsorPassword;

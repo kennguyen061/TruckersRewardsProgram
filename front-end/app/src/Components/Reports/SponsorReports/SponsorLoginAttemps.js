@@ -1,43 +1,43 @@
 import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
-const SponsorDriverApp = () => {
+const SponsorLogin = () => {
   return (
     <ReportGenerator
-      title="Sponsor Driver Applications"
-      filename="Sponsor-Driver-Apps.pdf"
+      title="Sponsor Driver Login Attempts"
+      filename="Sponsor-Driver-Login-Attempts.pdf"
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Driver Applications</h1>
-        <p>This is a report of all driver apps</p>
+        <h1>Sponsor Driver Login Attempts</h1>
+        <p>This is a report of all attempts to login</p>
         <table>
           <tr>
             <th>Driver</th>
-            <th>Application Status</th>
-            <th>Date Applied</th>
+            <th>Login</th>
+            <th>Time</th>
             <th> Reason</th>
           </tr>
 
           <tr>
             <td>Bob</td>
-            <td>Applied</td>
-            <td>9/1/11</td>
-            <td></td>
+            <td>Yes</td>
+            <td>2:12pm</td>
+            <td>Correct password</td>
           </tr>
 
           <tr>
-            <td>Phil</td>
-            <td>Accepted</td>
-            <td>9/1/11</td>
-            <td></td>
+            <td>Bob</td>
+            <td>Yes</td>
+            <td>2:12pm</td>
+            <td>Correct password</td>
           </tr>
 
           <tr>
-            <td>Marry</td>
-            <td>Rejected</td>
-            <td>9/1/11</td>
-            <td>Yo Momma Jokes</td>
+            <td>Bob</td>
+            <td>Yes</td>
+            <td>2:12pm</td>
+            <td>Correct password</td>
           </tr>
         </table>
       </div>
@@ -45,4 +45,4 @@ const SponsorDriverApp = () => {
   );
 };
 
-export default SponsorDriverApp;
+export default SponsorLogin;
