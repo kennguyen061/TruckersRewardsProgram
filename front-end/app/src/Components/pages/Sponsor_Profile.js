@@ -1,20 +1,22 @@
 import React from "react";
-import DriverNav from "../UI/DriverNav";
+import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
 
-import "./Driver_Profile.css";
-function Driver_Profile(props) {
+import "./Sponsor_Profile.css";
+function Sponsor_Profile(props) {
   return (
     <div>
-      <DriverNav />
-    <div className="Driver_Profile">
-      <div className="Main_Component">
-        <div className="Cards">
+      <SponsorNav />
+    <div className="Sponsor_Profile">
           <div>
             <label className="Login-Header">
               Welcome Back First Last Name!
             </label>
-            <hr className="line" />
+            <hr className="line_50" />
+          </div>
+          <div>
+            <label className="Name">Organization:</label>
+            <hr className="line_bold" />
           </div>
           <div>
             <label className="Name">Name:</label>
@@ -31,8 +33,6 @@ function Driver_Profile(props) {
           <div>
             <label className="Phone">Phone Number:</label>
           </div>
-        </div>
-      </div>
     </div>
     <div className="bottom_here">
       <Footer />
@@ -41,4 +41,4 @@ function Driver_Profile(props) {
   );
 }
 
-export default Driver_Profile;
+export default Sponsor_Profile;

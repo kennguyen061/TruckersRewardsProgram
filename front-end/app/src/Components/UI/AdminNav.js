@@ -16,7 +16,7 @@ function NewNav() {
   const [nav, setNav] = useState(false);
   const handlerNav = () => setNav(!nav);
   return (
-      <div className={nav ? "navbar-bg" : "navbar"}>
+      <div className={nav ? "navbar-bg" : "anavbar"}>
         <div className="logo">
           <h2>
             Roger's Rewards <BsTruck className="icon" />
@@ -36,7 +36,7 @@ function NewNav() {
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
-          <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
             <BsPerson className="icon" />
           </Link>
         </div>

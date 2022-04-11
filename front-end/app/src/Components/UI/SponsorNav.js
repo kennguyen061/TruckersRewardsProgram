@@ -12,11 +12,11 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function NewNav() {
+function SponsorNav() {
   const [nav, setNav] = useState(false);
   const handlerNav = () => setNav(!nav);
   return (
-      <div className={nav ? "navbar-bg" : "navbar"}>
+      <div className={nav ? "navbar-bg" : "snavbar"}>
         <div className="logo">
           <h2>
             Roger's Rewards <BsTruck className="icon" />
@@ -30,13 +30,13 @@ function NewNav() {
             <li>Reports</li>
           </Link>
           <li>Catalog</li>
-          <Link to="/main/points" smooth={true} duration={500}>
-            <li>Dashboard</li>
+          <Link to="/pages/Driver_Management" smooth={true} duration={500}>
+            <li>Drivers</li>
           </Link>
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
-          <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
             <BsPerson className="icon" />
           </Link>
         </div>
@@ -79,4 +79,4 @@ function NewNav() {
   );
 }
 
-export default NewNav;
+export default SponsorNav;
