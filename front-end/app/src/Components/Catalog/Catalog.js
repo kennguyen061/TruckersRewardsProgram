@@ -192,7 +192,9 @@ export default function Catalog() {
         </div>
       </div>
       <Outlet />
+      <div className="bottom_here">
       <Footer />
+      </div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import React from "react";
-import DriverNav from "../UI/DriverNav";
+import AdminNav from "../UI/AdminNav";
 import Footer from "../Footer/Footer";
 
-import "./Driver_Profile.css";
-function Driver_Profile(props) {
+import "./Admin_Profile.css";
+function Admin_Profile(props) {
   return (
     <div>
-      <DriverNav />
-    <div className="Driver_Profile">
+      <AdminNav />
+    <div className="Admin_Profile">
       <div className="Main_Component">
         <div className="Cards">
           <div>
@@ -41,4 +41,4 @@ function Driver_Profile(props) {
   );
 }
 
-export default Driver_Profile;
+export default Admin_Profile;
