@@ -11,6 +11,8 @@ import Catalog from "./Components/Catalog/Catalog.js";
 import Listing from "./Components/Catalog/listing_details.js";
 import Sponsor_Profile from "./Components/pages/Sponsor_Profile.js";
 import Driver_Sponsor_Dashboard from "./Components/pages/Driver_Sponsor_Dashboard.js";
+import Apply_To_Sponsor from "./Components/pages/Apply_To_Sponsor.js";
+import Admin_Profile from "./Components/pages/Admin_Profile.js";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Route path="/pages/Application" element={<Application />} />
           <Route path="/pages/Driver_Profile" element={<Profile />} />
           <Route path="/pages/Sponsor_Profile" element={<Sponsor_Profile />} />
+          <Route path="/pages/Admin_Profile" element={<Admin_Profile />} />
           <Route path="/main/points" element={<Points />} />
           <Route path="/pages/Login" element={<Login />} />
           <Route path="/pages/Wishlist" element={<Wishlist />} />
@@ -28,6 +31,7 @@ function App() {
           <Route path="/Catalog/Catalog" element={<Catalog />} />
           <Route path="/Catalog/Listing" element={<Listing />} />
           <Route path="/pages/Driver_Sponsor_Dashboard" element={<Driver_Sponsor_Dashboard />} />
+          <Route path="/pages/Apply_To_Sponsor" element={<Apply_To_Sponsor />} />
         </Routes>
       </div>
     </div>

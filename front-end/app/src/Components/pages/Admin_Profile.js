@@ -1,22 +1,20 @@
 import React from "react";
-import SponsorNav from "../UI/SponsorNav";
+import AdminNav from "../UI/AdminNav";
 import Footer from "../Footer/Footer";
 
-import "./Sponsor_Profile.css";
-function Sponsor_Profile(props) {
+import "./Admin_Profile.css";
+function Admin_Profile(props) {
   return (
     <div>
-      <SponsorNav />
-    <div className="Sponsor_Profile">
+      <AdminNav />
+    <div className="Admin_Profile">
+      <div className="Main_Component">
+        <div className="Cards">
           <div>
             <label className="Login-Header">
               Welcome Back First Last Name!
             </label>
-            <hr className="line_50" />
-          </div>
-          <div>
-            <label className="Name">Organization:</label>
-            <hr className="line_bold" />
+            <hr className="line" />
           </div>
           <div>
             <label className="Name">Name:</label>
@@ -33,6 +31,8 @@ function Sponsor_Profile(props) {
           <div>
             <label className="Phone">Phone Number:</label>
           </div>
+        </div>
+      </div>
     </div>
     <div className="bottom_here">
       <Footer />
@@ -41,4 +41,4 @@ function Sponsor_Profile(props) {
   );
 }
 
-export default Sponsor_Profile;
+export default Admin_Profile;
