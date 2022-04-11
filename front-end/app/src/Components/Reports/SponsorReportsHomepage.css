@@ -1,0 +1,58 @@
+.Spacer {
+  height: 5rem;
+}
+
+.ReportsTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: white;
+  width: 100%;
+  margin-bottom: 5rem;
+  height: 8rem;
+}
+
+.SponsorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SponsorPage table {
+  width: 100%;
+  margin-top: 0.5rem;
+
+  border-collapse: collapse;
+}
+
+.SponsorPage table,
+td {
+  border-collapse: collapse;
+  width: 25rem;
+  height: 5rem;
+  text-align: center;
+  background-color: #a5a1a129;
+}
+
+.ReportsTitle h1 {
+  font-size: 35pt;
+}
+
+.ReportsTitle h2 {
+  margin-top: 0.3rem;
+  font-size: 25pt;
+}
+
+.ReportsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Reports-Link {
+  font-size: 25pt;
+  color: blue;
+  text-decoration: underline;
+}

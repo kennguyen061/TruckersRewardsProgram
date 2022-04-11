@@ -9,11 +9,22 @@ import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import Listing from "./Components/Catalog/listing_details.js";
+<<<<<<< HEAD
 import Sponsor_Profile from "./Components/pages/Sponsor_Profile.js";
 import Driver_Sponsor_Dashboard from "./Components/pages/Driver_Sponsor_Dashboard.js";
 import Driver_Management from "./Components/pages/Driver_Management.js";
 import Apply_To_Sponsor from "./Components/pages/Apply_To_Sponsor.js";
 import Admin_Profile from "./Components/pages/Admin_Profile.js";
+=======
+import SponsorReports from "./Components/Reports/SponsorReportsHomepage.js";
+import SponsorCurrentDriver from "./Components/Reports/SponsorReports/SponsorCurentDrivers.js";
+import SponsorDriverApp from "./Components/Reports/SponsorReports/SponsorDriverApp.js";
+import SponsorLeastBought from "./Components/Reports/SponsorReports/SponsorLeastBought.js";
+import SponsorMostBought from "./Components/Reports/SponsorReports/SponsorMostBought.js";
+import SponsorPassword from "./Components/Reports/SponsorReports/SponsorPasswordChange.js";
+import SponsorLogin from "./Components/Reports/SponsorReports/SponsorLoginAttemps.js";
+import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChange.js";
+>>>>>>> origin/main
 
 function App() {
   return (
@@ -34,6 +45,35 @@ function App() {
           <Route path="/pages/Driver_Sponsor_Dashboard" element={<Driver_Sponsor_Dashboard />} />
           <Route path="/pages/Driver_Management" element={<Driver_Management />} />
           <Route path="/pages/Apply_To_Sponsor" element={<Apply_To_Sponsor />} />
+          <Route path="/Reports/SponsorReports" element={<SponsorReports />} />
+          <Route
+            path="/Reports/SponsorReports/CurrenDrivers"
+            element={<SponsorCurrentDriver />}
+          />
+          <Route
+            path="/Reports/SponsorReports/DriverApp"
+            element={<SponsorDriverApp />}
+          />
+          <Route
+            path="/Reports/SponsorReports/LeastBought"
+            element={<SponsorLeastBought />}
+          />
+          <Route
+            path="/Reports/SponsorReports/MostBought"
+            element={<SponsorMostBought />}
+          />
+          <Route
+            path="/Reports/SponsorReports/LoginAttempts"
+            element={<SponsorLogin />}
+          />
+          <Route
+            path="/Reports/SponsorReports/PasswordReport"
+            element={<SponsorPassword />}
+          />
+          <Route
+            path="/Reports/SponsorReports/DriversPoints"
+            element={<SponsorPoints />}
+          />
         </Routes>
       </div>
     </div>

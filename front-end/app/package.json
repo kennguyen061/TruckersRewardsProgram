@@ -13,6 +13,7 @@
     "bulma-scss": "^0.9.3",
     "chart.js": "^3.7.1",
     "crypto": "^1.0.1",
+    "jspdf-html2canvas": "^1.4.9",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-circular-progressbar": "^2.0.4",
