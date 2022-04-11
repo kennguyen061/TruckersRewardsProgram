@@ -22,7 +22,7 @@
 
 .SponsorPage table {
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 
   border-collapse: collapse;
 }
@@ -37,12 +37,12 @@ td {
 }
 
 .ReportsTitle h1 {
-  font-size: 30pt;
+  font-size: 35pt;
 }
 
 .ReportsTitle h2 {
   margin-top: 0.3rem;
-  font-size: 23pt;
+  font-size: 25pt;
 }
 
 .ReportsSection {
