@@ -37,7 +37,7 @@ function NewNav() {
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
-          <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <Link to="/pages/Login" smooth={true} duration={500}>
             <BsPerson className="icon" />
           </Link>
         </div>

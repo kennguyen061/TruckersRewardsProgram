@@ -26,7 +26,7 @@ function DriverNav() {
           <Link to="/" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/pages/application" smooth={true} duration={500}>
+          <Link to="/pages/Driver_Sponsor_Dashboard" smooth={true} duration={500}>
             <li>Sponsors</li>
           </Link>
           <Link to="/Catalog/Catalog" smooth={true} duration={500}>

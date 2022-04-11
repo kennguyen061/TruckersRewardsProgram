@@ -7,7 +7,7 @@ function Driver_Profile(props) {
   return (
     <div>
       <DriverNav />
-    <div className="Profile">
+    <div className="Driver_Profile">
       <div className="Main_Component">
         <div className="Cards">
           <div>
@@ -34,7 +34,9 @@ function Driver_Profile(props) {
         </div>
       </div>
     </div>
-    <Footer />
+    <div className="bottom_here">
+      <Footer />
+    </div>
     </div>
   );
 }

@@ -1,0 +1,57 @@
+.Dashboard_Profile {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 6rem;
+  color: rgb(0, 0, 0);
+  background-color: rgba(89, 167, 255, 0.781);
+}
+
+.dashboard_header {
+  display: flex;
+  font: inherit;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsor_button {
+  display: flex;
+  font: inherit;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.line {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5px;
+  background-color:rgb(16, 19, 245);
+  /* opacity: 0.5; */
+}
+
+.line_50 {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5px;
+  background-color:rgb(16, 19, 245);
+  opacity: 0.5;
+}
+
+.current_sponsors {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bottom_here {
+  position: absolute;
+  bottom: 0px;
+  width:100%;
+}
+

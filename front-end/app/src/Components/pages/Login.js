@@ -50,7 +50,7 @@ function Login() {
               <label className="Sign_Up_Text">
                 Don't have an account?{" "}
                 {
-                  <Link to="/Application" className="Link">
+                  <Link to="/pages/application" className="Link">
                     {" "}
                     Click Here{" "}
                   </Link>
@@ -61,7 +61,9 @@ function Login() {
         </div>
       </div>
     </div>
-    <Footer />
+    <div className="bottom_here">
+      <Footer />
+    </div>
     </div>
   );
 }
