@@ -1,0 +1,48 @@
+.Sponsor_Profile {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 6rem;
+  background-color: rgba(89, 167, 255, 0.781);
+}
+
+.Login-Header {
+  font: inherit;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.Name {
+  font: inherit;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.Email {
+  font: inherit;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.Address {
+  font: inherit;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.Phone {
+  font: inherit;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.line {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5px;
+  background-color:rgb(16, 19, 245);
+  opacity: 0.5;
+}

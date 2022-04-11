@@ -1,25 +1,21 @@
 import React from "react";
-import NewNav from "../UI/HomeNav";
+import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 
 import "./Wishlist.css";
 function Wishlist(props) {
   return (
     <div>
-      <NewNav />
-    <div className="Profile">
-      <div className="Main_Component">
-        <div className="Cards">
-          <div>
+      <DriverNav />
+    <div className="Wishlist">
             <label className="Login-Header">
               Wishlist
             </label>
-            <hr className="line" />
-          </div>
-        </div>
-      </div>
+            <hr className="line_50" />
     </div>
-    <Footer />
+    <div className="bottom_here">
+      <Footer />
+    </div>
     </div>
   );
 }

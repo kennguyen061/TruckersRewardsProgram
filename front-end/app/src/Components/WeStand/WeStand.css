@@ -5,36 +5,19 @@
 
 .WeStand {
   width: 100%;
-  padding: 3rem 0;
+  padding: 2rem 0;
+  background-color: rgba(89, 167, 255, 0.781);
 }
 
 .WeStand .container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 1rem;
-  padding: 0 1rem;
-}
-
-.driverOfTheYear {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 2rem 0;
+  height: 100%;
+  display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.WeStand .box {
-  display: flex;
-  max-width: 310px;
-  align-items: center;
-  margin: auto;
-  text-align: center;
-}
-
-.right {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin: auto;
+  padding: .1rem;
 }
 
 .promo {

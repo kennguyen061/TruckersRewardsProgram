@@ -1,13 +1,13 @@
 import React from "react";
-import NewNav from "../UI/DriverNav";
+import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 
 import "./Driver_Profile.css";
 function Driver_Profile(props) {
   return (
     <div>
-      <NewNav />
-    <div className="Profile">
+      <DriverNav />
+    <div className="Driver_Profile">
       <div className="Main_Component">
         <div className="Cards">
           <div>
@@ -34,7 +34,9 @@ function Driver_Profile(props) {
         </div>
       </div>
     </div>
-    <Footer />
+    <div className="bottom_here">
+      <Footer />
+    </div>
     </div>
   );
 }

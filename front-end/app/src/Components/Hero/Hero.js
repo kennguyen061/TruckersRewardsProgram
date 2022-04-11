@@ -12,8 +12,8 @@ function Hero() {
       </video>
       <div className="overlay"></div>
       <div className="content">
-        <h1>I'm not sure what should go here</h1>
-        <h2>Hey have you taken a good look at the navbar?</h2>
+        <h1>Inspiring Drivers to Drive Safe</h1>
+        <h2>drive safe, earn points, get rewards</h2>
       </div>
     </div>
   );

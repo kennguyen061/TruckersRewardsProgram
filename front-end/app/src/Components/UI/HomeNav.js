@@ -31,16 +31,13 @@ function NewNav() {
           <Link to="/pages/application" smooth={true} duration={500}>
             <li>Apply</li>
           </Link>
-          <Link to="/main/points" smooth={true} duration={500}>
-            <li>Points</li>
-          </Link>
           <Link to="/pages/Login" smooth={true} duration={500}>
             <li>Login</li>
           </Link>
         </ul>
         <div className="nav-icons">
           <BiSearch className="icon" style={{ marginRight: "1rem" }} />
-          <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <Link to="/pages/Login" smooth={true} duration={500}>
             <BsPerson className="icon" />
           </Link>
         </div>
@@ -59,9 +56,6 @@ function NewNav() {
             </Link>
             <Link to="/pages/application" smooth={true} duration={500}>
               <li>Apply</li>
-            </Link>
-            <Link to="/main/points" smooth={true} duration={500}>
-              <li>Points</li>
             </Link>
             <Link to="/pages/Login" smooth={true} duration={500}>
               <li>Login</li>
