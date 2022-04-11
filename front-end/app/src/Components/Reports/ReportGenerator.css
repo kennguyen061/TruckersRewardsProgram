@@ -1,0 +1,112 @@
+.ReportPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.Spacer {
+  height: 5rem;
+}
+
+.ReportSection {
+  display: flex;
+  order: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.InfoBox {
+  background-color: #333;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20pt;
+  color: white;
+}
+
+.ReportPage h1 {
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+.ReportPage h2 {
+  padding: 0.5rem 1rem;
+}
+
+.StatusBlock {
+  display: flex;
+  width: 100%;
+  max-height: 5rem;
+  justify-content: center;
+  padding: 1rem 1rem;
+  padding-top: 1rem;
+}
+
+.ButtonBlock {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.ButtonBlock button {
+  font: inherit;
+  font-size: 16pt;
+  cursor: pointer;
+  border: 1px solid #0a93ee;
+  background-color: #0a81cf;
+  color: white;
+  border-radius: 30px;
+  width: 10rem;
+  height: 4rem;
+  text-align: center;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.ButtonBlock a {
+  width: 10rem;
+  height: 4rem;
+  text-align: center;
+  padding: 1rem;
+  padding-top: 1.25rem;
+  background-image: linear-gradient(
+    45deg,
+    var(--primary-dark) 0%,
+    var(--primary-light) 100%
+  );
+  border: 1px solid var(--primary-dark);
+  color: #fff;
+  border-radius: 30px;
+  font-size: 16pt;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  margin: 0.5rem;
+}
+
+.DocumentBox {
+  margin: 0rem 0;
+  overflow: scroll;
+  max-height: 450px;
+  border: 1px solid #aaa;
+  background-color: #ddd;
+  user-select: none;
+  cursor: default;
+  margin-bottom: 2rem;
+}
+
+.Document {
+  display: inline-block;
+  padding: 1in;
+  width: 8.5in;
+  min-height: 11in;
+  border-radius: 10px;
+  margin: 2rem;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 5px -2px,
+    rgba(0, 0, 0, 0.14) 0px 7px 10px 1px, rgba(0, 0, 0, 0.12) 0px 2px 16px 1px;
+}

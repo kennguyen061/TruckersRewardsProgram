@@ -9,6 +9,7 @@ import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import Listing from "./Components/Catalog/listing_details.js";
+import Report1 from "./Components/Reports/Report1.js";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/pages/Dev" element={<Dev />} />
           <Route path="/Catalog/Catalog" element={<Catalog />} />
           <Route path="/Catalog/Listing" element={<Listing />} />
+          <Route path="/Reports/Report1" element={<Report1 />} />
         </Routes>
       </div>
     </div>
