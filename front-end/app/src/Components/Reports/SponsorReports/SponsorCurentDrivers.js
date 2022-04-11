@@ -1,8 +1,8 @@
-import ReportGenerator from "./ReportGenerator";
+import ReportGenerator from "../ReportGenerator";
 
-import "./Report1.css";
+import "./SponsorReport.css";
 
-const MyReport = () => {
+const SponsorDriverApp = () => {
   return (
     <ReportGenerator
       title="Sponsor Driver Applications"
@@ -46,4 +46,4 @@ const MyReport = () => {
   );
 };
 
-export default MyReport;
+export default SponsorDriverApp;
