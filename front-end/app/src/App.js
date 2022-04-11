@@ -7,6 +7,7 @@ import Profile from "./Components/pages/Driver_Profile.js";
 import Login from "./Components/pages/Login.js";
 import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
+import PointTake from "./Components/pages/PointTake.js";
 //import Catalog from "./Components/Catalog/Catalog.js";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/pages/Login" element={<Login />} />
           <Route path="/pages/Wishlist" element={<Wishlist />} />
           <Route path="/pages/Dev" element={<Dev />} />
+          <Route path="/pages/PointTake" element={<PointTake />} />
         </Routes>
       </div>
     </div>
