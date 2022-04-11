@@ -30,8 +30,8 @@ function SponsorNav() {
             <li>Reports</li>
           </Link>
           <li>Catalog</li>
-          <Link to="/main/points" smooth={true} duration={500}>
-            <li>Dashboard</li>
+          <Link to="/pages/Driver_Management" smooth={true} duration={500}>
+            <li>Drivers</li>
           </Link>
         </ul>
         <div className="nav-icons">

@@ -1,16 +1,16 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import DriverNav from "../UI/DriverNav";
+import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
 
-import "./Driver_Sponsor_Dashboard.css";
-function Driver_Sponsor_Dashboard(props) {
+import "./Driver_Management.css";
+function Driver_Management(props) {
   return (
     <div>
-      <DriverNav />
+      <SponsorNav />
       <div className="Dashboard_Profile">
       <label className="dashboard_header">
-        Sponsor Dashboard
+        Driver Management
       </label>
       <hr className="line_50" />
       <br></br>
@@ -18,13 +18,13 @@ function Driver_Sponsor_Dashboard(props) {
         <button type="submit" >
           <label className="sponsor_button">
            {" "}
-            Apply to New Sponsor
+            Manage Applicants
           </label>
         </button>
         </Link>
         <hr className="line_30" />
           <label className="current_sponsors">
-            Current Sponsors
+            Current Drivers
           </label>
         <hr className="line_30" />
     <div className="bottom_here">
@@ -35,4 +35,4 @@ function Driver_Sponsor_Dashboard(props) {
   );
 }
 
-export default Driver_Sponsor_Dashboard;
+export default Driver_Management;

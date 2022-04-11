@@ -1,7 +1,7 @@
 import DriverNav from "../UI/DriverNav";
 import "./Application.css";
-import DriverForm from "../DriverForm/DriverForm";
-import NewDriver from "../DriverForm/NewDriver";
+import SponsorApplyForm from "../SponsorApplyForm/SponsorApplyForm";
+import NewApplicant from "../SponsorApplyForm/SponsorApplyForm";
 import Footer from "../Footer/Footer";
 
 function Application() {
@@ -22,9 +22,9 @@ function Application() {
       <DriverNav />
       <div className="Container">
         <div>
-          <NewDriver onAddDriver={addDriverHandler}>
-            <DriverForm />
-          </NewDriver>
+          <NewApplicant onAddDriver={addDriverHandler}>
+            <SponsorApplyForm />
+          </NewApplicant>
         </div>
       </div>
     <Footer />
