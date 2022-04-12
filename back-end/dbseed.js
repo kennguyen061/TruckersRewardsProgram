@@ -17,15 +17,7 @@ con.connect(function (err) {
 
   //Creates SPONSORORG Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(20) NOT NULL,Conversion_scale FLOAT NOT NULL,primary key (SID));",
-    function (error, result, fields) {
-      console.log(result);
-    }
-  );
-
-  //Creates CATALOG Table
-  con.query(
-    "CREATE TABLE IF NOT EXISTS CATALOG (CatID int auto_increment NOT NULL unique,SID int NOT NULL,primary key (CatID),foreign key (SID) references SPONSORORG(SID));",
+    "CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(20) NOT NULL,Conversion_scale FLOAT NOT NULL DEFAULT 0.1,Catalog_rules JSON,,primary key (SID));",
     function (error, result, fields) {
       console.log(result);
     }

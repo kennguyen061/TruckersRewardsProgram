@@ -115,4 +115,9 @@ UPDATE ITEM
 SET Price = ''
 WHERE ItemID = '';
 
+-- UPDATE CATALOG
+UPDATE SPONSORORG
+SET Catalog_rules = JSON_INSERT(Catalog_rules,?)
+WHERE SID = ?;
+
 
