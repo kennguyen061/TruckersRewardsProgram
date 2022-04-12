@@ -17,7 +17,7 @@ con.connect(function (err) {
 
   //Creates SPONSORORG Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(20) NOT NULL,Conversion_scale FLOAT NOT NULL DEFAULT 0.1,Catalog_rules JSON,,primary key (SID));",
+    "CREATE TABLE IF NOT EXISTS SPONSORORG (SID int auto_increment NOT NULL unique,name varchar(20) NOT NULL,Driver_rules varchar(65535),Conversion_scale FLOAT NOT NULL DEFAULT 0.1,Catalog_rules varchar(65535),primary key (SID));",
     function (error, result, fields) {
       console.log(result);
     }
@@ -25,7 +25,7 @@ con.connect(function (err) {
 
   //Creates DRIVER Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS DRIVER (UID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(20) NOT NULL,Password_hash varchar(255) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,primary key (UID));",
+    "CREATE TABLE IF NOT EXISTS DRIVER (UID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(255) NOT NULL,Password_hash varchar(65535) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,primary key (UID));",
     function (error, result, fields) {
       console.log(result);
     }
@@ -57,7 +57,7 @@ con.connect(function (err) {
 
   //Creates SPONSORACCT Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS SPONSORACCT (SUID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(20) NOT NULL,Password_hash varchar(255) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,SID int NOT NULL,primary key (SUID),foreign key (SID) references SPONSORORG(SID));",
+    "CREATE TABLE IF NOT EXISTS SPONSORACCT (SUID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(255) NOT NULL,Password_hash varchar(65535) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(20) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,SID int NOT NULL,primary key (SUID),foreign key (SID) references SPONSORORG(SID));",
     function (error, result, fields) {
       console.log(result);
     }
@@ -105,7 +105,7 @@ con.connect(function (err) {
 
   //Creates ADMIN Table
   con.query(
-    "CREATE TABLE IF NOT EXISTS ADMIN (A_ID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(20) NOT NULL,Password_hash varchar(255) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(60) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,SID int NOT NULL,primary key (A_ID));",
+    "CREATE TABLE IF NOT EXISTS ADMIN (A_ID int auto_increment NOT NULL unique,First_name varchar(20) NOT NULL,Last_name varchar(20) NOT NULL,Email varchar(255) NOT NULL,Password_hash varchar(65535) NOT NULL,Password_salt varchar(60) NOT NULL,Address varchar(60) NOT NULL,Phone_number char(12) NOT NULL,VisibleFlag BIT NOT NULL,SID int NOT NULL,primary key (A_ID));",
     function (error, result, fields) {
       console.log(result);
     }
@@ -113,7 +113,7 @@ con.connect(function (err) {
 
   //Creates PASSWORDCHANGES
   con.query(
-    "CREATE TABLE IF NOT EXISTS PASSWORDCHANGES (PwdChangeID int auto_increment NOT NULL unique,User_type varchar(20) NOT NULL,Pwd_date DATETIME NOT NULL,Email varchar(20) NOT NULL,Change_type varchar(20) NOT NULL,primary key (PwdChangeID));",
+    "CREATE TABLE IF NOT EXISTS PASSWORDCHANGES (PwdChangeID int auto_increment NOT NULL unique,User_type varchar(20) NOT NULL,Pwd_date DATETIME NOT NULL,Email varchar(255) NOT NULL,Change_type varchar(20) NOT NULL,primary key (PwdChangeID));",
     function (error, result, fields) {
       console.log(result);
     }
