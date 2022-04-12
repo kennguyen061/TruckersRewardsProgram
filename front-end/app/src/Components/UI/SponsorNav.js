@@ -30,6 +30,9 @@ function SponsorNav() {
             <li>Reports</li>
           </Link>
           <Link to="/Catalog/Sponsor_Catalog_Edit" smooth={true} duration={500}>
+            <li> Edit Catalog</li>
+          </Link>
+          <Link to="/Catalog/Catalog" smooth={true} duration={500}>
             <li>Catalog</li>
           </Link>
           

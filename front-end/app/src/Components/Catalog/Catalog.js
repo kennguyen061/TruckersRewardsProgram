@@ -115,14 +115,14 @@ export default function Catalog() {
           className="buttons has-addons is-centered"
           style={{ marginTop: 30 }}
         >
-          <button className="button" onClick={fetchData}>
+          <button className="button_1" onClick={fetchData}>
             {" "}
             Sort by: Recent{" "}
           </button>
-          <button className="button" onClick={fetchHighData}>
+          <button className="button_1" onClick={fetchHighData}>
             Sort by: Highest Price
           </button>
-          <button className="button" onClick={fetchLowData}>
+          <button className="button_1" onClick={fetchLowData}>
             Sort by: Lowest Price
           </button>
 
@@ -162,25 +162,25 @@ export default function Catalog() {
               <center>
                 <img src={listing.MainImage.url_170x135} alt="listing1"></img>{" "}
               </center>
-              <Link to={`/listing_details/${listing.listing_id}`}>
+              {/* <Link to={`/listing_details/${listing.listing_id}`}> */}
                 <center>
                   <h1 style={{ fontSize: 25, color: "blue" }}>
                     <strong>{listing.title} </strong>
                   </h1>
                 </center>
-              </Link>
+              {/* </Link> */}
 
               {/* Convert to points */}
               <center>
                 <h2 style={{ color: "black" }}>Price: {listing.price}</h2>
               </center>
 
-              <button className="button is-info" onClick={notify_cart(listing)}>
+              <button className="button_1" onClick={notify_cart(listing)}>
                 {" "}
                 Add to Cart{" "}
               </button>
               <button
-                className="button is-warning"
+                className="button_1"
                 onClick={notify_wishlist(listing)}
                 style={{ float: "right" }}
               >
@@ -192,9 +192,9 @@ export default function Catalog() {
         </div>
       </div>
       <Outlet />
-      <div className="bottom_here">
+      
+      
       <Footer />
-      </div>
     </div>
   );
 }
