@@ -7,9 +7,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // specify database
 const db = mysql.createConnection({
-  host: "database-1.cy0nrpgxkpzk.us-east-1.rds.amazonaws.com",
+  host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
-  password: "test1337froggang",
+  password: "y4PVPHuqVq52Pvp",
 });
 
 // connect to database
@@ -35,7 +35,13 @@ router.get("/", (request, response) => {
 router.post("/update", (request, response) => {
   db.query(
     "INSERT INTO CARTITEM(UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?)",
-    [request.body.UID, request.body.SID, request.body.ItemName, request.body.Price, request.body.Quantity],
+    [
+      request.body.UID,
+      request.body.SID,
+      request.body.ItemName,
+      request.body.Price,
+      request.body.Quantity,
+    ],
     (error, result) => {
       if (error) throw error;
       console.log("Cart updated");
@@ -47,7 +53,7 @@ router.post("/update", (request, response) => {
 router.post("/remove", (request, response) => {
   db.query(
     "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemName = ?",
-    [request.body.UID, request.body.SID,request.body.ItemName],
+    [request.body.UID, request.body.SID, request.body.ItemName],
     (error, result) => {
       if (error) throw error;
       console.log("Cart item removed.");

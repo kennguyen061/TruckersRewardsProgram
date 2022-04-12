@@ -7,9 +7,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 // specify database
 const db = mysql.createConnection({
-  host: "database-1.cy0nrpgxkpzk.us-east-1.rds.amazonaws.com",
+  host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
-  password: "test1337froggang",
+  password: "y4PVPHuqVq52Pvp",
 });
 
 // connect to database
