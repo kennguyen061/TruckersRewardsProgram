@@ -1,6 +1,7 @@
 //import { Link, Route } from "react-router-dom";
 import "./Home.css";
 import NewNav from "../UI/HomeNav";
+import DriverNav from "../UI/DriverNav";
 import Hero from "../Hero/Hero";
 import People from "../People/People";
 import WeStand from "../WeStand/WeStand";
@@ -12,7 +13,7 @@ toast.warn("This text demonstrates the annoucement feature");
 function Home() {
   return (
     <div>
-      <NewNav />
+      <DriverNav />
       <Hero />
       <People />
       <WeStand />

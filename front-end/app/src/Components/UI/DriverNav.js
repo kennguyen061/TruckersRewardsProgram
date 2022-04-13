@@ -35,8 +35,8 @@ function DriverNav() {
           <Link to="/main/points" smooth={true} duration={500}>
             <li>Points</li>
           </Link>
-          <Link to="/pages/Wishlist" smooth={true} duration={500}>
-            <li>Wishlist</li>
+          <Link to="/pages/Cart" smooth={true} duration={500}>
+            <li>Cart</li>
           </Link>
         </ul>
         <div className="nav-icons">
