@@ -34,8 +34,9 @@ router.get("/", (request, response) => {
 // Add a cart item
 router.post("/update", (request, response) => {
   db.query(
-    "INSERT INTO CARTITEM(UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?)",
+    "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?,?)",
     [
+      request.body.ItemID,
       request.body.UID,
       request.body.SID,
       request.body.ItemName,
@@ -52,8 +53,8 @@ router.post("/update", (request, response) => {
 // remove wish list item
 router.post("/remove", (request, response) => {
   db.query(
-    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemName = ?",
-    [request.body.UID, request.body.SID, request.body.ItemName],
+    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
       if (error) throw error;
       console.log("Cart item removed.");
