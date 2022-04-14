@@ -46,7 +46,7 @@ db.connect((error) => {
 //   );
 // }
 
-router.post("/createApplication", (request,response) => {
+router.post("/createApplication", (request, response) => {
   // check if application already exists
   db.query(
     "SELECT COUNT(*) FROM APPLICATION WHERE UID = ? AND SID = ?;",
@@ -78,7 +78,7 @@ router.post("/createApplication", (request,response) => {
 //   );
 // }
 
-// driver delete application 
+// driver delete application
 router.post("/deleteapplication", (request, response) => {
   db.query(
     "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?",
