@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import html2PDF from "jspdf-html2canvas";
 import "./ReportGenerator.css";
-import NewNav from "../UI/SponsorNav";
+import SponsorNav from "../UI/SponsorNav";
 
 const STATUS_PREVIEW = "preview";
 const STATUS_GENERATING = "generating";
@@ -45,7 +45,7 @@ const ReportGenerator = ({
 
   return (
     <div className="ReportPage">
-      <NewNav />
+      <SponsorNav />
       <div className="Spacer"></div>
       <div className="InfoBox">
         <h1>{title}</h1>
