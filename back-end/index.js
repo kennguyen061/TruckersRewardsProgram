@@ -5,7 +5,6 @@ const pointsRoute = require("./routes/Points");
 const wishListRoute = require("./routes/WishList");
 const cartRoute = require("./routes/Cart");
 const drivermgtRoute = require("./routes/Drivermanagement")
-//TODO: WIP
 const applicationRoute = require("./routes/Application")
 const PORT = 8000;
 
@@ -17,7 +16,6 @@ app.use("/points", pointsRoute);
 app.use("/wishlist", wishListRoute);
 app.use("/cart", cartRoute);
 app.use("/drivermgt",drivermgtRoute);
-//TODO: WIP
 app.use("/application", applicationRoute);
 
 app.listen(PORT, () => {
