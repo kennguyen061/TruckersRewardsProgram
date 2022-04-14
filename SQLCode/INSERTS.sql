@@ -31,7 +31,8 @@ SELECT * FROM POINTBALANCE;
 INSERT INTO DRIVER(UID,First_name,Last_name,Email,Password_hash,Password_salt,Address,Phone_number,VisibleFlag) VALUES(1,'Test','Driver','testdriver@clemson.edu','lfsdjflsdjf','dslfksjdlfjsdf','100 Daniel Dr', '864-844-3242',1);
 SELECT * FROM DRIVER;
 
-INSERT INTO SPONSORORG(SID, name, Driver_rules,Conversion_scale) VALUES(1,'Clemson','drive good',1000);
+INSERT INTO SPONSORORG(SID, name, Driver_rules,Conversion_scale) VALUES(1,'Clemson','drive good',0.1);
+UPDATE SPONSORORG SET Conversion_scale = 0.1 WHERE SID = 1;
 SELECT * FROM SPONSORORG;
 
 SELECT * FROM CARTITEM WHERE UID = 1 AND SID = 1 AND ITEMID = '';
