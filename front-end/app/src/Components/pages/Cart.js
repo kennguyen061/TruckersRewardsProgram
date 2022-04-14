@@ -6,7 +6,43 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 //Retreive cart from the logged in driver
+// //Gets the current quantity
+// const getquantity = (UID, SID, ItemID) => {
+//   db.query(
+//     "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//       return result[0].Quantity;
+//     }
+//   );
+// };
 
+// function addquantity(UID, SID, ItemID) {
+//   //calculate new quantity
+//   currentquantity = getquantity(UID, SID, ItemID);
+//   newQuantity = currentquantity + 1;
+//   db.query(
+//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [newQuantity, UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//     }
+//   );
+// }
+
+// function lowerquantity(UID, SID, ItemID) {
+//   //calculate new quantity
+//   currentquantity = getquantity(UID, SID, ItemID);
+//   newQuantity = currentquantity - 1;
+//   db.query(
+//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+//     [newQuantity, UID, SID, ItemID],
+//     (error, result) => {
+//       if (error) throw error;
+//     }
+//   );
+// }
 
 export default function Cart() {
 

@@ -39,6 +39,7 @@ async function retrievecatalogrules(SID) {
     [SID],
     (error, result) => {
       if (error) throw error;
+      var catalogrules = [];
       catalogrules = result[0].Catalog_rules.split(',');
       return catalogrules;
     }
