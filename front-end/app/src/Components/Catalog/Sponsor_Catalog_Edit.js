@@ -2,6 +2,10 @@ import React, { useState, useEffect }  from 'react';
 import Select from 'react-select';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./Sponsor_Catalog_Edit.css";
+import SponsorNav from "../UI/SponsorNav";
+import Footer from "../Footer/Footer";
+
 toast.configure()
 
 
@@ -16,7 +20,6 @@ export default function Edit_Catalog() {
     
     var new_listing = []
 
-    
 
     const fetchData = () => {
         const etsy_url =
@@ -45,11 +48,6 @@ export default function Edit_Catalog() {
     };
     
     
-    // useEffect(() => {
-    //     fetchData();
-        
-    //   }, []);
-    
     // handle onChange event of the dropdown
     const handleChange = (e) => {
         setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -72,18 +70,14 @@ export default function Edit_Catalog() {
         { value: 'Accessories', label: 'Accessories'},
     ]
 
-
-    
     new_listing = listing.concat(listing_1);
     
 
-    
     console.log(new_listing)
     console.log(selectedValues)
     var filtered_listing = []
 
 
-    //sex, dildo, porn, fuck, ass, hell, dick, politics, damn, racist, racism, sex toy, vibrator, thongs,18+
     filtered_listing = new_listing.filter(filtered_listing => !filtered_listing.title.includes('republican') || 
     !filtered_listing.title.includes('Republican') || !filtered_listing.description.includes('republican') || !filtered_listing.description.includes('Republican')
       || !filtered_listing.tags.includes('republican') || !filtered_listing.tags.includes('Republican') ||
@@ -119,11 +113,11 @@ export default function Edit_Catalog() {
     || listing.taxonomy_path.includes(selectedValues[5]) || listing.taxonomy_path.includes(selectedValues[6]) || listing.taxonomy_path.includes(selectedValues[7])
     || listing.taxonomy_path.includes(selectedValues[8]) || listing.taxonomy_path.includes(selectedValues[9]) || listing.taxonomy_path.includes(selectedValues[10])
     || listing.taxonomy_path.includes(selectedValues[11]))
+
     //KENNY ADD filtered_listing in the Catalog table for the sponsor
 
     console.log(filtered_listing)
 
-    //KENNY ADD filtered_listing in the Catalog table for the sponsor
 
 
     const save_catalog_notify = () =>{
@@ -131,35 +125,35 @@ export default function Edit_Catalog() {
       }
     
     return (
-        <center>
-            <div className='Edit Catalog' style={{marginLeft: 10, marginRight: 10}}>
+      <div className='Edit Catalog'>
+        <SponsorNav />
+      <center>
+        <div className = "editing">
+          <h1>Click this button to retrieve the most active listings from Etsy (this will take around five seconds)</h1>
+          <h3 style={{color:"red"}}>Every Catalog Item Displayed to the Driver is in Stock </h3>
+          <h3 style={{color:"red"}}>Catalog will not have any Explicit Items</h3><br></br>
+          <button className="button_1" onClick={fetchData}> Retrieve the Most Active Listings from Etsy </button>
+          <br></br>
 
-              <h1>Click this button to retrieve the most active listings from Etsy (this will take around five seconds)</h1>
-              <h1 style={{}}>Catalog will not have any Explicit Items</h1>
-              <h1 style={{}}>Every Catalog Item Displayed to the Driver is in Stock </h1>
-              <button className="button is-info" onClick={fetchData}> Retrieve the Most Active Listings from Etsy </button>
-              <br></br><br></br>
+          <h1 style={{}}>Edit your Catalog by Choosing Categories to be Displayed</h1><br></br>
+    
 
-              <h1 style={{}}>Edit your Catalog by Choosing Categories to be Displayed</h1>
-  
+          <Select 
+            styles={{width: 50, height:35}}
+            name = 'categories'
+            onChange={handleChange}
+            isMulti
+            options={options}
+            className="basic-multi-select"
+            classNamePrefix="select"
+          /><br></br>
 
+          <button className="button_1" onClick={save_catalog_notify} style = {{float:"right"}}> Save Catalog </button>
+        </div>
+        </center>  
+        <Footer/>
+      </div>  
 
-              <Select 
-                    styles={{width: 50, height:35}}
-                    name = 'categories'
-                    onChange={handleChange}
-                    isMulti
-                    options={options}
-                    className="basic-multi-select"
-                    classNamePrefix="select"
-              />    <br></br>
-
-              <button className="button is-info" onClick={save_catalog_notify} style = {{float:"right"}}> Save Catalog </button>
-
-
-            </div>
-        </center>
-      
     )
 
 }

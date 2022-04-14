@@ -3,20 +3,21 @@ import React, { useState, useEffect }  from 'react';
 import ImageGallery from 'react-image-gallery';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const mysql = require('mysql');
+import './Listing_details.js'
+// const mysql = require('mysql');
 toast.configure()
 
-// specify database
-const db = mysql.createConnection({
-    host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
-    user: "admin",
-    password: "test1337froggang"
-});
+// // specify database
+// const db = mysql.createConnection({
+//     host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
+//     user: "admin",
+//     password: "test1337froggang"
+// });
 
-// connect to database
-db.connect((error) => {
-    if (error) throw error;
-});
+// // connect to database
+// db.connect((error) => {
+//     if (error) throw error;
+// });
 
 function Listing_details() {
     let {id}= useParams();
@@ -25,54 +26,54 @@ function Listing_details() {
 
     
     
-    const notify_cart = item => () =>{
-        // Calling toast method by passing string
-        //variables to add to the table are 
-        //item.listing_id
-        //item.title
-        //item.price (should be in points though)
+    // const notify_cart = item => () =>{
+    //     // Calling toast method by passing string
+    //     //variables to add to the table are 
+    //     //item.listing_id
+    //     //item.title
+    //     //item.price (should be in points though)
 
-        //make some conditional that checks if the driver already has that item on the cart (SELECT STATEMENT)
-        //1 for uid and sid are placeholder
-        db.query("SELECT * FROM CARTITEM WHERE UID = 1 AND SID = 1 AND ITEMID = ?;",
-        [
-            item.listing_id
-        ],
-        (error, result) => {
-            if (error) throw error;
-            if(result.length >= 1) {
-                // if they do, increase the quantity by 1 of the current entry (UPDATE)
-                //1 for uid and sid are placeholder
-                //Retrieve old quantity (3rd index in table), increase it by one
-                newquantity = result[0].Quantity + 1;
-                db.query("UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = 1 AND SID = 1",
-                [
-                    newquantity,
-                    item.listing_id
-                ],
-                (error, result) => {
-                    if (error) throw error;
-                }
-                )
-            }
-            else {
-                //If not, create an entry with the item. (quantity 1) (INSERT INTO)
-                //1 for uid and sid are placeholder
-                db.query("INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,1,1);",
-                [
-                    item.listing_id,
-                    item.title,
-                    item.price,
-                ],
-                (error, result) => {
-                    if (error) throw error;
-                }
-                )
-            }
-        }
-        )  
-        toast('Product has been added to the cart')
-    }
+    //     //make some conditional that checks if the driver already has that item on the cart (SELECT STATEMENT)
+    //     //1 for uid and sid are placeholder
+    //     db.query("SELECT * FROM CARTITEM WHERE UID = 1 AND SID = 1 AND ITEMID = ?;",
+    //     [
+    //         item.listing_id
+    //     ],
+    //     (error, result) => {
+    //         if (error) throw error;
+    //         if(result.length >= 1) {
+    //             // if they do, increase the quantity by 1 of the current entry (UPDATE)
+    //             //1 for uid and sid are placeholder
+    //             //Retrieve old quantity (3rd index in table), increase it by one
+    //             newquantity = result[0].Quantity + 1;
+    //             db.query("UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = 1 AND SID = 1",
+    //             [
+    //                 newquantity,
+    //                 item.listing_id
+    //             ],
+    //             (error, result) => {
+    //                 if (error) throw error;
+    //             }
+    //             )
+    //         }
+    //         else {
+    //             //If not, create an entry with the item. (quantity 1) (INSERT INTO)
+    //             //1 for uid and sid are placeholder
+    //             db.query("INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,1,1);",
+    //             [
+    //                 item.listing_id,
+    //                 item.title,
+    //                 item.price,
+    //             ],
+    //             (error, result) => {
+    //                 if (error) throw error;
+    //             }
+    //             )
+    //         }
+    //     }
+    //     )  
+    //     toast('Product has been added to the cart')
+    // }
 
     const fetchData = () => 
     {
@@ -125,43 +126,10 @@ function Listing_details() {
     
     return (
         
-        <div className="product page">
-            <div className = "columns" style={{marginTop:30, marginLeft:10, marginRight:10}}>
-                <div className="column is-three-fifths">   
-                    <div>
-                        <center><ImageGallery items={images}/></center> 
-                    </div>
-                </div>
-
-                <div className="column">
-                    <div>
-                        { listing.map((listing) => (
-                            <>
-                                <h1 style={{ fontSize: 25, fontWeight: "bold" }}>
-                                    {listing.title}
-                                </h1>
-                            
-                                
-                                <br></br>
-                          
-
-                                <h1 style={{fontSize: 25, fontWeight: "bold" }}>Price: {listing.price}</h1> <br></br>
-                                <button class="button is-large is-fullwidth is-rounded" onClick={notify_cart(listing)}>Add to Cart</button> <br></br>
-                                <button class="button is-large is-fullwidth is-rounded">Add to Wishlist</button><br></br>
-
-
-                                <h1 style={{fontSize: 25, fontWeight: "bold" }}>Description</h1>
-
-                                <p>
-                                    {listing.description}
-                                </p>
-                            </>                                   
-                        ))}
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        <div style = {{marginTop: 50}}>
+          <ImageGallery items={images}/>
+          </div>
+       
     )
 
   }
