@@ -47,7 +47,18 @@ router.post("/update", (request, response) => {
     }
   );
 
-  // insert new balance
+  // UPDATE new balance
+  db.query(
+    "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
+    [
+      request.body.currentPoints,
+      request.body.PointID,
+    ],
+    (error, result) => {
+      if (error) throw error;
+    }
+  );
+  // insert new balance into log
   db.query(
     "INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
     [

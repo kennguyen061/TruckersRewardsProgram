@@ -32,8 +32,8 @@ function updatecatalogrules(SID, rulestring) {
   );
 }
 
-//Retrieves catalogrule from a sponsor
-const retrievecatalogrules = (SID) => {
+//Retrieves catalogrule from a sponsor TODO: FIX THIS NOT RETURNING ARRAY
+async function retrievecatalogrules(SID) {
   db.query(
     "SELECT * FROM SPONSORORG WHERE SID = ?",
     [SID],
