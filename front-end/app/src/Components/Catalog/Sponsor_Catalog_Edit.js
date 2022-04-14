@@ -1,31 +1,30 @@
-import React, { useState, useEffect }  from 'react';
-import Select from 'react-select';
-import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Sponsor_Catalog_Edit.css";
 import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
-const mysql = require('mysql');
-toast.configure()
-
-
+//const mysql = require("mysql");
+toast.configure();
+/*
 // specify database
 const db = mysql.createConnection({
-    host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
-    user: "admin",
-    password: "test1337froggang"
+  host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
+  user: "admin",
+  password: "test1337froggang",
 });
 
 // connect to database
 db.connect((error) => {
-    if (error) throw error;
+  if (error) throw error;
 });
 
 //updates a sponsor's catalog rules
 function updatecatalogrules(SID, rulestring) {
   db.query(
     "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-    [rulestring,SID],
+    [rulestring, SID],
     (error, result) => {
       if (error) throw error;
     }
@@ -34,163 +33,208 @@ function updatecatalogrules(SID, rulestring) {
 
 //Retrieves catalogrule from a sponsor TODO: FIX THIS NOT RETURNING ARRAY
 async function retrievecatalogrules(SID) {
-  db.query(
-    "SELECT * FROM SPONSORORG WHERE SID = ?",
-    [SID],
-    (error, result) => {
-      if (error) throw error;
-      var catalogrules = [];
-      catalogrules = result[0].Catalog_rules.split(',');
-      return catalogrules;
-    }
-  );
-};
-
+  db.query("SELECT * FROM SPONSORORG WHERE SID = ?", [SID], (error, result) => {
+    if (error) throw error;
+    var catalogrules = [];
+    catalogrules = result[0].Catalog_rules.split(",");
+    return catalogrules;
+  });
+}
+*/
 export default function Edit_Catalog() {
+  // set value for default selection
+  const [selectedValues, setSelectedValue] = useState([]);
 
-    // set value for default selection
-    const [selectedValues, setSelectedValue] = useState([]);
+  //used to grab the active listings
+  const [listing, setlisting] = useState([]);
+  const [listing_1, setlisting_1] = useState([]);
 
-    //used to grab the active listings
-    const [listing, setlisting] = useState([]);
-    const [listing_1, setlisting_1] = useState([]);
-    
-    var new_listing = []
+  var new_listing = [];
 
+  const fetchData = () => {
+    const etsy_url =
+      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
 
-    const fetchData = () => {
-        const etsy_url =
-          "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
-    
-        fetch(etsy_url)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setlisting(data.results);
-          });
+    fetch(etsy_url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setlisting(data.results);
+      });
 
-          const etsy_url_2 =
-          "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=100&api_key=dmmhikoeydunsffqrxyeubdv";
-    
-        fetch(etsy_url_2)
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            setlisting_1(data.results);
-          });
-          
-          toast("Retrieving Catalog")
-    };
-    
-    
-    // handle onChange event of the dropdown
-    const handleChange = (e) => {
-        setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
-    }
+    const etsy_url_2 =
+      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=100&api_key=dmmhikoeydunsffqrxyeubdv";
 
-    
+    fetch(etsy_url_2)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setlisting_1(data.results);
+      });
 
-    const options = [
-        { value: 'Art & Collectibles', label: 'Art & Collectibles' },
-        { value: 'Jewelry', label: 'Jewelry' },
-        { value: 'Home & Living', label: 'Home & Living'},
-        { value: 'Craft Supplies & Tools', label: 'Craft Supplies & Tools'},
-        { value: 'Clothing', label: 'Clothing'},
-        { value: 'Toys & Games', label: 'Toys & Games'},
-        { value: 'Paper & Party Supplies', label: 'Paper & Party Supplies'},
-        { value: 'Gifts & Mementos', label: 'Gifts & Mementos'},
-        { value: 'Books, Movies & Music', label: 'Books, Movies & Music'},
-        { value: 'Electronics & Accessories', label: 'Electronics & Accessories'},
-        { value: 'Bath & Beauty', label: 'Bath & Beauty'},
-        { value: 'Accessories', label: 'Accessories'},
-    ]
+    toast("Retrieving Catalog");
+  };
 
-    new_listing = listing.concat(listing_1);
-    
+  // handle onChange event of the dropdown
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map((x) => x.value) : []);
+  };
 
-    console.log(new_listing)
-    console.log(selectedValues)
-    var filtered_listing = []
+  const options = [
+    { value: "Art & Collectibles", label: "Art & Collectibles" },
+    { value: "Jewelry", label: "Jewelry" },
+    { value: "Home & Living", label: "Home & Living" },
+    { value: "Craft Supplies & Tools", label: "Craft Supplies & Tools" },
+    { value: "Clothing", label: "Clothing" },
+    { value: "Toys & Games", label: "Toys & Games" },
+    { value: "Paper & Party Supplies", label: "Paper & Party Supplies" },
+    { value: "Gifts & Mementos", label: "Gifts & Mementos" },
+    { value: "Books, Movies & Music", label: "Books, Movies & Music" },
+    { value: "Electronics & Accessories", label: "Electronics & Accessories" },
+    { value: "Bath & Beauty", label: "Bath & Beauty" },
+    { value: "Accessories", label: "Accessories" },
+  ];
 
+  new_listing = listing.concat(listing_1);
 
-    filtered_listing = new_listing.filter(filtered_listing => !filtered_listing.title.includes('republican') || 
-    !filtered_listing.title.includes('Republican') || !filtered_listing.description.includes('republican') || !filtered_listing.description.includes('Republican')
-      || !filtered_listing.tags.includes('republican') || !filtered_listing.tags.includes('Republican') ||
-      
-      !filtered_listing.title.includes('sex') || !filtered_listing.title.includes('Sex') || !filtered_listing.description.includes('sex') || !filtered_listing.description.includes('Sex')
-      || !filtered_listing.tags.includes('sex') || !filtered_listing.tags.includes('Sex') ||
+  console.log(new_listing);
+  console.log(selectedValues);
+  var filtered_listing = [];
 
-      !filtered_listing.title.includes('dildo') || !filtered_listing.title.includes('Dildo') || !filtered_listing.description.includes('dildo') || !filtered_listing.description.includes('Dildo')
-      || !filtered_listing.tags.includes('dildo') || !filtered_listing.tags.includes('Dildo') ||
+  filtered_listing = new_listing.filter(
+    (filtered_listing) =>
+      !filtered_listing.title.includes("republican") ||
+      !filtered_listing.title.includes("Republican") ||
+      !filtered_listing.description.includes("republican") ||
+      !filtered_listing.description.includes("Republican") ||
+      !filtered_listing.tags.includes("republican") ||
+      !filtered_listing.tags.includes("Republican") ||
+      !filtered_listing.title.includes("sex") ||
+      !filtered_listing.title.includes("Sex") ||
+      !filtered_listing.description.includes("sex") ||
+      !filtered_listing.description.includes("Sex") ||
+      !filtered_listing.tags.includes("sex") ||
+      !filtered_listing.tags.includes("Sex") ||
+      !filtered_listing.title.includes("dildo") ||
+      !filtered_listing.title.includes("Dildo") ||
+      !filtered_listing.description.includes("dildo") ||
+      !filtered_listing.description.includes("Dildo") ||
+      !filtered_listing.tags.includes("dildo") ||
+      !filtered_listing.tags.includes("Dildo") ||
+      !filtered_listing.title.includes("porn") ||
+      !filtered_listing.title.includes("Porn") ||
+      !filtered_listing.description.includes("porn") ||
+      !filtered_listing.description.includes("Porn") ||
+      !filtered_listing.tags.includes("porn") ||
+      !filtered_listing.tags.includes("Porn") ||
+      !filtered_listing.title.includes("fuck") ||
+      !filtered_listing.title.includes("Fuck") ||
+      !filtered_listing.description.includes("fuck") ||
+      !filtered_listing.description.includes("Fuck") ||
+      !filtered_listing.tags.includes("fuck") ||
+      !filtered_listing.tags.includes("Fuck") ||
+      !filtered_listing.title.includes("ass") ||
+      !filtered_listing.title.includes("Ass") ||
+      !filtered_listing.description.includes("ass") ||
+      !filtered_listing.description.includes("Ass") ||
+      !filtered_listing.tags.includes("ass") ||
+      !filtered_listing.tags.includes("Ass") ||
+      !filtered_listing.title.includes("hell") ||
+      !filtered_listing.title.includes("Hell") ||
+      !filtered_listing.description.includes("hell") ||
+      !filtered_listing.description.includes("Hell") ||
+      !filtered_listing.tags.includes("hell") ||
+      !filtered_listing.tags.includes("Hell") ||
+      !filtered_listing.title.includes("dick") ||
+      !filtered_listing.title.includes("Dick") ||
+      !filtered_listing.description.includes("dick") ||
+      !filtered_listing.description.includes("Dick") ||
+      !filtered_listing.tags.includes("dick") ||
+      !filtered_listing.tags.includes("Dick") ||
+      !filtered_listing.title.includes("erotic") ||
+      !filtered_listing.title.includes("Erotic") ||
+      !filtered_listing.description.includes("erotic") ||
+      !filtered_listing.description.includes("Erotic") ||
+      !filtered_listing.tags.includes("erotic") ||
+      !filtered_listing.tags.includes("Erotic")
+  );
 
-      !filtered_listing.title.includes('porn') || !filtered_listing.title.includes('Porn') || !filtered_listing.description.includes('porn') || !filtered_listing.description.includes('Porn')
-      || !filtered_listing.tags.includes('porn') || !filtered_listing.tags.includes('Porn') ||
+  // list array is filtered based on multi-select dropdown
+  filtered_listing = filtered_listing.filter(
+    (listing) =>
+      listing.taxonomy_path.includes(selectedValues[0]) ||
+      listing.taxonomy_path.includes(selectedValues[1]) ||
+      listing.taxonomy_path.includes(selectedValues[2]) ||
+      listing.taxonomy_path.includes(selectedValues[3]) ||
+      listing.taxonomy_path.includes(selectedValues[4]) ||
+      listing.taxonomy_path.includes(selectedValues[5]) ||
+      listing.taxonomy_path.includes(selectedValues[6]) ||
+      listing.taxonomy_path.includes(selectedValues[7]) ||
+      listing.taxonomy_path.includes(selectedValues[8]) ||
+      listing.taxonomy_path.includes(selectedValues[9]) ||
+      listing.taxonomy_path.includes(selectedValues[10]) ||
+      listing.taxonomy_path.includes(selectedValues[11])
+  );
 
-      !filtered_listing.title.includes('fuck') || !filtered_listing.title.includes('Fuck') || !filtered_listing.description.includes('fuck') || !filtered_listing.description.includes('Fuck')
-      || !filtered_listing.tags.includes('fuck') || !filtered_listing.tags.includes('Fuck') ||
+  //KENNY ADD filtered_listing in the Catalog table for the sponsor
+  // updatecatalogrules(1, filtered_listing.toString());
+  console.log(filtered_listing);
 
-      !filtered_listing.title.includes('ass') || !filtered_listing.title.includes('Ass') || !filtered_listing.description.includes('ass') || !filtered_listing.description.includes('Ass')
-      || !filtered_listing.tags.includes('ass') || !filtered_listing.tags.includes('Ass') ||
+  const save_catalog_notify = () => {
+    toast("Catalog has been saved for Drivers");
+  };
 
-      !filtered_listing.title.includes('hell') || !filtered_listing.title.includes('Hell') || !filtered_listing.description.includes('hell') || !filtered_listing.description.includes('Hell')
-      || !filtered_listing.tags.includes('hell') || !filtered_listing.tags.includes('Hell') ||
-
-      !filtered_listing.title.includes('dick') || !filtered_listing.title.includes('Dick') || !filtered_listing.description.includes('dick') || !filtered_listing.description.includes('Dick')
-      || !filtered_listing.tags.includes('dick') || !filtered_listing.tags.includes('Dick') ||
-
-      !filtered_listing.title.includes('erotic') || !filtered_listing.title.includes('Erotic') || !filtered_listing.description.includes('erotic') || !filtered_listing.description.includes('Erotic')
-      || !filtered_listing.tags.includes('erotic') || !filtered_listing.tags.includes('Erotic') 
-      )
-
-    // list array is filtered based on multi-select dropdown
-    filtered_listing = filtered_listing.filter(listing => listing.taxonomy_path.includes(selectedValues[0]) || listing.taxonomy_path.includes(selectedValues[1])
-    || listing.taxonomy_path.includes(selectedValues[2]) || listing.taxonomy_path.includes(selectedValues[3]) || listing.taxonomy_path.includes(selectedValues[4])
-    || listing.taxonomy_path.includes(selectedValues[5]) || listing.taxonomy_path.includes(selectedValues[6]) || listing.taxonomy_path.includes(selectedValues[7])
-    || listing.taxonomy_path.includes(selectedValues[8]) || listing.taxonomy_path.includes(selectedValues[9]) || listing.taxonomy_path.includes(selectedValues[10])
-    || listing.taxonomy_path.includes(selectedValues[11]))
-
-    //KENNY ADD filtered_listing in the Catalog table for the sponsor
-    updatecatalogrules(1,filtered_listing.toString())
-    console.log(filtered_listing)
-
-
-
-    const save_catalog_notify = () =>{
-           toast('Catalog has been saved for Drivers')
-      }
-    
-    return (
-      <div className='Edit Catalog'>
-        <SponsorNav />
+  return (
+    <div className="Edit Catalog">
+      <SponsorNav />
       <center>
-        <div className = "editing">
-          <h1>Click this button to retrieve the most active listings from Etsy (this will take around five seconds)</h1>
-          <h3 style={{color:"red"}}>Every Catalog Item Displayed to the Driver is in Stock </h3>
-          <h3 style={{color:"red"}}>Catalog will not have any Explicit Items</h3><br></br>
-          <button className="button_1" onClick={fetchData}> Retrieve the Most Active Listings from Etsy </button>
+        <div className="editing">
+          <h1>
+            Click this button to retrieve the most active listings from Etsy
+            (this will take around five seconds)
+          </h1>
+          <h3 style={{ color: "red" }}>
+            Every Catalog Item Displayed to the Driver is in Stock{" "}
+          </h3>
+          <h3 style={{ color: "red" }}>
+            Catalog will not have any Explicit Items
+          </h3>
+          <br></br>
+          <button className="button_1" onClick={fetchData}>
+            {" "}
+            Retrieve the Most Active Listings from Etsy{" "}
+          </button>
           <br></br>
 
-          <h1 style={{}}>Edit your Catalog by Choosing Categories to be Displayed</h1><br></br>
-    
+          <h1 style={{}}>
+            Edit your Catalog by Choosing Categories to be Displayed
+          </h1>
+          <br></br>
 
-          <Select 
-            styles={{width: 50, height:35}}
-            name = 'categories'
+          <Select
+            styles={{ width: 50, height: 35 }}
+            name="categories"
             onChange={handleChange}
             isMulti
             options={options}
             className="basic-multi-select"
             classNamePrefix="select"
-          /><br></br>
+          />
+          <br></br>
 
-          <button className="button_1" onClick={save_catalog_notify} style = {{float:"right"}}> Save Catalog </button>
+          <button
+            className="button_1"
+            onClick={save_catalog_notify}
+            style={{ float: "right" }}
+          >
+            {" "}
+            Save Catalog{" "}
+          </button>
         </div>
-        </center>  
-        <Footer/>
-      </div>  
-
-    )
-
+      </center>
+      <Footer />
+    </div>
+  );
 }
