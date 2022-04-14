@@ -5,9 +5,31 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./Sponsor_Catalog_Edit.css";
 import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
-
+const mysql = require('mysql');
 toast.configure()
 
+
+// specify database
+const db = mysql.createConnection({
+    host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "test1337froggang"
+});
+
+// connect to database
+db.connect((error) => {
+    if (error) throw error;
+});
+
+function updatecatalogrules(SID, rulestring) {
+  db.query(
+    "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
+    [SID, rulestring],
+    (error, result) => {
+      if (error) throw error;
+    }
+  );
+}
 
 export default function Edit_Catalog() {
 
@@ -115,7 +137,7 @@ export default function Edit_Catalog() {
     || listing.taxonomy_path.includes(selectedValues[11]))
 
     //KENNY ADD filtered_listing in the Catalog table for the sponsor
-
+    updatecatalogrules(1,filtered_listing)
     console.log(filtered_listing)
 
 
