@@ -25,7 +25,7 @@ db.connect((error) => {
 function updatecatalogrules(SID, rulestring) {
   db.query(
     "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-    [SID, rulestring],
+    [rulestring,SID],
     (error, result) => {
       if (error) throw error;
     }
