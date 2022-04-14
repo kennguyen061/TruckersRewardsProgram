@@ -8,7 +8,7 @@ function Application() {
   const addDriverHandler = (driver) => {
     console.log("in applicartion");
 
-    fetch("http://localhost:8000/account/create", {
+    fetch("http://http://18.235.52.212:8000/account/create", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(driver),
@@ -27,7 +27,7 @@ function Application() {
           </NewDriver>
         </div>
       </div>
-    <Footer />
+      <Footer />
     </div>
   );
 }
