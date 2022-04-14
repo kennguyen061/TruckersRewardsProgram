@@ -21,6 +21,7 @@ db.connect((error) => {
     if (error) throw error;
 });
 
+//updates a sponsor's catalog rules
 function updatecatalogrules(SID, rulestring) {
   db.query(
     "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
@@ -30,6 +31,19 @@ function updatecatalogrules(SID, rulestring) {
     }
   );
 }
+
+//Retrieves catalogrule from a sponsor
+const retrievecatalogrules = (SID) => {
+  db.query(
+    "SELECT * FROM SPONSORORG WHERE SID = ?",
+    [SID],
+    (error, result) => {
+      if (error) throw error;
+      catalogrules = result[0].Catalog_rules.split(',');
+      return catalogrules;
+    }
+  );
+};
 
 export default function Edit_Catalog() {
 
@@ -137,7 +151,7 @@ export default function Edit_Catalog() {
     || listing.taxonomy_path.includes(selectedValues[11]))
 
     //KENNY ADD filtered_listing in the Catalog table for the sponsor
-    updatecatalogrules(1,filtered_listing)
+    updatecatalogrules(1,filtered_listing.toString())
     console.log(filtered_listing)
 
 
