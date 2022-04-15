@@ -1,12 +1,14 @@
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useNavigate } from "react-router-dom";
 import "./Login.css";
 import NewNav from "../UI/HomeNav";
 import Footer from "../Footer/Footer";
+// import { useCookies } from "react-cookie";
 import { useState } from "react";
 
 function Login() {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+  const navigate = useNavigate();
 
   const emailHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -16,7 +18,7 @@ function Login() {
     setEnteredPassword(event.target.value);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const loginInfo = {
@@ -24,13 +26,15 @@ function Login() {
       password: enteredPassword,
     };
 
-    fetch("http://18.235.52.212:8000/account/", {
+    const response = await fetch("http://18.235.52.212:8000/account/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginInfo),
-    }).then(() => {
-      console.log("We in!!");
     });
+
+    const { role } = await response.json();
+    window.localStorage.setItem("role", role);
+    //redirect to other pages
   };
 
   return (

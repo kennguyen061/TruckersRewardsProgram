@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </React.StrictMode>
   </BrowserRouter>,
   document.getElementById("root")
