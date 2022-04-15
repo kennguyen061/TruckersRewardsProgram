@@ -5,42 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Sponsor_Catalog_Edit.css";
 import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
-//const mysql = require("mysql");
 toast.configure();
-/*
-// specify database
-const db = mysql.createConnection({
-  host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
-  user: "admin",
-  password: "test1337froggang",
-});
 
-// connect to database
-db.connect((error) => {
-  if (error) throw error;
-});
-
-//updates a sponsor's catalog rules
-function updatecatalogrules(SID, rulestring) {
-  db.query(
-    "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-    [rulestring, SID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
-
-//Retrieves catalogrule from a sponsor TODO: FIX THIS NOT RETURNING ARRAY
-async function retrievecatalogrules(SID) {
-  db.query("SELECT * FROM SPONSORORG WHERE SID = ?", [SID], (error, result) => {
-    if (error) throw error;
-    var catalogrules = [];
-    catalogrules = result[0].Catalog_rules.split(",");
-    return catalogrules;
-  });
-}
-*/
 export default function Edit_Catalog() {
   // set value for default selection
   const [selectedValues, setSelectedValue] = useState([]);
@@ -179,7 +145,7 @@ export default function Edit_Catalog() {
   );
 
   //KENNY ADD filtered_listing in the Catalog table for the sponsor
-  // updatecatalogrules(1, filtered_listing.toString());
+  // call updatecatalogrules route
   console.log(filtered_listing);
 
   const save_catalog_notify = () => {

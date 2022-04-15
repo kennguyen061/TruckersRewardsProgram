@@ -46,11 +46,109 @@ router.post("/update", (request, response) => {
     (error, result) => {
       if (error) throw error;
       console.log("Cart updated");
+      response.send(true);
     }
   );
 });
 
-// remove wish list item
+// increasequantity
+router.post("/increasequantity", (request, response) => {
+  //calculate new quantity
+  var currentquantity = 0;
+  db.query(
+    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    [UID, SID, ItemID],
+    (error, result) => {
+      if (error) throw error;
+      currentquantity = result[0].Quantity;
+    }
+  );
+  newQuantity = currentquantity + 1;
+  db.query(
+    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+    [newQuantity, request.body.UID, request.body.SID, request.body.ItemID],
+    (error, result) => {
+      if (error) throw error;
+      console.log("Cart updated");
+      response.send(true);
+    }
+  );
+});
+
+// decreasequantity
+router.post("/decreasequantity", (request, response) => {
+  //calculate new quantity
+  var currentquantity = 0;
+  db.query(
+    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    [UID, SID, ItemID],
+    (error, result) => {
+      if (error) throw error;
+      currentquantity = result[0].Quantity;
+    }
+  );
+  newQuantity = currentquantity - 1;
+  db.query(
+    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
+    [newQuantity, UID, SID, ItemID],
+    (error, result) => {
+      if (error) throw error;
+      console.log("Cart updated");
+      response.send(true);
+    }
+  );
+});
+
+//notify cart
+router.post("/notifycart", (request, response) => {
+  //1 for uid and sid are placeholder
+      db.query("SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
+      [
+          request.body.UID,
+          request.body.SID,
+          request.body.ItemID
+      ],
+      (error, result) => {
+          if (error) throw error;
+          if(result.length >= 1) {
+              // if they do, increase the quantity by 1 of the current entry (UPDATE)
+              //1 for uid and sid are placeholder
+              //Retrieve old quantity (3rd index in table), increase it by one
+              newquantity = result[0].Quantity + 1;
+              db.query("UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
+              [
+                  newquantity,
+                  request.body.ItemID,
+                  request.body.UID,
+                  request.body.SID
+              ],
+              (error, result) => {
+                  if (error) throw error;
+              }
+              )
+          }
+          else {
+              //If not, create an entry with the item. (quantity 1) (INSERT INTO)
+              //1 for uid and sid are placeholder
+              db.query("INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,?,?);",
+              [
+                  request.body.ItemID,
+                  request.body.ItemName,
+                  request.body.Price,
+                  request.body.UID,
+                  request.body.SID
+              ],
+              (error, result) => {
+                  if (error) throw error;
+                  response.send(true);
+              }
+              )
+          }
+      }
+      );  
+});
+
+// remove cart item
 router.post("/remove", (request, response) => {
   db.query(
     "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
@@ -58,46 +156,9 @@ router.post("/remove", (request, response) => {
     (error, result) => {
       if (error) throw error;
       console.log("Cart item removed.");
+      response.send(true);
     }
   );
 });
-
-// //Gets the current quantity
-// const getquantity = (UID, SID, ItemID) => {
-//   db.query(
-//     "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
-//     [UID, SID, ItemID],
-//     (error, result) => {
-//       if (error) throw error;
-//       return result[0].Quantity;
-//     }
-//   );
-// };
-
-// function addquantity(UID, SID, ItemID) {
-//   //calculate new quantity
-//   currentquantity = getquantity(UID, SID, ItemID);
-//   newQuantity = currentquantity + 1;
-//   db.query(
-//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-//     [newQuantity, UID, SID, ItemID],
-//     (error, result) => {
-//       if (error) throw error;
-//     }
-//   );
-// }
-
-// function lowerquantity(UID, SID, ItemID) {
-//   //calculate new quantity
-//   currentquantity = getquantity(UID, SID, ItemID);
-//   newQuantity = currentquantity - 1;
-//   db.query(
-//     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-//     [newQuantity, UID, SID, ItemID],
-//     (error, result) => {
-//       if (error) throw error;
-//     }
-//   );
-// }
 
 module.exports = router;
