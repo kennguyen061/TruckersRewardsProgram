@@ -10,6 +10,7 @@ const db = mysql.createConnection({
   host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
   password: "y4PVPHuqVq52Pvp",
+  database: "CPSC4910",
 });
 
 // connect to database
@@ -120,7 +121,6 @@ router.get("/retrievealluserapplications", (request, response) => {
     }
   );
 });
-
 
 // read specific application
 router.get("/retrieveallsponsorapplications", (request, response) => {

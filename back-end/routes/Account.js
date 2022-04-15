@@ -11,6 +11,7 @@ const db = mysql.createConnection({
   host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
   password: "y4PVPHuqVq52Pvp",
+  database: "CPSC4910",
 });
 
 // connect to database
@@ -31,7 +32,7 @@ function loginAttempt(email, status) {
 
 // access account
 router.get("/", (request, response) => {
-  responseBody = {
+  let responseBody = {
     exists: false,
     id: null,
     role: null,

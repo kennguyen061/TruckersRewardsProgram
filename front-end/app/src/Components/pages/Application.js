@@ -8,13 +8,17 @@ function Application() {
   const addDriverHandler = (driver) => {
     console.log("in applicartion");
 
-    fetch("http://http://18.235.52.212:8000/account/create", {
+    fetch("http://18.235.52.212:8000/account/create/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(driver),
-    }).then(() => {
-      console.log("account-creation request submitted");
-    });
+    })
+      .then(() => {
+        console.log("account-creation request submitted");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   };
 
   return (

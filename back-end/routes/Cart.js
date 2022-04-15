@@ -10,8 +10,8 @@ const db = mysql.createConnection({
   host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
   password: "y4PVPHuqVq52Pvp",
+  database: "CPSC4910",
 });
-
 // connect to database
 db.connect((error) => {
   if (error) throw error;
@@ -102,50 +102,48 @@ router.post("/decreasequantity", (request, response) => {
 //notify cart
 router.post("/notifycart", (request, response) => {
   //1 for uid and sid are placeholder
-      db.query("SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
-      [
-          request.body.UID,
-          request.body.SID,
-          request.body.ItemID
-      ],
-      (error, result) => {
-          if (error) throw error;
-          if(result.length >= 1) {
-              // if they do, increase the quantity by 1 of the current entry (UPDATE)
-              //1 for uid and sid are placeholder
-              //Retrieve old quantity (3rd index in table), increase it by one
-              newquantity = result[0].Quantity + 1;
-              db.query("UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
-              [
-                  newquantity,
-                  request.body.ItemID,
-                  request.body.UID,
-                  request.body.SID
-              ],
-              (error, result) => {
-                  if (error) throw error;
-              }
-              )
+  db.query(
+    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
+    [request.body.UID, request.body.SID, request.body.ItemID],
+    (error, result) => {
+      if (error) throw error;
+      if (result.length >= 1) {
+        // if they do, increase the quantity by 1 of the current entry (UPDATE)
+        //1 for uid and sid are placeholder
+        //Retrieve old quantity (3rd index in table), increase it by one
+        newquantity = result[0].Quantity + 1;
+        db.query(
+          "UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
+          [
+            newquantity,
+            request.body.ItemID,
+            request.body.UID,
+            request.body.SID,
+          ],
+          (error, result) => {
+            if (error) throw error;
           }
-          else {
-              //If not, create an entry with the item. (quantity 1) (INSERT INTO)
-              //1 for uid and sid are placeholder
-              db.query("INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,?,?);",
-              [
-                  request.body.ItemID,
-                  request.body.ItemName,
-                  request.body.Price,
-                  request.body.UID,
-                  request.body.SID
-              ],
-              (error, result) => {
-                  if (error) throw error;
-                  response.send(true);
-              }
-              )
+        );
+      } else {
+        //If not, create an entry with the item. (quantity 1) (INSERT INTO)
+        //1 for uid and sid are placeholder
+        db.query(
+          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,?,?);",
+          [
+            request.body.ItemID,
+            request.body.ItemName,
+            request.body.Price,
+            request.body.UID,
+            request.body.SID,
+          ],
+          (error, result) => {
+            if (error) throw error;
+            response.send(true);
           }
+        );
       }
-      );  
+    }
+  );
 });
 
 // remove cart item
