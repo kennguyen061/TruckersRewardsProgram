@@ -6,7 +6,7 @@ const wishListRoute = require("./routes/WishList");
 const cartRoute = require("./routes/Cart");
 const drivermgtRoute = require("./routes/Drivermanagement");
 const applicationRoute = require("./routes/Application");
-const catalogRoute = requre("./routes/Catalog");
+const catalogRoute = require("./routes/Catalog");
 const PORT = 8000;
 
 const app = express();

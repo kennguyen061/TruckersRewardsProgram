@@ -3,7 +3,6 @@ import "./Login.css";
 import NewNav from "../UI/HomeNav";
 import Footer from "../Footer/Footer";
 import { useState } from "react";
-import { get } from "../../../../../back-end/routes/Account";
 
 function Login() {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -14,7 +13,7 @@ function Login() {
   };
 
   const passwordHandler = (event) => {
-    setEnteredPassword(event.target.value));
+    setEnteredPassword(event.target.value);
   };
 
   const submitHandler = (event) => {
@@ -25,17 +24,14 @@ function Login() {
       password: enteredPassword,
     };
 
-    fetch("http://http://18.235.52.212:8000/account/",{
-      method:"GET",
+    fetch("http://http://18.235.52.212:8000/account/", {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginInfo),
-    }).then(()=> {
+    }).then(() => {
       console.log("We in!!");
-    })
-
-  }
-
-
+    });
+  };
 
   return (
     <div>
@@ -54,31 +50,28 @@ function Login() {
                 <label className="Login-Header">BE ONE OF US!</label>
               </div>
               <form onSubmit={submitHandler}>
-              <div>
-                <input
-                  type={"email"}
-                  required
-                  className="EMAIL"
-                  onChange={emailHandler}
-                  placeholder={" Enter Email"}
-                />
-              </div>
-              <div>
-                <input
-                  type={"password"}
-                  required
-                  className="PASSWORD"
-                  onChange={passwordHandler}
-                  placeholder={" Enter Password"}
-                />
-              </div>
-              <div>
-                {" "}
-                <button type="submit">
+                <div>
+                  <input
+                    type={"email"}
+                    required
+                    className="EMAIL"
+                    onChange={emailHandler}
+                    placeholder={" Enter Email"}
+                  />
+                </div>
+                <div>
+                  <input
+                    type={"password"}
+                    required
+                    className="PASSWORD"
+                    onChange={passwordHandler}
+                    placeholder={" Enter Password"}
+                  />
+                </div>
+                <div>
                   {" "}
-                  Login{" "}
-                </button>
-              </div>
+                  <button type="submit"> Login </button>
+                </div>
               </form>
 
               <div>
