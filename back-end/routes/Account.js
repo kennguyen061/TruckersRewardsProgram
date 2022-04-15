@@ -31,7 +31,7 @@ function loginAttempt(email, status) {
 
 // access account
 router.get("/", (request, response) => {
- let responseBody = {
+  responseBody = {
     exists: false,
     id: null,
     role: null,
