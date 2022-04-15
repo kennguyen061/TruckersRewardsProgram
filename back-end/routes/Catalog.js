@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
-const { response } = require("express");
 const mysql = require("mysql");
 
 router.use(bodyParser.json());
@@ -21,22 +20,26 @@ db.connect((error) => {
 
 //update catalogrules
 router.post("/updatecatalogrules", (request, response) => {
-    db.query(
-        "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-        [request.body.rulestring, request.body.SID],
-        (error, result) => {
-          if (error) throw error;
-          response.send(true);
-        }
-      );
+  db.query(
+    "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
+    [request.body.rulestring, request.body.SID],
+    (error, result) => {
+      if (error) throw error;
+      response.send(true);
+    }
+  );
 });
 
 // read catalogrules
 router.get("/getcatalogrules", (request, response) => {
-  db.query("SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?", [request.body.SID], (error, result) => {
-    if (error) throw error;
-    response.send(JSON.stringify(result));
-  });
+  db.query(
+    "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
+    [request.body.SID],
+    (error, result) => {
+      if (error) throw error;
+      response.send(JSON.stringify(result));
+    }
+  );
 });
 
 module.exports = router;
