@@ -24,8 +24,8 @@ function Login() {
       password: enteredPassword,
     };
 
-    fetch("http://http://18.235.52.212:8000/account/", {
-      method: "GET",
+    fetch("http://18.235.52.212:8000/account/", {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginInfo),
     }).then(() => {
