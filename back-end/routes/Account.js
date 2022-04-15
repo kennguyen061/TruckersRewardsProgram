@@ -141,11 +141,7 @@ router.post("/create", (request, response) => {
 
   // create hash and salt
   let salt = new Date().toISOString();
-  /*
-  let hash = forge.md.sha256.create();
-  hash.update(request.body.password + salt);
-  let digest = forge.util.encode64(hash.digest().data);
-  */
+
   let hash = crypto
     .createHash("sha256")
     .update(request.body.password + salt)
@@ -187,7 +183,7 @@ router.post("/createsponsorsubuser", (request, response) => {
   );
 
   // create hash and salt
-  let salt = new Date();
+  let salt = new Date().toISOString();
   let hash = crypto
     .createHash("sha256")
     .update(request.body.password + salt)
