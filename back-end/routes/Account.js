@@ -119,6 +119,7 @@ router.post("/", (request, response) => {
 
       if (responseBody.exists) {
         loginAttempt(request.body.email, "Success");
+        response.send(responseBody);
       } else {
         loginAttempt(request.body.email, "Failure");
         response.send(responseBody);
