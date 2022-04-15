@@ -9,28 +9,21 @@ function Driver_Sponsor_Dashboard(props) {
     <div>
       <DriverNav />
       <div className="Dashboard_Profile">
-      <label className="dashboard_header">
-        Sponsor Dashboard
-      </label>
-      <hr className="line_50" />
-      <br></br>
-      <Link to="/pages/Apply_To_Sponsor" className="Link">
-        <button type="submit" >
-          <label className="sponsor_button">
-           {" "}
-            Apply to New Sponsor
-          </label>
-        </button>
+        <label className="dashboard_header">Sponsor Dashboard</label>
+        <hr className="line_50" />
+        <br></br>
+        <Link to="/pages/Apply_To_Sponsor" className="Link">
+          <button type="submit">
+            <label className="sponsor_button"> Apply to New Sponsor</label>
+          </button>
         </Link>
         <hr className="line_30" />
-          <label className="current_sponsors">
-            Current Sponsors
-          </label>
+        <label className="current_sponsors">Current Sponsors</label>
         <hr className="line_30" />
-    <div className="bottom_here">
-      <Footer />
-    </div>
-    </div>
+        <div className="bottom_here">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }

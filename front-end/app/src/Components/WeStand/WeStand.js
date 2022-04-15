@@ -5,13 +5,13 @@ function WeStand() {
     <div className="WeStand">
       <div className="container">
         <h2>Our Mission</h2>
-          <p>
-            At Roger's Rewards we believe that it is important to
-            drive safe. Everyone relies on the expansive
-            transportation industry for all aspects of life. However, semi-trucks
-            account for 11% of all motor vehicle crash deaths.
-            We aim to change that through providing safe drivers with rewards.
-          </p>
+        <p>
+          At Roger's Rewards we believe that it is important to drive safe.
+          Everyone relies on the expansive transportation industry for all
+          aspects of life. However, semi-trucks account for 11% of all motor
+          vehicle crash deaths. We aim to change that through providing safe
+          drivers with rewards.
+        </p>
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ import Hero from "../Hero/Hero";
 import People from "../People/People";
 import WeStand from "../WeStand/WeStand";
 import Footer from "../Footer/Footer";
-import React, { useState, useEffect } from'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Dev() {
   return (
     <div>
@@ -16,8 +16,7 @@ function Dev() {
       <People />
       <WeStand />
       <Footer />
-      </div>
-      
+    </div>
   );
 }
 export default Dev;

@@ -7,15 +7,13 @@ function Wishlist(props) {
   return (
     <div>
       <DriverNav />
-    <div className="Wishlist">
-            <label className="Login-Header">
-              Wishlist
-            </label>
-            <hr className="line_50" />
-    </div>
-    <div className="bottom_here">
-      <Footer />
-    </div>
+      <div className="Wishlist">
+        <label className="Login-Header">Wishlist</label>
+        <hr className="line_50" />
+      </div>
+      <div className="bottom_here">
+        <Footer />
+      </div>
     </div>
   );
 }

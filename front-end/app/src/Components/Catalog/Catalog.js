@@ -78,34 +78,30 @@ export default function Catalog() {
     fetchData();
   }, []);
 
-  console.log(listing)
+  console.log(listing);
   function search(listing) {
-  
     return listing.filter((item) => {
-
       if (filterParam === "All") {
         return searchParam.some((newItem) => {
-            return (
-                item[newItem]
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(q.toLowerCase()) > -1
-            );
+          return (
+            item[newItem]
+              .toString()
+              .toLowerCase()
+              .indexOf(q.toLowerCase()) > -1
+          );
+        });
+      } else if (item.taxonomy_path.includes(filterParam)) {
+        return searchParam.some((newItem) => {
+          return (
+            item[newItem]
+              .toString()
+              .toLowerCase()
+              .indexOf(q.toLowerCase()) > -1
+          );
         });
       }
-      
-      else if (item.taxonomy_path.includes(filterParam)) {
-          return searchParam.some((newItem) => {
-            return (
-                item[newItem]
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(q.toLowerCase()) > -1
-            )
-        });
-      }
-  });
-}
+    });
+  }
 
   return (
     <div className="Catalog">
@@ -161,7 +157,15 @@ export default function Catalog() {
       </center>
 
       <div
-        className="columns" style={{ marginTop: 30, marginLeft: 10, marginRight: 10, marginBottom: 20, borderRadius: 8}}>
+        className="columns"
+        style={{
+          marginTop: 30,
+          marginLeft: 10,
+          marginRight: 10,
+          marginBottom: 20,
+          borderRadius: 8,
+        }}
+      >
         <div className="column">
           {search(listing).map((listing) => (
             <div
@@ -169,31 +173,43 @@ export default function Catalog() {
               style={{ border: "2px solid black", backgroundColor: "#E2DBD9" }}
             >
               <center>
-                <img style = {{marginTop: 10}} src={listing.MainImage.url_170x135} alt="listing1"></img>{" "}
+                <img
+                  style={{ marginTop: 10 }}
+                  src={listing.MainImage.url_170x135}
+                  alt="listing1"
+                ></img>{" "}
               </center>
               {/* <Link to={`/Listing_details/${listing.listing_id}`}> */}
-                <center>
-                  <h1 style={{ fontSize: 25, color: "#EE730D", marginBottom:10 }}>
-                    <strong>{listing.title} </strong>
-                  </h1>
-                </center>
+              <center>
+                <h1
+                  style={{ fontSize: 25, color: "#EE730D", marginBottom: 10 }}
+                >
+                  <strong>{listing.title} </strong>
+                </h1>
+              </center>
               {/* </Link> */}
 
               {/* Convert to points */}
               <center>
-                <h2 style={{ color: "black", marginBottom: 10}}> Points: {Math.round(listing.price)}</h2>
+                <h2 style={{ color: "black", marginBottom: 10 }}>
+                  {" "}
+                  Points: {Math.round(listing.price)}
+                </h2>
                 <h4>Description: {listing.description}</h4>
               </center>
 
-
-              <button className="button_1" onClick={notify_cart(listing)} style = {{marginLeft:10, marginTop:5}}>
+              <button
+                className="button_1"
+                onClick={notify_cart(listing)}
+                style={{ marginLeft: 10, marginTop: 5 }}
+              >
                 {" "}
                 Add to Cart{" "}
               </button>
               <button
                 className="button_1"
                 onClick={notify_wishlist(listing)}
-                style={{ float: "right", marginRight: 10, marginTop: 5}}
+                style={{ float: "right", marginRight: 10, marginTop: 5 }}
               >
                 {" "}
                 Add to Wishlist
@@ -203,8 +219,7 @@ export default function Catalog() {
         </div>
       </div>
       <Outlet />
-      
-      
+
       <Footer />
     </div>
   );

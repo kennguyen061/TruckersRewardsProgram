@@ -27,7 +27,7 @@ function Application() {
           </NewApplicant>
         </div>
       </div>
-    <Footer />
+      <Footer />
     </div>
   );
 }
