@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-const forge = require("node-forge");
-forge.options.usePureJavaScript = true;
+const crypto = require("crypto");
+//forge.options.usePureJavaScript = true;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -47,27 +47,26 @@ router.post("/", (request, response) => {
       if (error) throw error;
       if (result.length === 0) return;
 
-      let hash = forge.md.sha256.create();
-      hash.update(request.body.password + result[0].Password_salt);
-      let digest = forge.util.encode64(hash.digest().data);
-      /*
+      let salt = new Date(result[0].Password_salt).toISOString();
+
       let hash = crypto
         .createHash("sha256")
-        .update(request.body.password + result[0].Password_salt)
-        .digest("base64");*/
-      if (digest === result[0].Password_hash) {
+        .update(request.body.password + salt)
+        .digest("base64");
+
+      if (hash === result[0].Password_hash) {
         responseBody.exists = true;
         responseBody.id = result[0].UID;
         responseBody.role = "DRIVER";
       }
+
+      if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+        response.send(responseBody);
+        return;
+      }
     }
   );
-
-  if (responseBody.exists) {
-    loginAttempt(request.body.email, "Success");
-    response.send(responseBody);
-    return;
-  }
 
   // check sponsor table
   db.query(
@@ -76,23 +75,26 @@ router.post("/", (request, response) => {
     (error, result) => {
       if (error) throw error;
       if (result.length === 0) return;
+
+      let salt = new Date(result[0].Password_salt).toISOString();
+
       let hash = crypto
         .createHash("sha256")
-        .update(request.body.password + result[0].Password_salt)
+        .update(request.body.password + salt)
         .digest("base64");
+
       if (hash === result[0].Password_hash) {
         responseBody.exists = true;
         responseBody.id = result[0].SUID;
         responseBody.role = "SPONSORACCT";
       }
+      if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+        response.send(responseBody);
+        return;
+      }
     }
   );
-
-  if (responseBody.exists) {
-    loginAttempt(request.body.email, "Success");
-    response.send(responseBody);
-    return;
-  }
 
   // check admin table
   db.query(
@@ -102,25 +104,27 @@ router.post("/", (request, response) => {
       if (error) throw error;
       if (result.length === 0) return;
 
+      let salt = new Date(result[0].Password_salt).toISOString();
+
       let hash = crypto
         .createHash("sha256")
-        .update(request.body.password + result[0].Password_salt)
+        .update(request.body.password + salt)
         .digest("base64");
+
       if (hash === result[0].Password_hash) {
         responseBody.exists = true;
         responseBody.id = result[0].A_ID;
         responseBody.role = "ADMIN";
       }
+
+      if (responseBody.exists) {
+        loginAttempt(request.body.email, "Success");
+      } else {
+        loginAttempt(request.body.email, "Failure");
+        response.send(responseBody);
+      }
     }
   );
-
-  if (responseBody.exists) {
-    loginAttempt(request.body.email, "Success");
-  } else {
-    loginAttempt(request.body.email, "Failure");
-  }
-
-  response.send(responseBody);
 });
 
 // create account
@@ -136,24 +140,28 @@ router.post("/create", (request, response) => {
   );
 
   // create hash and salt
-  let salt = new Date();
-
+  let salt = new Date().toISOString();
+  /*
   let hash = forge.md.sha256.create();
   hash.update(request.body.password + salt);
   let digest = forge.util.encode64(hash.digest().data);
-  /*
+  */
   let hash = crypto
     .createHash("sha256")
     .update(request.body.password + salt)
     .digest("base64");
-*/
+
+  console.log("The creation hash is: " + hash);
+  console.log("The creation salt is: " + salt);
+  console.log("The creation password is: " + request.body.password);
+
   db.query(
     "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
     [
       request.body.firstName,
       request.body.lastName,
       request.body.email,
-      digest,
+      hash,
       salt,
       request.body.street,
       request.body.phoneNum,
