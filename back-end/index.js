@@ -6,6 +6,7 @@ const wishListRoute = require("./routes/WishList");
 const cartRoute = require("./routes/Cart");
 const drivermgtRoute = require("./routes/Drivermanagement");
 const applicationRoute = require("./routes/Application");
+const catalogRoute = requre("./routes/Catalog");
 const PORT = 8000;
 
 const app = express();
@@ -17,6 +18,7 @@ app.use("/wishlist", wishListRoute);
 app.use("/cart", cartRoute);
 app.use("/drivermgt", drivermgtRoute);
 app.use("/application", applicationRoute);
+app.use("/catalog", catalogRoute);
 
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
