@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
-const crypto = require("crypto");
+const forge = require("node-forge");
+forge.options.usePureJavaScript = true;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -45,11 +46,16 @@ router.post("/", (request, response) => {
     (error, result) => {
       if (error) throw error;
       if (result.length === 0) return;
+
+      let hash = forge.md.sha256.create();
+      hash.update(request.body.password + result[0].Password_salt);
+      let digest = forge.util.encode64(hash.digest().data);
+      /*
       let hash = crypto
         .createHash("sha256")
         .update(request.body.password + result[0].Password_salt)
-        .digest("base64");
-      if (hash === result[0].Password_hash) {
+        .digest("base64");*/
+      if (digest === result[0].Password_hash) {
         responseBody.exists = true;
         responseBody.id = result[0].UID;
         responseBody.role = "DRIVER";
@@ -95,6 +101,7 @@ router.post("/", (request, response) => {
     (error, result) => {
       if (error) throw error;
       if (result.length === 0) return;
+
       let hash = crypto
         .createHash("sha256")
         .update(request.body.password + result[0].Password_salt)
@@ -130,18 +137,23 @@ router.post("/create", (request, response) => {
 
   // create hash and salt
   let salt = new Date();
+
+  let hash = forge.md.sha256.create();
+  hash.update(request.body.password + salt);
+  let digest = forge.util.encode64(hash.digest().data);
+  /*
   let hash = crypto
     .createHash("sha256")
     .update(request.body.password + salt)
     .digest("base64");
-
+*/
   db.query(
     "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
     [
       request.body.firstName,
       request.body.lastName,
       request.body.email,
-      hash,
+      digest,
       salt,
       request.body.street,
       request.body.phoneNum,
