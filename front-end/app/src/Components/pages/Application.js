@@ -3,8 +3,10 @@ import "./Application.css";
 import DriverForm from "../DriverForm/DriverForm";
 import NewDriver from "../DriverForm/NewDriver";
 import Footer from "../Footer/Footer";
+import { Link, Route, useNavigate } from "react-router-dom";
 
 function Application() {
+  const navigate = useNavigate();
   const addDriverHandler = (driver) => {
     console.log("in applicartion");
 
@@ -15,6 +17,7 @@ function Application() {
     })
       .then(() => {
         console.log("account-creation request submitted");
+        navigate("/pages/Login", { replace: true });
       })
       .catch((error) => {
         console.log("Error: ", error);

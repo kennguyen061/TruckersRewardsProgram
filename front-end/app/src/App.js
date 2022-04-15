@@ -9,7 +9,6 @@ import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Cart from "./Components/pages/Cart.js";
 import PointTake from "./Components/pages/PointTake.js";
-//import Catalog from "./Components/Catalog/Catalog.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import Edit_Catalog from "./Components/Catalog/Sponsor_Catalog_Edit.js";
 import Sponsor_Profile from "./Components/pages/Sponsor_Profile.js";
