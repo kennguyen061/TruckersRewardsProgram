@@ -19,7 +19,7 @@ db.connect((error) => {
 
 // get reportable accounts
 router.get("/", (request, respsonse) => {
-  responseBody = {
+  let responseBody = {
     driverAccounts: null,
     sponsorAccounts: null,
   };
@@ -57,5 +57,3 @@ router.get("/", (request, respsonse) => {
   }
 });
 
-// generate report
-router.get("/", (request, respsonse) => {});
