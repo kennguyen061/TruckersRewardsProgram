@@ -285,32 +285,61 @@ router.post("/createsponsorsubuser", (request, response) => {
 router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
+    console.log(request.query);
 
-  if (request.body.role == "DRIVER") {
+    let responseBody = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        address: '',
+        phoneNumber: ''
+    };
+
+  if (request.query.role == "DRIVER") {
+    console.log("Entered Drivers ass");
     db.query(
       "SELECT * FROM DRIVER WHERE UID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
-        if (error) throw error;
-        response.send(JSON.stringify(result));
+        if (error) {
+          throw error;
+        } else {
+            console.log("trying to send");
+            responseBody.firstName = result[1]
+            responseBody.lastName = result[2]
+            responseBody.email = result[3]
+            responseBody.address = result[6]
+            responseBody.phoneNumber = result[7]
+            response.send(JSON.stringify(responseBody));
+        }
       }
     );
-  } else if (request.body.role == "SPONSORACCT") {
+  } else if (request.query.role == "SPONSORACCT") {
     db.query(
       "SELECT * FROM SPONSORACCT WHERE SUID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
         if (error) throw error;
-        response.send(JSON.stringify(result));
+          responseBody.firstName = result[1]
+          responseBody.lastName = result[2]
+          responseBody.email = result[3]
+          responseBody.address = result[6]
+          responseBody.phoneNumber = result[7]
+          response.send(JSON.stringify(responseBody));
       }
     );
-  } else if (request.body.role == "ADMIN") {
+  } else if (request.query.role == "ADMIN") {
     db.query(
       "SELECT * FROM ADMIN WHERE A_ID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
         if (error) throw error;
-        response.send(JSON.stringify(result));
+          responseBody.firstName = result[1]
+          responseBody.lastName = result[2]
+          responseBody.email = result[3]
+          responseBody.address = result[6]
+          responseBody.phoneNumber = result[7]
+          response.send(JSON.stringify(responseBody));
       }
     );
   }
