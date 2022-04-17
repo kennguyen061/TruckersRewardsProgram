@@ -32,41 +32,42 @@ function loginAttempt(email, status) {
 
 // access account
 router.post("/", (request, response) => {
-  console.log("Hit login");
-  let responseBody = {
-    exists: false,
-    id: null,
-    role: null,
-  };
+    console.log("Hit login");
 
-  // check driver table
-  db.query(
+    let responseBody = {
+        exists: false,
+        id: null,
+        role: null,
+    };
+
+    // check driver table
+    db.query(
     "SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
-      if (error) throw error;
-      if (result.length === 0) return;
+        if (error) throw error;
+        if (result.length === 0) return;
 
-      let salt = new Date(result[0].Password_salt).toISOString();
+        let salt = new Date(result[0].Password_salt).toISOString();
 
-      let hash = crypto
+        let hash = crypto
         .createHash("sha256")
         .update(request.body.password + salt)
         .digest("base64");
 
-      if (hash === result[0].Password_hash) {
+        if (hash === result[0].Password_hash) {
         responseBody.exists = true;
         responseBody.id = result[0].UID;
         responseBody.role = "DRIVER";
-      }
+        }
 
-      if (responseBody.exists) {
+        if (responseBody.exists) {
         loginAttempt(request.body.email, "Success");
         response.send(responseBody);
         return;
-      }
+        }
     }
-  );
+    );
 
   // check sponsor table
   db.query(
@@ -217,47 +218,61 @@ router.post("/createsponsor", (req, res) => {
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
 router.post("/createsponsorsubuser", (request, response) => {
   // check if account already exists
-  console.log("Hit create sponsor subuser");
-  db.query(
-    "SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
-    [request.body.email],
-    (error, result) => {
-      if (error) {
-        throw error;
-      } else if (result == 1) {
-        response.send(false);
-      } else {
-        // create hash and salt
-        let salt = new Date().toISOString();
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        //does this need more than just street?
-        //into what sponsor?
-        //needs to get sponsor ID based off of name
-        db.query(
-          "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-          [
-            request.body.firstName,
-            request.body.lastName,
-            request.body.email,
-            hash,
-            salt,
-            request.body.street,
-            request.body.phoneNum,
-            1,
-          ],
-          (errorInsert) => {
-            if (errorInsert) {
-              console.log("Error Creating Sponsor sub user");
-              throw error;
+    console.log("Hit create sponsor subuser");
+    db.query("SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
+        [
+            request.body.email
+        ],
+        (error, result) => {
+            if (error) {
+                throw error;
+            } else if (result == 1) {
+                response.send(false);
             } else {
-              response.send(true);
-            }
-          }
-        );
+                // create hash and salt
+                let salt = new Date().toISOString();
+                let hash = crypto
+                  .createHash("sha256")
+                  .update(request.body.password + salt)
+                    .digest("base64");
+
+                org_id  = ""
+
+                db.query("SELECT SUID FROM SPONSORORG WHERE name = ?;",
+                    [
+                        request.body.name
+                    ],
+                    (error) => {
+                        if (error) {
+                            console.log("Sponsor does not exists");
+                        } else {
+                            org_id = result
+                        }
+                    });
+
+                //does this need more than just street?
+                //into what sponsor?
+                //needs to get sponsor ID based off of name
+                db.query("INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+                    [
+                        request.body.firstName,
+                        request.body.lastName,
+                        request.body.email,
+                        hash,
+                        salt,
+                        request.body.street,
+                        request.body.phoneNum,
+                        1,
+                  ],
+                  (errorInsert) => {
+                    if (errorInsert) {
+                      console.log("Error Creating Sponsor sub user");
+                      throw error;
+                    } else {
+                      response.send(true);
+                    }
+                  }
+                );
       }
     }
   );
@@ -266,55 +281,137 @@ router.post("/createsponsorsubuser", (request, response) => {
 // read account
 // again role is not a table
 // needs to get table based on the role passed
+// client should not be able to call this function without uid and role cookie
 router.get("/read", (request, response) => {
-  // select record given uid
-  console.log("Hit account read");
-  db.query(
-    "SELECT * FROM ? WHERE UID = ?",
-    [request.params.role, request.params.uid],
-    (error, result) => {
-      if (error) throw error;
-      response.send(JSON.stringify(result));
+    // select record given uid
+    console.log("Hit account read");
+
+    if (request.body.role == "DRIVER") {
+        db.query("SELECT * FROM DRIVER WHERE UID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(JSON.stringify(result));
+            }
+        );
+    } else if (request.body.role == "SPONSORACCT") {
+        db.query("SELECT * FROM SPONSORACCT WHERE SUID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(JSON.stringify(result));
+            }
+        );
+    } else if (request.body.role == "ADMIN") {
+        db.query("SELECT * FROM ADMIN WHERE A_ID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(JSON.stringify(result));
+            }
+        );
     }
-  );
 });
 
 // update account
-
 //needs an if statment to select proper table
 //Role is not the same as table
+//client should not be able to call this function without uid and role cookie
 router.post("/update", (request, response) => {
-  console.log("Hit update account");
-  db.query(
-    "UPDATE ? SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE UID = ?;",
-    [
-      request.body.role,
-      request.body.firstName,
-      request.body.lastName,
-      request.body.email,
-      request.body.street,
-      request.body.phoneNum,
-    ],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
+    console.log("Hit update account");
+
+    if (request.body.role == "DRIVER") {
+        db.query("UPDATE DRIVER SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE UID = ?;",
+            [
+                request.body.firstName,
+                request.body.lastName,
+                request.body.email,
+                request.body.street,
+                request.body.phoneNum,
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
+    } else if (request.body.role == "SPONSORACCT") {
+        db.query("UPDATE SPONSORACCT SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE SUID = ?;",
+            [
+                request.body.firstName,
+                request.body.lastName,
+                request.body.email,
+                request.body.street,
+                request.body.phoneNum,
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
+    } else if (request.body.role == "ADMIN") {
+        db.query("UPDATE ADMIN SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE A_ID = ?;",
+            [
+                request.body.firstName,
+                request.body.lastName,
+                request.body.email,
+                request.body.street,
+                request.body.phoneNum,
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
     }
-  );
 });
 
 // delete account
 //needs an if statment to select proper table
 //Role is not the same as table
+// client should not be able to call this function without uid and role cookie
 router.post("/delete", (request, response) => {
-  console.log("Hit delete account");
-  db.query(
-    "UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
-    [request.body.role, request.body.uid],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
+    console.log("Hit delete account");
+
+    if (request.body.role == "DRIVER") {
+        db.query("UPDATE DRIVER SET VisibleFlag = 0 WHERE UID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
+    } else if (request.body.role == "SPONSORACCT") {
+        db.query("UPDATE SPONSORACCT SET VisibleFlag = 0 WHERE UID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
+    } else if (request.body.role == "ADMIN") {
+        db.query("UPDATE ADMIN SET VisibleFlag = 0 WHERE A_ID = ?;",
+            [
+                request.body.id
+            ],
+            (error, result) => {
+                if (error) throw error;
+                response.send(true);
+            }
+        );
     }
-  );
 });
 
 module.exports = router;
