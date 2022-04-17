@@ -35,6 +35,7 @@ router.get("/", (request, response) => {
   );
 });
 
+//Point math needs to be done on the client side and the new total should be sent
 // update points
 router.post("/update", (request, response) => {
   console.log("Hit update points");
