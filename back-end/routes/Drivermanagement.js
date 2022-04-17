@@ -54,16 +54,36 @@ router.get("/viewdriverpoints", (request, response) => {
   );
 });
 
-//TODO: view all orders of a driver
+//view all orders of a driver
 router.get("/viewdriverorders", (request, response) => {
   console.log("Hit driver orders");
+  let responseBody = {
+    OrderID: "",
+    UID: "",
+    SID: "",
+    Orderdate: "",
+    Address: "",
+  };
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("Orders retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.OrderID = element.OrderID,
+          responseBody.UID = element.UID,
+          responseBody.SID = element.SID,
+          responseBody.Orderdate = element.Orderdate,
+          responseBody.Address = element.Address,
+          rbArray.push(responseBody);
+        }
+        response.send(JSON.stringify(rbArray));
+      }
     }
   );
 });
