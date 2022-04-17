@@ -109,7 +109,6 @@ router.post("/changescale", (request, response) => {
     [request.body.conversion_scale, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      console.log(result);
       response.send(true);
     }
   );
