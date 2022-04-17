@@ -39,8 +39,8 @@ export default function Catalog() {
         Price: Math.round(item.price),
         Quantity: item.quantity
       })
-
     })
+    .catch(err => console.error(err))
     // Calling toast method by passing string
     //variables to add to the table are
     //item.listing_id
