@@ -407,7 +407,8 @@ router.post("/delete", (request, response) => {
       [request.body.id],
       (error, result) => {
         if (error) throw error;
-        if (result.length == 0) {
+        if (result.fieldCount == 0) {
+          console.log(result.length);
           response.send(false);
         } else {
           response.send(true);
@@ -420,7 +421,7 @@ router.post("/delete", (request, response) => {
       [request.body.id],
       (error, result) => {
         if (error) throw error;
-        if (result.length == 0) {
+        if (result.fieldCount == 0) {
           response.send(false);
         } else {
           response.send(true);
@@ -433,7 +434,7 @@ router.post("/delete", (request, response) => {
       [request.body.id],
       (error, result) => {
         if (error) throw error;
-        if (result.length == 0) {
+        if (result.fieldCount == 0) {
           response.send(false);
         } else {
           response.send(true);
