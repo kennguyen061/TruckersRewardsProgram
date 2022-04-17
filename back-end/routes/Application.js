@@ -23,16 +23,16 @@ router.post("/createApplication", (request, response) => {
   // check if application already exists
   console.log("Hit create applicaiton");
   db.query(
-    "SELECT COUNT(*) FROM APPLICATION WHERE UID = ? AND SID = ?;",
+    "SELECT COUNT(*) AS RowCount FROM APPLICATION WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      if (result.length >= 1) {
+      if (result.RowCount >= 1) {
         response.send(false);
       } else {
         //Creates the new application
         db.query(
-          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP()",
+          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP())",
           [request.body.UID, request.body.SID],
           (error, result) => {
             if (error) throw error;
