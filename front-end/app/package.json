@@ -33,6 +33,7 @@
     "react-toastify": "^8.2.0",
     "reactstrap": "^9.0.1",
     "recharts": "^2.1.9",
+    "select": "^1.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

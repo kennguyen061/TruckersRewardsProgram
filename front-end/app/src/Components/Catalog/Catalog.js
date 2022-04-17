@@ -14,6 +14,9 @@ export default function Catalog() {
   //used to grab the active listings
   const [listing, setlisting] = useState([]);
 
+  //temp driver id
+  var ID = 1
+
   //used for the search parameters
   const [q, setQ] = useState("");
 
@@ -24,6 +27,20 @@ export default function Catalog() {
   const [filterParam, setFilterParam] = useState("All");
 
   const notify_cart = (item) => () => {
+
+    fetch("http://18.235.52.212:8000/cart/update/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ItemID: item.listing_id,
+        UID: ID,
+        SID: 1,
+        ItemName: item.title,
+        Price: Math.round(item.price),
+        Quantity: item.quantity
+      })
+
+    })
     // Calling toast method by passing string
     //variables to add to the table are
     //item.listing_id
