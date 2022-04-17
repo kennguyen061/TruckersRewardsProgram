@@ -406,8 +406,12 @@ router.post("/delete", (request, response) => {
       "UPDATE DRIVER SET VisibleFlag = 0 WHERE UID = ?;",
       [request.body.id],
       (error) => {
-        if (error) throw error;
-        response.send(true);
+          if (error, result) throw error;
+          if (result.length == 0) {
+              response.send(false);
+          } else {
+              response.send(true);
+          }
       }
     );
   } else if (request.body.role == "SPONSOR") {
@@ -415,8 +419,12 @@ router.post("/delete", (request, response) => {
       "UPDATE SPONSORACCT SET VisibleFlag = 0 WHERE SUID = ?;",
       [request.body.id],
       (error) => {
-        if (error) throw error;
-        response.send(true);
+          if (error, result) throw error;
+          if (result.length == 0) {
+              response.send(false);
+          } else {
+              response.send(true);
+          }
       }
     );
   } else if (request.body.role == "ADMIN") {
@@ -424,8 +432,12 @@ router.post("/delete", (request, response) => {
       "UPDATE ADMIN SET VisibleFlag = 0 WHERE A_ID = ?;",
       [request.body.id],
       (error) => {
-        if (error) throw error;
-        response.send(true);
+          if (error, result) throw error;
+          if (result.length == 0) {
+              response.send(false);
+          } else {
+              response.send(true);
+          }
       }
     );
   }
