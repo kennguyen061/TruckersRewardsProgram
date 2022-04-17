@@ -204,8 +204,7 @@ router.post("/createsponsor", (req, res) => {
           (errorCreate, resultCreate) => {
             if (error) {
               console.log("Something went wrong creating a sponsor");
-            }
-            if (resultCreate.affectdRows >= 1) {
+            } else {
               res.send(true);
             }
           }
@@ -223,33 +222,40 @@ router.post("/createsponsorsubuser", (request, response) => {
     "SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
-      if (error) throw error;
-      if (result == 1) response.send(false);
-    }
-  );
+      if (error) {
+        throw error;
+      } else if (result == 1) {
+        response.send(false);
+      } else {
+        // create hash and salt
+        let salt = new Date().toISOString();
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
 
-  // create hash and salt
-  let salt = new Date().toISOString();
-  let hash = crypto
-    .createHash("sha256")
-    .update(request.body.password + salt)
-    .digest("base64");
-
-  db.query(
-    "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-    [
-      request.body.firstName,
-      request.body.lastName,
-      request.body.email,
-      hash,
-      salt,
-      request.body.street,
-      request.body.phoneNum,
-      1,
-    ],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
+        db.query(
+          "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+          [
+            request.body.firstName,
+            request.body.lastName,
+            request.body.email,
+            hash,
+            salt,
+            request.body.street,
+            request.body.phoneNum,
+            1,
+          ],
+          (errorInsert) => {
+            if (errorInsert) {
+              console.log("Error Creating Sponsor sub user");
+              throw error;
+            } else {
+              response.send(true);
+            }
+          }
+        );
+      }
     }
   );
 });
