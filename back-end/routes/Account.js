@@ -264,6 +264,8 @@ router.post("/createsponsorsubuser", (request, response) => {
 });
 
 // read account
+// again role is not a table
+// needs to get table based on the role passed
 router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
