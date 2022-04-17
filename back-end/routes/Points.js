@@ -29,7 +29,7 @@ router.get("/", (request, response) => {
       if (error) throw error;
       if (result.length > 0) {
         console.log("Points accessed.");
-        response.send(result[0].Amount);
+        response.send(JSON.stringify(result[0].Amount));
       }
     }
   );
