@@ -56,7 +56,7 @@ router.get("/", (request, response) => {
   );
 });
 
-// Add a cart item    
+// Add a cart item
 // TODO make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
 router.post("/update", (request, response) => {
   console.log("Hit update");
