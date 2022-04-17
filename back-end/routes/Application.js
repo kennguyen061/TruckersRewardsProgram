@@ -48,7 +48,7 @@ router.post("/createApplication", (request, response) => {
 router.post("/deleteapplication", (request, response) => {
   console.log("Hit delete app");
   db.query(
-    "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?",
+    "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
@@ -61,7 +61,7 @@ router.post("/deleteapplication", (request, response) => {
 router.post("/approveapplication", (request, response) => {
   console.log("Hit approve app");
   db.query(
-    "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?",
+    "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?;",
     [response.body.UID, response.body.SID],
     (error, result) => {
       if (error) throw error;
@@ -69,21 +69,21 @@ router.post("/approveapplication", (request, response) => {
   );
   //Creates a new point and wishlist record after application approval
   db.query(
-    "INSERT INTO DRIVERWISHLIST(UID,SID) VALUES(?,?)",
+    "INSERT INTO DRIVERWISHLIST(UID,SID) VALUES(?,?);",
     [response.body.UID, response.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0)",
+    "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0);",
     [response.body.UID, response.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?)",
+    "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?);",
     [response.body.UID, response.body.SID],
     (error, result) => {
       if (error) throw error;
