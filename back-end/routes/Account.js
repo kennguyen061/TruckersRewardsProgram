@@ -279,9 +279,7 @@ router.post("/createsponsorsubuser", (request, response) => {
 });
 
 // read account
-// again role is not a table
-// needs to get table based on the role passed
-// client should not be able to call this function without uid and role cookie
+
 router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
@@ -341,9 +339,7 @@ router.get("/read", (request, response) => {
 });
 
 // update account
-//needs an if statment to select proper table
-//Role is not the same as table
-//client should not be able to call this function without uid and role cookie
+
 router.post("/update", (request, response) => {
   console.log("Hit update account");
 
@@ -358,7 +354,7 @@ router.post("/update", (request, response) => {
         request.body.phoneNum,
         request.body.id,
       ],
-      (error, result) => {
+      (error) => {
         if (error) throw error;
         response.send(true);
       }
@@ -374,7 +370,7 @@ router.post("/update", (request, response) => {
         request.body.phoneNum,
         request.body.id,
       ],
-      (error, result) => {
+      (error) => {
         if (error) throw error;
         response.send(true);
       }
@@ -390,7 +386,7 @@ router.post("/update", (request, response) => {
         request.body.phoneNum,
         request.body.id,
       ],
-      (error, result) => {
+      (error) => {
         if (error) throw error;
         response.send(true);
       }
