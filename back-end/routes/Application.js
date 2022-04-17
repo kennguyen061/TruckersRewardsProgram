@@ -84,7 +84,7 @@ router.post("/approveapplication", (request, response) => {
   );
   db.query(
     "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?);",
-    [ [request.body.UID, request.body.SID],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
       response.send(true);

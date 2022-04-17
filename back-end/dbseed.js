@@ -65,7 +65,7 @@ db.connect(function (err) {
 
   //Creates POINTBALANCE Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS POINTBALANCE ( PointID int auto_increment NOT NULL unique, Amount int NOT NULL, UID int NOT NULL, SID int NOT NULL, primary key (PointID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORANDDRIVER (SID) );",
+    "CREATE TABLE IF NOT EXISTS POINTBALANCE ( PointID int auto_increment NOT NULL unique, Amount int NOT NULL, UID int NOT NULL, SID int NOT NULL, primary key (PointID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORORG (SID)",
     function (error, result, fields) {
       console.log(result);
     }
