@@ -359,7 +359,7 @@ router.post("/update", (request, response) => {
         response.send(true);
       }
     );
-  } else if (request.body.role == "SPONSORACCT") {
+  } else if (request.body.role == "SPONSOR") {
     db.query(
       "UPDATE SPONSORACCT SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE SUID = ?;",
       [
