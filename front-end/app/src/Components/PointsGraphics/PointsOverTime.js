@@ -10,7 +10,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-var data = [
+//changed var to let
+// var should never be used as it is bad syntax in new version of javascript like we are using
+
+let data = [
   {
     name: "January",
     Points: 4000,

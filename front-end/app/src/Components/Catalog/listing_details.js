@@ -61,7 +61,9 @@ function Listing_details() {
   images.forEach((a) => delete a.url_170x135);
   images.forEach((a) => delete a.green);
 
-  var i;
+  //changed var to let
+  // var should never be used as it is bad syntax in new version of javascript like we are using
+  let i;
   for (i = 0; i < images.length; i++) {
     images[i].thumbnail = images[i]["url_75x75"];
     images[i].original = images[i]["url_570xN"];

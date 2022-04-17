@@ -15,7 +15,9 @@ export default function Edit_Catalog() {
   const [listing, setlisting] = useState([]);
   const [listing_1, setlisting_1] = useState([]);
 
-  var new_listing = [];
+  //changed var to let
+  // var should never be used as it is bad syntax in new version of javascript like we are using
+  let new_listing = [];
 
   const fetchData = () => {
     const etsy_url =
@@ -49,25 +51,64 @@ export default function Edit_Catalog() {
   };
 
   const options = [
-    { value: "Art & Collectibles", label: "Art & Collectibles" },
-    { value: "Jewelry", label: "Jewelry" },
-    { value: "Home & Living", label: "Home & Living" },
-    { value: "Craft Supplies & Tools", label: "Craft Supplies & Tools" },
-    { value: "Clothing", label: "Clothing" },
-    { value: "Toys & Games", label: "Toys & Games" },
-    { value: "Paper & Party Supplies", label: "Paper & Party Supplies" },
-    { value: "Gifts & Mementos", label: "Gifts & Mementos" },
-    { value: "Books, Movies & Music", label: "Books, Movies & Music" },
-    { value: "Electronics & Accessories", label: "Electronics & Accessories" },
-    { value: "Bath & Beauty", label: "Bath & Beauty" },
-    { value: "Accessories", label: "Accessories" },
+    {
+      value: "Art & Collectibles",
+      label: "Art & Collectibles",
+    },
+    {
+      value: "Jewelry",
+      label: "Jewelry",
+    },
+    {
+      value: "Home & Living",
+      label: "Home & Living",
+    },
+    {
+      value: "Craft Supplies & Tools",
+      label: "Craft Supplies & Tools",
+    },
+    {
+      value: "Clothing",
+      label: "Clothing",
+    },
+    {
+      value: "Toys & Games",
+      label: "Toys & Games",
+    },
+    {
+      value: "Paper & Party Supplies",
+      label: "Paper & Party Supplies",
+    },
+    {
+      value: "Gifts & Mementos",
+      label: "Gifts & Mementos",
+    },
+    {
+      value: "Books, Movies & Music",
+      label: "Books, Movies & Music",
+    },
+    {
+      value: "Electronics & Accessories",
+      label: "Electronics & Accessories",
+    },
+    {
+      value: "Bath & Beauty",
+      label: "Bath & Beauty",
+    },
+    {
+      value: "Accessories",
+      label: "Accessories",
+    },
   ];
 
   new_listing = listing.concat(listing_1);
 
   console.log(new_listing);
   console.log(selectedValues);
-  var filtered_listing = [];
+
+  //changed var to let
+  // var should never be used as it is bad syntax in new version of javascript like we are using
+  let filtered_listing = [];
 
   filtered_listing = new_listing.filter(
     (filtered_listing) =>
@@ -180,7 +221,10 @@ export default function Edit_Catalog() {
           <br></br>
 
           <Select
-            styles={{ width: 50, height: 35 }}
+            styles={{
+              width: 50,
+              height: 35,
+            }}
             name="categories"
             onChange={handleChange}
             isMulti

@@ -4,9 +4,12 @@ import "react-circular-progressbar/dist/styles.css";
 import PannelBar from "./PannelBar";
 
 function ProgressBar() {
-  var totalPoints = 2000;
-  var goal = 9000;
-  var ratio = (totalPoints / goal) * 100;
+  //changed var to let
+  // var should never be used as it is bad syntax in new version of javascript like we are using
+
+  let totalPoints = 2000;
+  let goal = 9000;
+  let ratio = (totalPoints / goal) * 100;
   ratio = ratio - (ratio % 1);
 
   return (
