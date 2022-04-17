@@ -43,13 +43,20 @@ router.get("/viewdriver", (request, response) => {
 // view driver points of a sponsor
 router.get("/viewdriverpoints", (request, response) => {
   console.log("Hit driver points");
+  let responseBody = {
+    Amount: "",
+  };
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("Points retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        responseBody.Amount = result[0].Amount;
+        console.log("Points retrieved.");
+      }      
+      response.send(JSON.stringify(responseBody));
     }
   );
 });
