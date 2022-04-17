@@ -191,7 +191,7 @@ router.post("/createsponsor", (req, res) => {
       if (error) {
         console.log("Something went wrong looking for a sponsor");
       }
-      if (result >= 1) {
+      if (result.length >= 1) {
         res.send(false);
       } else {
         db.query(
@@ -203,7 +203,7 @@ router.post("/createsponsor", (req, res) => {
             req.body.cRules,
           ],
           (errorCreate, resultCreate) => {
-            if (error) {
+            if (errorCreate) {
               console.log("Something went wrong creating a sponsor");
             } else {
               res.send(true);
@@ -245,7 +245,7 @@ router.post("/createsponsorsubuser", (request, response) => {
               console.log("Sponsor does not exists");
               throw error2;
             } else {
-              org_id = result2;
+              org_id = result2[0].SID;
               db.query(
                 "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 [
