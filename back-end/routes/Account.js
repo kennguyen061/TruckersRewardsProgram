@@ -132,44 +132,50 @@ router.post("/", (request, response) => {
 router.post("/create", (request, response) => {
   // check if account already exists
   console.log("Hit accouint creation");
+  let go = true;
   db.query(
     "SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
       if (error) throw error;
-      if (result == 1) response.send(false);
+      if (result == 1) {
+        go = false;
+        response.send(false);
+      }
     }
   );
 
-  // create hash and salt
-  let salt = new Date().toISOString();
+  if (go) {
+    // create hash and salt
+    let salt = new Date().toISOString();
 
-  let hash = crypto
-    .createHash("sha256")
-    .update(request.body.password + salt)
-    .digest("base64");
+    let hash = crypto
+      .createHash("sha256")
+      .update(request.body.password + salt)
+      .digest("base64");
 
-  console.log("The creation hash is: " + hash);
-  console.log("The creation salt is: " + salt);
-  console.log("The creation password is: " + request.body.password);
+    console.log("The creation hash is: " + hash);
+    console.log("The creation salt is: " + salt);
+    console.log("The creation password is: " + request.body.password);
 
-  db.query(
-    "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-    [
-      request.body.firstName,
-      request.body.lastName,
-      request.body.email,
-      hash,
-      salt,
-      request.body.street,
-      request.body.phoneNum,
-      1,
-    ],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
-    }
-  );
+    db.query(
+      "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+      [
+        request.body.firstName,
+        request.body.lastName,
+        request.body.email,
+        hash,
+        salt,
+        request.body.street,
+        request.body.phoneNum,
+        1,
+      ],
+      (error, result) => {
+        if (error) throw error;
+        response.send(true);
+      }
+    );
+  }
 });
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
