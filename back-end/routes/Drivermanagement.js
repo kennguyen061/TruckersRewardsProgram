@@ -22,7 +22,7 @@ router.get("/viewdrivers", (request, response) => {
     Email: "",
     Address: "",
     Phone_number: "",
-  }
+  };
 
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
@@ -58,7 +58,7 @@ router.get("/viewdriver", (request, response) => {
     Email: "",
     Address: "",
     Phone_number: "",
-  }
+  };
 
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
@@ -75,9 +75,8 @@ router.get("/viewdriver", (request, response) => {
           responseBody.Email = result[0].Email;
           responseBody.Address = result[0].Address;
           responseBody.Phone_number = result[0].Phone_number;
+          response.send(JSON.stringify(responseBody));
         }
-
-        response.send(JSON.stringify(responseBody));
       }
     }
   );
@@ -98,7 +97,7 @@ router.get("/viewdriverpoints", (request, response) => {
       } else {
         responseBody.Amount = result[0].Amount;
         console.log("Points retrieved.");
-      }      
+      }
       response.send(JSON.stringify(responseBody));
     }
   );
@@ -125,12 +124,12 @@ router.get("/viewdriverorders", (request, response) => {
         let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
-          responseBody.OrderID = element.OrderID,
-          responseBody.UID = element.UID,
-          responseBody.SID = element.SID,
-          responseBody.Orderdate = element.Orderdate,
-          responseBody.Address = element.Address,
-          rbArray.push(responseBody);
+          (responseBody.OrderID = element.OrderID),
+            (responseBody.UID = element.UID),
+            (responseBody.SID = element.SID),
+            (responseBody.Orderdate = element.Orderdate),
+            (responseBody.Address = element.Address),
+            rbArray.push(responseBody);
         }
         response.send(JSON.stringify(rbArray));
       }
