@@ -15,13 +15,35 @@ const db = mysql.createConnection({
 // view all drivers of a sponsor
 router.get("/viewdrivers", (request, response) => {
   console.log("Hit view drivers");
+
+  let responseBody = {
+    First_name: "",
+    Last_name: "",
+    Email: "",
+    Address: "",
+    Phone_number: "",
+  }
+
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
     [request.params.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("All sponsor drivers retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.First_name = element.First_name;
+          responseBody.Last_name = element.Last_name;
+          responseBody.Email = element.Email;
+          responseBody.Address = element.Address;
+          responseBody.Phone_number = element.Phone_number;
+          rbArray.push(responseBody);
+        }
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
 });
@@ -29,13 +51,34 @@ router.get("/viewdrivers", (request, response) => {
 // view specific driver of a sponsor
 router.get("/viewdriver", (request, response) => {
   console.log("Hit view specific driver");
+
+  let responseBody = {
+    First_name: "",
+    Last_name: "",
+    Email: "",
+    Address: "",
+    Phone_number: "",
+  }
+
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
-    [request.params.SID, request.params.UID],
+    [request.query.SID, request.query.UID],
     (error, result) => {
-      if (error) throw error;
-      console.log("sponsor driver retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          responseBody.First_name = result[0].First_name;
+          responseBody.Last_name = result[0].Last_name;
+          responseBody.Email = result[0].Email;
+          responseBody.Address = result[0].Address;
+          responseBody.Phone_number = result[0].Phone_number;
+        }
+
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
 });
@@ -43,27 +86,54 @@ router.get("/viewdriver", (request, response) => {
 // view driver points of a sponsor
 router.get("/viewdriverpoints", (request, response) => {
   console.log("Hit driver points");
+  let responseBody = {
+    Amount: "",
+  };
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("Points retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        responseBody.Amount = result[0].Amount;
+        console.log("Points retrieved.");
+      }      
+      response.send(JSON.stringify(responseBody));
     }
   );
 });
 
-//TODO: view all orders of a driver
+//view all orders of a driver
 router.get("/viewdriverorders", (request, response) => {
   console.log("Hit driver orders");
+  let responseBody = {
+    OrderID: "",
+    UID: "",
+    SID: "",
+    Orderdate: "",
+    Address: "",
+  };
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("Orders retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.OrderID = element.OrderID,
+          responseBody.UID = element.UID,
+          responseBody.SID = element.SID,
+          responseBody.Orderdate = element.Orderdate,
+          responseBody.Address = element.Address,
+          rbArray.push(responseBody);
+        }
+        response.send(JSON.stringify(rbArray));
+      }
     }
   );
 });
@@ -75,7 +145,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -83,7 +152,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -91,7 +159,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -112,8 +179,7 @@ router.post("/changescale", (request, response) => {
     [request.body.conversion_scale, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      console.log(result);
-      updatePointBalanceLog(newPoints, Reason, PointID, SID);
+      response.send(true);
     }
   );
 });
