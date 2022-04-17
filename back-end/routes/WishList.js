@@ -19,6 +19,12 @@ db.connect((error) => {
   console.log("Connected");
 });
 
+/*
+ * Only work on this once everything is done
+ *
+ *
+ */
+
 // access wish list
 router.get("/", (request, response) => {
   console.log("Hit access wishlist");
