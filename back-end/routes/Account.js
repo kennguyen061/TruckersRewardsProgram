@@ -247,7 +247,7 @@ router.post("/createsponsorsubuser", (request, response) => {
             } else {
               org_id = result2;
               db.query(
-                "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag,SID) VALUES(?,?,?,?,?,?,?,?,?);",
+                "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 [
                   request.body.firstName,
                   request.body.lastName,
