@@ -96,7 +96,7 @@ router.post("/approveapplication", (request, response) => {
 router.post("/rejectapplication", (request, response) => {
   console.log("rejectapp");
   db.query(
-    "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?",
+    "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?;",
     [request.body.Reason, request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
@@ -109,7 +109,7 @@ router.post("/rejectapplication", (request, response) => {
 router.get("/retrieveapplication", (request, response) => {
   console.log("Hit retrieve app");
   db.query(
-    "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?",
+    "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?;",
     [request.query.UID, request.query.SID],
     (error, result) => {
       if (error) throw error;
@@ -122,7 +122,7 @@ router.get("/retrieveapplication", (request, response) => {
 router.get("/retrievealluserapplications", (request, response) => {
   console.log("Hit get all apps");
   db.query(
-    "SELECT * FROM APPLICATION WHERE UID = ?",
+    "SELECT * FROM APPLICATION WHERE UID = ?;",
     [request.query.UID],
     (error, result) => {
       if (error) throw error;
@@ -135,7 +135,7 @@ router.get("/retrievealluserapplications", (request, response) => {
 router.get("/retrieveallsponsorapplications", (request, response) => {
   console.log("Hit get all sponsor apps");
   db.query(
-    "SELECT * FROM APPLICATION WHERE SID = ?",
+    "SELECT * FROM APPLICATION WHERE SID = ?;",
     [request.query.SID],
     (error, result) => {
       if (error) throw error;
