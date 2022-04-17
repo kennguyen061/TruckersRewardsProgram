@@ -405,39 +405,39 @@ router.post("/delete", (request, response) => {
     db.query(
       "UPDATE DRIVER SET VisibleFlag = 0 WHERE UID = ?;",
       [request.body.id],
-      (error) => {
-          if (error, result) throw error;
-          if (result.length == 0) {
-              response.send(false);
-          } else {
-              response.send(true);
-          }
+      (error, result) => {
+        if (error) throw error;
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          response.send(true);
+        }
       }
     );
   } else if (request.body.role == "SPONSOR") {
     db.query(
       "UPDATE SPONSORACCT SET VisibleFlag = 0 WHERE SUID = ?;",
       [request.body.id],
-      (error) => {
-          if (error, result) throw error;
-          if (result.length == 0) {
-              response.send(false);
-          } else {
-              response.send(true);
-          }
+      (error, result) => {
+        if (error) throw error;
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          response.send(true);
+        }
       }
     );
   } else if (request.body.role == "ADMIN") {
     db.query(
       "UPDATE ADMIN SET VisibleFlag = 0 WHERE A_ID = ?;",
       [request.body.id],
-      (error) => {
-          if (error, result) throw error;
-          if (result.length == 0) {
-              response.send(false);
-          } else {
-              response.send(true);
-          }
+      (error, result) => {
+        if (error) throw error;
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          response.send(true);
+        }
       }
     );
   }
