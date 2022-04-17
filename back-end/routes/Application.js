@@ -27,16 +27,19 @@ router.post("/createApplication", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      if (result == 1) response.send(false);
-    }
-  );
-  //Creates the new application
-  db.query(
-    "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP()",
-    [request.body.UID, request.body.SID],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
+      if (result.length >= 1) {
+        response.send(false);
+      } else {
+        //Creates the new application
+        db.query(
+          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP()",
+          [request.body.UID, request.body.SID],
+          (error, result) => {
+            if (error) throw error;
+            response.send(true);
+          }
+        );
+      }
     }
   );
 });
@@ -89,12 +92,12 @@ router.post("/approveapplication", (request, response) => {
   );
 });
 
-// update account
+// reject app
 router.post("/rejectapplication", (request, response) => {
   console.log("rejectapp");
   db.query(
     "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?",
-    [Reason, UID, SID],
+    [request.body.Reason, request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
       response.send(true);
@@ -107,7 +110,7 @@ router.get("/retrieveapplication", (request, response) => {
   console.log("Hit retrieve app");
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
@@ -120,7 +123,7 @@ router.get("/retrievealluserapplications", (request, response) => {
   console.log("Hit get all apps");
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ?",
-    [request.params.UID],
+    [request.query.UID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
@@ -133,7 +136,7 @@ router.get("/retrieveallsponsorapplications", (request, response) => {
   console.log("Hit get all sponsor apps");
   db.query(
     "SELECT * FROM APPLICATION WHERE SID = ?",
-    [request.params.SID],
+    [request.query.SID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
