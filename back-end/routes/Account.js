@@ -65,66 +65,76 @@ router.post("/", (request, response) => {
         loginAttempt(request.body.email, "Success");
         response.send(responseBody);
         return;
-      }
-    }
-  );
-
-  // check sponsor table
-  db.query(
-    "SELECT Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
-    [request.body.email],
-    (error, result) => {
-      if (error) throw error;
-      if (result.length === 0) return;
-
-      let salt = new Date(result[0].Password_salt).toISOString();
-
-      let hash = crypto
-        .createHash("sha256")
-        .update(request.body.password + salt)
-        .digest("base64");
-
-      if (hash === result[0].Password_hash) {
-        responseBody.exists = true;
-        responseBody.id = result[0].SUID;
-        responseBody.role = "SPONSORACCT";
-      }
-      if (responseBody.exists) {
-        loginAttempt(request.body.email, "Success");
-        response.send(responseBody);
-        return;
-      }
-    }
-  );
-
-  // check admin table
-  db.query(
-    "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
-    [request.body.email],
-    (error, result) => {
-      if (error) throw error;
-      if (result.length === 0) return;
-
-      let salt = new Date(result[0].Password_salt).toISOString();
-
-      let hash = crypto
-        .createHash("sha256")
-        .update(request.body.password + salt)
-        .digest("base64");
-
-      if (hash === result[0].Password_hash) {
-        responseBody.exists = true;
-        responseBody.id = result[0].A_ID;
-        responseBody.role = "ADMIN";
-      }
-
-      if (responseBody.exists) {
-        loginAttempt(request.body.email, "Success");
+      } else {
+        loginAttempt(request.body.email, "Failure");
         response.send(responseBody);
       }
     }
   );
+
   if (!responseBody.exists) {
+    // check sponsor table
+    db.query(
+      "SELECT Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
+      [request.body.email],
+      (error, result) => {
+        if (error) throw error;
+        if (result.length === 0) return;
+
+        let salt = new Date(result[0].Password_salt).toISOString();
+
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
+
+        if (hash === result[0].Password_hash) {
+          responseBody.exists = true;
+          responseBody.id = result[0].SUID;
+          responseBody.role = "SPONSORACCT";
+        }
+        if (responseBody.exists) {
+          loginAttempt(request.body.email, "Success");
+          response.send(responseBody);
+          return;
+        } else {
+          loginAttempt(request.body.email, "Failure");
+          response.send(responseBody);
+        }
+      }
+    );
+  } else if (!responseBody.exists) {
+    // check admin table
+    db.query(
+      "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
+      [request.body.email],
+      (error, result) => {
+        if (error) throw error;
+        if (result.length === 0) return;
+
+        let salt = new Date(result[0].Password_salt).toISOString();
+
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
+
+        if (hash === result[0].Password_hash) {
+          responseBody.exists = true;
+          responseBody.id = result[0].A_ID;
+          responseBody.role = "ADMIN";
+        }
+
+        if (responseBody.exists) {
+          loginAttempt(request.body.email, "Success");
+          response.send(responseBody);
+        } else {
+          loginAttempt(request.body.email, "Failure");
+          response.send(responseBody);
+        }
+      }
+    );
+  } else {
     loginAttempt(request.body.email, "Failure");
     response.send(responseBody);
   }
@@ -132,60 +142,58 @@ router.post("/", (request, response) => {
 
 // create account
 router.post("/create", (request, response) => {
-  console.log("Hit create sponsor subuser");
+  console.log("Hit create driver");
   // check if account already exists
   console.log("Hit accouint creation");
-  let go = true;
+
   db.query(
-    "SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
+    "SELECT COUNT(*) AS RowCount FROM DRIVER WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
+      console.log(result);
       if (error) throw error;
       if (result.length >= 1) {
-        go = false;
         response.send(false);
+      } else if (result.length == 0) {
+        // create hash and salt
+        let salt = new Date().toISOString();
+
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
+
+        console.log("The creation hash is: " + hash);
+        console.log("The creation salt is: " + salt);
+        console.log("The creation password is: " + request.body.password);
+
+        db.query(
+          "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+          [
+            request.body.firstName,
+            request.body.lastName,
+            request.body.email,
+            hash,
+            salt,
+            request.body.street,
+            request.body.phoneNum,
+            1,
+          ],
+          (error, result) => {
+            if (error) throw error;
+            response.send(true);
+          }
+        );
       }
     }
   );
-
-  if (go) {
-    // create hash and salt
-    let salt = new Date().toISOString();
-
-    let hash = crypto
-      .createHash("sha256")
-      .update(request.body.password + salt)
-      .digest("base64");
-
-    console.log("The creation hash is: " + hash);
-    console.log("The creation salt is: " + salt);
-    console.log("The creation password is: " + request.body.password);
-
-    db.query(
-      "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-      [
-        request.body.firstName,
-        request.body.lastName,
-        request.body.email,
-        hash,
-        salt,
-        request.body.street,
-        request.body.phoneNum,
-        1,
-      ],
-      (error, result) => {
-        if (error) throw error;
-        response.send(true);
-      }
-    );
-  }
 });
 
 //Create a Sponsor
 router.post("/createsponsor", (req, res) => {
   console.log("Hit create sponsor");
   db.query(
-    "SELECT COUNT(*) FROM SPONSORORG WHERE name = ?;",
+    "SELECT COUNT(*) AS RowCount FROM SPONSORORG WHERE name = ?;",
     req.body.name,
     (error, result) => {
       if (error) {
@@ -220,12 +228,12 @@ router.post("/createsponsorsubuser", (request, response) => {
   // check if account already exists
   console.log("Hit create sponsor subuser");
   db.query(
-    "SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
+    "SELECT COUNT(*) AS RowCount FROM SPONSORACCT WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
       if (error) {
         throw error;
-      } else if (result == 1) {
+      } else if (result.RowCount == 1) {
         response.send(false);
       } else {
         // create hash and salt

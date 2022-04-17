@@ -57,7 +57,7 @@ db.connect(function (err) {
 
   //Creates SPONSORACCT Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS SPONSORACCT ( SUID int auto_increment NOT NULL unique, First_name varchar(20) NOT NULL, Last_name varchar(20) NOT NULL, Email varchar(255) NOT NULL, Password_hash varchar(6383) NOT NULL, Password_salt varchar(60) NOT NULL, Address varchar(20) NOT NULL, Phone_number char(12) NOT NULL, VisibleFlag BIT NOT NULL, SID int NOT NULL, primary key (SUID), foreign key (SID) references SPONSORORG (SID) );",
+    "CREATE TABLE IF NOT EXISTS SPONSORACCT ( SUID int auto_increment NOT NULL unique, First_name varchar(20) NOT NULL, Last_name varchar(20) NOT NULL, Email varchar(255) NOT NULL, Password_hash varchar(6383) NOT NULL, Password_salt varchar(60) NOT NULL, Address varchar(20) NOT NULL, Phone_number char(12) NOT NULL, VisibleFlag BIT NOT NULL, SID int NOT NULL, primary key (SUID), foreign key (SID) references SPONSORORG (SID));",
     function (error, result, fields) {
       console.log(result);
     }
@@ -65,7 +65,7 @@ db.connect(function (err) {
 
   //Creates POINTBALANCE Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS POINTBALANCE ( PointID int auto_increment NOT NULL unique, Amount int NOT NULL, UID int NOT NULL, SID int NOT NULL, primary key (PointID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORANDDRIVER (SID) );",
+    "CREATE TABLE IF NOT EXISTS POINTBALANCE ( PointID int auto_increment NOT NULL unique, Amount int NOT NULL, UID int NOT NULL, SID int NOT NULL, primary key (PointID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORORG (SID));",
     function (error, result, fields) {
       console.log(result);
     }
