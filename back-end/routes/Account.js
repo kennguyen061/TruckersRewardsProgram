@@ -32,6 +32,7 @@ function loginAttempt(email, status) {
 
 // access account
 router.post("/", (request, response) => {
+  console.log("Hit login");
   let responseBody = {
     exists: false,
     id: null,
@@ -130,6 +131,7 @@ router.post("/", (request, response) => {
 // create account
 router.post("/create", (request, response) => {
   // check if account already exists
+  console.log("Hit accouint creation");
   db.query(
     "SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
     [request.body.email],
@@ -173,6 +175,7 @@ router.post("/create", (request, response) => {
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
 router.post("/createsponsorsubuser", (request, response) => {
   // check if account already exists
+  console.log("Hit create sponsor subuser");
   db.query(
     "SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
     [request.body.email],
@@ -211,6 +214,7 @@ router.post("/createsponsorsubuser", (request, response) => {
 // read account
 router.get("/read", (request, response) => {
   // select record given uid
+  console.log("Hit account read");
   db.query(
     "SELECT * FROM ? WHERE UID = ?",
     [request.params.role, request.params.uid],
@@ -223,6 +227,7 @@ router.get("/read", (request, response) => {
 
 // update account
 router.post("/update", (request, response) => {
+  console.log("Hit update account");
   db.query(
     "UPDATE ? SET First_name = ?, Last_name = ?, Email = ?, Address = ?, Phone_number = ? WHERE UID = ?;",
     [
@@ -242,6 +247,7 @@ router.post("/update", (request, response) => {
 
 // delete account
 router.post("/delete", (request, response) => {
+  console.log("Hit delete account");
   db.query(
     "UPDATE ? SET VisibleFlag = 0 WHERE UID = ?;",
     [request.body.role, request.body.uid],

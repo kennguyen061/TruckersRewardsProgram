@@ -20,6 +20,7 @@ db.connect((error) => {
 
 // get reportable accounts
 router.get("/", (request, respsonse) => {
+  console.log("Hit get all accounts");
   let responseBody = {
     driverAccounts: null,
     sponsorAccounts: null,

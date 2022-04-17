@@ -21,6 +21,7 @@ db.connect((error) => {
 
 //update catalogrules
 router.post("/updatecatalogrules", (request, response) => {
+  console.log("Hit update cat rules");
   db.query(
     "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
     [request.body.rulestring, request.body.SID],
@@ -33,6 +34,7 @@ router.post("/updatecatalogrules", (request, response) => {
 
 // read catalogrules
 router.get("/getcatalogrules", (request, response) => {
+  console.log("Hit get cat rules");
   db.query(
     "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
     [request.params.SID],

@@ -14,6 +14,7 @@ const db = mysql.createConnection({
 
 // view all drivers of a sponsor
 router.get("/viewdrivers", (request, response) => {
+  console.log("Hit view drivers");
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
     [request.params.SID],
@@ -27,6 +28,7 @@ router.get("/viewdrivers", (request, response) => {
 
 // view specific driver of a sponsor
 router.get("/viewdriver", (request, response) => {
+  console.log("Hit view specific driver");
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
     [request.params.SID, request.params.UID],
@@ -40,6 +42,7 @@ router.get("/viewdriver", (request, response) => {
 
 // view driver points of a sponsor
 router.get("/viewdriverpoints", (request, response) => {
+  console.log("Hit driver points");
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
     [request.params.UID, request.params.SID],
@@ -53,6 +56,7 @@ router.get("/viewdriverpoints", (request, response) => {
 
 //TODO: view all orders of a driver
 router.get("/viewdriverorders", (request, response) => {
+  console.log("Hit driver orders");
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
     [request.params.UID, request.params.SID],
@@ -65,6 +69,7 @@ router.get("/viewdriverorders", (request, response) => {
 });
 // removedriver
 router.post("/removedriver", (request, response) => {
+  console.log("Hit remove");
   db.query(
     "DELETE FROM SPONSORANDDRIVER WHERE UID = ? AND SID = ?",
     [request.body.UID, request.body.SID],
@@ -101,6 +106,7 @@ router.post("/removedriver", (request, response) => {
 
 // update conversion_scale
 router.post("/changescale", (request, response) => {
+  console.log("Hit change points scale");
   db.query(
     "UPDATE SPONSORORG SET conversion_scale = ? WHERE SID = ?;",
     [request.body.conversion_scale, request.body.SID],

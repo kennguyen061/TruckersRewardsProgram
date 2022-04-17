@@ -20,6 +20,7 @@ db.connect((error) => {
 
 // access cart of a user
 router.get("/", (request, response) => {
+  console.log("Hit user cart");
   db.query(
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
     [request.params.UID, request.params.SID],
@@ -33,6 +34,7 @@ router.get("/", (request, response) => {
 
 // Add a cart item
 router.post("/update", (request, response) => {
+  console.log("Hit update");
   db.query(
     "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?,?)",
     [
@@ -54,7 +56,8 @@ router.post("/update", (request, response) => {
 // increasequantity
 router.post("/increasequantity", (request, response) => {
   //calculate new quantity
-  var currentquantity = 0;
+  console.log("Hit increase quantity");
+  let currentquantity = 0;
   db.query(
     "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
     [UID, SID, ItemID],
@@ -77,8 +80,9 @@ router.post("/increasequantity", (request, response) => {
 
 // decreasequantity
 router.post("/decreasequantity", (request, response) => {
+  console.log("Hit update");
   //calculate new quantity
-  var currentquantity = 0;
+  let currentquantity = 0;
   db.query(
     "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
     [UID, SID, ItemID],
@@ -101,6 +105,7 @@ router.post("/decreasequantity", (request, response) => {
 
 //notify cart
 router.post("/notifycart", (request, response) => {
+  console.log("Hit notify cart");
   //1 for uid and sid are placeholder
   db.query(
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
@@ -111,7 +116,7 @@ router.post("/notifycart", (request, response) => {
         // if they do, increase the quantity by 1 of the current entry (UPDATE)
         //1 for uid and sid are placeholder
         //Retrieve old quantity (3rd index in table), increase it by one
-        newquantity = result[0].Quantity + 1;
+        let newquantity = result[0].Quantity + 1;
         db.query(
           "UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
           [
@@ -148,6 +153,7 @@ router.post("/notifycart", (request, response) => {
 
 // remove cart item
 router.post("/remove", (request, response) => {
+  console.log("Hit remove");
   db.query(
     "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
     [request.body.UID, request.body.SID, request.body.ItemID],

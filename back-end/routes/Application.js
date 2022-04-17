@@ -21,6 +21,7 @@ db.connect((error) => {
 
 router.post("/createApplication", (request, response) => {
   // check if application already exists
+  console.log("Hit create applicaiton");
   db.query(
     "SELECT COUNT(*) FROM APPLICATION WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
@@ -42,6 +43,7 @@ router.post("/createApplication", (request, response) => {
 
 // driver delete application
 router.post("/deleteapplication", (request, response) => {
+  console.log("Hit delete app");
   db.query(
     "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?",
     [request.body.UID, request.body.SID],
@@ -54,6 +56,7 @@ router.post("/deleteapplication", (request, response) => {
 
 // approve application
 router.post("/approveapplication", (request, response) => {
+  console.log("Hit approve app");
   db.query(
     "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?",
     [response.body.UID, response.body.SID],
@@ -88,6 +91,7 @@ router.post("/approveapplication", (request, response) => {
 
 // update account
 router.post("/rejectapplication", (request, response) => {
+  console.log("rejectapp");
   db.query(
     "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?",
     [Reason, UID, SID],
@@ -100,6 +104,7 @@ router.post("/rejectapplication", (request, response) => {
 
 // read specific application
 router.get("/retrieveapplication", (request, response) => {
+  console.log("Hit retrieve app");
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?",
     [request.params.UID, request.params.SID],
@@ -112,6 +117,7 @@ router.get("/retrieveapplication", (request, response) => {
 
 // read specific application
 router.get("/retrievealluserapplications", (request, response) => {
+  console.log("Hit get all apps");
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ?",
     [request.params.UID],
@@ -124,6 +130,7 @@ router.get("/retrievealluserapplications", (request, response) => {
 
 // read specific application
 router.get("/retrieveallsponsorapplications", (request, response) => {
+  console.log("Hit get all sponsor apps");
   db.query(
     "SELECT * FROM APPLICATION WHERE SID = ?",
     [request.params.SID],

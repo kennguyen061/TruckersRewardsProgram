@@ -21,6 +21,7 @@ db.connect((error) => {
 
 // access points
 router.get("/", (request, response) => {
+  console.log("Hit access points");
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE PointID = ?;",
     [request.params.PointID],
@@ -36,6 +37,7 @@ router.get("/", (request, response) => {
 
 // update points
 router.post("/update", (request, response) => {
+  console.log("Hit update points");
   // select point ID
   db.query(
     "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
