@@ -180,6 +180,7 @@ router.post("/create", (request, response) => {
   }
 });
 
+//Create a Sponsor
 router.post("/createsponsor", (req, res) => {
   console.log("Hit create sponsor");
   db.query(
@@ -197,7 +198,7 @@ router.post("/createsponsor", (req, res) => {
           [
             req.body.name,
             req.body.dRules,
-            req.body.coversionScale,
+            req.body.conversionScale,
             req.body.cRules,
           ],
           (errorCreate, resultCreate) => {
