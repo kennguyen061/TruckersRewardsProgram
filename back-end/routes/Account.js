@@ -2,7 +2,6 @@ const router = require("express").Router();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const crypto = require("crypto");
-//forge.options.usePureJavaScript = true;
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -214,7 +213,7 @@ router.get("/read", (request, response) => {
   // select record given uid
   db.query(
     "SELECT * FROM ? WHERE UID = ?",
-    [request.body.role, request.body.uid],
+    [request.params.role, request.params.uid],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));

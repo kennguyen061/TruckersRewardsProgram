@@ -23,7 +23,7 @@ db.connect((error) => {
 router.get("/", (request, response) => {
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE PointID = ?;",
-    [PointID],
+    [request.params.PointID],
     (error, result) => {
       if (error) throw error;
       if (result.length > 0) {
@@ -43,7 +43,7 @@ router.post("/update", (request, response) => {
     (error, result) => {
       if (error) throw error;
       if (result.length > 0) {
-        PointID = result[0].PointID;
+        let PointID = result[0].PointID;
       }
     }
   );

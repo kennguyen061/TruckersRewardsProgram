@@ -25,7 +25,7 @@ router.get("/", (request, respsonse) => {
     sponsorAccounts: null,
   };
 
-  if (request.body.role == "SPONSORACCT") {
+  if (request.params.role == "SPONSORACCT") {
     db.query(
       "SELECT UID, First_name, Last_name Password_hash, Password_salt FROM DRIVER;",
       (error, result) => {
@@ -33,11 +33,11 @@ router.get("/", (request, respsonse) => {
         responseBody.driverAccounts = result;
       }
     );
-
-    respsonse.send(responseBody);
+    //if this sends here then an error is made by the call at the end
+    //respsonse.send(responseBody);
   }
 
-  if (request.body.role == "ADMIN") {
+  if (request.params.role == "ADMIN") {
     db.query(
       "SELECT UID, First_name, Last_name Password_hash, Password_salt FROM DRIVER;",
       (error, result) => {

@@ -35,7 +35,7 @@ router.post("/updatecatalogrules", (request, response) => {
 router.get("/getcatalogrules", (request, response) => {
   db.query(
     "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
-    [request.body.SID],
+    [request.params.SID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));

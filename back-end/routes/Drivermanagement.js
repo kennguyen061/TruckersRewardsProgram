@@ -16,7 +16,7 @@ const db = mysql.createConnection({
 router.get("/viewdrivers", (request, response) => {
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
-    [request.body.SID],
+    [request.params.SID],
     (error, result) => {
       if (error) throw error;
       console.log("All sponsor drivers retrieved.");
@@ -29,7 +29,7 @@ router.get("/viewdrivers", (request, response) => {
 router.get("/viewdriver", (request, response) => {
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
-    [request.body.SID, request.body.UID],
+    [request.params.SID, request.params.UID],
     (error, result) => {
       if (error) throw error;
       console.log("sponsor driver retrieved.");
@@ -42,7 +42,7 @@ router.get("/viewdriver", (request, response) => {
 router.get("/viewdriverpoints", (request, response) => {
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
-    [request.body.UID, request.body.SID],
+    [request.params.UID, request.params.SID],
     (error, result) => {
       if (error) throw error;
       console.log("Points retrieved.");
@@ -55,7 +55,7 @@ router.get("/viewdriverpoints", (request, response) => {
 router.get("/viewdriverorders", (request, response) => {
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
-    [request.body.UID, request.body.SID],
+    [request.params.UID, request.params.SID],
     (error, result) => {
       if (error) throw error;
       console.log("Orders retrieved.");

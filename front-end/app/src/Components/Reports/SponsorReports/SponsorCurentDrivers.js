@@ -3,6 +3,16 @@ import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
 const SponsorCurrentDrivers = () => {
+  const createRows = async () => {
+    await fetch("http://18.235.52.212:8000/drivermgt/viewdrivers", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        SID: "*",
+      }),
+    });
+  };
+
   return (
     <ReportGenerator
       title="Sponsor Drivers"

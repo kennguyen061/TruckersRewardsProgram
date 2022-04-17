@@ -23,7 +23,7 @@ db.connect((error) => {
 router.get("/", (request, response) => {
   db.query(
     "SELECT * FROM DRIVERWISHLIST WHERE WishlistID = ?",
-    [request.body.WishlistID],
+    [request.params.WishlistID],
     (error, result) => {
       if (error) throw error;
       console.log("Wish list retrieved.");

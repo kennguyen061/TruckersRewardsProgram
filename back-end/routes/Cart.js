@@ -22,7 +22,7 @@ db.connect((error) => {
 router.get("/", (request, response) => {
   db.query(
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
-    [request.body.UID, request.body.SID],
+    [request.params.UID, request.params.SID],
     (error, result) => {
       if (error) throw error;
       console.log("All cart items retrieved.");
@@ -63,7 +63,7 @@ router.post("/increasequantity", (request, response) => {
       currentquantity = result[0].Quantity;
     }
   );
-  newQuantity = currentquantity + 1;
+  let newQuantity = currentquantity + 1;
   db.query(
     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
     [newQuantity, request.body.UID, request.body.SID, request.body.ItemID],
@@ -87,7 +87,7 @@ router.post("/decreasequantity", (request, response) => {
       currentquantity = result[0].Quantity;
     }
   );
-  newQuantity = currentquantity - 1;
+  let newQuantity = currentquantity - 1;
   db.query(
     "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
     [newQuantity, UID, SID, ItemID],

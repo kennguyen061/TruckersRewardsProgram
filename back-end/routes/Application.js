@@ -102,7 +102,7 @@ router.post("/rejectapplication", (request, response) => {
 router.get("/retrieveapplication", (request, response) => {
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?",
-    [request.body.UID, request.body.SID],
+    [request.params.UID, request.params.SID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
@@ -114,7 +114,7 @@ router.get("/retrieveapplication", (request, response) => {
 router.get("/retrievealluserapplications", (request, response) => {
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ?",
-    [request.body.UID],
+    [request.params.UID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
@@ -126,7 +126,7 @@ router.get("/retrievealluserapplications", (request, response) => {
 router.get("/retrieveallsponsorapplications", (request, response) => {
   db.query(
     "SELECT * FROM APPLICATION WHERE SID = ?",
-    [request.body.SID],
+    [request.params.SID],
     (error, result) => {
       if (error) throw error;
       response.send(JSON.stringify(result));
