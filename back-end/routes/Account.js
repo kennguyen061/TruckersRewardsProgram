@@ -132,16 +132,17 @@ router.post("/", (request, response) => {
 
 // create account
 router.post("/create", (request, response) => {
-  console.log("Hit create sponsor subuser");
+  console.log("Hit create driver");
   // check if account already exists
   console.log("Hit accouint creation");
   let go = true;
   db.query(
-    "SELECT COUNT(*) FROM DRIVER WHERE Email = ?;",
+    "SELECT COUNT(*) AS RowCount FROM DRIVER WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
+      console.log(result);
       if (error) throw error;
-      if (result.length >= 1) {
+      if (result.RowCount >= 1) {
         go = false;
         response.send(false);
       }
@@ -185,13 +186,13 @@ router.post("/create", (request, response) => {
 router.post("/createsponsor", (req, res) => {
   console.log("Hit create sponsor");
   db.query(
-    "SELECT COUNT(*) FROM SPONSORORG WHERE name = ?;",
+    "SELECT COUNT(*) AS RowCount FROM SPONSORORG WHERE name = ?;",
     req.body.name,
     (error, result) => {
       if (error) {
         console.log("Something went wrong looking for a sponsor");
       }
-      if (result.length >= 1) {
+      if (result.RowCount >= 1) {
         res.send(false);
       } else {
         db.query(
@@ -220,12 +221,12 @@ router.post("/createsponsorsubuser", (request, response) => {
   // check if account already exists
   console.log("Hit create sponsor subuser");
   db.query(
-    "SELECT COUNT(*) FROM SPONSORACCT WHERE Email = ?;",
+    "SELECT COUNT(*) AS RowCount FROM SPONSORACCT WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
       if (error) {
         throw error;
-      } else if (result == 1) {
+      } else if (result.RowCount == 1) {
         response.send(false);
       } else {
         // create hash and salt
