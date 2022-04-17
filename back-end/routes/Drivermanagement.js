@@ -108,11 +108,11 @@ router.get("/viewdriverpoints", (request, response) => {
 router.get("/viewdriverorders", (request, response) => {
   console.log("Hit driver orders");
   let responseBody = {
-    OrderID: "",
-    UID: "",
-    SID: "",
-    Orderdate: "",
-    Address: "",
+    OrderID: null,
+    UID: null,
+    SID: null,
+    Orderdate: null,
+    Address: null,
   };
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
