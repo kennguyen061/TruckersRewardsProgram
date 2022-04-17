@@ -21,13 +21,37 @@ db.connect((error) => {
 // access cart of a user
 router.get("/", (request, response) => {
   console.log("Hit user cart");
+  let responseBody = {
+    ItemID: null,
+    ItemName: null,
+    Price: null,
+    Quantity: null,
+    Availability: null,
+    UID: null,
+    SID: null,
+  };
   db.query(
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
-    [request.params.UID, request.params.SID],
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("All cart items retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.ItemID = element.ItemID;
+          responseBody.ItemName = element.ItemName;
+          responseBody.Price = element.Price;
+          responseBody.Quantity = element.Quantity;
+          responseBody.Availability = element.Availability;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          rbArray.push(responseBody);
+        }
+        response.send(JSON.stringify(rbArray));
+      }
     }
   );
 });
