@@ -49,25 +49,32 @@ router.post("/update", (request, response) => {
       if (error) throw error;
       if (result.length > 0) {
         pointId = result[0].PointID;
+      } else {
+        response.send(false);
       }
-    }
-  );
+      // new balance
+      db.query(
+        "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
+        [request.body.newAmount, pointId],
+        (error, result) => {
+          if (error) throw error;
 
-  // new balance
-  db.query(
-    "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
-    [request.body.newAmount, request.body.pointId],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-
-  // log new balance
-  db.query(
-    "INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
-    [request.body.newAmount, request.body.reason, pointId, request.body.SID],
-    (error, result) => {
-      if (error) throw error;
+          // log new balance
+          db.query(
+            "INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?);",
+            [
+              request.body.newAmount,
+              request.body.reason,
+              pointId,
+              request.body.SID,
+            ],
+            (error, result) => {
+              if (error) throw error;
+              response.send(true);
+            }
+          );
+        }
+      );
     }
   );
 });
