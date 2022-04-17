@@ -178,12 +178,34 @@ router.get("/retrievealluserapplications", (request, response) => {
 // read specific application
 router.get("/retrieveallsponsorapplications", (request, response) => {
   console.log("Hit get all sponsor apps");
+
+  let responseBody = {
+    Appstatus: "",
+    Reason: "",
+    UID: "",
+    SID: "",
+  };
+
   db.query(
     "SELECT * FROM APPLICATION WHERE SID = ?;",
     [request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      response.send(JSON.stringify(result));
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.Appstatus = element.Appstatus;
+          responseBody.Reason = element.Reason;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          rbArray.push(responseBody);
+        }
+
+        response.send(JSON.stringify(rbArray));
+      }
     }
   );
 });
