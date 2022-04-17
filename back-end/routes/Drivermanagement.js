@@ -40,6 +40,7 @@ router.get("/viewdrivers", (request, response) => {
           responseBody.Email = element.Email;
           responseBody.Address = element.Address;
           responseBody.Phone_number = element.Phone_number;
+          rbArray.push(responseBody);
         }
         response.send(JSON.stringify(responseBody));
       }
