@@ -26,7 +26,7 @@ router.get("/viewdrivers", (request, response) => {
 
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
-    [request.params.SID],
+    [request.query.SID],
     (error, result) => {
       if (error) {
         throw error;
