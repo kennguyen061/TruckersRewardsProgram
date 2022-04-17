@@ -128,10 +128,10 @@ router.get("/retrieveapplication", (request, response) => {
           response.send(false);
         } else {
           responseBody.exists = true;
-          responseBody.Appstatus = result.Appstatus;
-          responseBody.Reason = result.Reason;
-          responseBody.UID = result.UID;
-          responseBody.SID = result.SID;
+          responseBody.Appstatus = result[0].Appstatus;
+          responseBody.Reason = result[0].Reason;
+          responseBody.UID = result[0].UID;
+          responseBody.SID = result[0].SID;
         }
 
         response.send(JSON.stringify(responseBody));
@@ -143,12 +143,34 @@ router.get("/retrieveapplication", (request, response) => {
 // read specific application
 router.get("/retrievealluserapplications", (request, response) => {
   console.log("Hit get all apps");
+
+  let responseBody = {
+    Appstatus: "",
+    Reason: "",
+    UID: "",
+    SID: "",
+  };
+
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ?;",
     [request.query.UID],
     (error, result) => {
-      if (error) throw error;
-      response.send(JSON.stringify(result));
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.Appstatus = element.Appstatus;
+          responseBody.Reason = element.Reason;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          rbArray.push(responseBody);
+        }
+
+        response.send(JSON.stringify(rbArray));
+      }
     }
   );
 });
