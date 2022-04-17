@@ -120,16 +120,18 @@ router.post("/", (request, response) => {
       if (responseBody.exists) {
         loginAttempt(request.body.email, "Success");
         response.send(responseBody);
-      } else {
-        loginAttempt(request.body.email, "Failure");
-        response.send(responseBody);
       }
     }
   );
+  if (!responseBody.exists) {
+    loginAttempt(request.body.email, "Failure");
+    response.send(responseBody);
+  }
 });
 
 // create account
 router.post("/create", (request, response) => {
+  console.log("Hit create sponsor subuser");
   // check if account already exists
   console.log("Hit accouint creation");
   let go = true;
@@ -176,6 +178,40 @@ router.post("/create", (request, response) => {
       }
     );
   }
+});
+
+router.post("/createsponsor", (req, res) => {
+  console.log("Hit create sponsor");
+  db.query(
+    "SELECT COUNT(*) FROM SPONSORORG WHERE name = ?;",
+    req.body.name,
+    (error, result) => {
+      if (error) {
+        console.log("Something went wrong looking for a sponsor");
+      }
+      if (result >= 1) {
+        res.send(false);
+      } else {
+        db.query(
+          "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+          [
+            req.body.name,
+            req.body.dRules,
+            req.body.coversionScale,
+            req.body.cRules,
+          ],
+          (errorCreate, resultCreate) => {
+            if (error) {
+              console.log("Something went wrong creating a sponsor");
+            }
+            if (resultCreate.affectdRows >= 1) {
+              res.send(true);
+            }
+          }
+        );
+      }
+    }
+  );
 });
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
