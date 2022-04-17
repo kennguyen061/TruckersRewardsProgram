@@ -62,7 +62,7 @@ router.post("/approveapplication", (request, response) => {
   console.log("Hit approve app");
   db.query(
     "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?;",
-    [response.body.UID, response.body.SID],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
@@ -70,21 +70,21 @@ router.post("/approveapplication", (request, response) => {
   //Creates a new point and wishlist record after application approval
   db.query(
     "INSERT INTO DRIVERWISHLIST(UID,SID) VALUES(?,?);",
-    [response.body.UID, response.body.SID],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
     "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0);",
-    [response.body.UID, response.body.SID],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
     "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?);",
-    [response.body.UID, response.body.SID],
+    [ [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
       response.send(true);
