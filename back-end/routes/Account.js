@@ -141,7 +141,7 @@ router.post("/create", (request, response) => {
     [request.body.email],
     (error, result) => {
       if (error) throw error;
-      if (result == 1) {
+      if (result.length >= 1) {
         go = false;
         response.send(false);
       }
