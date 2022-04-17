@@ -309,7 +309,7 @@ router.get("/read", (request, response) => {
         response.send(JSON.stringify(responseBody));
       }
     );
-  } else if (request.query.role == "SPONSORACCT") {
+  } else if (request.query.role == "SPONSOR") {
     db.query(
       "SELECT * FROM SPONSORACCT WHERE SUID = ?;",
       [request.query.id],
