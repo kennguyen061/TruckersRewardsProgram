@@ -75,7 +75,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -83,7 +82,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -91,7 +89,6 @@ router.post("/removedriver", (request, response) => {
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      response.send(true);
     }
   );
   db.query(
@@ -113,7 +110,7 @@ router.post("/changescale", (request, response) => {
     (error, result) => {
       if (error) throw error;
       console.log(result);
-      updatePointBalanceLog(newPoints, Reason, PointID, SID);
+      response.send(true);
     }
   );
 });
