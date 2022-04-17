@@ -285,29 +285,35 @@ router.post("/createsponsorsubuser", (request, response) => {
 router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
+  console.log(request.query);
 
-  if (request.body.role == "DRIVER") {
+  if (request.query.role == "DRIVER") {
+    console.log("Entered Drivers ass");
     db.query(
       "SELECT * FROM DRIVER WHERE UID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
-        if (error) throw error;
-        response.send(JSON.stringify(result));
+        if (error) {
+          throw error;
+        } else {
+          console.log("trying to send");
+          response.send(JSON.stringify(result[0]));
+        }
       }
     );
-  } else if (request.body.role == "SPONSORACCT") {
+  } else if (request.query.role == "SPONSORACCT") {
     db.query(
       "SELECT * FROM SPONSORACCT WHERE SUID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
         if (error) throw error;
         response.send(JSON.stringify(result));
       }
     );
-  } else if (request.body.role == "ADMIN") {
+  } else if (request.query.role == "ADMIN") {
     db.query(
       "SELECT * FROM ADMIN WHERE A_ID = ?;",
-      [request.body.id],
+      [request.query.id],
       (error, result) => {
         if (error) throw error;
         response.send(JSON.stringify(result));
