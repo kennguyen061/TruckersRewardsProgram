@@ -286,13 +286,13 @@ router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
 
-    let responseBody = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: '',
-        phoneNumber: ''
-    };
+  let responseBody = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+  };
 
   if (request.query.role == "DRIVER") {
     console.log("Entered Drivers ass");
@@ -301,7 +301,12 @@ router.get("/read", (request, response) => {
       [request.query.id],
       (error, result) => {
         if (error) throw error;
-        response.send(JSON.stringify(result));
+        responseBody.firstName = result[0].First_name;
+        responseBody.lastName = result[0].Last_name;
+        responseBody.email = result[0].Email;
+        responseBody.address = result[0].Address;
+        responseBody.phoneNumber = result[0].Phone_number;
+        response.send(JSON.stringify(responseBody));
       }
     );
   } else if (request.query.role == "SPONSORACCT") {
@@ -310,12 +315,12 @@ router.get("/read", (request, response) => {
       [request.query.id],
       (error, result) => {
         if (error) throw error;
-          responseBody.firstName = result[1]
-          responseBody.lastName = result[2]
-          responseBody.email = result[3]
-          responseBody.address = result[6]
-          responseBody.phoneNumber = result[7]
-          response.send(JSON.stringify(responseBody));
+        responseBody.firstName = result[0].First_name;
+        responseBody.lastName = result[0].Last_name;
+        responseBody.email = result[0].Email;
+        responseBody.address = result[0].Address;
+        responseBody.phoneNumber = result[0].Phone_number;
+        response.send(JSON.stringify(responseBody));
       }
     );
   } else if (request.query.role == "ADMIN") {
@@ -324,12 +329,12 @@ router.get("/read", (request, response) => {
       [request.query.id],
       (error, result) => {
         if (error) throw error;
-          responseBody.firstName = result[1]
-          responseBody.lastName = result[2]
-          responseBody.email = result[3]
-          responseBody.address = result[6]
-          responseBody.phoneNumber = result[7]
-          response.send(JSON.stringify(responseBody));
+        responseBody.firstName = result[0].First_name;
+        responseBody.lastName = result[0].Last_name;
+        responseBody.email = result[0].Email;
+        responseBody.address = result[0].Address;
+        responseBody.phoneNumber = result[0].Phone_number;
+        response.send(JSON.stringify(responseBody));
       }
     );
   }
