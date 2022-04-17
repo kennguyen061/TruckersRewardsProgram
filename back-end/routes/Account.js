@@ -238,14 +238,14 @@ router.post("/createsponsorsubuser", (request, response) => {
         let org_id = "";
 
         db.query(
-          "SELECT SUID FROM SPONSORORG WHERE name = ?;",
+          "SELECT SID FROM SPONSORORG WHERE name = ?;",
           [request.body.name],
-          (error2) => {
-            if (error) {
+          (error2, result2) => {
+            if (error2) {
               console.log("Sponsor does not exists");
               throw error2;
             } else {
-              org_id = result;
+              org_id = result2;
               db.query(
                 "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag,SID) VALUES(?,?,?,?,?,?,?,?,?);",
                 [
@@ -262,7 +262,7 @@ router.post("/createsponsorsubuser", (request, response) => {
                 (errorInsert) => {
                   if (errorInsert) {
                     console.log("Error Creating Sponsor sub user");
-                    throw error;
+                    throw errorInsert;
                   } else {
                     response.send(true);
                   }
