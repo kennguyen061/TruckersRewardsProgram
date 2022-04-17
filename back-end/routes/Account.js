@@ -275,6 +275,9 @@ router.get("/read", (request, response) => {
 });
 
 // update account
+
+//needs an if statment to select proper table
+//Role is not the same as table
 router.post("/update", (request, response) => {
   console.log("Hit update account");
   db.query(
@@ -295,6 +298,8 @@ router.post("/update", (request, response) => {
 });
 
 // delete account
+//needs an if statment to select proper table
+//Role is not the same as table
 router.post("/delete", (request, response) => {
   console.log("Hit delete account");
   db.query(
