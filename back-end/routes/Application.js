@@ -108,12 +108,34 @@ router.post("/rejectapplication", (request, response) => {
 // read specific application
 router.get("/retrieveapplication", (request, response) => {
   console.log("Hit retrieve app");
+
+  let responseBody = {
+    exists: false,
+    Appstatus: "",
+    Reason: "",
+    UID: "",
+    SID: "",
+  };
+
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?;",
     [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      response.send(JSON.stringify(result));
+      if (error) {
+        throw error;
+      } else {
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          responseBody.exists = true;
+          responseBody.Appstatus = result.Appstatus;
+          responseBody.Reason = result.Reason;
+          responseBody.UID = result.UID;
+          responseBody.SID = result.SID;
+        }
+
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
 });
