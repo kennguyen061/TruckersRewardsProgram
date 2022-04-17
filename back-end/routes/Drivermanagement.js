@@ -29,13 +29,34 @@ router.get("/viewdrivers", (request, response) => {
 // view specific driver of a sponsor
 router.get("/viewdriver", (request, response) => {
   console.log("Hit view specific driver");
+
+  let responseBody = {
+    First_name: "",
+    Last_name: "",
+    Email: "",
+    Address: "",
+    Phone_number: "",
+  }
+
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
-    [request.params.SID, request.params.UID],
+    [request.query.SID, request.query.UID],
     (error, result) => {
-      if (error) throw error;
-      console.log("sponsor driver retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          responseBody.First_name = result[0].First_name;
+          responseBody.Last_name = result[0].Last_name;
+          responseBody.Email = result[0].Email;
+          responseBody.Address = result[0].Address;
+          responseBody.Phone_number = result[0].Phone_number;
+        }
+
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
 });
