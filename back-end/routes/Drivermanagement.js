@@ -25,7 +25,7 @@ router.get("/viewdrivers", (request, response) => {
   };
 
   db.query(
-    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
+    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.VisibleFlag = 1",
     [request.query.SID],
     (error, result) => {
       if (error) {
@@ -61,7 +61,7 @@ router.get("/viewdriver", (request, response) => {
   };
 
   db.query(
-    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ?",
+    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ? AND DRIVER.VisibleFlag = 1",
     [request.query.SID, request.query.UID],
     (error, result) => {
       if (error) {
