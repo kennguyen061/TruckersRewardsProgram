@@ -57,3 +57,5 @@ router.get("/", (request, respsonse) => {
     respsonse.send(responseBody);
   }
 });
+
+module.exports = router;
