@@ -24,7 +24,7 @@ router.get("/", (request, response) => {
   console.log("Hit access points");
   db.query(
     "SELECT Amount FROM POINTBALANCE WHERE PointID = ?;",
-    [request.params.PointID],
+    [request.query.PointID],
     (error, result) => {
       if (error) throw error;
       if (result.length > 0) {
@@ -37,39 +37,46 @@ router.get("/", (request, response) => {
 
 // update points
 router.post("/update", (request, response) => {
-  console.log("Hit update points");
-  // select point ID
-  db.query(
-    "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
-    [request.body.UID, request.body.SID],
-    (error, result) => {
-      if (error) throw error;
-      if (result.length > 0) {
-        let PointID = result[0].PointID;
-      }
-    }
-  );
+    console.log("Hit update points");
 
-  // UPDATE new balance
-  db.query(
-    "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
-    [request.body.currentPoints, request.body.PointID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-  // insert new balance into log
-  db.query(
-    "INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
-    [
-      request.body.currentPoints,
-      request.body.Reason,
-      request.body.PointID,
-      request.body.SID,
-    ],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
+    let pointId;
+
+    // select point ID
+    db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+        [
+            request.body.uid,
+            request.body.sid
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length > 0) {
+                pointId = result[0].PointID;
+            }
+        }
+    );
+
+    // new balance
+    db.query("UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
+        [
+            request.body.newAmount,
+            request.body.pointId],
+        (error, result) => {
+            if (error) throw error;
+        }
+    );
+
+    // log new balance
+    db.query("INSERT INTO POINTBALANCELOG(Point_Update,Update_Status,PointDate,PointID,SID) VALUES (?,?,CURRENT_TIMESTAMP(),?,?",
+        [
+            request.body.newAmount,
+            request.body.reason,
+            pointId,
+            request.body.SID,
+        ],
+        (error, result) => {
+            if (error) throw error;
+        }
+    );
 });
+
 module.exports = router;
