@@ -15,13 +15,34 @@ const db = mysql.createConnection({
 // view all drivers of a sponsor
 router.get("/viewdrivers", (request, response) => {
   console.log("Hit view drivers");
+
+  let responseBody = {
+    First_name: "",
+    Last_name: "",
+    Email: "",
+    Address: "",
+    Phone_number: "",
+  }
+
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ?",
     [request.params.SID],
     (error, result) => {
-      if (error) throw error;
-      console.log("All sponsor drivers retrieved.");
-      response.send(result);
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        let rbArray = Array(result.length);
+        //loop through result[index]
+        for (const element of result) {
+          responseBody.First_name = element.First_name;
+          responseBody.Last_name = element.Last_name;
+          responseBody.Email = element.Email;
+          responseBody.Address = element.Address;
+          responseBody.Phone_number = element.Phone_number;
+        }
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
 });
