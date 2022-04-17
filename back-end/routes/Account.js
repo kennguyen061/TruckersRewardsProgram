@@ -285,7 +285,6 @@ router.post("/createsponsorsubuser", (request, response) => {
 router.get("/read", (request, response) => {
   // select record given uid
   console.log("Hit account read");
-    console.log(request.query);
 
     let responseBody = {
         firstName: '',
@@ -301,17 +300,8 @@ router.get("/read", (request, response) => {
       "SELECT * FROM DRIVER WHERE UID = ?;",
       [request.query.id],
       (error, result) => {
-        if (error) {
-          throw error;
-        } else {
-            console.log("trying to send");
-            responseBody.firstName = result[1]
-            responseBody.lastName = result[2]
-            responseBody.email = result[3]
-            responseBody.address = result[6]
-            responseBody.phoneNumber = result[7]
-            response.send(JSON.stringify(responseBody));
-        }
+        if (error) throw error;
+        response.send(JSON.stringify(result));
       }
     );
   } else if (request.query.role == "SPONSORACCT") {
