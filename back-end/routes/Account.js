@@ -234,6 +234,9 @@ router.post("/createsponsorsubuser", (request, response) => {
           .update(request.body.password + salt)
           .digest("base64");
 
+        //does this need more than just street?
+        //into what sponsor?
+        //needs to get sponsor ID based off of name
         db.query(
           "INSERT INTO SPONSORACCT(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
           [
