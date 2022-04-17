@@ -19,30 +19,41 @@ db.connect((error) => {
   console.log("Connected");
 });
 
-//update catalogrules
+//update catalog rules
 router.post("/updatecatalogrules", (request, response) => {
-  console.log("Hit update cat rules");
-  db.query(
-    "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-    [request.body.rulestring, request.body.SID],
-    (error, result) => {
-      if (error) throw error;
-      response.send(true);
-    }
-  );
+    console.log("Hit update cat rules");
+    db.query("UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
+        [
+            request.body.rules,
+            request.body.sid
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.affectedRows == 1) {
+                response.send(true);
+            } else {
+                response.send(false);
+            }
+        }
+    );
 });
 
-// read catalogrules
+// read catalog rules
 router.get("/getcatalogrules", (request, response) => {
-  console.log("Hit get cat rules");
-  db.query(
-    "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
-    [request.params.SID],
-    (error, result) => {
-      if (error) throw error;
-      response.send(JSON.stringify(result));
-    }
-  );
+    console.log("Hit get cat rules");
+    db.query("SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
+        [
+            request.params.SID
+        ],
+        (error, result) => {
+            if (error) throw error;
+            if (result.length == 1) {
+                response.send(JSON.stringify(result[0));
+            } else {
+                response.send(JSON.stringify(null);
+            }
+        }
+    );
 });
 
 module.exports = router;
