@@ -17,7 +17,7 @@ db.connect(function (err) {
 
   //Creates SPONSORORG Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS SPONSORORG ( SID int auto_increment NOT NULL unique, name varchar(20) NOT NULL, Driver_rules varchar(6383), Conversion_scale FLOAT NOT NULL DEFAULT 0.1, Catalog_rules varchar(6383), primary key (SID) );",
+    "CREATE TABLE IF NOT EXISTS SPONSORORG ( SID int auto_increment NOT NULL unique, name varchar(20) NOT NULL, Driver_rules varchar(6383), Conversion_scale FLOAT NOT NULL DEFAULT 0.1, Catalog_rules longtext, primary key (SID) );",
     function (error, result, fields) {
       console.log(result);
     }
