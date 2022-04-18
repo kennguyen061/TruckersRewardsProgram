@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-toast.warn("Roger's Rewards is currently under development, we appreciated your understanding");
+// toast.warn("Roger's Rewards is currently under development, we appreciated your understanding");
 function Home() {
   return (
     <div>
