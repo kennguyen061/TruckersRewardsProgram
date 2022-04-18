@@ -141,49 +141,55 @@ router.post("/", (request, response) => {
 });
 
 // create account
-router.post("/create", (request, response) => {
+router.post("/create", (req, res) => {
   console.log("Hit create driver");
-  // check if account already exists
-  console.log("Hit accouint creation");
 
   db.query(
     "SELECT COUNT(*) AS RowCount FROM DRIVER WHERE Email = ?;",
-    [request.body.email],
-    (error, result) => {
-      console.log(result);
-      if (error) throw error;
-      if (result.length >= 1) {
-        response.send(false);
-      } else if (result.length == 0) {
-        // create hash and salt
-        let salt = new Date().toISOString();
-
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        console.log("The creation hash is: " + hash);
-        console.log("The creation salt is: " + salt);
-        console.log("The creation password is: " + request.body.password);
-
-        db.query(
-          "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-          [
-            request.body.firstName,
-            request.body.lastName,
-            request.body.email,
-            hash,
-            salt,
-            request.body.street,
-            request.body.phoneNum,
-            1,
-          ],
-          (error, result) => {
-            if (error) throw error;
-            response.send(true);
-          }
+    [req.body.email],
+    (Error, Result) => {
+      if (Error) {
+        console.log(
+          "There was an error geting the number of users with this email."
         );
+        throw Error;
+      } else {
+        console.log(Result[0].RowCount);
+
+        if (Result[0].RowCount != 0) {
+          console.log("The driver exists");
+          res.status(404);
+          res.send(false);
+        } else {
+          let salt = new Date().toISOString();
+
+          let hash = crypto
+            .createHash("sha256")
+            .update(req.body.password + salt)
+            .digest("base64");
+
+          console.log("The creation hash is: " + hash);
+          console.log("The creation salt is: " + salt);
+          console.log("The creation password is: " + req.body.password);
+
+          db.query(
+            "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+            [
+              req.body.firstName,
+              req.body.lastName,
+              req.body.email,
+              hash,
+              salt,
+              req.body.street,
+              req.body.phoneNum,
+              1,
+            ],
+            (error, result) => {
+              if (error) throw error;
+              res.send(true);
+            }
+          );
+        }
       }
     }
   );
