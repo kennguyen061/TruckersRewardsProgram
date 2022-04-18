@@ -1,5 +1,5 @@
 import "./SponsorNav.css";
-import { BiSearch } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { BsList, BsPerson, BsTruck } from "react-icons/bs";
 import {
   FaFacebook,
@@ -41,7 +41,9 @@ function SponsorNav() {
         </Link>
       </ul>
       <div className="nav-icons">
-        <BiSearch className="icon" style={{ marginRight: "1rem" }} />
+        <Link to="/" smooth={true} duration={500}>
+          <BiLogOut className="icon" style={{ marginRight: "1rem" }} />
+       </Link>
         <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
           <BsPerson className="icon" />
         </Link>
@@ -69,7 +71,7 @@ function SponsorNav() {
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
-            <button>Search</button>
+            <button>LogOut</button>
             <button>Account</button>
           </div>
           <div className="socials">
