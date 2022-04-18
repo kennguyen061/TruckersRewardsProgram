@@ -205,7 +205,7 @@ router.post("/createsponsor", (req, res) => {
       if (error) {
         console.log("Something went wrong looking for a sponsor");
       }
-      if (result.length >= 1) {
+      if (result[0].RowCount != 0) {
         res.send(false);
       } else {
         db.query(
@@ -239,7 +239,7 @@ router.post("/createsponsorsubuser", (request, response) => {
     (error, result) => {
       if (error) {
         throw error;
-      } else if (result.RowCount == 1) {
+      } else if (result[0].RowCount != 0) {
         response.send(false);
       } else {
         // create hash and salt
