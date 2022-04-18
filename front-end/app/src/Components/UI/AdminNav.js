@@ -12,7 +12,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function NewNav() {
+function AdminNav() {
   const [nav, setNav] = useState(false);
   const handlerNav = () => setNav(!nav);
   return (
@@ -79,4 +79,4 @@ function NewNav() {
   );
 }
 
-export default NewNav;
+export default AdminNav;

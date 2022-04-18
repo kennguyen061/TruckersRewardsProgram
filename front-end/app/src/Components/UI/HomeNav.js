@@ -1,5 +1,4 @@
 import "./Nav.css";
-import { BiSearch } from "react-icons/bi";
 import { BsList, BsPerson, BsTruck } from "react-icons/bs";
 import {
   FaFacebook,
@@ -12,7 +11,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function NewNav() {
+function HomeNav() {
   const [nav, setNav] = useState(false);
   const handlerNav = () => setNav(!nav);
   return (
@@ -36,7 +35,6 @@ function NewNav() {
         </Link>
       </ul>
       <div className="nav-icons">
-        <BiSearch className="icon" style={{ marginRight: "1rem" }} />
         <Link to="/pages/Login" smooth={true} duration={500}>
           <BsPerson className="icon" />
         </Link>
@@ -63,7 +61,6 @@ function NewNav() {
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
-            <button>Search</button>
             <button>Account</button>
           </div>
           <div className="socials">
@@ -79,4 +76,4 @@ function NewNav() {
   );
 }
 
-export default NewNav;
+export default HomeNav;
