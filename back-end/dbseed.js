@@ -135,7 +135,7 @@ db.connect(function (err) {
 
   //Creates CARTITEM Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS CARTITEM ( ItemID int auto_increment NOT NULL, ItemName varchar(255) NOT NULL, Price float NOT NULL, Quantity int NOT NULL, UID int NOT NULL, SID int NOT NULL, Availability BIT NOT NULL, primary key (ItemID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORORG (SID) );",
+    "CREATE TABLE IF NOT EXISTS CARTITEM ( ItemID int auto_increment NOT NULL, ItemName varchar(255) NOT NULL, Price float NOT NULL, Quantity int NOT NULL, UID int NOT NULL, SID int NOT NULL, Availability int NOT NULL, primary key (ItemID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORORG (SID) );",
     function (error, result, fields) {
       console.log(result);
     }
