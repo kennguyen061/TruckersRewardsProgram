@@ -1,5 +1,7 @@
 import "./PointTake.css";
 import { useState } from "react";
+import Footer from "../Footer/Footer";
+import SponsorNav from "../UI/SponsorNav";
 
 const PointTake = () => {
   const [inputs, setInputs] = useState({});
@@ -16,27 +18,33 @@ const PointTake = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Enter Persons name:
-        <input
-          type="text"
-          name="username"
-          value={inputs.username || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Enter point Change:
-        <input
-          type="number"
-          name="age"
-          value={inputs.age || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <input type="submit" />
-    </form>
+    <div className="PointTakePage">
+      <SponsorNav />
+      <div className="spacer"></div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Enter Persons name:
+          <input
+            type="text"
+            name="username"
+            value={inputs.username || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Enter point Change:
+          <input
+            type="number"
+            name="age"
+            value={inputs.age || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <input type="submit" />
+      </form>
+      <div className="spacer"></div>
+      <Footer />
+    </div>
   );
 };
 
