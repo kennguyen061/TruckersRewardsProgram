@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Sponsor_Catalog_Edit.css";
 import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
+import Catalog from "./Catalog";
 toast.configure();
 
 export default function Edit_Catalog() {
@@ -104,7 +105,7 @@ export default function Edit_Catalog() {
   new_listing = listing.concat(listing_1);
 
   console.log(new_listing);
-  console.log(selectedValues);
+  //console.log(selectedValues);
 
   //changed var to let
   // var should never be used as it is bad syntax in new version of javascript like we are using
@@ -189,7 +190,18 @@ export default function Edit_Catalog() {
   // call updatecatalogrules route
   console.log(filtered_listing);
 
-  const save_catalog_notify = () => {
+  const save_catalog_notify = (catalog)  => () => {
+    console.log(catalog)
+    fetch("http://18.235.52.212:8000/catalog/updatecatalogrules", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        SID: 1,
+        rules: catalog
+      })
+    })
+    .catch(err => console.error(err))
+
     toast("Catalog has been saved for Drivers");
   };
 
@@ -236,7 +248,7 @@ export default function Edit_Catalog() {
 
           <button
             className="button_1"
-            onClick={save_catalog_notify}
+            onClick={save_catalog_notify(filtered_listing)}
             style={{ float: "right" }}
           >
             {" "}
