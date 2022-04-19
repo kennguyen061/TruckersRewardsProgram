@@ -166,7 +166,7 @@ router.post("/notifycart", (request, response) => {
         //1 for uid and sid are placeholder
         console.log(result[0]);
         db.query(
-          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,) VALUES(?,?,?,?,?,?);",
+          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,Availability) VALUES(?,?,?,?,?,?);",
           [
             request.body.ItemID,
             request.body.ItemName,
