@@ -32,7 +32,7 @@ function Login() {
       body: JSON.stringify(loginInfo),
     });
 
-    const { role } = await response.json();
+    const { id, role } = await response.json();
     window.localStorage.setItem("role", role);
     // window.localStorage.getItem("role");
     //redirect to other pages
