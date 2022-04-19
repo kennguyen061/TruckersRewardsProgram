@@ -5,6 +5,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Retreive cart from the logged in driver
 //call / route
+
+
+fetch("http://18.235.52.212:8000/cart/", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      
+    })
+   
+
+
+
+
 export default function Cart() {
   return (
     <div>
