@@ -17,13 +17,15 @@ export default function Cart() {
         headers: { "Content-Type": "application/json" },
       })
       .then(response => {
-        return response.json();
+        console.log(response.json());
       })
       .then((data) => {
         setCart(data.results)
       })
-      .then(err => {console.log("Hello");});
+      .then(err => {console.log(err);});
   };
+
+  console.log(cart)
 
     useEffect(() => {
       fetchData();

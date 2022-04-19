@@ -160,15 +160,13 @@ router.post("/notifycart", (request, response) => {
         //If not, create an entry with the item. (quantity 1) (INSERT INTO)
         //1 for uid and sid are placeholder
         db.query(
-          "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity,Availability) VALUES(?,?,?,?,?,?,?)",
+          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,?,?);",
           [
             request.body.ItemID,
-            request.body.UID,
-            request.body.SID,
             request.body.ItemName,
             request.body.Price,
-            request.body.Quantity,
-            request.body.Availability
+            request.body.UID,
+            request.body.SID,
           ],
           (error, result) => {
             if (error) throw error;
