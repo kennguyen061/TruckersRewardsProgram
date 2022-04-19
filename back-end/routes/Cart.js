@@ -61,7 +61,7 @@ router.get("/", (request, response) => {
 router.post("/update", (request, response) => {
   console.log("Hit update");
   db.query(
-    "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity) VALUES(?,?,?,?,?,?)",
+    "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity,Availability) VALUES(?,?,?,?,?,?,?)",
     [
       request.body.ItemID,
       request.body.UID,
@@ -69,6 +69,7 @@ router.post("/update", (request, response) => {
       request.body.ItemName,
       request.body.Price,
       request.body.Quantity,
+      request.body.Availability
     ],
     (error, result) => {
       if (error) throw error;

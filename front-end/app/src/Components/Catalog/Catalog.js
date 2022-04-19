@@ -27,21 +27,24 @@ export default function Catalog() {
   const [filterParam, setFilterParam] = useState("All");
 
   const notify_cart = (item) => () => {
-
+    console.log(item.quantity)
     fetch("http://18.235.52.212:8000/cart/update/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ItemID: item.listing_id,
+        //need the user id
         UID: ID,
+        //need the user id's sponsor 
         SID: 1,
         ItemName: item.title,
         Price: Math.round(item.price),
-        Quantity: item.quantity
+        Quantity: 1,
+        Availability: item.quantity
       })
     })
     .catch(err => console.error(err))
-    // Calling toast method by passing string
+    
     //variables to add to the table are
     //item.listing_id
     //item.title
