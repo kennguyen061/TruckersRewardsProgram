@@ -144,6 +144,7 @@ router.post("/notifycart", (request, response) => {
         //1 for uid and sid are placeholder
         //Retrieve old quantity (3rd index in table), increase it by one
         let newquantity = result[0].Quantity + 1;
+        console.log(result[0]);
         db.query(
           "UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
           [
@@ -160,6 +161,7 @@ router.post("/notifycart", (request, response) => {
       } else {
         //If not, create an entry with the item. (quantity 1) (INSERT INTO)
         //1 for uid and sid are placeholder
+        console.log(result[0]);
         db.query(
           "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,) VALUES(?,?,?,1,?,?,?);",
           [
