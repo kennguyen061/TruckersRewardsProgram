@@ -15,7 +15,8 @@ export default function Catalog() {
   const [listing, setlisting] = useState([]);
 
   //temp driver id
-  var ID = 1
+  const role = window.localStorage.getItem("role");
+  const id = window.localStorage.getItem("id");
 
   //used for the search parameters
   const [q, setQ] = useState("");
@@ -27,31 +28,24 @@ export default function Catalog() {
   const [filterParam, setFilterParam] = useState("All");
 
   const notify_cart = (item) => () => {
-    console.log(item.quantity)
-    fetch("http://18.235.52.212:8000/cart/update/", {
+
+    fetch("http://18.235.52.212:8000/cart/notifycart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ItemID: item.listing_id,
         //need the user id
-        UID: ID,
-        //need the user id's sponsor 
+        UID: id,
         SID: 1,
         ItemName: item.title,
         Price: Math.round(item.price),
         Quantity: 1,
-        Availability: item.quantity
+        Availability:item.quantity
+
       })
     })
     .catch(err => console.error(err))
     
-    //variables to add to the table are
-    //item.listing_id
-    //item.title
-    //item.price (should be in points though)
-
-    //make some conditional that checks if the driver already has that item on the cart, if they do, increase the quantity by 1
-
     toast("Product has been added to the cart");
   };
 
@@ -209,7 +203,6 @@ export default function Catalog() {
               </center>
               {/* </Link> */}
 
-              {/* Convert to points */}
               <center>
                 <h2 style={{ color: "black", marginBottom: 10 }}>
                   {" "}

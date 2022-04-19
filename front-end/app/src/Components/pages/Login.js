@@ -37,7 +37,16 @@ function Login() {
     window.localStorage.setItem("id", id);
     // window.localStorage.getItem("role");
     //redirect to other pages
-    navigate("/pages/Driver_Profile", { replace: true });
+
+    if (role === "DRIVER") {
+      navigate("/pages/Driver_Profile", { replace: true });
+    } else if (role === "SPONSOR") {
+      //do something
+    } else if (role === "ADMIN") {
+      //do somthing else
+    } else {
+      //reject
+    }
   };
 
   return (

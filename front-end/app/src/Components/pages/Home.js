@@ -1,6 +1,6 @@
 import "./Home.css";
 import NewNav from "../UI/HomeNav";
-import SponsorNav from "../UI/SponsorNav";
+// import SponsorNav from "../UI/SponsorNav";
 import Hero from "../Hero/Hero";
 import People from "../People/People";
 import WeStand from "../WeStand/WeStand";
@@ -13,7 +13,7 @@ function Home() {
   return (
     <div>
       <NewNav />
-      <SponsorNav />
+      {/* <SponsorNav /> */}
       <Hero />
       <People />
       <WeStand />
