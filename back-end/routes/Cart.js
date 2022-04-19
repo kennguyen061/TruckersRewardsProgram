@@ -70,7 +70,7 @@ router.post("/update", (request, response) => {
       request.body.ItemName,
       request.body.Price,
       request.body.Quantity,
-      request.body.Availability
+      request.body.Availability,
     ],
     (error, result) => {
       if (error) throw error;
@@ -154,6 +154,7 @@ router.post("/notifycart", (request, response) => {
           ],
           (error, result) => {
             if (error) throw error;
+            response.send(true);
           }
         );
       } else {
@@ -168,7 +169,7 @@ router.post("/notifycart", (request, response) => {
             request.body.ItemName,
             request.body.Price,
             request.body.Quantity,
-            request.body.Availability
+            request.body.Availability,
           ],
           (error, result) => {
             if (error) throw error;
