@@ -138,11 +138,14 @@ router.post("/notifycart", (request, response) => {
     "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
     [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
+      console.log(result.length);
       if (error) throw error;
       if (result.length >= 1) {
         // if they do, increase the quantity by 1 of the current entry (UPDATE)
         //1 for uid and sid are placeholder
         //Retrieve old quantity (3rd index in table), increase it by one
+
+        console.log("entered update");
         let newquantity = result[0].Quantity + 1;
         console.log(result[0]);
         db.query(
@@ -163,7 +166,7 @@ router.post("/notifycart", (request, response) => {
         //1 for uid and sid are placeholder
         console.log(result[0]);
         db.query(
-          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,) VALUES(?,?,?,1,?,?,?);",
+          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,) VALUES(?,?,?,?,?,?);",
           [
             request.body.ItemID,
             request.body.ItemName,
