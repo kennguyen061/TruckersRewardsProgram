@@ -15,7 +15,8 @@ export default function Catalog() {
   const [listing, setlisting] = useState([]);
 
   //temp driver id
-  var ID = 1
+  const role = window.localStorage.getItem("role");
+  const id = window.localStorage.getItem("id");
 
   //used for the search parameters
   const [q, setQ] = useState("");
@@ -34,8 +35,7 @@ export default function Catalog() {
       body: JSON.stringify({
         ItemID: item.listing_id,
         //need the user id
-        UID: ID,
-        //need the user id's sponsor 
+        UID: id,
         SID: 1,
         ItemName: item.title,
         Price: Math.round(item.price),
