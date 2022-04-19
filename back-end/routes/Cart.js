@@ -133,12 +133,16 @@ router.post("/decreasequantity", (request, response) => {
 //notify cart
 router.post("/notifycart", (request, response) => {
   console.log("Hit notify cart");
+  console.log(request.body);
+  console.log("UID " + request.body.UID);
+  console.log("SID " + request.body.SID);
+  console.log("ItemId " + request.body.ItemID);
   //1 for uid and sid are placeholder
   db.query(
-    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ITEMID = ?;",
+    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?;",
     [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
-      console.log(result.length);
+      console.log(result);
       if (error) throw error;
       if (result.length >= 1) {
         // if they do, increase the quantity by 1 of the current entry (UPDATE)
@@ -166,11 +170,12 @@ router.post("/notifycart", (request, response) => {
         //1 for uid and sid are placeholder
         console.log(result[0]);
         db.query(
-          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,Availability) VALUES(?,?,?,?,?,?);",
+          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID,Availability) VALUES(?,?,?,?,?,?,?);",
           [
             request.body.ItemID,
             request.body.ItemName,
             request.body.Price,
+            request.body.Quantity,
             request.body.UID,
             request.body.SID,
             request.body.Availability,
