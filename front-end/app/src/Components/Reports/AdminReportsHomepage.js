@@ -2,7 +2,7 @@ import "./ReportsHomepage.css";
 import NewNav from "../UI/SponsorNav";
 import { Link } from "react-router-dom";
 
-const SponsorReportsHomepage = () => {
+const AdminReportsHomepage = () => {
   return (
     <div className="SponsorReports">
       <NewNav />
@@ -86,4 +86,4 @@ const SponsorReportsHomepage = () => {
   );
 };
 
-export default SponsorReportsHomepage;
+export default AdminReportsHomepage;
