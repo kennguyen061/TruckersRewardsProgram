@@ -30,6 +30,96 @@ function loginAttempt(email, status) {
   );
 }
 
+//TODO: Password change log
+function changePasswordlog(User_type, Email, Change_type) {
+  db.query(
+    "INSERT INTO PASSWORDCHANGES(User_type, Pwd_date, Email, Change_type) VALUES(?,CURRENT_TIMESTAMP(), ?, ?);",
+    [User_type, Email, Change_type],
+    (error) => {
+      if (error) throw error;
+    }
+  );
+}
+
+//TODO: Change password route
+router.post("/updatepassword", (request, response) => {
+  console.log("Hit update password of account");
+
+  if (request.body.role == "DRIVER") {
+    let salt = new Date().toISOString();
+    let hash = crypto
+      .createHash("sha256")
+      .update(request.body.password + salt)
+      .digest("base64");
+
+    console.log("The creation hash is: " + hash);
+    console.log("The creation salt is: " + salt);
+    console.log("The creation password is: " + req.body.password);    
+    
+    db.query(
+      "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
+      [
+        hash,
+        salt,
+        request.body.id,
+      ],
+      (error) => {
+        if (error) throw error;
+        //call changepasswordlog
+        response.send(true);
+      }
+    );
+  } else if (request.body.role == "SPONSOR") {
+    let salt = new Date().toISOString();
+    let hash = crypto
+      .createHash("sha256")
+      .update(request.body.password + salt)
+      .digest("base64");
+
+    console.log("The creation hash is: " + hash);
+    console.log("The creation salt is: " + salt);
+    console.log("The creation password is: " + req.body.password);    
+    
+    db.query(
+      "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
+      [
+        hash,
+        salt,
+        request.body.id,
+      ],
+      (error) => {
+        if (error) throw error;
+        //call changepasswordlog
+        response.send(true);
+      }
+    );
+  } else if (request.body.role == "ADMIN") {
+    let salt = new Date().toISOString();
+    let hash = crypto
+      .createHash("sha256")
+      .update(request.body.password + salt)
+      .digest("base64");
+
+    console.log("The creation hash is: " + hash);
+    console.log("The creation salt is: " + salt);
+    console.log("The creation password is: " + req.body.password);    
+    
+    db.query(
+      "UPDATE ADMIN SET Password_hash = ?, Password_salt = ? WHERE UID = ?;",
+      [
+        hash,
+        salt,
+        request.body.id,
+      ],
+      (error) => {
+        if (error) throw error;
+        //call changepasswordlog
+        response.send(true);
+      }
+    );
+  }
+});
+
 // access account
 router.post("/", (request, response) => {
   console.log("Hit login");
