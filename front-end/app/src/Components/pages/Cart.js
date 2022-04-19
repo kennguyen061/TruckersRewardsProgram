@@ -7,17 +7,29 @@ import "react-toastify/dist/ReactToastify.css";
 //call / route
 
 
-fetch("http://18.235.52.212:8000/cart/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      
-    })
-   
-
-
-
 
 export default function Cart() {
+  const [cart, setCart] = useState([]);
+
+  const fetchData = () => {
+    fetch("http://18.235.52.212:8000/cart/", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(response => {
+        return response.json();
+      })
+      .then((data) => {
+        setCart(data.results)
+      })
+      .then(err => {console.log("Hello");});
+  };
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+    
   return (
     <div>
       <DriverNav />

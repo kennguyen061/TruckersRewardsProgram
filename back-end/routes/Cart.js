@@ -31,14 +31,15 @@ router.get("/", (request, response) => {
     SID: null,
   };
   db.query(
-    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
+    "SELECT * FROM CARTITEM WHERE UID = 1 AND SID = 1",
     [request.query.UID, request.query.SID],
     (error, result) => {
+      let rbArray = Array(result.length);
       if (error) {
         throw error;
       } else {
         //responsebody array
-        let rbArray = Array(result.length);
+        //let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
           responseBody.ItemID = element.ItemID;
@@ -159,13 +160,15 @@ router.post("/notifycart", (request, response) => {
         //If not, create an entry with the item. (quantity 1) (INSERT INTO)
         //1 for uid and sid are placeholder
         db.query(
-          "INSERT INTO CARTITEM(ItemID, ItemName, Price, Quantity, UID, SID) VALUES(?,?,?,1,?,?);",
+          "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity,Availability) VALUES(?,?,?,?,?,?,?)",
           [
             request.body.ItemID,
-            request.body.ItemName,
-            request.body.Price,
             request.body.UID,
             request.body.SID,
+            request.body.ItemName,
+            request.body.Price,
+            request.body.Quantity,
+            request.body.Availability
           ],
           (error, result) => {
             if (error) throw error;
