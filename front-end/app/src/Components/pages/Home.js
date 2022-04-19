@@ -13,7 +13,7 @@ function Home() {
   return (
     <div>
       <NewNav />
-      <SponsorNav />
+      {/* <SponsorNav /> */}
       <Hero />
       <People />
       <WeStand />
