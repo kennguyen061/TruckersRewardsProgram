@@ -34,6 +34,7 @@ function Login() {
 
     const { id, role } = await response.json();
     window.localStorage.setItem("role", role);
+    window.localStorage.setItem("id", id);
     // window.localStorage.getItem("role");
     //redirect to other pages
     navigate("/pages/Driver_Profile", { replace: true });
