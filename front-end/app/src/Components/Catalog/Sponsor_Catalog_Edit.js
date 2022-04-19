@@ -107,9 +107,10 @@ export default function Edit_Catalog() {
   console.log(new_listing);
   //console.log(selectedValues);
 
-  //changed var to let
-  // var should never be used as it is bad syntax in new version of javascript like we are using
+
   let filtered_listing = [];
+
+
 
   filtered_listing = new_listing.filter(
     (filtered_listing) =>
@@ -192,7 +193,7 @@ export default function Edit_Catalog() {
 
   const save_catalog_notify = (catalog)  => () => {
     console.log(catalog)
-    fetch("http://18.235.52.212:8000/catalog/updatecatalogrules", {
+    fetch("http://18.235.52.212:8000/catalog/updatecatalogrules/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
