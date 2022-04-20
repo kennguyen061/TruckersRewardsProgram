@@ -42,6 +42,27 @@ export default function Cart() {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
     // })
+
+    const url = new URL("http://18.235.52.212:8000/cart/remove");
+
+    //url.searchParams.append("UID", id);
+    //will need a call to find the SID soon
+    //url.searchParams.append("SID", 1);
+    //url.searchParams.append("ItemID", item.ItemID);
+
+    const body = {
+      UID: id,
+      SID: 1,
+      ItemID: item.ItemID,
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    toast("Remove Quantity");
   };
 
   const increase_qty = (item) => () => {
@@ -67,7 +88,30 @@ export default function Cart() {
     toast("Increased Quantity");
   };
 
-  const decrease_qty = (item) => () => {};
+  const decrease_qty = (item) => () => {
+
+    const url = new URL("http://18.235.52.212:8000/cart/decreasequantity");
+
+    //url.searchParams.append("UID", id);
+    //will need a call to find the SID soon
+    //url.searchParams.append("SID", 1);
+    //url.searchParams.append("ItemID", item.ItemID);
+
+    const body = {
+      UID: id,
+      SID: 1,
+      ItemID: item.ItemID,
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    toast("Decreased Quantity");
+
+  };
 
   return (
     <div>
@@ -100,7 +144,9 @@ export default function Cart() {
                 </button>
               </div>
 
-              <button className="button_1" style={{ float: "left" }}>
+              <button className="button_1" 
+              style={{ float: "left" }}
+              onClick={decrease_qty(cart)}>
                 {" "}
                 -{" "}
               </button>
@@ -121,6 +167,7 @@ export default function Cart() {
           </div>
         ))}
 
+        {/* to be completed */}
         <button className="button_1" style={{ marginTop: 30 }}>
           {" "}
           Checkout{" "}
