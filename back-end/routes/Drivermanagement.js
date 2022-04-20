@@ -26,6 +26,7 @@ router.get("/viewdrivers", (request, response) => {
         throw error;
       } else {
         //loop through result[index]
+        console.log(result);
         for (const element of result) {
           let responseBody = {
             First_name: "",
@@ -40,9 +41,10 @@ router.get("/viewdrivers", (request, response) => {
           responseBody.Email = element.Email;
           responseBody.Address = element.Address;
           responseBody.Phone_number = element.Phone_number;
+          console.log(responseBody);
           rbArray.push(responseBody);
         }
-        response.send(JSON.stringify(responseBody));
+        response.send(JSON.stringify(rbArray));
       }
     }
   );
@@ -126,12 +128,12 @@ router.get("/viewdriverorders", (request, response) => {
             Address: null,
           };
 
-          (responseBody.OrderID = element.OrderID),
-            (responseBody.UID = element.UID),
-            (responseBody.SID = element.SID),
-            (responseBody.Orderdate = element.Orderdate),
-            (responseBody.Address = element.Address),
-            rbArray.push(responseBody);
+          responseBody.OrderID = element.OrderID;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          responseBody.Orderdate = element.Orderdate;
+          responseBody.Address = element.Address;
+          rbArray.push(responseBody);
         }
         response.send(JSON.stringify(rbArray));
       }
