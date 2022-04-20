@@ -17,7 +17,7 @@ const SponsorReportsHomepage = () => {
             <tr>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/CurrenDrivers"
+                  to="/Reports/SponsorReports/CurrentDrivers"
                   className="Reports-Link"
                 >
                   Current Drivers Report

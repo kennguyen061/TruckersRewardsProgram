@@ -77,7 +77,7 @@ router.get("/SponsorName", (req, res) => {
       } else {
         if (result.length != 0) {
           const name = result[0].name;
-          res.send(name);
+          res.send(JSON.stringify(name));
         } else {
           console.log(length != 0);
           res.send(false);

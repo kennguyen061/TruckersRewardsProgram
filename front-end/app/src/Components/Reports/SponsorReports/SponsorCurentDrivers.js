@@ -6,9 +6,10 @@ import "./SponsorReport.css";
 const SponsorCurrentDrivers = () => {
   const [data, setData] = useState([]);
   const [sponsor, setSponsor] = useState("Sponsor");
-
+  let SID = window.localStorage.getItem("sid");
+  /*
   const createRows = async () => {
-    let SID = window.localStorage.getItem("sid");
+    
     const url = new URL("http://18.235.52.212:8000/drivermgt/viewdrivers");
 
     url.searchParams.append("SID", SID);
@@ -19,19 +20,46 @@ const SponsorCurrentDrivers = () => {
     });
     const data2 = await response.json();
     setData(data2);
-
+    console.log(data);
+    
     const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
 
     urlName.searchParams.append("sid", SID);
-
+    
     const resName = await fetch(urlName, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
     const name = await resName.json();
+
     setSponsor(name);
+    console.log(name);
+    
   };
-  useEffect(() => createRows, []);
+  */
+  useEffect(() => {
+    const url = new URL("http://18.235.52.212:8000/drivermgt/viewdrivers");
+
+    url.searchParams.append("SID", SID);
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data));
+
+    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
+
+    urlName.searchParams.append("sid", SID);
+
+    fetch(urlName, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((comp) => setSponsor(comp));
+  }, [SID]);
 
   return (
     <ReportGenerator
@@ -40,7 +68,7 @@ const SponsorCurrentDrivers = () => {
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s' Curent Drivers`}</h1>
+        <h1>{`${sponsor}'s Curent Drivers`}</h1>
         <p>This is a report of all drivers</p>
         <table>
           <thead>
