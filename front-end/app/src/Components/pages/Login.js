@@ -2,7 +2,7 @@ import { Link, Route, useNavigate } from "react-router-dom";
 import "./Login.css";
 import NewNav from "../UI/HomeNav";
 import Footer from "../Footer/Footer";
-// import { useCookies } from "react-cookie";
+
 import { useState } from "react";
 
 function Login() {
