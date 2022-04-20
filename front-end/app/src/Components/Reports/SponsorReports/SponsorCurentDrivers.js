@@ -4,15 +4,20 @@ import "./SponsorReport.css";
 
 const SponsorCurrentDrivers = () => {
   const createRows = async () => {
-    await fetch(
-      "http://18.235.52.212:8000/drivermgt/viewdrivers" +
-        new URLSearchParams({ SID: "*" }),
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    let SID = window.localStorage.getItem("sid");
+    const url = new URL("http://18.235.52.212:8000/drivermgt/viewdrivers");
+
+    url.searchParams.append("SID", SID);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+
+    console.log(data);
   };
+  createRows();
 
   return (
     <ReportGenerator

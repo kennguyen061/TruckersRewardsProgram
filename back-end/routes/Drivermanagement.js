@@ -17,7 +17,7 @@ router.get("/viewdrivers", (request, response) => {
   console.log("Hit view drivers");
 
   db.query(
-    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.VisibleFlag = 1",
+    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.VisibleFlag = 1;",
     [request.query.SID],
     (error, result) => {
       //responsebody array
@@ -61,7 +61,7 @@ router.get("/viewdriver", (request, response) => {
   };
 
   db.query(
-    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ? AND DRIVER.VisibleFlag = 1",
+    "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.UID = ? AND DRIVER.VisibleFlag = 1;",
     [request.query.SID, request.query.UID],
     (error, result) => {
       if (error) {
@@ -125,7 +125,7 @@ router.get("/viewdriverorders", (request, response) => {
             Orderdate: null,
             Address: null,
           };
-        
+
           (responseBody.OrderID = element.OrderID),
             (responseBody.UID = element.UID),
             (responseBody.SID = element.SID),
@@ -142,28 +142,28 @@ router.get("/viewdriverorders", (request, response) => {
 router.post("/removedriver", (request, response) => {
   console.log("Hit remove");
   db.query(
-    "DELETE FROM SPONSORANDDRIVER WHERE UID = ? AND SID = ?",
+    "DELETE FROM SPONSORANDDRIVER WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "DELETE FROM DRIVERWISHLIST WHERE UID = ? AND SID = ?",
+    "DELETE FROM DRIVERWISHLIST WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "DELETE FROM POINTBALANCE WHERE UID = ? AND SID = ?",
+    "DELETE FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?",
+    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
     [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
