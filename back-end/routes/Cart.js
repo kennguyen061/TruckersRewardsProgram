@@ -66,7 +66,7 @@ router.get("/", (request, response) => {
 router.post("/update", (request, response) => {
   console.log("Hit update");
   db.query(
-    "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity,Availability) VALUES(?,?,?,?,?,?,?)",
+    "INSERT INTO CARTITEM(ItemID,UID,SID,ItemName,Price,Quantity,Availability) VALUES(?,?,?,?,?,?,?);",
     [
       request.body.ItemID,
       request.body.UID,
@@ -90,21 +90,31 @@ router.post("/increasequantity", (request, response) => {
   console.log("Hit increase quantity");
   let currentquantity = 0;
   db.query(
-    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?;",
     [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
-      if (error) throw error;
-      currentquantity = result[0].Quantity;
-    }
-  );
-  let newQuantity = currentquantity + 1;
-  db.query(
-    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [newQuantity, request.body.UID, request.body.SID, request.body.ItemID],
-    (error, result) => {
-      if (error) throw error;
-      console.log("Cart updated");
-      response.send(true);
+      if (error) {
+        throw error;
+      } else {
+        currentquantity = result[0].Quantity;
+        let newQuantity = currentquantity + 1;
+
+        console.log(newQuantity);
+        db.query(
+          "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?;",
+          [
+            newQuantity,
+            request.body.UID,
+            request.body.SID,
+            request.body.ItemID,
+          ],
+          (error, result) => {
+            if (error) throw error;
+            console.log("Cart updated");
+            response.send(true);
+          }
+        );
+      }
     }
   );
 });
@@ -115,21 +125,29 @@ router.post("/decreasequantity", (request, response) => {
   //calculate new quantity
   let currentquantity = 0;
   db.query(
-    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    "SELECT Quantity FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?;",
     [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
-      if (error) throw error;
-      currentquantity = result[0].Quantity;
-    }
-  );
-  let newQuantity = currentquantity - 1;
-  db.query(
-    "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?",
-    [newQuantity, request.body.UID, request.body.SID, request.body.ItemID],
-    (error, result) => {
-      if (error) throw error;
-      console.log("Cart updated");
-      response.send(true);
+      if (error) {
+        throw error;
+      } else {
+        currentquantity = result[0].Quantity;
+        let newQuantity = currentquantity - 1;
+        db.query(
+          "UPDATE CARTITEM SET Quantity = ? WHERE UID = ? AND SID = ? AND ItemID = ?;",
+          [
+            newQuantity,
+            request.body.UID,
+            request.body.SID,
+            request.body.ItemID,
+          ],
+          (error, result) => {
+            if (error) throw error;
+            console.log("Cart updated");
+            response.send(true);
+          }
+        );
+      }
     }
   );
 });
@@ -157,7 +175,7 @@ router.post("/notifycart", (request, response) => {
         let newquantity = result[0].Quantity + 1;
         console.log(result[0]);
         db.query(
-          "UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?",
+          "UPDATE CARTITEM SET Quantity = ? WHERE ItemID = ? AND UID = ? AND SID = ?;",
           [
             newquantity,
             request.body.ItemID,
@@ -198,10 +216,13 @@ router.post("/notifycart", (request, response) => {
 router.post("/remove", (request, response) => {
   console.log("Hit remove");
   db.query(
-    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?",
+    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ? AND ItemID = ?;",
     [request.body.UID, request.body.SID, request.body.ItemID],
     (error, result) => {
-      if (error) throw error;
+      if (error) {
+        console.log("that item wasnt here");
+        response.send(false);
+      }
       console.log("Cart item removed.");
       response.send(true);
     }
