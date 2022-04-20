@@ -16,25 +16,25 @@ const db = mysql.createConnection({
 router.get("/viewdrivers", (request, response) => {
   console.log("Hit view drivers");
 
-  let responseBody = {
-    First_name: "",
-    Last_name: "",
-    Email: "",
-    Address: "",
-    Phone_number: "",
-  };
-
   db.query(
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.VisibleFlag = 1",
     [request.query.SID],
     (error, result) => {
+    //responsebody array
+    let rbArray = Array();
       if (error) {
         throw error;
       } else {
-        //responsebody array
-        let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
+          let responseBody = {
+            First_name: "",
+            Last_name: "",
+            Email: "",
+            Address: "",
+            Phone_number: "",
+          };
+
           responseBody.First_name = element.First_name;
           responseBody.Last_name = element.Last_name;
           responseBody.Email = element.Email;

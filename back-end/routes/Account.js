@@ -46,15 +46,16 @@ router.post("/updatepassword", (request, response) => {
   console.log("Hit update password of account");
 
   if (request.body.role == "DRIVER") {
+    //check current password
     let salt = new Date().toISOString();
     let hash = crypto
       .createHash("sha256")
-      .update(request.body.password + salt)
+      .update(request.body.newpassword + salt)
       .digest("base64");
 
     console.log("The creation hash is: " + hash);
     console.log("The creation salt is: " + salt);
-    console.log("The creation password is: " + req.body.password);    
+    console.log("The creation password is: " + request.body.newpassword);    
     
     db.query(
       "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
@@ -70,15 +71,16 @@ router.post("/updatepassword", (request, response) => {
       }
     );
   } else if (request.body.role == "SPONSOR") {
+    //check current password
     let salt = new Date().toISOString();
     let hash = crypto
       .createHash("sha256")
-      .update(request.body.password + salt)
+      .update(request.body.newpassword + salt)
       .digest("base64");
 
     console.log("The creation hash is: " + hash);
     console.log("The creation salt is: " + salt);
-    console.log("The creation password is: " + req.body.password);    
+    console.log("The creation password is: " + request.body.newpassword);    
     
     db.query(
       "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
@@ -94,15 +96,17 @@ router.post("/updatepassword", (request, response) => {
       }
     );
   } else if (request.body.role == "ADMIN") {
+    //check current password
+
     let salt = new Date().toISOString();
     let hash = crypto
       .createHash("sha256")
-      .update(request.body.password + salt)
+      .update(request.body.newpassword + salt)
       .digest("base64");
 
     console.log("The creation hash is: " + hash);
     console.log("The creation salt is: " + salt);
-    console.log("The creation password is: " + req.body.password);    
+    console.log("The creation password is: " + request.body.newpassword);    
     
     db.query(
       "UPDATE ADMIN SET Password_hash = ?, Password_salt = ? WHERE UID = ?;",
