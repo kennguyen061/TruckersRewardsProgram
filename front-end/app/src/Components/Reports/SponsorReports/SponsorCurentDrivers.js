@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReportGenerator from "../ReportGenerator";
 
 import "./SponsorReport.css";
 
 const SponsorCurrentDrivers = () => {
   const [data, setData] = useState([]);
+  const [sponsor, setSponsor] = useState("Sponsor");
 
   const createRows = async () => {
     let SID = window.localStorage.getItem("sid");
@@ -18,8 +19,19 @@ const SponsorCurrentDrivers = () => {
     });
     const data2 = await response.json();
     setData(data2);
+
+    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
+
+    urlName.searchParams.append("sid", SID);
+
+    const resName = await fetch(urlName, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const name = await resName.json();
+    setSponsor(name);
   };
-  createRows();
+  useEffect(() => createRows, []);
 
   return (
     <ReportGenerator
@@ -28,7 +40,7 @@ const SponsorCurrentDrivers = () => {
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Curent Drivers</h1>
+        <h1>{`${sponsor}'s' Curent Drivers`}</h1>
         <p>This is a report of all drivers</p>
         <table>
           <thead>

@@ -71,6 +71,7 @@ router.get("/SponsorName", (req, res) => {
     "SELECT name FROM SPONSORORG WHERE SID = ?;",
     [req.query.sid],
     (err, result) => {
+      console.log(result);
       if (err) {
         //do stuff
       } else {

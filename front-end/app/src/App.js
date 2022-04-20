@@ -64,7 +64,7 @@ function App() {
           <Route path="/pages/Cart" element={<Cart />} />
 
           <Route
-            path="/Reports/SponsorReports/CurrenDrivers"
+            path="/Reports/SponsorReports/CurrentDrivers"
             element={<SponsorCurrentDriver />}
           />
           <Route
