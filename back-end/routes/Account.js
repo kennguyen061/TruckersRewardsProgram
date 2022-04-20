@@ -19,6 +19,33 @@ db.connect((error) => {
   if (error) throw error;
 });
 
+/*Password complexity system original code from
+ https://www.geeksforgeeks.org/check-if-a-string-contains-uppercase-lowercase-special-characters-and-numeric-values/:
+  modified to also check the password to be more than 8 characters
+*/
+function isAllPresent(str) {
+  // Regex to check if a string
+  // contains uppercase, lowercase
+  // special character & numeric value
+  var pattern = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+$"
+  );
+
+  // If the string is empty or less than a length of 8
+  // then print No
+  if (!str || str.length === 0 || str.length < 8) {
+    return false;
+  }
+
+  // Print Yes If the string matches
+  // with the Regex
+  if (pattern.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // record login attempt
 function loginAttempt(email, status) {
   db.query(
@@ -73,8 +100,8 @@ router.post("/updatepassword", (request, response) => {
           db.query(
             "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
             [hash, salt, request.body.email],
-            (error) => {
-              if (error) throw error;
+            (error2) => {
+              if (error2) throw error2;
               //call changepasswordlog
               changePasswordlog("DRIVER", request.body.email, newhash);
               response.send(true);
@@ -113,8 +140,8 @@ router.post("/updatepassword", (request, response) => {
           db.query(
             "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
             [hash, salt, request.body.email],
-            (error) => {
-              if (error) throw error;
+            (error2) => {
+              if (error2) throw error2;
               //call changepasswordlog
               changePasswordlog("SPONSOR", request.body.email, newhash);
               response.send(true);
@@ -153,8 +180,8 @@ router.post("/updatepassword", (request, response) => {
           db.query(
             "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
             [hash, salt, request.body.email],
-            (error) => {
-              if (error) throw error;
+            (error2) => {
+              if (error2) throw error2;
               //call changepasswordlog
               changePasswordlog("ADMIN", request.body.email, newhash);
               response.send(true);
@@ -306,34 +333,43 @@ router.post("/create", (req, res) => {
           res.status(404);
           res.send(false);
         } else {
-          let salt = new Date().toISOString();
+          //TODO: CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
+          //If it meets requirements:
+          if(isAllPresent(req.body.password)) {
+            let salt = new Date().toISOString();
 
-          let hash = crypto
-            .createHash("sha256")
-            .update(req.body.password + salt)
-            .digest("base64");
-
-          console.log("The creation hash is: " + hash);
-          console.log("The creation salt is: " + salt);
-          console.log("The creation password is: " + req.body.password);
-
-          db.query(
-            "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
-            [
-              req.body.firstName,
-              req.body.lastName,
-              req.body.email,
-              hash,
-              salt,
-              req.body.street,
-              req.body.phoneNum,
-              1,
-            ],
-            (error, result) => {
-              if (error) throw error;
-              res.send(true);
-            }
-          );
+            let hash = crypto
+              .createHash("sha256")
+              .update(req.body.password + salt)
+              .digest("base64");
+  
+            console.log("The creation hash is: " + hash);
+            console.log("The creation salt is: " + salt);
+            console.log("The creation password is: " + req.body.password);
+  
+            db.query(
+              "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
+              [
+                req.body.firstName,
+                req.body.lastName,
+                req.body.email,
+                hash,
+                salt,
+                req.body.street,
+                req.body.phoneNum,
+                1,
+              ],
+              (error, result) => {
+                if (error) throw error;
+                res.send(true);
+              }
+            );
+          }
+          //If it doesn't meet password complexity requirements
+          else {
+            console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+            res.send(false);
+          }
         }
       }
     }
