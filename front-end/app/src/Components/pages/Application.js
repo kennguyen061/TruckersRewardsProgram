@@ -15,9 +15,14 @@ function Application() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(driver),
     })
-      .then(() => {
-        console.log("account-creation request submitted");
-        navigate("/pages/Login", { replace: true });
+      .then((res) => {
+        if (res == false) {
+          console.log("password not complex");
+          //add pop-up functionallity here
+        } else {
+          console.log("account-creation request submitted");
+          navigate("/pages/Login", { replace: true });
+        }
       })
       .catch((error) => {
         console.log("Error: ", error);
