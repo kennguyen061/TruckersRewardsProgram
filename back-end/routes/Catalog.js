@@ -40,7 +40,7 @@ router.post("/updatecatalogrules", (request, response) => {
 router.get("/getcatalogrules", (request, response) => {
   console.log("Hit get cat rules");
   db.query(
-    "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?",
+    "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?;",
     [request.query.SID],
     (error, result) => {
       if (error) throw error;

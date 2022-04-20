@@ -32,7 +32,7 @@ router.post("/createApplication", (request, response) => {
       } else {
         //Creates the new application
         db.query(
-          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP())",
+          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP());",
           [request.body.UID, request.body.SID],
           (error, result) => {
             if (error) throw error;

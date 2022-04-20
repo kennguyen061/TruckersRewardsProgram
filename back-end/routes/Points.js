@@ -55,7 +55,7 @@ router.post("/update", (request, response) => {
       }
       // new balance
       db.query(
-        "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?",
+        "UPDATE POINTBALANCE SET Amount = ? WHERE PointID = ?;",
         [request.body.newAmount, pointId],
         (error, result) => {
           if (error) throw error;

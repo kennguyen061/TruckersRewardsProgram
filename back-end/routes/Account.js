@@ -190,7 +190,7 @@ router.post("/", (request, response) => {
       let salt = new Date(result[0].Password_salt).toISOString();
 
       db.query(
-        "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;;",
+        "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;",
         [result[0].UID],
         (err, ret) => {
           if (err) {

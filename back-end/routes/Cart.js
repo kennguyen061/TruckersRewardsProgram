@@ -23,7 +23,7 @@ router.get("/", (request, response) => {
   console.log("Hit user cart");
 
   db.query(
-    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
+    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?;",
     [request.query.UID, request.query.SID],
     (error, result) => {
       let rbArray = Array();

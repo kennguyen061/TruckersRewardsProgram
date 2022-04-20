@@ -89,7 +89,7 @@ router.get("/viewdriverpoints", (request, response) => {
     Amount: "",
   };
   db.query(
-    "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
+    "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
     [request.query.UID, request.query.SID],
     (error, result) => {
       if (error) {
@@ -108,7 +108,7 @@ router.get("/viewdriverorders", (request, response) => {
   console.log("Hit driver orders");
 
   db.query(
-    "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
+    "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?;",
     [request.query.UID, request.query.SID],
     (error, result) => {
       let rbArray = Array();

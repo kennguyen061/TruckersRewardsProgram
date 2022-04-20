@@ -29,7 +29,7 @@ db.connect((error) => {
 router.get("/", (request, response) => {
   console.log("Hit access wishlist");
   db.query(
-    "SELECT * FROM DRIVERWISHLIST WHERE WishlistID = ?",
+    "SELECT * FROM DRIVERWISHLIST WHERE WishlistID = ?;",
     [request.params.WishlistID],
     (error, result) => {
       if (error) throw error;
@@ -43,7 +43,7 @@ router.get("/", (request, response) => {
 router.post("/update", (request, response) => {
   console.log("Hit update wishlist");
   db.query(
-    "INSERT INTO WISHLISTITEM(WishlistID, ItemName, Cost) VALUES(?,?,?)",
+    "INSERT INTO WISHLISTITEM(WishlistID, ItemName, Cost) VALUES(?,?,?);",
     [request.body.WishlistID, request.body.ItemName, request.body.Cost],
     (error, result) => {
       if (error) throw error;
@@ -56,7 +56,7 @@ router.post("/update", (request, response) => {
 router.post("/remove", (request, response) => {
   console.log("Hit remove wishlist");
   db.query(
-    "DELETE FROM WISHLISTITEM WHERE WishlistID = ? AND ItemName = ?",
+    "DELETE FROM WISHLISTITEM WHERE WishlistID = ? AND ItemName = ?;",
     [request.body.WishlistID, request.body.ItemName],
     (error, result) => {
       if (error) throw error;
