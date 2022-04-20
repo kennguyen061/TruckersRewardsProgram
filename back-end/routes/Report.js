@@ -64,4 +64,26 @@ router.get("/", (request, respsonse) => {
   respsonse.send(responseBody);
 });
 
+router.get("/SponsorName", (req, res) => {
+  console.log("Getting sponsor names");
+
+  db.query(
+    "SELECT name FROM SPONSORORG WHERE SID = ?;",
+    [req.query.sid],
+    (err, result) => {
+      if (err) {
+        //do stuff
+      } else {
+        if (result.length != 0) {
+          const name = result.name;
+          res.json(name);
+        } else {
+          res.send(false);
+        }
+      }
+    }
+  );
+  res.send(false);
+});
+
 module.exports = router;
