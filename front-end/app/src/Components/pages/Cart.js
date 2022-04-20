@@ -33,25 +33,14 @@ export default function Cart() {
   }, []);
 
   const remove = (item) => () => {
-    // const url = new URL ("http://18.235.52.212:8000/cart/remove")
-    // url.searchParams.append("UID", id)
-    // //will need a call to find the SID soon
-    // url.searchParams.append("SID", 1)
-    // url.searchParams.append("ItemID", item.ItemID)
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    // })
-
+  
     const url = new URL("http://18.235.52.212:8000/cart/remove");
 
-    //url.searchParams.append("UID", id);
-    //will need a call to find the SID soon
-    //url.searchParams.append("SID", 1);
-    //url.searchParams.append("ItemID", item.ItemID);
 
     const body = {
       UID: id,
+
+      //needs to change
       SID: 1,
       ItemID: item.ItemID,
     };
@@ -62,7 +51,9 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    toast("Remove Quantity");
+    
+
+    window.location.reload(false);
   };
 
   const increase_qty = (item) => () => {
@@ -75,6 +66,8 @@ export default function Cart() {
 
     const body = {
       UID: id,
+
+      //needs to change
       SID: 1,
       ItemID: item.ItemID,
     };
@@ -85,17 +78,13 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    toast("Increased Quantity");
+    window.location.reload(false);
   };
 
   const decrease_qty = (item) => () => {
 
     const url = new URL("http://18.235.52.212:8000/cart/decreasequantity");
 
-    //url.searchParams.append("UID", id);
-    //will need a call to find the SID soon
-    //url.searchParams.append("SID", 1);
-    //url.searchParams.append("ItemID", item.ItemID);
 
     const body = {
       UID: id,
@@ -109,7 +98,8 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    toast("Decreased Quantity");
+    window.location.reload(false);
+
 
   };
 
