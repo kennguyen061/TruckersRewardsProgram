@@ -144,24 +144,24 @@ router.get("/retrieveapplication", (request, response) => {
 router.get("/retrievealluserapplications", (request, response) => {
   console.log("Hit get all apps");
 
-  let responseBody = {
-    Appstatus: "",
-    Reason: "",
-    UID: "",
-    SID: "",
-  };
-
   db.query(
     "SELECT * FROM APPLICATION WHERE UID = ?;",
     [request.query.UID],
     (error, result) => {
+      //responsebody array
+      let rbArray = Array();
       if (error) {
         throw error;
       } else {
-        //responsebody array
-        let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
+          let responseBody = {
+            Appstatus: null,
+            Reason: null,
+            UID: null,
+            SID: null,
+          };
+
           responseBody.Appstatus = element.Appstatus;
           responseBody.Reason = element.Reason;
           responseBody.UID = element.UID;
@@ -179,24 +179,23 @@ router.get("/retrievealluserapplications", (request, response) => {
 router.get("/retrieveallsponsorapplications", (request, response) => {
   console.log("Hit get all sponsor apps");
 
-  let responseBody = {
-    Appstatus: "",
-    Reason: "",
-    UID: "",
-    SID: "",
-  };
-
   db.query(
     "SELECT * FROM APPLICATION WHERE SID = ?;",
     [request.query.SID],
     (error, result) => {
+      let rbArray = Array();
       if (error) {
         throw error;
       } else {
-        //responsebody array
-        let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
+          let responseBody = {
+            Appstatus: null,
+            Reason: null,
+            UID: null,
+            SID: null,
+          };
+
           responseBody.Appstatus = element.Appstatus;
           responseBody.Reason = element.Reason;
           responseBody.UID = element.UID;
