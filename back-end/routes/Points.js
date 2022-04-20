@@ -80,4 +80,31 @@ router.post("/update", (request, response) => {
   );
 });
 
+router.get('/history', (request, response) => {
+
+    let pointId;
+
+    // select point id
+    db.query("SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+        [
+            request.body.UID,
+            request.body.SID
+        ],
+        (error, result) => {
+            if (error) {
+                throw error
+            };
+            if (result.length > 0) {
+                pointId = result[0].PointID;
+            } else {
+                response.send(false);
+            }
+
+            // get point history
+            db.query(
+            );
+        }
+    );
+})
+
 module.exports = router;
