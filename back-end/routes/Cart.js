@@ -31,7 +31,7 @@ router.get("/", (request, response) => {
     SID: null,
   };
   db.query(
-    "SELECT * FROM CARTITEM WHERE UID = 1 AND SID = 1",
+    "SELECT * FROM CARTITEM WHERE UID = ? AND SID = ?",
     [request.query.UID, request.query.SID],
     (error, result) => {
       let rbArray = Array(result.length);

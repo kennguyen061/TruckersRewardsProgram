@@ -9,20 +9,28 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState("");
+
+  const role = window.localStorage.getItem("role");
+  const id = window.localStorage.getItem("id");
+
+  const url = new URL ("http://18.235.52.212:8000/cart/")
+
+  url.searchParams.append("UID", id)
+  url.searchParams.append("SID", 1)
+
 
   const fetchData = () => {
-    fetch("http://18.235.52.212:8000/cart/", {
+    fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       })
-      .then(response => {
-        console.log(response.json());
-      })
+      .then(response => response.json())
       .then((data) => {
-        setCart(data.results)
-      })
-      .then(err => {console.log(err);});
+        setCart(data)
+      });
+
+      // .then(err => {console.log(err);});
   };
 
   console.log(cart)
