@@ -20,8 +20,8 @@ router.get("/viewdrivers", (request, response) => {
     "SELECT First_name,Last_name,Email,Address,Phone_number FROM DRIVER INNER JOIN SPONSORANDDRIVER ON SPONSORANDDRIVER.UID = DRIVER.UID WHERE SID = ? AND DRIVER.VisibleFlag = 1",
     [request.query.SID],
     (error, result) => {
-    //responsebody array
-    let rbArray = Array();
+      //responsebody array
+      let rbArray = Array();
       if (error) {
         throw error;
       } else {
@@ -106,24 +106,26 @@ router.get("/viewdriverpoints", (request, response) => {
 //view all orders of a driver
 router.get("/viewdriverorders", (request, response) => {
   console.log("Hit driver orders");
-  let responseBody = {
-    OrderID: null,
-    UID: null,
-    SID: null,
-    Orderdate: null,
-    Address: null,
-  };
+
   db.query(
     "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?",
     [request.query.UID, request.query.SID],
     (error, result) => {
+      let rbArray = Array();
       if (error) {
         throw error;
       } else {
         //responsebody array
-        let rbArray = Array(result.length);
         //loop through result[index]
         for (const element of result) {
+          let responseBody = {
+            OrderID: null,
+            UID: null,
+            SID: null,
+            Orderdate: null,
+            Address: null,
+          };
+        
           (responseBody.OrderID = element.OrderID),
             (responseBody.UID = element.UID),
             (responseBody.SID = element.SID),
