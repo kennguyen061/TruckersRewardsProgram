@@ -193,12 +193,11 @@ router.post("/", (request, response) => {
         "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;;",
         [result[0].UID],
         (err, ret) => {
-          //save sid her
           if (err) {
             console.log("problem getting sid");
           } else {
             if (ret.length === 1) {
-              responseBody.sid = ret[0].sid;
+              responseBody.sid = ret[0].SID;
             }
           }
         }
@@ -226,7 +225,7 @@ router.post("/", (request, response) => {
   if (!responseBody.exists) {
     // check sponsor table
     db.query(
-      "SELECT Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
+      "SELECT Password_hash, Password_salt,SUID,SID FROM SPONSORACCT WHERE Email = ?;",
       [request.body.email],
       (error, result) => {
         if (error) throw error;
@@ -243,6 +242,7 @@ router.post("/", (request, response) => {
           responseBody.exists = true;
           responseBody.id = result[0].SUID;
           responseBody.role = "SPONSORACCT";
+          responseBody.sid = result[0].SID;
         }
         if (responseBody.exists) {
           loginAttempt(request.body.email, "Success");
