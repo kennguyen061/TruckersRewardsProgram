@@ -75,15 +75,16 @@ router.get("/SponsorName", (req, res) => {
         //do stuff
       } else {
         if (result.length != 0) {
-          const name = result.name;
-          res.json(name);
+          const name = result[0].name;
+          res.send(name);
         } else {
+          console.log(length != 0);
           res.send(false);
         }
       }
     }
   );
-  res.send(false);
+  console.log("hit end");
 });
 
 module.exports = router;
