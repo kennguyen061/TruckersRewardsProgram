@@ -139,13 +139,14 @@ const DriverForm = (props) => {
       </div>
       <div className="new-driver__control">
         <label>Password</label>
+        <p>8-15 character, 1 uppercase, 1 lowercase, 1 special character</p>
         <input
           type="password"
           name="password"
           value={enteredPassword}
           placeholder="4-8 Characters"
-          minLength="4"
-          maxLength="8"
+          minLength="8"
+          maxLength="15"
           onChange={(event) => setEnteredPassword(event.target.value)}
           required
         />
