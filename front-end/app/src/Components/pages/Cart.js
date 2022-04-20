@@ -33,15 +33,27 @@ export default function Cart() {
   }, []);
 
   const remove = (item) => () => {
-    // const url = new URL ("http://18.235.52.212:8000/cart/remove")
-    // url.searchParams.append("UID", id)
-    // //will need a call to find the SID soon
-    // url.searchParams.append("SID", 1)
-    // url.searchParams.append("ItemID", item.ItemID)
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    // })
+  
+    const url = new URL("http://18.235.52.212:8000/cart/remove");
+
+
+    const body = {
+      UID: id,
+
+      //needs to change
+      SID: 1,
+      ItemID: item.ItemID,
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    
+
+    window.location.reload(false);
   };
 
   const increase_qty = (item) => () => {
@@ -51,6 +63,28 @@ export default function Cart() {
     //will need a call to find the SID soon
     //url.searchParams.append("SID", 1);
     //url.searchParams.append("ItemID", item.ItemID);
+
+    const body = {
+      UID: id,
+
+      //needs to change
+      SID: 1,
+      ItemID: item.ItemID,
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    window.location.reload(false);
+  };
+
+  const decrease_qty = (item) => () => {
+
+    const url = new URL("http://18.235.52.212:8000/cart/decreasequantity");
+
 
     const body = {
       UID: id,
@@ -64,10 +98,10 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    toast("Increased Quantity");
-  };
+    window.location.reload(false);
 
-  const decrease_qty = (item) => () => {};
+
+  };
 
   return (
     <div>
@@ -100,7 +134,9 @@ export default function Cart() {
                 </button>
               </div>
 
-              <button className="button_1" style={{ float: "left" }}>
+              <button className="button_1" 
+              style={{ float: "left" }}
+              onClick={decrease_qty(cart)}>
                 {" "}
                 -{" "}
               </button>
@@ -121,6 +157,7 @@ export default function Cart() {
           </div>
         ))}
 
+        {/* to be completed */}
         <button className="button_1" style={{ marginTop: 30 }}>
           {" "}
           Checkout{" "}
