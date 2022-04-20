@@ -46,144 +46,127 @@ router.post("/updatepassword", (request, response) => {
   console.log("Hit update password of account");
 
   if (request.body.role == "DRIVER") {
-   //check current password
-   db.query(
-    "SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
-    [request.body.email],
-    (error, result) => {
-      if (error) throw error;
+    //check current password
+    db.query(
+      "SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
+      [request.body.email],
+      (error, result) => {
+        if (error) throw error;
 
-      let salt = new Date(result[0].Password_salt).toISOString();
-      let hash = crypto
-        .createHash("sha256")
-        .update(request.body.oldpassword + salt)
-        .digest("base64");
-
-      if (hash === result[0].Password_hash) {
-        let newsalt = new Date().toISOString();
-        let newhash = crypto
+        let salt = new Date(result[0].Password_salt).toISOString();
+        let hash = crypto
           .createHash("sha256")
-          .update(request.body.newpassword + salt)
+          .update(request.body.oldpassword + salt)
           .digest("base64");
-    
-        console.log("The new hash is: " + newhash);
-        console.log("The new salt is: " + newsalt);
-        console.log("The new password is: " + request.body.newpassword);    
-        
-        db.query(
-          "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-          [
-            hash,
-            salt,
-            request.body.email,
-          ],
-          (error) => {
-            if (error) throw error;
-            //call changepasswordlog
-            changePasswordlog("DRIVER",request.body.email,newhash)
-            response.send(true);
-          }
-        )      
+
+        if (hash === result[0].Password_hash) {
+          let newsalt = new Date().toISOString();
+          let newhash = crypto
+            .createHash("sha256")
+            .update(request.body.newpassword + salt)
+            .digest("base64");
+
+          console.log("The new hash is: " + newhash);
+          console.log("The new salt is: " + newsalt);
+          console.log("The new password is: " + request.body.newpassword);
+
+          db.query(
+            "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+            [hash, salt, request.body.email],
+            (error) => {
+              if (error) throw error;
+              //call changepasswordlog
+              changePasswordlog("DRIVER", request.body.email, newhash);
+              response.send(true);
+            }
+          );
+        } else {
+          response.send(false);
+        }
       }
-      else {
-        response.send(false);
+    );
+  } else if (request.body.role == "SPONSOR") {
+    //check current password
+    db.query(
+      "SELECT UID, Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
+      [request.body.email],
+      (error, result) => {
+        if (error) throw error;
+
+        let salt = new Date(result[0].Password_salt).toISOString();
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.oldpassword + salt)
+          .digest("base64");
+
+        if (hash === result[0].Password_hash) {
+          let newsalt = new Date().toISOString();
+          let newhash = crypto
+            .createHash("sha256")
+            .update(request.body.newpassword + salt)
+            .digest("base64");
+
+          console.log("The new hash is: " + newhash);
+          console.log("The new salt is: " + newsalt);
+          console.log("The new password is: " + request.body.newpassword);
+
+          db.query(
+            "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+            [hash, salt, request.body.email],
+            (error) => {
+              if (error) throw error;
+              //call changepasswordlog
+              changePasswordlog("SPONSOR", request.body.email, newhash);
+              response.send(true);
+            }
+          );
+        } else {
+          response.send(false);
+        }
       }
-    });
+    );
+  } else if (request.body.role == "ADMIN") {
+    //check current password
+    db.query(
+      "SELECT UID, Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
+      [request.body.email],
+      (error, result) => {
+        if (error) throw error;
+
+        let salt = new Date(result[0].Password_salt).toISOString();
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.oldpassword + salt)
+          .digest("base64");
+
+        if (hash === result[0].Password_hash) {
+          let newsalt = new Date().toISOString();
+          let newhash = crypto
+            .createHash("sha256")
+            .update(request.body.newpassword + salt)
+            .digest("base64");
+
+          console.log("The new hash is: " + newhash);
+          console.log("The new salt is: " + newsalt);
+          console.log("The new password is: " + request.body.newpassword);
+
+          db.query(
+            "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+            [hash, salt, request.body.email],
+            (error) => {
+              if (error) throw error;
+              //call changepasswordlog
+              changePasswordlog("ADMIN", request.body.email, newhash);
+              response.send(true);
+            }
+          );
+        } else {
+          response.send(false);
+        }
+      }
+    );
   }
-
-  else if (request.body.role == "SPONSOR") {
-    //check current password
-    db.query(
-     "SELECT UID, Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
-     [request.body.email],
-     (error, result) => {
-       if (error) throw error;
- 
-       let salt = new Date(result[0].Password_salt).toISOString();
-       let hash = crypto
-         .createHash("sha256")
-         .update(request.body.oldpassword + salt)
-         .digest("base64");
- 
-       if (hash === result[0].Password_hash) {
-         let newsalt = new Date().toISOString();
-         let newhash = crypto
-           .createHash("sha256")
-           .update(request.body.newpassword + salt)
-           .digest("base64");
-     
-         console.log("The new hash is: " + newhash);
-         console.log("The new salt is: " + newsalt);
-         console.log("The new password is: " + request.body.newpassword);    
-         
-         db.query(
-           "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-           [
-             hash,
-             salt,
-             request.body.email,
-           ],
-           (error) => {
-             if (error) throw error;
-             //call changepasswordlog
-             changePasswordlog("SPONSOR",request.body.email,newhash)
-             response.send(true);
-           }
-         )      
-       }
-       else {
-         response.send(false);
-       }
-     });
-   }
-
-   else if (request.body.role == "ADMIN") {
-    //check current password
-    db.query(
-     "SELECT UID, Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
-     [request.body.email],
-     (error, result) => {
-       if (error) throw error;
- 
-       let salt = new Date(result[0].Password_salt).toISOString();
-       let hash = crypto
-         .createHash("sha256")
-         .update(request.body.oldpassword + salt)
-         .digest("base64");
- 
-       if (hash === result[0].Password_hash) {
-         let newsalt = new Date().toISOString();
-         let newhash = crypto
-           .createHash("sha256")
-           .update(request.body.newpassword + salt)
-           .digest("base64");
-     
-         console.log("The new hash is: " + newhash);
-         console.log("The new salt is: " + newsalt);
-         console.log("The new password is: " + request.body.newpassword);    
-         
-         db.query(
-           "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-           [
-             hash,
-             salt,
-             request.body.email,
-           ],
-           (error) => {
-             if (error) throw error;
-             //call changepasswordlog
-             changePasswordlog("ADMIN",request.body.email,newhash)
-             response.send(true);
-           }
-         )      
-       }
-       else {
-         response.send(false);
-       }
-     });
-   }
 });
-
 
 // access account
 router.post("/", (request, response) => {
@@ -193,6 +176,7 @@ router.post("/", (request, response) => {
     exists: false,
     id: null,
     role: null,
+    sid: null,
   };
 
   // check driver table
@@ -204,6 +188,21 @@ router.post("/", (request, response) => {
       if (result.length === 0) return;
 
       let salt = new Date(result[0].Password_salt).toISOString();
+
+      db.query(
+        "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;;",
+        [result[0].UID],
+        (err, ret) => {
+          //save sid her
+          if (err) {
+            console.log("problem getting sid");
+          } else {
+            if (ret.length === 1) {
+              responseBody.sid = ret[0].sid;
+            }
+          }
+        }
+      );
 
       let hash = crypto
         .createHash("sha256")
@@ -220,9 +219,6 @@ router.post("/", (request, response) => {
         loginAttempt(request.body.email, "Success");
         response.send(responseBody);
         return;
-      } else {
-        loginAttempt(request.body.email, "Failure");
-        response.send(responseBody);
       }
     }
   );
@@ -252,9 +248,6 @@ router.post("/", (request, response) => {
           loginAttempt(request.body.email, "Success");
           response.send(responseBody);
           return;
-        } else {
-          loginAttempt(request.body.email, "Failure");
-          response.send(responseBody);
         }
       }
     );
@@ -282,9 +275,6 @@ router.post("/", (request, response) => {
 
         if (responseBody.exists) {
           loginAttempt(request.body.email, "Success");
-          response.send(responseBody);
-        } else {
-          loginAttempt(request.body.email, "Failure");
           response.send(responseBody);
         }
       }
