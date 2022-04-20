@@ -2,7 +2,7 @@
   height: 100vh;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
   padding-top: 6rem;
   background-color: rgba(89, 167, 255, 0.781);
@@ -19,4 +19,29 @@
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
+}
+
+.button_2 {
+  background-color: #D3232E;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.quantity {
+  text-align:center;
+
+  margin-top: 500;
+  width:333px; 
+  margin:auto; 
+}
+
+.item {
+  margin-left: 500;
 }

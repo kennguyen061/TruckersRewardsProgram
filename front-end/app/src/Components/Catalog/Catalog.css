@@ -1,7 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 button:focus {
-  background: lightgreen;
+  background: rgb(136, 211, 136);
 }
 
 .btn-group button {
