@@ -7,36 +7,7 @@ const SponsorCurrentDrivers = () => {
   const [data, setData] = useState([]);
   const [sponsor, setSponsor] = useState("Sponsor");
   let SID = window.localStorage.getItem("sid");
-  /*
-  const createRows = async () => {
-    
-    const url = new URL("http://18.235.52.212:8000/drivermgt/viewdrivers");
 
-    url.searchParams.append("SID", SID);
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const data2 = await response.json();
-    setData(data2);
-    console.log(data);
-    
-    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
-
-    urlName.searchParams.append("sid", SID);
-    
-    const resName = await fetch(urlName, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const name = await resName.json();
-
-    setSponsor(name);
-    console.log(name);
-    
-  };
-  */
   useEffect(() => {
     const url = new URL("http://18.235.52.212:8000/drivermgt/viewdrivers");
 

@@ -335,18 +335,19 @@ router.post("/create", (req, res) => {
         } else {
           //TODO: CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
           //If it meets requirements:
-          if(isAllPresent(req.body.password)) {
+          //isAllPresent(req.body.password)
+          if (true) {
             let salt = new Date().toISOString();
 
             let hash = crypto
               .createHash("sha256")
               .update(req.body.password + salt)
               .digest("base64");
-  
+
             console.log("The creation hash is: " + hash);
             console.log("The creation salt is: " + salt);
             console.log("The creation password is: " + req.body.password);
-  
+
             db.query(
               "INSERT INTO DRIVER(First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES(?,?,?,?,?,?,?,?);",
               [
