@@ -229,4 +229,77 @@ router.post("/remove", (request, response) => {
   );
 });
 
+//checkout (adds all cart items to order and ITEM if there is enough points, clears cart and subtracts order's points)
+router.post("/checkout", (request, response) => {
+  console.log("Hit checkout");
+  //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE)
+  db.query(
+    "INSERT INTO ORDERS(UID,SID,Orderdate,Address) VALUES(?,?,CURRENT_TIMESTAMP(),?);",
+    [
+      request.body.UID,
+      request.body.SID,
+      request.body.Address,
+    ],
+    (error, result) => {
+      if (error) throw error;
+      console.log("Order created");
+      //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID
+      console.log("Hit user cart");
+
+      let rbArray = Array();
+      db.query(
+        "SELECT ItemID, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+        [request.query.UID, request.query.SID],
+        (error2, result2) => {
+          if (error2) {
+            throw error2;
+          } else {
+            //responsebody array
+            //loop through result[index]
+            for (const element of result2) {
+              console.log(element.ItemID);
+              let responseBody = {
+                ItemID: null,
+                Quantity: null,
+                Price: null,
+              };
+    
+              responseBody.ItemID = element.ItemID;
+              responseBody.Price = element.Price;
+              responseBody.Quantity = element.Quantity;
+              console.log(responseBody);
+              rbArray.push(responseBody);
+            }
+            console.log(rbArray);
+          }
+        }
+      );
+      for(const element of rbArray) {
+        db.query(
+          "INSERT INTO ITEM(ItemID,OrderID,Quantity,Price) VALUES(?,?,?,?);",
+          [
+            element.ItemID,
+            result.insertID,
+            element.Quantity,
+            element.Price,
+          ],
+          (error2, result2) => {
+            if (error2) throw error2;
+            console.log("ITEM ADDED TO ORDER");
+          }
+        ); 
+      }
+    }
+  );  
+  //DELETE ALL CARTITEMS FOR A UID AND SID
+  db.query(
+    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
+    [request.body.UID, request.body.SID,],
+    (error, result) => {
+      console.log("Cart items removed for Order.");
+      response.send(true);
+    }
+  );
+});
+
 module.exports = router;
