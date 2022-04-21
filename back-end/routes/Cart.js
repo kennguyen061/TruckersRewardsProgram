@@ -264,7 +264,6 @@ router.post("/checkout", (request, response) => {
                 Price: null,
               };
               
-              responseBody.ItemID = element.ItemID;
               responseBody.ItemName = element.ItemName;
               responseBody.Price = element.Price;
               responseBody.Quantity = element.Quantity;
