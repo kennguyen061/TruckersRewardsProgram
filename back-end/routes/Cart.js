@@ -249,7 +249,7 @@ router.post("/checkout", (request, response) => {
       let rbArray = Array();
       db.query(
         "SELECT ItemID, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
-        [request.query.UID, request.query.SID],
+        [request.body.UID, request.body.SID],
         (error2, result2) => {
           if (error2) {
             throw error2;
@@ -294,7 +294,7 @@ router.post("/checkout", (request, response) => {
   //DELETE ALL CARTITEMS FOR A UID AND SID
   db.query(
     "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-    [request.body.UID, request.body.SID,],
+    [request.body.UID, request.body.SID],
     (error, result) => {
       console.log("Cart items removed for Order.");
       response.send(true);
