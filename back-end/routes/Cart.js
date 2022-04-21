@@ -272,23 +272,23 @@ router.post("/checkout", (request, response) => {
             }
             console.log(rbArray);
           }
+          for(const element of rbArray) {
+            db.query(
+              "INSERT INTO ITEM(ItemID,OrderID,Quantity,Price) VALUES(?,?,?,?);",
+              [
+                element.ItemID,
+                result.insertId,
+                element.Quantity,
+                element.Price,
+              ],
+              (error3, result3) => {
+                if (error2) throw error2;
+                console.log("ITEM ADDED TO ORDER");
+              }
+            ); 
+          }
         }
       );
-      for(const element of rbArray) {
-        db.query(
-          "INSERT INTO ITEM(ItemID,OrderID,Quantity,Price) VALUES(?,?,?,?);",
-          [
-            element.ItemID,
-            result.insertId,
-            element.Quantity,
-            element.Price,
-          ],
-          (error2, result2) => {
-            if (error2) throw error2;
-            console.log("ITEM ADDED TO ORDER");
-          }
-        ); 
-      }
         //DELETE ALL CARTITEMS FOR A UID AND SID
       db.query(
       "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
