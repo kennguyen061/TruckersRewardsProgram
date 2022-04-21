@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS POINTBALANCE (
     SID int NOT NULL,
     primary key (PointID),
     foreign key (UID) references DRIVER(UID),
-    foreign key (SID) references SPONSORANDDRIVER(SID)
+    foreign key (SID) references SPONSORORG(SID)
     );
     
 CREATE TABLE IF NOT EXISTS POINTBALANCELOG (
