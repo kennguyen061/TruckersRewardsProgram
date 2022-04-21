@@ -232,74 +232,91 @@ router.post("/remove", (request, response) => {
 //checkout (adds all cart items to order and ITEM if there is enough points, clears cart and subtracts order's points)
 router.post("/checkout", (request, response) => {
   console.log("Hit checkout");
-  //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE)
+  //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE) 
+  let total = 0;
   db.query(
-    "INSERT INTO ORDERS(UID,SID,Orderdate,Address) VALUES(?,?,CURRENT_TIMESTAMP(),?);",
-    [
-      request.body.UID,
-      request.body.SID,
-      request.body.address,
-    ],
-    (error, result) => {
-      if (error) throw error;
-      console.log("Order created");
-      console.log("Result id: " + result.insertId);
-      //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID  
-      let rbArray = Array();
-      db.query(
-        "SELECT ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
-        [request.body.UID, request.body.SID],
-        (error2, result2) => {
-          if (error2) {
-            throw error2;
-          } else {
-              console.log("responsebody reached")
-            //responsebody array
-            //loop through result[index]
-            for (const element of result2) {
-              console.log(element.ItemID);
-              let responseBody = {
-                ItemName: null,
-                Quantity: null,
-                Price: null,
-              };
-              
-              responseBody.ItemName = element.ItemName;
-              responseBody.Price = element.Price;
-              responseBody.Quantity = element.Quantity;
-              console.log(responseBody);
-              rbArray.push(responseBody);
-            }
-            console.log(rbArray);
-            console.log("rbArray.length: " + rbArray.length)
-            for(const element of rbArray) {
-              db.query(
-                "INSERT INTO ITEM(ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?);",
-                [
-                  element.ItemName,
-                  result.insertId,
-                  element.Quantity,
-                  element.Price,
-                ],
-                (error3, result3) => {
-                  if (error3) throw error3;
-                  console.log("ITEM ADDED TO ORDER");
-                }
-              ); 
-            }
+          "SELECT Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+          [requst.body.UID, request.body.SID],
+          (error, result) => {
+            if (error) {
+              throw error;
+            } else {
+              //responsebody array
+              //loop through result[index]
+              for (const element of result) {                
+                total = total + element.Price;
+                console.log("Total: " + total);
+              }
           }
-        }
-      );
-      //DELETE ALL CARTITEMS FOR A UID AND SID
-      db.query(
-      "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-      [1, 1],
-      (error, result) => {
-        console.log("Cart items removed for Order.");
+          console.log("Total:" +total);
+          db.query(
+            "INSERT INTO ORDERS(Total,UID,SID,Orderdate,Address) VALUES(?,?,?,CURRENT_TIMESTAMP(),?);",
+            [
+              total,
+              request.body.UID,
+              request.body.SID,
+              request.body.address,
+            ],
+            (error, result) => {
+              if (error) throw error;
+              console.log("Order created");
+              console.log("Result id: " + result.insertId);
+              //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID  
+              let rbArray = Array();
+              db.query(
+                "SELECT ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                [request.body.UID, request.body.SID],
+                (error2, result2) => {
+                  if (error2) {
+                    throw error2;
+                  } else {
+                    //responsebody array
+                    //loop through result[index]
+                    for (const element of result2) {
+                      let responseBody = {
+                        ItemName: null,
+                        Quantity: null,
+                        Price: null,
+                      };
+                      
+                      responseBody.ItemName = element.ItemName;
+                      responseBody.Price = element.Price;
+                      responseBody.Quantity = element.Quantity;
+                      console.log(responseBody);
+                      rbArray.push(responseBody);
+                    }
+                    console.log(rbArray);
+                    console.log("rbArray.length: " + rbArray.length)
+                    for(const element of rbArray) {
+                      db.query(
+                        "INSERT INTO ITEM(ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?);",
+                        [
+                          element.ItemName,
+                          result.insertId,
+                          element.Quantity,
+                          element.Price,
+                        ],
+                        (error3, result3) => {
+                          if (error3) throw error3;
+                          console.log("ITEM ADDED TO ORDER");
+                        }
+                      ); 
+                    }
+                  }
+                }
+              );
+              //DELETE ALL CARTITEMS FOR A UID AND SID
+              db.query(
+              "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
+              [request.body.UID, request.body.SID],
+              (error, result) => {
+                console.log("Cart items removed for Order.");
+              }
+            );
+            }
+          );
       }
-    );
-    }
-  );  
+  );
 });
 
 module.exports = router;
