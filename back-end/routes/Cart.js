@@ -236,7 +236,7 @@ router.post("/checkout", (request, response) => {
   let total = 0;
   db.query(
           "SELECT Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
-          [requst.body.UID, request.body.SID],
+          [request.body.UID, request.body.SID],
           (error, result) => {
             if (error) {
               throw error;
