@@ -4,6 +4,12 @@ import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
 const SponsorDriverApp = () => {
+  const [data, setData] = useState([]);
+  const [sponsor, setSponsor] = useState("Sponsor");
+  let SID = window.localStorage.getItem("sid");
+
+  useEffect(() => {}, []);
+
   return (
     <ReportGenerator
       title="Sponsor Driver Applications"

@@ -209,4 +209,22 @@ router.get("/retrieveallsponsorapplications", (request, response) => {
   );
 });
 
+router.get("/getAllSponsorApps", (req, res) => {
+  //get all apps
+  db.query(
+    " SELECT * FROM APPLICATION WHERE SID = ?;",
+    [req.query.SID],
+    (err, result) => {
+      if (err) {
+        console.log("problem with get all sponsor apps");
+        res.send(false);
+      } else if (result.length == 0) {
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(result));
+      }
+    }
+  );
+});
+
 module.exports = router;

@@ -24,46 +24,6 @@ db.connect((error) => {
  *
  */
 
-// get reportable accounts
-router.get("/", (request, respsonse) => {
-  console.log("Hit get all accounts");
-
-  let responseBody = {
-    driverAccounts: null,
-    sponsorAccounts: null,
-  };
-
-  if (request.params.role == "SPONSORACCT") {
-    db.query(
-      "SELECT UID, First_name, Last_name Password_hash, Password_salt FROM DRIVER;",
-      (error, result) => {
-        if (error) throw error;
-        responseBody.driverAccounts = result;
-      }
-    );
-  }
-
-  if (request.params.role == "ADMIN") {
-    db.query(
-      "SELECT UID, First_name, Last_name Password_hash, Password_salt FROM DRIVER;",
-      (error, result) => {
-        if (error) throw error;
-        responseBody.driverAccounts = result;
-      }
-    );
-
-    db.query(
-      "SELECT SUID, First_name, Last_name Password_hash, Password_salt FROM SPONSORACCT;",
-      (error, result) => {
-        if (error) throw error;
-        responseBody.sponsorAccounts = result;
-      }
-    );
-  }
-
-  respsonse.send(responseBody);
-});
-
 router.get("/SponsorName", (req, res) => {
   console.log("Getting sponsor names");
 
