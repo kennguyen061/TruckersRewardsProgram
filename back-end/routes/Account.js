@@ -90,7 +90,7 @@ router.post("/updatepassword", (request, response) => {
           let newsalt = new Date().toISOString();
           let newhash = crypto
             .createHash("sha256")
-            .update(request.body.newpassword + salt)
+            .update(request.body.newpassword + newsalt)
             .digest("base64");
 
           console.log("The new hash is: " + newhash);
@@ -99,7 +99,7 @@ router.post("/updatepassword", (request, response) => {
 
           db.query(
             "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-            [hash, salt, request.body.email],
+            [newhash, newsalt, request.body.email],
             (error2) => {
               if (error2) throw error2;
               //call changepasswordlog
@@ -130,7 +130,7 @@ router.post("/updatepassword", (request, response) => {
           let newsalt = new Date().toISOString();
           let newhash = crypto
             .createHash("sha256")
-            .update(request.body.newpassword + salt)
+            .update(request.body.newpassword + newsalt)
             .digest("base64");
 
           console.log("The new hash is: " + newhash);
@@ -139,7 +139,7 @@ router.post("/updatepassword", (request, response) => {
 
           db.query(
             "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-            [hash, salt, request.body.email],
+            [newhash, newsalt, request.body.email],
             (error2) => {
               if (error2) throw error2;
               //call changepasswordlog
@@ -170,7 +170,7 @@ router.post("/updatepassword", (request, response) => {
           let newsalt = new Date().toISOString();
           let newhash = crypto
             .createHash("sha256")
-            .update(request.body.newpassword + salt)
+            .update(request.body.newpassword + newsalt)
             .digest("base64");
 
           console.log("The new hash is: " + newhash);
@@ -179,7 +179,7 @@ router.post("/updatepassword", (request, response) => {
 
           db.query(
             "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
-            [hash, salt, request.body.email],
+            [newhash, newsalt, request.body.email],
             (error2) => {
               if (error2) throw error2;
               //call changepasswordlog
