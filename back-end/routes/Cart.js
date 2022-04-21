@@ -263,7 +263,7 @@ router.post("/checkout", (request, response) => {
                 Quantity: null,
                 Price: null,
               };
-    
+              
               responseBody.ItemID = element.ItemID;
               responseBody.Price = element.Price;
               responseBody.Quantity = element.Quantity;
@@ -279,7 +279,7 @@ router.post("/checkout", (request, response) => {
           "INSERT INTO ITEM(ItemID,OrderID,Quantity,Price) VALUES(?,?,?,?);",
           [
             element.ItemID,
-            result.insertID,
+            result.insertId,
             element.Quantity,
             element.Price,
           ],
@@ -289,17 +289,17 @@ router.post("/checkout", (request, response) => {
           }
         ); 
       }
+        //DELETE ALL CARTITEMS FOR A UID AND SID
+      db.query(
+      "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
+      [request.body.UID, request.body.SID],
+      (error, result) => {
+        console.log("Cart items removed for Order.");
+        response.send(true);
+      }
+      );
     }
   );  
-  //DELETE ALL CARTITEMS FOR A UID AND SID
-  db.query(
-    "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-    [request.body.UID, request.body.SID],
-    (error, result) => {
-      console.log("Cart items removed for Order.");
-      response.send(true);
-    }
-  );
 });
 
 module.exports = router;
