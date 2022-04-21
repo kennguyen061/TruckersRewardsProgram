@@ -247,7 +247,7 @@ router.post("/checkout", (request, response) => {
       //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID  
       let rbArray = Array();
       db.query(
-        "SELECT ItemID, ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+        "SELECT ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
         [request.body.UID, request.body.SID],
         (error2, result2) => {
           if (error2) {
@@ -259,7 +259,6 @@ router.post("/checkout", (request, response) => {
             for (const element of result2) {
               console.log(element.ItemID);
               let responseBody = {
-                ItemID: null,
                 ItemName: null,
                 Quantity: null,
                 Price: null,
@@ -276,9 +275,8 @@ router.post("/checkout", (request, response) => {
             console.log("rbArray.length: " + rbArray.length)
             for(const element of rbArray) {
               db.query(
-                "INSERT INTO ITEM(ItemID,ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?,?);",
+                "INSERT INTO ITEM(ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?);",
                 [
-                  element.ItemID,
                   element.ItemName,
                   result.insertId,
                   element.Quantity,

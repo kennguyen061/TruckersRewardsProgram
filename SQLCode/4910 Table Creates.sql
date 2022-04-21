@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS ITEM (
     Quantity int NOT NULL,
     Price float NOT NULL,
     OrderID int NOT NULL,
-    primary key (ItemID, OrderID),
+    primary key (ItemID),
     foreign key (OrderID) references ORDERS(OrderID)
     );
     

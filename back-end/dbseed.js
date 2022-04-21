@@ -97,7 +97,7 @@ db.connect(function (err) {
 
   //Creates ITEM Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS ITEM ( ItemID int auto_increment NOT NULL unique,ItemName varchar(255) NOT NULL, Quantity int NOT NULL, Price float NOT NULL, OrderID int NOT NULL, primary key (ItemID,OrderID), foreign key (OrderID) references ORDERS (OrderID) );",
+    "CREATE TABLE IF NOT EXISTS ITEM ( ItemID int auto_increment NOT NULL unique,ItemName varchar(255) NOT NULL, Quantity int NOT NULL, Price float NOT NULL, OrderID int NOT NULL, primary key (ItemID), foreign key (OrderID) references ORDERS (OrderID) );",
     function (error, result, fields) {
       console.log(result);
     }
