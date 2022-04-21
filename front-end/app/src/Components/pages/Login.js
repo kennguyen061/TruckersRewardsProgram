@@ -43,9 +43,9 @@ function Login() {
     if (role === "DRIVER") {
       navigate("/pages/Driver_Profile", { replace: true });
     } else if (role === "SPONSOR") {
-      //do something
+      navigate("/pages/Sponsor_Profile", { replace: true });
     } else if (role === "ADMIN") {
-      //do somthing else
+      navigate("/pages/Admin_Profile", { replace: true });
     } else {
       //reject
     }
