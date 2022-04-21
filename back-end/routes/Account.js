@@ -268,7 +268,7 @@ router.post("/", (request, response) => {
         if (hash === result[0].Password_hash) {
           responseBody.exists = true;
           responseBody.id = result[0].SUID;
-          responseBody.role = "SPONSORACCT";
+          responseBody.role = "SPONSOR";
           responseBody.sid = result[0].SID;
         }
         if (responseBody.exists) {
@@ -378,27 +378,25 @@ router.post("/create", (req, res) => {
 });
 
 // get user id
-router.get('/id', (request, response) => {
+router.get("/id", (request, response) => {
+  let responseBody = {
+    id: 0,
+  };
 
-    let responseBody = {
-        id: 0
+  db.query(
+    "SELECT UID FROM DRIVER WHERE Email = ?;",
+    [request.query.email],
+    (error, result) => {
+      if (error) {
+        console.log("ERROR getting ID");
+      } else if (result.length == 0) {
+        console.log("ERROR getting ID");
+      } else {
+        responseBody.id = result[0].UID;
+        response.send(JSON.stringify(responseBody));
+      }
     }
-
-    db.query("SELECT UID FROM DRIVER WHERE Email = ?;",
-        [
-            request.query.email
-        ],
-        (error, result) => {
-            if (error) {
-                console.log("ERROR getting ID")
-            } else if (result.length == 0) {
-                console.log("ERROR getting ID")
-            } else {
-                responseBody.id = result[0].UID
-                response.send(JSON.stringify(responseBody));
-            }
-        }
-    );
+  );
 });
 
 //Create a Sponsor
