@@ -376,6 +376,30 @@ router.post("/create", (req, res) => {
   );
 });
 
+// get user id
+router.get('/id', (request, response) => {
+
+    let responseBody = {
+        id: 0
+    }
+
+    db.query("SELECT UID FROM DRIVER WHERE Email = ?;",
+        [
+            request.query.email
+        ],
+        (error, result) => {
+            if (error) {
+                console.log("ERROR getting ID")
+            } else if (result.length == 0) {
+                console.log("ERROR getting ID")
+            } else {
+                responseBody.id = result[0].UID
+                response.send(JSON.stringify(responseBody));
+            }
+        }
+    );
+});
+
 //Create a Sponsor
 router.post("/createsponsor", (req, res) => {
   console.log("Hit create sponsor");
