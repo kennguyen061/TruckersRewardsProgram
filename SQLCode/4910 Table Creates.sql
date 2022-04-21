@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS ORDERS (
 	OrderID int auto_increment NOT NULL unique,
 	OrderDate DATETIME NOT NULL,
 	Address varchar(20) NOT NULL,
+    Total int NOT NULL,
 	UID int NOT NULL,
 	SID int NOT NULL,
 	primary key (OrderID),
@@ -112,10 +113,11 @@ CREATE TABLE IF NOT EXISTS ORDERS (
     
 CREATE TABLE IF NOT EXISTS ITEM (
 	ItemID int auto_increment NOT NULL unique,
+    ItemName varchar(255) NOT NULL,
     Quantity int NOT NULL,
     Price float NOT NULL,
     OrderID int NOT NULL,
-    primary key (ItemID),
+    primary key (ItemID, OrderID),
     foreign key (OrderID) references ORDERS(OrderID)
     );
     

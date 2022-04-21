@@ -238,66 +238,69 @@ router.post("/checkout", (request, response) => {
     [
       request.body.UID,
       request.body.SID,
-      request.body.Address,
+      request.body.address,
     ],
     (error, result) => {
       if (error) throw error;
       console.log("Order created");
-      //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID
-      console.log("Hit user cart");
-
+      console.log("Result id: " + result.insertId);
+      //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID  
       let rbArray = Array();
       db.query(
-        "SELECT ItemID, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+        "SELECT ItemID, ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
         [request.body.UID, request.body.SID],
         (error2, result2) => {
           if (error2) {
             throw error2;
           } else {
+              console.log("responsebody reached")
             //responsebody array
             //loop through result[index]
             for (const element of result2) {
               console.log(element.ItemID);
               let responseBody = {
                 ItemID: null,
+                ItemName: null,
                 Quantity: null,
                 Price: null,
               };
               
               responseBody.ItemID = element.ItemID;
+              responseBody.ItemName = element.ItemName;
               responseBody.Price = element.Price;
               responseBody.Quantity = element.Quantity;
               console.log(responseBody);
               rbArray.push(responseBody);
             }
             console.log(rbArray);
-          }
-          for(const element of rbArray) {
-            db.query(
-              "INSERT INTO ITEM(ItemID,OrderID,Quantity,Price) VALUES(?,?,?,?);",
-              [
-                element.ItemID,
-                result.insertId,
-                element.Quantity,
-                element.Price,
-              ],
-              (error3, result3) => {
-                if (error2) throw error2;
-                console.log("ITEM ADDED TO ORDER");
-              }
-            ); 
+            console.log("rbArray.length: " + rbArray.length)
+            for(const element of rbArray) {
+              db.query(
+                "INSERT INTO ITEM(ItemID,ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?,?);",
+                [
+                  element.ItemID,
+                  element.ItemName,
+                  result.insertId,
+                  element.Quantity,
+                  element.Price,
+                ],
+                (error3, result3) => {
+                  if (error3) throw error3;
+                  console.log("ITEM ADDED TO ORDER");
+                }
+              ); 
+            }
           }
         }
       );
-        //DELETE ALL CARTITEMS FOR A UID AND SID
+      //DELETE ALL CARTITEMS FOR A UID AND SID
       db.query(
       "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-      [request.body.UID, request.body.SID],
+      [1, 1],
       (error, result) => {
         console.log("Cart items removed for Order.");
-        response.send(true);
       }
-      );
+    );
     }
   );  
 });
