@@ -144,7 +144,7 @@ const DriverForm = (props) => {
           type="password"
           name="password"
           value={enteredPassword}
-          placeholder="4-8 Characters"
+          placeholder="8-15 Characters"
           minLength="8"
           maxLength="15"
           onChange={(event) => setEnteredPassword(event.target.value)}
@@ -156,9 +156,9 @@ const DriverForm = (props) => {
         <input
           type="password"
           value={reenteredPassword}
-          placeholder="4-8 Characters"
-          minLength="4"
-          maxLength="8"
+          placeholder="8-15 Characters"
+          minLength="8"
+          maxLength="15"
           onChange={(event) => setReenteredPassword(event.target.value)}
           required
         />

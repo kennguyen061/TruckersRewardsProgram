@@ -25,6 +25,7 @@ import SponsorPassword from "./Components/Reports/SponsorReports/SponsorPassword
 import SponsorLogin from "./Components/Reports/SponsorReports/SponsorLoginAttemps.js";
 import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChange.js";
 import Listing_details from "./Components/Catalog/listing_details.js";
+import Error from "./Components/pages/Error.js";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/pages/PointTake" element={<PointTake />} />
           <Route path="/Catalog/Catalog" element={<Catalog />} />
           <Route path="/Listing_details/:id" element={<Listing_details />} />
+          <Route path="/pages/Error" element={<Error />} />
 
           <Route
             path="/pages/Driver_Sponsor_Dashboard"

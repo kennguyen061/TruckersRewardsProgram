@@ -47,7 +47,7 @@ function Login() {
     } else if (role === "ADMIN") {
       navigate("/pages/Admin_Profile", { replace: true });
     } else {
-      //reject
+      navigate("/pages/Error", { replace: true });
     }
   };
 
