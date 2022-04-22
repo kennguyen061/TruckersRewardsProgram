@@ -40,7 +40,7 @@ const SponsorDriverApp = () => {
       filename="Sponsor-Driver-Apps.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Driver Application Report1`}</h1>
+        <h1>{`${sponsor}'s Driver Application Report`}</h1>
         <p>This is a report of all driver apps</p>
         <table>
           <thead>

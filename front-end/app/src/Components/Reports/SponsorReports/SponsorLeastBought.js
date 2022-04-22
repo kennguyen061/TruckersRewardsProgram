@@ -36,14 +36,12 @@ const SponsorLeastBought = () => {
       filename="Sponsor-Least-Bought.pdf"
     >
       <div className="ReportStyle">
-        <h1>Sponsor Least Bought Rewards</h1>
+        <h1>{`${sponsor}'s Least Bought Rewards`}</h1>
         <p>This is a report of the least bought rewards</p>
         <table>
           <thead>
             <tr>
               <th>Reward</th>
-              <th>Cost</th>
-              <th>Points</th>
               <th>Rank</th>
             </tr>
           </thead>
