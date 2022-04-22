@@ -123,4 +123,12 @@ router.get("/pointChangeSponsor", (req, res) => {
   );
 });
 
+//get all drivers current
+//get all apps
+//get least bought for all sponsors
+//get login for all
+//getr most bought for all
+//get all password changes
+//get all points changes
+
 module.exports = router;
