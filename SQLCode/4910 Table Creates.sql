@@ -100,16 +100,7 @@ CREATE TABLE IF NOT EXISTS APPLICATION (
     foreign key (SID) references SPONSORORG(SID)
     );
     
-CREATE TABLE IF NOT EXISTS ORDERS (
-	OrderID int auto_increment NOT NULL unique,
-	OrderDate DATETIME NOT NULL,
-	Address varchar(20) NOT NULL,
-    Total int NOT NULL,
-	UID int NOT NULL,
-	SID int NOT NULL,
-	primary key (OrderID),
-	foreign key (UID) references DRIVER(UID),
-	foreign key (SID) references SPONSORORG(SID));
+CREATE TABLE IF NOT EXISTS ORDERS ( OrderID int auto_increment NOT NULL unique, Total int NOT NULL,OrderDate DATETIME NOT NULL, Address varchar(20) NOT NULL, Orderstatus varchar(20) NOT NULL, UID int NOT NULL, SID int NOT NULL, primary key (OrderID), foreign key (UID) references DRIVER (UID), foreign key (SID) references SPONSORORG (SID) );
     
 CREATE TABLE IF NOT EXISTS ITEM (
 	ItemID int auto_increment NOT NULL unique,
