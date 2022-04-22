@@ -108,4 +108,19 @@ router.get("/sponsorPwdChanges", (req, res) => {
   );
 });
 
+router.get("/pointChangeSponsor", (req, res) => {
+  db.query(
+    "SELECT p.Point_Update, p.Update_Status, p.PointDate,d.Email FROM POINTBALANCELOG p JOIN POINTBALANCE b ON p.PointID = b.PointID JOIN DRIVER d ON d.UID = b.UID WHERE b.SID = ?;",
+    [req.query.SID],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting points info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
 module.exports = router;

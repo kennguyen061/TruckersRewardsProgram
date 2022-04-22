@@ -37,7 +37,6 @@ const SponsorLogin = () => {
       title="Sponsor Driver Login Attempts"
       filename="Sponsor-Driver-Login-Attempts.pdf"
     >
-      {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
         <h1>{`${sponsor}'s Driver Login Attempts`}</h1>
         <p>This is a report of all attempts to login</p>

@@ -32,7 +32,7 @@ const SponsorDriverApp = () => {
     })
       .then((res) => res.json())
       .then((comp) => setSponsor(comp));
-  }, []);
+  }, [SID]);
 
   return (
     <ReportGenerator

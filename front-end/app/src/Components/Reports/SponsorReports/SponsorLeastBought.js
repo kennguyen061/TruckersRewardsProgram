@@ -28,7 +28,7 @@ const SponsorLeastBought = () => {
     })
       .then((res) => res.json())
       .then((comp) => setSponsor(comp));
-  }, []);
+  }, [SID]);
 
   return (
     <ReportGenerator
@@ -47,12 +47,12 @@ const SponsorLeastBought = () => {
           </thead>
 
           <tbody>
-            {data.map((item) => {
+            {data.map((item) => (
               <tr>
-                <th>{item.ItemName}</th>
-                <th>{item.Count}</th>
-              </tr>;
-            })}
+                <td>{item.ItemName}</td>
+                <td>{item.Count}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
