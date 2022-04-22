@@ -35,6 +35,9 @@ function SponsorNav() {
         <Link to="/Catalog/Catalog" smooth={true} duration={500}>
           <li>Catalog</li>
         </Link>
+        <Link to="/pages/PointTake" smooth={true} duration={50}>
+          <li>Point_Update</li>
+        </Link>
 
         <Link to="/pages/Driver_Management" smooth={true} duration={500}>
           <li>Drivers</li>
