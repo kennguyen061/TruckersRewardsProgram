@@ -416,28 +416,26 @@ router.post("/createsponsor", (req, res) => {
       if (result[0].RowCount != 0) {
         res.send(false);
       } else {
-            db.query(
-              "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
-              [
-                req.body.name,
-                req.body.dRules,
-                req.body.conversionScale,
-                req.body.cRules,
-              ],
-              (errorCreate, resultCreate) => {
-                if (errorCreate) {
-                  console.log("Something went wrong creating a sponsor");
-                } else {
-                  res.send(true);
-                }
-              }
-            );
+        db.query(
+          "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+          [
+            req.body.name,
+            req.body.dRules,
+            req.body.conversionScale,
+            req.body.cRules,
+          ],
+          (errorCreate, resultCreate) => {
+            if (errorCreate) {
+              console.log("Something went wrong creating a sponsor");
+            } else {
+              res.send(true);
+            }
+          }
+        );
       }
     }
   );
 });
-
-
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
 router.post("/createsponsorsubuser", (request, response) => {
