@@ -187,4 +187,22 @@ router.post("/changescale", (request, response) => {
   );
 });
 
+router.get("/getDriverByEmail", (req, res) => {
+  db.query(
+    "SELECT UID FROM DRIVER WHERE Email = ?;",
+    [req.query.Email],
+    (err, result) => {
+      if (err) {
+        console.log("something went wrong getting driver id");
+      } else {
+        if (result.length != 0) {
+          res.send(JSON.stringify(result[0]));
+        } else {
+          res.send(false);
+        }
+      }
+    }
+  );
+});
+
 module.exports = router;
