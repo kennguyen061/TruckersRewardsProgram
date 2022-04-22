@@ -332,7 +332,7 @@ router.post("/create", (req, res) => {
         console.log(
           "There was an error geting the number of users with this email."
         );
-        throw Error;
+        res.send(false);
       } else {
         console.log(Result[0].RowCount);
 
