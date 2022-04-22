@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // toast.warn("Roger's Rewards is currently under development, we appreciated your understanding");
 function Home() {
+  window.localStorage.clear();
   return (
     <div>
       <NewNav />
