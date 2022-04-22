@@ -241,10 +241,16 @@ router.post("/checkout", (request, response) => {
         console.log("EMPTY CART");
       }
       else {
+
         let total = 0;
         db.query("SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
         [request.body.UID,request.body.SID],
         (error,result) => {
+          if(result.length === 0) {
+            console.log("NO AMOUNT");
+            response.send(false);
+          }
+          else {
             let newpointbalance = result[0].Amount;
             //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE) 
             db.query(
@@ -345,10 +351,10 @@ router.post("/checkout", (request, response) => {
                 }
                 );
             }
-            });
+            });            
+          }
         });
       }
-
     });
 });
 
