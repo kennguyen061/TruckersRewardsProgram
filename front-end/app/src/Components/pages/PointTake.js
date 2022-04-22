@@ -26,7 +26,7 @@ const PointTake = () => {
       <div className="spacer"></div>
       <form onSubmit={handleSubmit}>
         <label>
-          Enter Persons name:
+          Enter Persons Email:
           <input
             type="text"
             name="Email:"

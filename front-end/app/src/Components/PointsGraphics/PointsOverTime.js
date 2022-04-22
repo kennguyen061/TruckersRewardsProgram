@@ -43,34 +43,49 @@ function PointsOverTime() {
       });
   }, []);
 
-  /*
+  let everything = new Map();
+
+  const obj = {
+    name: "Jan",
+    Points: 4000,
+  };
+
+  everything.set("0", obj);
+
+  let temp1 = 4000;
+  let temp2 = 5000;
+  let temp3 = 3000;
+  let temp4 = 2000;
+  let temp5 = 1000;
+  let temp6 = 3500;
+
   let data = [
     {
       name: "Jan",
-      Points: 4000,
+      Points: temp1,
     },
     {
       name: "March",
-      Points: 1000,
+      Points: temp2,
     },
     {
       name: "May",
-      Points: 4000,
+      Points: temp3,
     },
     {
       name: "July",
-      Points: 800,
+      Points: temp4,
     },
     {
       name: "October",
-      Points: 1500,
+      Points: temp5,
     },
     {
       name: "December",
-      Points: 5000,
+      Points: temp6,
     },
   ];
-*/
+
   return (
     <div className="Graph">
       <div className="dropdown">
