@@ -416,32 +416,36 @@ router.post("/createsponsor", (req, res) => {
       if (result[0].RowCount != 0) {
         res.send(false);
       } else {
-          if (isAllPresent(req.body.password)) {
-            db.query(
-              "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
-              [
-                req.body.name,
-                req.body.dRules,
-                req.body.conversionScale,
-                req.body.cRules,
-              ],
-              (errorCreate, resultCreate) => {
-                if (errorCreate) {
-                  console.log("Something went wrong creating a sponsor");
-                } else {
-                  res.send(true);
-                }
+
+        if (isAllPresent(req.body.password)) {
+          db.query(
+            "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+            [
+              req.body.name,
+              req.body.dRules,
+              req.body.conversionScale,
+              req.body.cRules,
+            ],
+            (errorCreate, resultCreate) => {
+              if (errorCreate) {
+                console.log("Something went wrong creating a sponsor");
+              } else {
+                res.send(true);
               }
-            );
-          }
-          else {
-            console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
-            res.send(false);
-          }
+            }
+          );
+        }
+        //If it doesn't meet password complexity requirements
+        else {
+          console.log("SPONSORSUBUSER PASSWORD DOES NOT MEET REQUIREMENTS");
+          res.send(false);
+        }
       }
     }
   );
 });
+
+
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
 router.post("/createsponsorsubuser", (request, response) => {
@@ -449,6 +453,73 @@ router.post("/createsponsorsubuser", (request, response) => {
   console.log("Hit create sponsor subuser");
   db.query(
     "SELECT COUNT(*) AS RowCount FROM SPONSORACCT WHERE Email = ?;",
+    [request.body.email],
+    (error, result) => {
+      if (error) {
+        throw error;
+      } else if (result[0].RowCount != 0) {
+        response.send(false);
+      } else {
+        // create hash and salt
+        let salt = new Date().toISOString();
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
+
+        let org_id = "";
+
+        db.query(
+          "SELECT SID FROM SPONSORORG WHERE name = ?;",
+          [request.body.sponsorName],
+          (error2, result2) => {
+            if (error2) {
+              console.log("Sponsor does not exists");
+              throw error2;
+            } else {
+              console.log(result2[0].SID);
+              if (isAllPresent(req.body.password)) {
+
+              }
+
+
+              org_id = result2[0].SID;
+              db.query(
+                "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                [
+                  request.body.firstName,
+                  request.body.lastName,
+                  request.body.email,
+                  hash,
+                  salt,
+                  request.body.street,
+                  request.body.phoneNum,
+                  1,
+                  org_id,
+                ],
+                (errorInsert) => {
+                  if (errorInsert) {
+                    console.log("Error Creating Sponsor sub user");
+                    throw errorInsert;
+                  } else {
+                    response.send(true);
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+// create admin
+router.post("/createadmin", (request, response) => {
+  // check if account already exists
+  console.log("Hit create admin");
+  db.query(
+    "SELECT COUNT(*) AS RowCount FROM ADMIN WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
       if (error) {
