@@ -416,30 +416,22 @@ router.post("/createsponsor", (req, res) => {
       if (result[0].RowCount != 0) {
         res.send(false);
       } else {
-
-        if (isAllPresent(req.body.password)) {
-          db.query(
-            "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
-            [
-              req.body.name,
-              req.body.dRules,
-              req.body.conversionScale,
-              req.body.cRules,
-            ],
-            (errorCreate, resultCreate) => {
-              if (errorCreate) {
-                console.log("Something went wrong creating a sponsor");
-              } else {
-                res.send(true);
+            db.query(
+              "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+              [
+                req.body.name,
+                req.body.dRules,
+                req.body.conversionScale,
+                req.body.cRules,
+              ],
+              (errorCreate, resultCreate) => {
+                if (errorCreate) {
+                  console.log("Something went wrong creating a sponsor");
+                } else {
+                  res.send(true);
+                }
               }
-            }
-          );
-        }
-        //If it doesn't meet password complexity requirements
-        else {
-          console.log("SPONSORSUBUSER PASSWORD DOES NOT MEET REQUIREMENTS");
-          res.send(false);
-        }
+            );
       }
     }
   );
@@ -479,33 +471,35 @@ router.post("/createsponsorsubuser", (request, response) => {
             } else {
               console.log(result2[0].SID);
               if (isAllPresent(req.body.password)) {
-
-              }
-
-
-              org_id = result2[0].SID;
-              db.query(
-                "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [
-                  request.body.firstName,
-                  request.body.lastName,
-                  request.body.email,
-                  hash,
-                  salt,
-                  request.body.street,
-                  request.body.phoneNum,
-                  1,
-                  org_id,
-                ],
-                (errorInsert) => {
-                  if (errorInsert) {
-                    console.log("Error Creating Sponsor sub user");
-                    throw errorInsert;
-                  } else {
-                    response.send(true);
+                org_id = result2[0].SID;
+                db.query(
+                  "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                  [
+                    request.body.firstName,
+                    request.body.lastName,
+                    request.body.email,
+                    hash,
+                    salt,
+                    request.body.street,
+                    request.body.phoneNum,
+                    1,
+                    org_id,
+                  ],
+                  (errorInsert) => {
+                    if (errorInsert) {
+                      console.log("Error Creating Sponsor sub user");
+                      throw errorInsert;
+                    } else {
+                      response.send(true);
+                    }
                   }
-                }
-              );
+                );                
+              }
+              //If it doesn't meet password complexity requirements
+              else {
+                console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+                res.send(false);
+              }
             }
           }
         );
