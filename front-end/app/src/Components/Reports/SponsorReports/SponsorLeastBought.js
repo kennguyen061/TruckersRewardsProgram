@@ -50,34 +50,13 @@ const SponsorLeastBought = () => {
 
           <tbody>
             {data.map((item) => {
-              <tr>{item.name}</tr>
-              <tr>item.</tr>
+              <tr>
+                <th>{item.ItemName}</th>
+                <th>{item.Count}</th>
+              </tr>;
             })}
           </tbody>
-          {/*
-
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
-
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
-
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
-          */}
-        </thead>
+        </table>
       </div>
     </ReportGenerator>
   );
