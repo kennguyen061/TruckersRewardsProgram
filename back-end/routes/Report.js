@@ -50,7 +50,7 @@ router.get("/SponsorName", (req, res) => {
 
 router.get("/boughtDESC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
     [],
     (err, results) => {
       if (err) {
@@ -65,7 +65,7 @@ router.get("/boughtDESC", (req, res) => {
 
 router.get("/boughtASC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
     [],
     (err, results) => {
       if (err) {
