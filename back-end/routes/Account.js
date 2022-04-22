@@ -283,7 +283,9 @@ router.post("/", (request, response) => {
         }
       }
     );
-  } else if (!responseBody.exists) {
+  }
+
+  if (!responseBody.exists) {
     // check admin table
     db.query(
       "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
