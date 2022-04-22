@@ -22,7 +22,6 @@ function PointsOverTime() {
   const sid = window.localStorage.getItem("sid");
 
   const [ReturnListData, setReturnedListData] = useState([]);
-  const [ReturnListDate, setReturnListDate] = useState([]);
 
   const url = new URL("http://18.235.52.212:8000/points/history");
 
@@ -33,10 +32,6 @@ function PointsOverTime() {
     setReturnedListData(item);
   };
 
-  const AllListHandler = (item) => {
-    setReturnListDate(item);
-  };
-
   useEffect(() => {
     fetch(url, {
       method: "GET",
@@ -45,10 +40,10 @@ function PointsOverTime() {
       .then((response) => response.json())
       .then((info) => {
         AllPointHandler(info);
-        AllListHandler(info);
       });
   }, []);
 
+  /*
   let data = [
     {
       name: "Jan",
@@ -75,7 +70,7 @@ function PointsOverTime() {
       Points: 5000,
     },
   ];
-
+*/
   return (
     <div className="Graph">
       <div className="dropdown">
