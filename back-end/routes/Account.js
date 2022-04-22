@@ -57,7 +57,7 @@ function loginAttempt(email, status) {
   );
 }
 
-//TODO: Password change log
+//Password change log
 function changePasswordlog(User_type, Email, Change_type) {
   db.query(
     "INSERT INTO PASSWORDCHANGES(User_type, Pwd_date, Email, Change_type) VALUES(?,CURRENT_TIMESTAMP(), ?, ?);",
@@ -338,10 +338,9 @@ router.post("/create", (req, res) => {
           res.status(404);
           res.send(false);
         } else {
-          //TODO: CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
+          //CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
           //If it meets requirements:
-          //isAllPresent(req.body.password)
-          if (true) {
+          if (isAllPresent(req.body.password)) {
             let salt = new Date().toISOString();
 
             let hash = crypto
@@ -417,22 +416,28 @@ router.post("/createsponsor", (req, res) => {
       if (result[0].RowCount != 0) {
         res.send(false);
       } else {
-        db.query(
-          "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
-          [
-            req.body.name,
-            req.body.dRules,
-            req.body.conversionScale,
-            req.body.cRules,
-          ],
-          (errorCreate, resultCreate) => {
-            if (errorCreate) {
-              console.log("Something went wrong creating a sponsor");
-            } else {
-              res.send(true);
-            }
+          if (isAllPresent(req.body.password)) {
+            db.query(
+              "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+              [
+                req.body.name,
+                req.body.dRules,
+                req.body.conversionScale,
+                req.body.cRules,
+              ],
+              (errorCreate, resultCreate) => {
+                if (errorCreate) {
+                  console.log("Something went wrong creating a sponsor");
+                } else {
+                  res.send(true);
+                }
+              }
+            );
           }
-        );
+          else {
+            console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+            res.send(false);
+          }
       }
     }
   );
