@@ -8,6 +8,7 @@ import Login from "./Components/pages/Login.js";
 import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Cart from "./Components/pages/Cart.js";
+import Checkout from "./Components/pages/Checkout.js"
 import PointTake from "./Components/pages/PointTake.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import Edit_Catalog from "./Components/Catalog/Sponsor_Catalog_Edit.js";
@@ -26,6 +27,7 @@ import SponsorLogin from "./Components/Reports/SponsorReports/SponsorLoginAttemp
 import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChange.js";
 import Listing_details from "./Components/Catalog/listing_details.js";
 import Error from "./Components/pages/Error.js";
+import Orders from "./Components/pages/Orders.js"
 
 function App() {
   return (
@@ -58,13 +60,26 @@ function App() {
             path="/pages/Apply_To_Sponsor"
             element={<Apply_To_Sponsor />}
           />
-          <Route path="/Reports/SponsorReports" element={<SponsorReports />} />
+          <Route 
+            path="/Reports/SponsorReports" 
+            element={<SponsorReports />} 
+          />
           <Route
             path="/Catalog/Sponsor_Catalog_Edit"
             element={<Edit_Catalog />}
           />
-          <Route path="/pages/Cart" element={<Cart />} />
-
+          <Route 
+            path="/pages/Cart"
+            element={<Cart />} 
+          />
+          <Route 
+            path="/Checkout"
+            element={<Checkout />} 
+          />
+          <Route 
+            path="/pages/Orders"
+            element={<Orders />} 
+          />      
           <Route
             path="/Reports/SponsorReports/CurrentDrivers"
             element={<SponsorCurrentDriver />}
@@ -94,6 +109,7 @@ function App() {
             element={<SponsorPoints />}
           />
         </Routes>
+
       </div>
     </div>
   );
