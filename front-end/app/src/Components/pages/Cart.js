@@ -9,7 +9,6 @@ toast.configure();
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
-  const [dummy, reload] = useState(false);
 
 
   
@@ -36,6 +35,7 @@ export default function Cart() {
 
   useEffect(() => {
     fetchData();
+
   }, []);
 
   const remove = (item) => () => {
@@ -118,8 +118,9 @@ export default function Cart() {
           >
             <center>
               <h2 style={{ marginTop: 5 }}>{cart.ItemName}</h2>
-              <h3>Inventory Quantity: {cart.Availability}</h3>
-              <h3 style={{ color: "red", marginBottom: 10 }}>
+
+              <br></br><h3>Availability: {cart.Availability}</h3>
+              <br></br><h3 style={{ color: "red", marginBottom: 10 }}>
                 {" "}
                 Cost: {cart.Price}
               
@@ -159,12 +160,14 @@ export default function Cart() {
           </div>
          
         ))}
-        <Link to={`/Checkout`}>
-        <button className="button_1" style={{ marginTop: 30 }}>
-          {" "}
-          Checkout{" "}
-        </button>
-        </Link>
+        <center>
+          <Link to={`/Checkout`}>
+          <button className="button_1" style={{ marginTop: 30 }}>
+            {" "}
+            Checkout{" "}
+          </button>
+          </Link>
+        </center>
       </div>
     </div>
   );

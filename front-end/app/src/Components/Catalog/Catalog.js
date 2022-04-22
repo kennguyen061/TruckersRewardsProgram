@@ -20,6 +20,7 @@ export default function Catalog() {
   //temp driver id
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
+  const sid = window.localStorage.getItem("sid");
 
   //Setup dynamic navbar variable
   let nav = <NewNav />;
@@ -65,17 +66,7 @@ export default function Catalog() {
     toast("Product has been added to the cart");
   };
 
-  const notify_wishlist = (item) => () => {
-    // Calling toast method by passing string
-    //variables to add to the table are
-    //item.listing_id
-    //item.title
-    //item.price (should be in points though)
 
-    //make some conditional that checks if the driver already has that item on their wishlist, if they do don't add it
-
-    toast("Product has been added to your wishlist");
-  };
 
   const fetchHighData = async () => {
     const high_etsy_url =
@@ -225,24 +216,25 @@ export default function Catalog() {
                   Points: {Math.round(listing.price)}
                 </h2>
                 <h4>Description: {listing.description}</h4>
-              </center>
+              
 
-              <button
-                className="button_1"
-                onClick={notify_cart(listing)}
-                style={{ marginLeft: 10, marginTop: 5 }}
-              >
-                {" "}
-                Add to Cart{" "}
-              </button>
-              <button
+                <button
+                  className="button_1"
+                  onClick={notify_cart(listing)}
+                  style={{ marginLeft: 10, marginTop: 5 }}
+                >
+                  {" "}
+                  Add to Cart{" "}
+                </button>
+              </center>
+              {/* <button
                 className="button_1"
                 onClick={notify_wishlist(listing)}
                 style={{ float: "right", marginRight: 10, marginTop: 5 }}
               >
                 {" "}
                 Add to Wishlist
-              </button>
+              </button> */}
             </div>
           ))}
         </div>
