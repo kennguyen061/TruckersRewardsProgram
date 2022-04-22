@@ -325,7 +325,7 @@ router.post("/checkout", (request, response) => {
               );
               }
             );
-          db.query("UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?",
+          db.query("UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?;",
           [
               newpointbalance-total,
               request.body.UID,
