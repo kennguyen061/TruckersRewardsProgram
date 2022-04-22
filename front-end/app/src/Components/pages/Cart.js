@@ -7,22 +7,43 @@ import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 toast.configure();
 
+
 export default function Cart() {
+
   const [cart, setCart] = useState([]);
-
-
+  
   
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
-  // const sid = window.localStorage.getItem("sid");
-
+  const sid = window.localStorage.getItem("sid");
   const url = new URL("http://18.235.52.212:8000/cart/");
 
   url.searchParams.append("UID", id);
   //will need a call to find the SID soon
   url.searchParams.append("SID", 1);
 
+  var total_cost = localStorage.getItem('bannerViews');
+
+  if(!total_cost) {
+    total_cost = 5;
+  }
+
+  function costFunc() {
+    let total = 0;
+    cart.map((cart) => ( 
+      total += (cart.Quantity * cart.Price)
+    ))
+    return total
+  }
+
+  function addTotalCost() {
+    localStorage.setItem('bannerViews', costFunc());
+  }
+
+
+
   const fetchData = () => {
+
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -31,12 +52,20 @@ export default function Cart() {
       .then((data) => {
         setCart(data);
       });
+      
   };
 
   useEffect(() => {
     fetchData();
-
+  
   }, []);
+
+  addTotalCost();
+  // cart.map((cart) => ( 
+  //   setCost(cart.Price)
+  // ))
+
+  
 
   const remove = (item) => () => {
   
@@ -79,7 +108,9 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
     
-    
+    addTotalCost();
+    window.location.reload(false);
+
   };
 
   const decrease_qty = (item) => () => {
@@ -99,7 +130,7 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    //window.location.reload(false);
+    window.location.reload(false);
   };
   
 
@@ -112,6 +143,7 @@ export default function Cart() {
 
       <div className="cart">
         {cart.map((cart) => ( 
+          
           <div
             className="item"
             style={{ border: "2px solid black", marginTop: 10 }}
@@ -122,7 +154,7 @@ export default function Cart() {
               <br></br><h3>Availability: {cart.Availability}</h3>
               <br></br><h3 style={{ color: "red", marginBottom: 10 }}>
                 {" "}
-                Cost: {cart.Price}
+                Total Cost: {cart.Quantity * cart.Price} Points
               
               </h3>
             </center>
@@ -161,6 +193,7 @@ export default function Cart() {
          
         ))}
         <center>
+          <h1>Cart Total : {total_cost} Points</h1>
           <Link to={`/Checkout`}>
           <button className="button_1" style={{ marginTop: 30 }}>
             {" "}
