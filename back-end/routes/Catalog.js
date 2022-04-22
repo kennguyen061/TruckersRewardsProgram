@@ -21,15 +21,19 @@ db.connect((error) => {
 
 //update catalog rules
 router.post("/updatecatalogrules", (request, response) => {
-  console.log("Hit update cat rules");
+  console.log("Hit update cart rules");
+  console.log(request.body);
   db.query(
     "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
     [request.body.rules, request.body.SID],
     (error, result) => {
+      console.log("request made");
       if (error) throw error;
       if (result.affectedRows == 1) {
+        console.log("true");
         response.send(true);
       } else {
+        console.log("false");
         response.send(false);
       }
     }
