@@ -209,6 +209,22 @@ router.get("/pointChangeAll", (req, res) => {
       }
     }
   );
+
+  //get all password changes
+  router.get("/allPwdChanges", (req, res) => {
+    db.query(
+      "SELECT r.Email, r.Pwd_date, r.User_type FROM PASSWORDCHANGES r JOIN DRIVER d ON d.Email = r.Email JOIN SPONSORANDDRIVER s ON s.UID = d.UID;",
+      [],
+      (err, results) => {
+        if (err) {
+          console.log("problem getting password info");
+          res.send(false);
+        } else {
+          res.send(JSON.stringify(results));
+        }
+      }
+    );
+  });
 });
 
 module.exports = router;

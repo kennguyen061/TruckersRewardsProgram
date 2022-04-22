@@ -20,7 +20,7 @@ const SponsorDriverApp = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data2) => setData(data2));
 
     const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
 
@@ -50,7 +50,7 @@ const SponsorDriverApp = () => {
               <th>Phone Number</th>
               <th>Application Status</th>
               <th>Date Applied</th>
-              <th> Reason</th>
+              <th>Reason</th>
             </tr>
           </thead>
           <tbody>

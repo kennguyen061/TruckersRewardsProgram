@@ -2,43 +2,26 @@ import { useState, useEffect } from "react";
 import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
-const SponsorLogin = () => {
+const AdminLogin = () => {
   const [data, setData] = useState([]);
-  const [sponsor, setSponsor] = useState("Sponsor");
-  let SID = window.localStorage.getItem("sid");
 
   useEffect(() => {
-    const url = new URL(
-      "http://18.235.52.212:8000/reports/sponsorLoginAttempts"
-    );
-
-    url.searchParams.append("SID", SID);
+    const url = new URL("http://18.235.52.212:8000/reports/allLoginAttempts");
 
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
-
-    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
-
-    urlName.searchParams.append("sid", SID);
-
-    fetch(urlName, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((comp) => setSponsor(comp));
-  }, [SID]);
+      .then((data2) => setData(data2));
+  }, []);
   return (
     <ReportGenerator
-      title="Sponsor Driver Login Attempts"
-      filename="Sponsor-Driver-Login-Attempts.pdf"
+      title="Admin Driver Login Attempts"
+      filename="Admin-Driver-Login-Attempts.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Driver Login Attempts`}</h1>
+        <h1>{`Roger's Rewards's Driver Login Attempts`}</h1>
         <p>This is a report of all attempts to login</p>
         <table>
           <thead>
@@ -64,4 +47,4 @@ const SponsorLogin = () => {
   );
 };
 
-export default SponsorLogin;
+export default AdminLogin;

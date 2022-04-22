@@ -3,44 +3,27 @@ import ReportGenerator from "../ReportGenerator";
 
 import "./SponsorReport.css";
 
-const SponsorDriverApp = () => {
+const AdminDriverApp = () => {
   const [data, setData] = useState([]);
-  const [sponsor, setSponsor] = useState("Sponsor");
-  let SID = window.localStorage.getItem("sid");
 
   useEffect(() => {
-    const url = new URL(
-      "http://18.235.52.212:8000/application/getAllSponsorApps"
-    );
-
-    url.searchParams.append("SID", SID);
+    const url = new URL("http://18.235.52.212:8000/reports/getAllApps");
 
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
-
-    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
-
-    urlName.searchParams.append("sid", SID);
-
-    fetch(urlName, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((comp) => setSponsor(comp));
-  }, [SID]);
+      .then((data2) => setData(data2));
+  }, []);
 
   return (
     <ReportGenerator
-      title="Sponsor Driver Applications"
-      filename="Sponsor-Driver-Apps.pdf"
+      title="Admin Driver Applications"
+      filename="Admin-Driver-Apps.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Driver Application Report`}</h1>
+        <h1>{`Roger's Rewards's Driver Application Report`}</h1>
         <p>This is a report of all driver apps</p>
         <table>
           <thead>
@@ -50,7 +33,7 @@ const SponsorDriverApp = () => {
               <th>Phone Number</th>
               <th>Application Status</th>
               <th>Date Applied</th>
-              <th> Reason</th>
+              <th>Reason</th>
             </tr>
           </thead>
           <tbody>

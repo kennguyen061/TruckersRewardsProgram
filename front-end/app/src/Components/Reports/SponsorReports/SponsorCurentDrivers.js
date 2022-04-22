@@ -18,7 +18,7 @@ const SponsorCurrentDrivers = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data2) => setData(data2));
 
     const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
 
@@ -38,7 +38,7 @@ const SponsorCurrentDrivers = () => {
       filename="Sponsor-Current-Drivers.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Curent Drivers`}</h1>
+        <h1>{`${sponsor}'s Current Drivers`}</h1>
         <p>This is a report of all drivers</p>
         <table>
           <thead>
@@ -46,7 +46,7 @@ const SponsorCurrentDrivers = () => {
               <th>Driver</th>
               <th>Address</th>
               <th>Phone number</th>
-              <th> Email</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>

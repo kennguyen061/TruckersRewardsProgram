@@ -2,41 +2,23 @@ import { useState, useEffect } from "react";
 import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
-const SponsorPoints = () => {
+const AdminPoints = () => {
   const [data, setData] = useState([]);
-  const [sponsor, setSponsor] = useState("Sponsor");
-  let SID = window.localStorage.getItem("sid");
 
   useEffect(() => {
-    const url = new URL("http://18.235.52.212:8000/reports/pointChangeSponsor");
-
-    url.searchParams.append("SID", SID);
+    const url = new URL("http://18.235.52.212:8000/reports/pointChangeAll");
 
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
-
-    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
-
-    urlName.searchParams.append("sid", SID);
-
-    fetch(urlName, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((comp) => setSponsor(comp));
-  }, [SID]);
+      .then((data2) => setData(data2));
+  }, []);
   return (
-    <ReportGenerator
-      title="Sponsor Driver Points"
-      filename="Sponsor-Driver-Points"
-    >
+    <ReportGenerator title="Admin Driver Points" filename="Admin-Driver-Points">
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Driver Points`}</h1>
+        <h1>{`Roger's Rewards's Driver Points`}</h1>
 
         <p>This is a report of all driver points</p>
         <table>
@@ -64,4 +46,4 @@ const SponsorPoints = () => {
   );
 };
 
-export default SponsorPoints;
+export default AdminPoints;

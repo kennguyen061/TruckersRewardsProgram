@@ -3,40 +3,27 @@ import ReportGenerator from "../ReportGenerator";
 
 import "./SponsorReport.css";
 
-const SponsorMostBought = () => {
+const AdminMostBought = () => {
   const [data, setData] = useState([]);
-  const [sponsor, setSponsor] = useState("Sponsor");
-  let SID = window.localStorage.getItem("sid");
 
   useEffect(() => {
-    const url = new URL("http://18.235.52.212:8000/reports/boughtASC");
+    const url = new URL("http://18.235.52.212:8000/reports/getAllMostBought");
 
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
-
-    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
-
-    urlName.searchParams.append("sid", SID);
-
-    fetch(urlName, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((comp) => setSponsor(comp));
-  }, [SID]);
+      .then((data2) => setData(data2));
+  }, []);
 
   return (
     <ReportGenerator
-      title="Sponsor Most Bought Rewards"
-      filename="Sponsor-Most-Bought.pdf"
+      title="Admin Most Bought Rewards"
+      filename="Admin-Most-Bought.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`${sponsor}'s Most Bought Rewards`}</h1>
+        <h1>{`Roger's Rewards's Most Bought Rewards`}</h1>
         <p>This is a report of the most bought rewards</p>
         <table>
           <thead>
@@ -60,4 +47,4 @@ const SponsorMostBought = () => {
   );
 };
 
-export default SponsorMostBought;
+export default AdminMostBought;
