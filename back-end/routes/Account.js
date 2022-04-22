@@ -367,8 +367,10 @@ router.post("/create", (req, res) => {
                 req.body.phoneNum,
                 1,
               ],
-              (error, result) => {
-                if (error) throw error;
+              (error) => {
+                if (error) {
+                  console.log("Problem inserting driver");
+                }
                 res.send(true);
               }
             );
