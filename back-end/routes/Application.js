@@ -212,7 +212,7 @@ router.get("/retrieveallsponsorapplications", (request, response) => {
 router.get("/getAllSponsorApps", (req, res) => {
   //get all apps
   db.query(
-    " SELECT * FROM APPLICATION WHERE SID = ?;",
+    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ?;",
     [req.query.SID],
     (err, result) => {
       if (err) {
