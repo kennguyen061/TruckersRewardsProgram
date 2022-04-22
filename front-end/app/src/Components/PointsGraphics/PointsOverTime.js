@@ -44,15 +44,16 @@ function PointsOverTime() {
   }, []);
 
   let everything = new Map();
+  let temp1 = 0;
+  useEffect(() => {
+    ReturnListData.map((item) => (temp1 = item.Point_Update[0]));
+  }, []);
+  useEffect(() => {
+    const fuck = Array.from(ReturnListData.values());
+    console.log(fuck);
+  }, []);
 
-  const obj = {
-    name: "Jan",
-    Points: 4000,
-  };
-
-  everything.set("0", obj);
-
-  let temp1 = 4000;
+  //temp1 = 4000;
   let temp2 = 5000;
   let temp3 = 3000;
   let temp4 = 2000;
