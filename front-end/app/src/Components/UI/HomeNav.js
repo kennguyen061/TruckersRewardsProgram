@@ -61,7 +61,9 @@ function HomeNav() {
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
+          <Link to="/pages/Login" smooth={true} duration={500}>
             <button>Account</button>
+          </Link>
           </div>
           <div className="socials">
             <FaFacebook className="icons" />
