@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import DriverNav from "../UI/DriverNav";
+import Footer from "../Footer/Footer";
 import "./Cart.css";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 toast.configure();
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
+  const [dummy, reload] = useState(false);
 
+
+  
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
+  // const sid = window.localStorage.getItem("sid");
 
   const url = new URL("http://18.235.52.212:8000/cart/");
 
@@ -53,16 +59,11 @@ export default function Cart() {
 
     
 
-    window.location.reload(false);
+    //window.location.reload(false);
   };
 
   const increase_qty = (item) => () => {
     const url = new URL("http://18.235.52.212:8000/cart/increasequantity");
-
-    //url.searchParams.append("UID", id);
-    //will need a call to find the SID soon
-    //url.searchParams.append("SID", 1);
-    //url.searchParams.append("ItemID", item.ItemID);
 
     const body = {
       UID: id,
@@ -77,8 +78,8 @@ export default function Cart() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-
-    window.location.reload(false);
+    
+    
   };
 
   const decrease_qty = (item) => () => {
@@ -98,17 +99,19 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    window.location.reload(false);
-
-
+    //window.location.reload(false);
   };
+  
+
 
   return (
+    
     <div>
-      <DriverNav />
+      
+      <DriverNav/>
 
       <div className="cart">
-        {cart.map((cart) => (
+        {cart.map((cart) => ( 
           <div
             className="item"
             style={{ border: "2px solid black", marginTop: 10 }}
@@ -119,6 +122,7 @@ export default function Cart() {
               <h3 style={{ color: "red", marginBottom: 10 }}>
                 {" "}
                 Cost: {cart.Price}
+              
               </h3>
             </center>
 
@@ -152,16 +156,15 @@ export default function Cart() {
                 +{" "}
               </button>
             </div>
-
-            {/* when user clicks this button, it will remove the item the cart (call /remove) */}
           </div>
+         
         ))}
-
-        {/* to be completed */}
+        <Link to={`/Checkout`}>
         <button className="button_1" style={{ marginTop: 30 }}>
           {" "}
           Checkout{" "}
         </button>
+        </Link>
       </div>
     </div>
   );
