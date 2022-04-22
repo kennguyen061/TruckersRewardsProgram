@@ -41,7 +41,7 @@ const SponsorDriverApp = () => {
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>`${sponsor}'s Driver Application Report</h1>
+        <h1>{`${sponsor}'s Driver Application Report1`}</h1>
         <p>This is a report of all driver apps</p>
         <table>
           <thead>
@@ -61,7 +61,7 @@ const SponsorDriverApp = () => {
                 <td>{item.Email} </td>
                 <td>{item.Phone_number}</td>
                 <td>{item.AppStatus}</td>
-                <td>{item.AppDate}</td>
+                <td>{Date(Date.parse(item.AppDate.replace(/[-]/g, "/")))}</td>
                 <td>{item.Reason}</td>
               </tr>
             ))}

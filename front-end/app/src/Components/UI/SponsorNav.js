@@ -26,7 +26,7 @@ function SponsorNav() {
         <Link to="/" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
-        <Link to="/pages/application" smooth={true} duration={500}>
+        <Link to="/Reports/SponsorReports" smooth={true} duration={500}>
           <li>Reports</li>
         </Link>
         <Link to="/Catalog/Sponsor_Catalog_Edit" smooth={true} duration={500}>
@@ -43,7 +43,7 @@ function SponsorNav() {
       <div className="nav-icons">
         <Link to="/" smooth={true} duration={500}>
           <BiLogOut className="icon" style={{ marginRight: "1rem" }} />
-       </Link>
+        </Link>
         <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
           <BsPerson className="icon" />
         </Link>
@@ -61,7 +61,7 @@ function SponsorNav() {
           <Link to="/Home" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/pages/application" smooth={true} duration={500}>
+          <Link to="/Reports/SponsorReports" smooth={true} duration={500}>
             <li>Reports</li>
           </Link>
           <li>Catalog</li>

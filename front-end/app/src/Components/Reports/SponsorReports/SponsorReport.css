@@ -23,4 +23,5 @@ td {
 .ReportStyle h1 {
   font-size: 25pt;
   color: black;
+  text-align: center;
 }
