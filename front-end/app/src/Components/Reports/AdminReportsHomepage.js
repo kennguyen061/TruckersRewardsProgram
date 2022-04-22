@@ -17,7 +17,7 @@ const AdminReportsHomepage = () => {
             <tr>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/CurrenDrivers"
+                  to="/Reports/AdminReports/CurrentDrivers"
                   className="Reports-Link"
                 >
                   Current Drivers Report
@@ -25,7 +25,7 @@ const AdminReportsHomepage = () => {
               </td>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/DriverApp"
+                  to="/Reports/AdminReports/DriverApp"
                   className="Reports-Link"
                 >
                   Driver Application Report
@@ -33,7 +33,7 @@ const AdminReportsHomepage = () => {
               </td>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/LeastBought"
+                  to="/Reports/AdminReports/LeastBought"
                   className="Reports-Link"
                 >
                   Least Bought Rewards Report
@@ -43,7 +43,7 @@ const AdminReportsHomepage = () => {
             <tr>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/MostBought"
+                  to="/Reports/AdminReports/MostBought"
                   className="Reports-Link"
                 >
                   Most Bought Rewards Report
@@ -51,7 +51,7 @@ const AdminReportsHomepage = () => {
               </td>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/LoginAttempts"
+                  to="/Reports/AdminReports/LoginAttempts"
                   className="Reports-Link"
                 >
                   Login Attempts Report
@@ -59,7 +59,7 @@ const AdminReportsHomepage = () => {
               </td>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/PasswordReport"
+                  to="/Reports/AdminReports/PasswordReport"
                   className="Reports-Link"
                 >
                   Password Changes Report
@@ -70,7 +70,7 @@ const AdminReportsHomepage = () => {
               <td></td>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/DriversPoints"
+                  to="/Reports/AdminReports/DriversPoints"
                   className="Reports-Link"
                 >
                   {" "}

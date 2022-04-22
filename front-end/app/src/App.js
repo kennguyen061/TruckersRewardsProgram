@@ -29,6 +29,13 @@ import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChan
 import Listing_details from "./Components/Catalog/listing_details.js";
 import Error from "./Components/pages/Error.js";
 import Orders from "./Components/pages/Orders.js";
+import AdminDrivers from "./Components/Reports/AdminReports/AdminCurentDrivers.js";
+import AdminApps from "./Components/Reports/AdminReports/AdminDriverApp";
+import AdminLeastBought from "./Components/Reports/AdminrReports/AdminLeastBought.js";
+import AdminMostBought from "./Components/Reports/AdminReports/AdminMostBought.js";
+import AdminPassword from "./Components/Reports/AdminReports/AdminPasswordChange.js";
+import AdminLogin from "./Components/Reports/AdminReports/AdminLoginAttemps.js";
+import AdminPoints from "./Components/Reports/AdminReports/AdminPointsChange.js";
 
 function App() {
   return (
@@ -97,6 +104,35 @@ function App() {
           <Route
             path="/Reports/SponsorReports/DriversPoints"
             element={<SponsorPoints />}
+          />
+
+          <Route
+            path="/Reports/AdminReports/CurrentDrivers"
+            element={<AdminDrivers />}
+          />
+          <Route
+            path="/Reports/AdminReports/DriverApp"
+            element={<AdminApps />}
+          />
+          <Route
+            path="/Reports/AdminReports/LeastBought"
+            element={<AdminLeastBought />}
+          />
+          <Route
+            path="/Reports/AdminReports/MostBought"
+            element={<AdminMostBought />}
+          />
+          <Route
+            path="/Reports/AdminReports/LoginAttempts"
+            element={<AdminLogin />}
+          />
+          <Route
+            path="/Reports/AdminReports/PasswordReport"
+            element={<AdminPassword />}
+          />
+          <Route
+            path="/Reports/AdminReports/DriversPoints"
+            element={<AdminPoints />}
           />
         </Routes>
       </div>
