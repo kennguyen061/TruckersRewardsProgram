@@ -4,39 +4,61 @@ import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
 const SponsorPassword = () => {
+  const [data, setData] = useState([]);
+  const [sponsor, setSponsor] = useState("Sponsor");
+  let SID = window.localStorage.getItem("sid");
+
+  useEffect(() => {
+    const url = new URL("http://18.235.52.212:8000/reports/sponsorPwdChanges");
+
+    url.searchParams.append("SID", SID);
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data));
+
+    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
+
+    urlName.searchParams.append("sid", SID);
+
+    fetch(urlName, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((comp) => setSponsor(comp));
+  }, [SID]);
   return (
     <ReportGenerator
       title="Sponsor Driver Password Changes"
       filename="Sponsor-Driver-Password-Changes.pdf"
     >
-      {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Driver Password Changes</h1>
+        <h1>{`${sponsor}'s Password Changes`}</h1>
+
         <p>This is a report of all driver password changes </p>
         <table>
-          <tr>
-            <th>Driver</th>
-            <th>Date Changed</th>
-            <th> Reason</th>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>9/1/11</td>
-            <td>Locked out</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>9/1/11</td>
-            <td>Locked out</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>9/1/11</td>
-            <td>Locked out</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Driver</th>
+              <th>Date Changed</th>
+              <th>User Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tbody>
+              {data.map((item) => (
+                <tr>
+                  <td>{item.Email}</td>
+                  <td>{item.Pwd_date}</td>
+                  <td>{item.User_type} </td>
+                </tr>
+              ))}
+            </tbody>
+          </tbody>
         </table>
       </div>
     </ReportGenerator>

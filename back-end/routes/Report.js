@@ -95,7 +95,7 @@ router.get("/sponsorLoginAttempts", (req, res) => {
 
 router.get("/sponsorPwdChanges", (req, res) => {
   db.query(
-    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
+    "SELECT r.Email, r.Pwd_date, r.User_type FROM PASSWORDCHANGES r JOIN DRIVER d ON d.Email = r.Email JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
     [req.query.SID],
     (err, results) => {
       if (err) {

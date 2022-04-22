@@ -37,7 +37,6 @@ const SponsorCurrentDrivers = () => {
       title="Sponsor Drivers"
       filename="Sponsor-Current-Drivers.pdf"
     >
-      {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
         <h1>{`${sponsor}'s Curent Drivers`}</h1>
         <p>This is a report of all drivers</p>
@@ -60,29 +59,6 @@ const SponsorCurrentDrivers = () => {
               </tr>
             ))}
           </tbody>
-
-          {/*
-          <tr>
-            <td>Bob</td>
-            <td>111 One St Somewhere PA</td>
-            <td>888-888-8888</td>
-            <td>Bob@sposor.net</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>111 One St Somewhere PA</td>
-            <td>888-888-8888</td>
-            <td>Bob@sposor.net</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>111 One St Somewhere PA</td>
-            <td>888-888-8888</td>
-            <td>Bob@sposor.net</td>
-          </tr>
-  */}
         </table>
       </div>
     </ReportGenerator>
