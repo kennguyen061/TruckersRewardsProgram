@@ -90,7 +90,7 @@ function PointsOverTime() {
         <LineChart
           width={500}
           height={300}
-          data={date}
+          data={data}
           margin={{
             top: 15,
             right: 30,
