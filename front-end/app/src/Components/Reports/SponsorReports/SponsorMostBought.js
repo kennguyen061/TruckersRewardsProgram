@@ -4,43 +4,56 @@ import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
 const SponsorMostBought = () => {
+  const [data, setData] = useState([]);
+  const [sponsor, setSponsor] = useState("Sponsor");
+  let SID = window.localStorage.getItem("sid");
+
+  useEffect(() => {
+    const url = new URL("http://18.235.52.212:8000/reports/boughtASC");
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data));
+
+    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
+
+    urlName.searchParams.append("sid", SID);
+
+    fetch(urlName, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((comp) => setSponsor(comp));
+  }, []);
+
   return (
     <ReportGenerator
       title="Sponsor Most Bought Rewards"
       filename="Sponsor-Most-Bought.pdf"
     >
-      {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Most Bought Rewards</h1>
+        <h1>{`${sponsor}'s Most Bought Rewards`}</h1>
         <p>This is a report of the most bought rewards</p>
         <table>
-          <tr>
-            <th>Reward</th>
-            <th>Cost</th>
-            <th>Points</th>
-            <th>Rank</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Reward</th>
+              <th>Rank</th>
+            </tr>
+          </thead>
 
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
-
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
-
-          <tr>
-            <td>Yo Momma</td>
-            <td>$25.99</td>
-            <td>5,000,000</td>
-            <td>11</td>
-          </tr>
+          <tbody>
+            {data.map((item) => {
+              <tr>
+                <th>{item.ItemName}</th>
+                <th>{item.Count}</th>
+              </tr>;
+            })}
+          </tbody>
         </table>
       </div>
     </ReportGenerator>
