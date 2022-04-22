@@ -259,12 +259,13 @@ router.post("/checkout", (request, response) => {
       }
       else {
           db.query(
-              "INSERT INTO ORDERS(Total,UID,SID,Orderdate,Address) VALUES(?,?,?,CURRENT_TIMESTAMP(),?);",
+              "INSERT INTO ORDERS(Total,UID,SID,Orderdate,Address,Orderstatus) VALUES(?,?,?,CURRENT_TIMESTAMP(),?,?);",
               [
                 total,
                 request.body.UID,
                 request.body.SID,
                 request.body.address,
+                "In Progress"
               ],
               (error, result) => {
                 if (error) throw error;
@@ -357,14 +358,14 @@ router.get("/driverorders", (request, response) => {
           let responseBody = {
             OrderID: null,
             Total: null,
-            Orderdate: null,
+            OrderDate: null,
             Address: null,
             Orderstatus: null,
           };
 
           responseBody.OrderID = element.OrderID;
           responseBody.Total = element.Total;
-          responseBody.Orderdate = element.Orderdate;
+          responseBody.OrderDate = element.OrderDate;
           responseBody.Address = element.Address;
           responseBody.Orderstatus = element.Orderstatus;
           console.log(responseBody);
