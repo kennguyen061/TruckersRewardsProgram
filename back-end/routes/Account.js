@@ -284,40 +284,40 @@ router.post("/", (request, response) => {
                 loginAttempt(request.body.email, "Failure");
                 response.send(false);
               }
-            }
-          }
-        );
-      } else if (!responseBody.exists) {
-        console.log("No here 2");
-        // check admin table
-        db.query(
-          "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
-          [request.body.email],
-          (error, result) => {
-            if (error) throw error;
-            if (result.length != 0) {
-              let salt = new Date(result[0].Password_salt).toISOString();
+            } else if (!responseBody.exists) {
+              console.log("No here 2");
+              // check admin table
+              db.query(
+                "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
+                [request.body.email],
+                (error, result) => {
+                  if (error) throw error;
+                  if (result.length != 0) {
+                    let salt = new Date(result[0].Password_salt).toISOString();
 
-              let hash = crypto
-                .createHash("sha256")
-                .update(request.body.password + salt)
-                .digest("base64");
+                    let hash = crypto
+                      .createHash("sha256")
+                      .update(request.body.password + salt)
+                      .digest("base64");
 
-              if (hash === result[0].Password_hash) {
-                responseBody.exists = true;
-                responseBody.id = result[0].A_ID;
-                responseBody.role = "ADMIN";
-                loginAttempt(request.body.email, "Success");
-                response.send(responseBody);
-              } else {
-                responseBody.exists = true;
-                loginAttempt(request.body.email, "Failure");
-                response.send(false);
-              }
-            } else {
-              console.log("email not found");
-              loginAttempt(request.body.email, "Failure");
-              response.send(false);
+                    if (hash === result[0].Password_hash) {
+                      responseBody.exists = true;
+                      responseBody.id = result[0].A_ID;
+                      responseBody.role = "ADMIN";
+                      loginAttempt(request.body.email, "Success");
+                      response.send(responseBody);
+                    } else {
+                      responseBody.exists = true;
+                      loginAttempt(request.body.email, "Failure");
+                      response.send(false);
+                    }
+                  } else {
+                    console.log("email not found");
+                    loginAttempt(request.body.email, "Failure");
+                    response.send(false);
+                  }
+                }
+              );
             }
           }
         );
