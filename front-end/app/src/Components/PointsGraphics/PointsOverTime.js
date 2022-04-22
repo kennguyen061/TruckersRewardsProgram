@@ -1,4 +1,5 @@
 import "./PointsOverTime.css";
+import { useEffect, useState } from "react";
 
 import {
   LineChart,
@@ -13,34 +14,68 @@ import {
 //changed var to let
 // var should never be used as it is bad syntax in new version of javascript like we are using
 
-let data = [
-  {
-    name: "January",
-    Points: 4000,
-  },
-  {
-    name: "March",
-    Points: 1000,
-  },
-  {
-    name: "May",
-    Points: 4000,
-  },
-  {
-    name: "July",
-    Points: 800,
-  },
-  {
-    name: "October",
-    Points: 1500,
-  },
-  {
-    name: "December",
-    Points: 5000,
-  },
-];
-
 function PointsOverTime() {
+  let YearValue = 0;
+
+  const role = window.localStorage.getItem("role");
+  const id = window.localStorage.getItem("id");
+  const sid = window.localStorage.getItem("sid");
+
+  const [ReturnListData, setReturnedListData] = useState([]);
+  const [ReturnListDate, setReturnListDate] = useState([]);
+
+  const url = new URL("http://18.235.52.212:8000/points/history");
+
+  url.searchParams.append("id", id);
+  url.searchParams.append("sid", sid);
+
+  const AllPointHandler = (item) => {
+    setReturnedListData(item);
+  };
+
+  const AllListHandler = (item) => {
+    setReturnListDate(item);
+  };
+
+  useEffect(() => {
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "points/json" },
+    })
+      .then((response) => response.json())
+      .then((info) => {
+        AllPointHandler(info);
+        AllListHandler(info);
+      });
+  }, []);
+
+  let data = [
+    {
+      name: "Jan",
+      Points: 4000,
+    },
+    {
+      name: "March",
+      Points: 1000,
+    },
+    {
+      name: "May",
+      Points: 4000,
+    },
+    {
+      name: "July",
+      Points: 800,
+    },
+    {
+      name: "October",
+      Points: 1500,
+    },
+    {
+      name: "December",
+      Points: 5000,
+    },
+  ];
+
   return (
     <div className="Graph">
       <div className="dropdown">
@@ -55,7 +90,7 @@ function PointsOverTime() {
         <LineChart
           width={500}
           height={300}
-          data={data}
+          data={date}
           margin={{
             top: 15,
             right: 30,

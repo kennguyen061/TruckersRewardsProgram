@@ -3,7 +3,7 @@ import Collapsible from "react-collapsible";
 
 function Accord() {
   return (
-    <div>
+    <div className="boxed">
       <Collapsible trigger="First">
         <p>
           This is the collapsible content. It can be any element or React

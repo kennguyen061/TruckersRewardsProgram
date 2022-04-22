@@ -4,12 +4,15 @@ import Footer from "../Footer/Footer";
 import SponsorNav from "../UI/SponsorNav";
 
 const PointTake = () => {
+  const role = window.localStorage.getItem("role");
+  const sid = window.localStorage.getItem("sid");
+
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
-    const name = event.target.name;
+    const Email = event.target.Email;
     const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
+    setInputs((values) => ({ ...values, [Email]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -26,7 +29,7 @@ const PointTake = () => {
           Enter Persons name:
           <input
             type="text"
-            name="username"
+            name="Email:"
             value={inputs.username || ""}
             onChange={handleChange}
           />
@@ -35,7 +38,7 @@ const PointTake = () => {
           Enter point Change:
           <input
             type="number"
-            name="age"
+            name="Ammount changed:"
             value={inputs.age || ""}
             onChange={handleChange}
           />
