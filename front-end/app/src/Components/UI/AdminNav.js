@@ -23,7 +23,7 @@ function AdminNav() {
         </h2>
       </div>
       <ul className="nav-menu">
-        <Link to="/" smooth={true} duration={500}>
+        <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
         <Link to="/pages/application" smooth={true} duration={500}>
@@ -35,9 +35,9 @@ function AdminNav() {
         </Link>
       </ul>
       <div className="nav-icons">
-       <Link to="/" smooth={true} duration={500}>
+        <Link to="/" smooth={true} duration={500}>
           <BiLogOut className="icon" style={{ marginRight: "1rem" }} />
-        </Link> 
+        </Link>
         <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
           <BsPerson className="icon" />
         </Link>
@@ -52,7 +52,7 @@ function AdminNav() {
 
       <div className={nav ? "small active" : "small"}>
         <ul className="small-menu">
-          <Link to="/Home" smooth={true} duration={500}>
+          <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
           <Link to="/pages/application" smooth={true} duration={500}>
