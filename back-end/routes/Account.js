@@ -499,7 +499,7 @@ router.post("/createsponsorsubuser", (request, response) => {
           }
           //If it doesn't meet password complexity requirements
           else {
-            console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+            console.log("SPONSOR SUB PASSWORD DOES NOT MEET REQUIREMENTS");
             res.send(false);
           }
       }
@@ -552,7 +552,7 @@ router.post("/createadminsubuser", (request, response) => {
         }
         //If it doesn't meet password complexity requirements
         else {
-          console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+          console.log("ADMIN PASSWORD DOES NOT MEET REQUIREMENTS");
           res.send(false);
         }
       }
