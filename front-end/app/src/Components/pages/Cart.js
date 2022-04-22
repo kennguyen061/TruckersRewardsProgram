@@ -200,6 +200,7 @@ export default function Cart() {
             Checkout{" "}
           </button>
           </Link>
+          <Footer />
         </center>
       </div>
     </div>
