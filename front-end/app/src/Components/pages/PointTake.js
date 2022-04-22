@@ -4,11 +4,10 @@ import Footer from "../Footer/Footer";
 import SponsorNav from "../UI/SponsorNav";
 
 const PointTake = () => {
-  const Email = " ";
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
-    Email = event.target.Email;
+    const Email = event.target.Email;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [Email]: value }));
   };
@@ -18,6 +17,7 @@ const PointTake = () => {
     console.log(inputs);
   };
 
+  /*
   const role = window.localStorage.getItem("role");
   const sid = window.localStorage.getItem("sid");
 
@@ -26,7 +26,7 @@ const PointTake = () => {
   );
   urlFirst.searchParams("Email", Email);
   const urlSecond = new URL("http://18.235.52.212:8000/points/update");
-
+*/
   return (
     <div className="PointTakePage">
       <SponsorNav />
