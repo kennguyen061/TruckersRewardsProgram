@@ -215,8 +215,12 @@ router.post("/", (request, response) => {
     "SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
     [request.body.email],
     (error, result) => {
-      if (error) throw error;
+      if (error) {
+        console.log("Problem with finding driver");
+        //response.send(false);
+      }
       if (result.length != 0) {
+        console.log("Found driver by email");
         let salt = new Date(result[0].Password_salt).toISOString();
 
         db.query(
@@ -227,6 +231,7 @@ router.post("/", (request, response) => {
               console.log("problem getting sid");
             } else {
               if (ret.length === 1) {
+                console.log("found driver SID");
                 responseBody.sid = ret[0].SID;
               }
             }
@@ -239,12 +244,14 @@ router.post("/", (request, response) => {
           .digest("base64");
 
         if (hash === result[0].Password_hash) {
+          console.log("hash be true");
           responseBody.exists = true;
           responseBody.id = result[0].UID;
           responseBody.role = "DRIVER";
           loginAttempt(request.body.email, "Success");
           response.send(responseBody);
         } else {
+          console.log("hash be false");
           responseBody.exists = true;
           loginAttempt(request.body.email, "Failure");
           response.send(false);
@@ -254,6 +261,7 @@ router.post("/", (request, response) => {
   );
 
   if (!responseBody.exists) {
+    console.log("Dont go here");
     // check sponsor table
     db.query(
       "SELECT Password_hash, Password_salt,SUID,SID FROM SPONSORACCT WHERE Email = ?;",
@@ -286,6 +294,7 @@ router.post("/", (request, response) => {
   }
 
   if (!responseBody.exists) {
+    console.log("No here 2");
     // check admin table
     db.query(
       "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
@@ -312,6 +321,7 @@ router.post("/", (request, response) => {
             response.send(false);
           }
         } else {
+          console.log("email not found");
           loginAttempt(request.body.email, "Failure");
           response.send(false);
         }
