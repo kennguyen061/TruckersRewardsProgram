@@ -18,19 +18,23 @@ function AdminNav() {
   return (
     <div className={nav ? "navbar-bg" : "anavbar"}>
       <div className="logo">
-        <h2>
-          Roger's Rewards <BsTruck className="icon" />
-        </h2>
+       <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
+         <h2>
+            Roger's Rewards <BsTruck className="icon" />
+         </h2>
+        </Link>
       </div>
       <ul className="nav-menu">
         <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
-        <Link to="/pages/application" smooth={true} duration={500}>
+        <Link to="/pages/error" smooth={true} duration={500}>
           <li>Reports</li>
         </Link>
-        <li>Accounts</li>
-        <Link to="/main/points" smooth={true} duration={500}>
+        <Link to="/pages/error" smooth={true} duration={500}>
+          <li>Accounts</li>
+        </Link>
+        <Link to="/pages/error" smooth={true} duration={500}>
           <li>Dashboard</li>
         </Link>
       </ul>
@@ -55,18 +59,24 @@ function AdminNav() {
           <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/pages/application" smooth={true} duration={500}>
+          <Link to="/pages/error" smooth={true} duration={500}>
             <li>Reports</li>
           </Link>
-          <li>Accounts</li>
-          <Link to="/main/points" smooth={true} duration={500}>
+          <Link to="/pages/error" smooth={true} duration={500}>
+            <li>Accounts</li>
+          </Link>
+          <Link to="/pages/error" smooth={true} duration={500}>
             <li>Dashboard</li>
           </Link>
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
-            <button>LogOut</button>
-            <button>Account</button>
+            <Link to="/" smooth={true} duration={500}>
+             <button>LogOut</button>
+            </Link>
+            <Link to="/Admin_Profile" smooth={true} duration={500}>
+              <button>Account</button>
+            </Link>
           </div>
           <div className="socials">
             <FaFacebook className="icons" />

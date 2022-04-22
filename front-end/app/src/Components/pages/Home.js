@@ -14,7 +14,6 @@ function Home() {
   return (
     <div>
       <NewNav />
-      {/* <SponsorNav /> */}
       <Hero />
       <People />
       <WeStand />
