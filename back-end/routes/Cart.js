@@ -339,4 +339,42 @@ router.post("/checkout", (request, response) => {
   });
 });
 
+// access orders of a user
+router.get("/driverorders", (request, response) => {
+  console.log("Hit driver orders");
+
+  db.query(
+    "SELECT * FROM ORDERS WHERE UID = ? AND SID = ?;",
+    [request.query.UID, request.query.SID],
+    (error, result) => {
+      let rbArray = Array();
+      if (error) {
+        throw error;
+      } else {
+        //responsebody array
+        //loop through result[index]
+        for (const element of result) {
+          let responseBody = {
+            OrderID: null,
+            Total: null,
+            Orderdate: null,
+            Address: null,
+            Orderstatus: null,
+          };
+
+          responseBody.OrderID = element.OrderID;
+          responseBody.Total = element.Total;
+          responseBody.Orderdate = element.Orderdate;
+          responseBody.Address = element.Address;
+          responseBody.Orderstatus = element.Orderstatus;
+          console.log(responseBody);
+          rbArray.push(responseBody);
+        }
+        console.log(rbArray);
+        response.send(JSON.stringify(rbArray));
+      }
+    }
+  );
+});
+
 module.exports = router;
