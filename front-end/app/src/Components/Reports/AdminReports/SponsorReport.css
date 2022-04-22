@@ -1,0 +1,27 @@
+.ReportStyle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ReportStyle table {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.ReportStyle table,
+th,
+td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+.ReportStyle tr:nth-child(even) {
+  background-color: #a5a1a19a;
+}
+
+.ReportStyle h1 {
+  font-size: 25pt;
+  color: black;
+  text-align: center;
+}
