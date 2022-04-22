@@ -18,9 +18,11 @@ function DriverNav() {
   return (
     <div className={nav ? "navbar-bg" : "dnavbar"}>
       <div className="logo">
-        <h2>
-          Roger's Rewards <BsTruck className="icon" />
-        </h2>
+        <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
+          <h2>
+            Roger's Rewards <BsTruck className="icon" />
+          </h2>
+        </Link>
       </div>
       <ul className="nav-menu">
         <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
@@ -63,8 +65,8 @@ function DriverNav() {
           <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/pages/application" smooth={true} duration={500}>
-            <li>Sponsors</li>
+          <Link to="/pages/Driver_Sponsor_Dashboard" smooth={true} duration={500}>
+           <li>Sponsors</li>
           </Link>
           <Link to="/Catalog/Catalog" smooth={true} duration={500}>
             <li>Catalog</li>
@@ -72,14 +74,21 @@ function DriverNav() {
           <Link to="/main/points" smooth={true} duration={500}>
             <li>Points</li>
           </Link>
-          <Link to="/pages/Wishlist" smooth={true} duration={500}>
-            <li>Wishlist</li>
+          <Link to="/pages/Cart" smooth={true} duration={500}>
+           <li>Cart</li>
+          </Link>
+          <Link to="/pages/Orders" smooth={true} duration={500}>
+            <li>Orders</li>
           </Link>
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
+          <Link to="/" smooth={true} duration={500}>
             <button>LogOut</button>
+          </Link>
+          <Link to="/pages/Driver_Profile" smooth={true} duration={500}>
             <button>Account</button>
+          </Link>
           </div>
           <div className="socials">
             <FaFacebook className="icons" />
