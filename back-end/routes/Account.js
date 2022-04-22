@@ -452,66 +452,65 @@ router.post("/createsponsorsubuser", (request, response) => {
       } else if (result[0].RowCount != 0) {
         response.send(false);
       } else {
-        // create hash and salt
-        let salt = new Date().toISOString();
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        let org_id = "";
-
-        db.query(
-          "SELECT SID FROM SPONSORORG WHERE name = ?;",
-          [request.body.sponsorName],
-          (error2, result2) => {
-            if (error2) {
-              console.log("Sponsor does not exists");
-              throw error2;
-            } else {
-              console.log(result2[0].SID);
-              if (isAllPresent(req.body.password)) {
-                org_id = result2[0].SID;
-                db.query(
-                  "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                  [
-                    request.body.firstName,
-                    request.body.lastName,
-                    request.body.email,
-                    hash,
-                    salt,
-                    request.body.street,
-                    request.body.phoneNum,
-                    1,
-                    org_id,
-                  ],
-                  (errorInsert) => {
-                    if (errorInsert) {
-                      console.log("Error Creating Sponsor sub user");
-                      throw errorInsert;
-                    } else {
-                      response.send(true);
+        if (isAllPresent(req.body.password)) {
+          // create hash and salt
+          let salt = new Date().toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
+          let org_id = "";
+          db.query(
+            "SELECT SID FROM SPONSORORG WHERE name = ?;",
+            [request.body.sponsorName],
+            (error2, result2) => {
+              if (error2) {
+                console.log("Sponsor does not exists");
+                throw error2;
+              } else {
+                console.log(result2[0].SID);
+                  org_id = result2[0].SID;
+                  db.query(
+                    "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                    [
+                      request.body.firstName,
+                      request.body.lastName,
+                      request.body.email,
+                      hash,
+                      salt,
+                      request.body.street,
+                      request.body.phoneNum,
+                      1,
+                      org_id,
+                    ],
+                    (errorInsert) => {
+                      if (errorInsert) {
+                        console.log("Error Creating Sponsor sub user");
+                        throw errorInsert;
+                      } else {
+                        response.send(true);
+                      }
                     }
-                  }
-                );                
+                  );                
+                }
+
               }
-              //If it doesn't meet password complexity requirements
-              else {
-                console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
-                res.send(false);
-              }
-            }
+            );
           }
-        );
+          //If it doesn't meet password complexity requirements
+          else {
+            console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+            res.send(false);
+          }
       }
     }
   );
 });
 
-// create admin
-router.post("/createadmin", (request, response) => {
+// create Admin sub account (TODO: should only be accessed if a admin is authenticated)
+router.post("/createadminsubuser", (request, response) => {
   // check if account already exists
-  console.log("Hit create admin");
+  console.log("Hit create admin subuser");
   db.query(
     "SELECT COUNT(*) AS RowCount FROM ADMIN WHERE Email = ?;",
     [request.body.email],
@@ -521,51 +520,41 @@ router.post("/createadmin", (request, response) => {
       } else if (result[0].RowCount != 0) {
         response.send(false);
       } else {
-        // create hash and salt
-        let salt = new Date().toISOString();
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
+        if (isAllPresent(req.body.password)) {
+          // create hash and salt
+          let salt = new Date().toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
 
-        let org_id = "";
-
-        db.query(
-          "SELECT SID FROM SPONSORORG WHERE name = ?;",
-          [request.body.sponsorName],
-          (error2, result2) => {
-            if (error2) {
-              console.log("Sponsor does not exists");
-              throw error2;
-            } else {
-              console.log(result2[0].SID);
-
-              org_id = result2[0].SID;
-              db.query(
-                "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [
-                  request.body.firstName,
-                  request.body.lastName,
-                  request.body.email,
-                  hash,
-                  salt,
-                  request.body.street,
-                  request.body.phoneNum,
-                  1,
-                  org_id,
-                ],
-                (errorInsert) => {
-                  if (errorInsert) {
-                    console.log("Error Creating Sponsor sub user");
-                    throw errorInsert;
-                  } else {
-                    response.send(true);
-                  }
-                }
-              );
+          db.query(
+            "INSERT INTO ADMIN( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+            [
+              request.body.firstName,
+              request.body.lastName,
+              request.body.email,
+              hash,
+              salt,
+              request.body.street,
+              request.body.phoneNum,
+              1,
+            ],
+            (errorInsert) => {
+              if (errorInsert) {
+                console.log("Error Creating Admin sub user");
+                throw errorInsert;
+              } else {
+                response.send(true);
+              }
             }
-          }
-        );
+          );                
+        }
+        //If it doesn't meet password complexity requirements
+        else {
+          console.log("DRIVER PASSWORD DOES NOT MEET REQUIREMENTS");
+          res.send(false);
+        }
       }
     }
   );
