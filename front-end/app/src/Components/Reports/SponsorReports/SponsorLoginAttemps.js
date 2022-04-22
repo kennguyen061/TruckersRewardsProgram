@@ -3,6 +3,35 @@ import ReportGenerator from "../ReportGenerator";
 import "./SponsorReport.css";
 
 const SponsorLogin = () => {
+  const [data, setData] = useState([]);
+  const [sponsor, setSponsor] = useState("Sponsor");
+  let SID = window.localStorage.getItem("sid");
+
+  useEffect(() => {
+    const url = new URL(
+      "http://18.235.52.212:8000/reports/sponsorLoginAttempts"
+    );
+
+    url.searchParams.append("SID", SID);
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => setData(data));
+
+    const urlName = new URL("http://18.235.52.212:8000/reports/SponsorName");
+
+    urlName.searchParams.append("sid", SID);
+
+    fetch(urlName, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((comp) => setSponsor(comp));
+  }, [SID]);
   return (
     <ReportGenerator
       title="Sponsor Driver Login Attempts"
@@ -10,36 +39,26 @@ const SponsorLogin = () => {
     >
       {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
-        <h1>Sponsor Driver Login Attempts</h1>
+        <h1>{`${sponsor}'s Driver Login Attempts`}</h1>
         <p>This is a report of all attempts to login</p>
         <table>
-          <tr>
-            <th>Driver</th>
-            <th>Login</th>
-            <th>Time</th>
-            <th> Reason</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-          <tr>
-            <td>Bob</td>
-            <td>Yes</td>
-            <td>2:12pm</td>
-            <td>Correct password</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>Yes</td>
-            <td>2:12pm</td>
-            <td>Correct password</td>
-          </tr>
-
-          <tr>
-            <td>Bob</td>
-            <td>Yes</td>
-            <td>2:12pm</td>
-            <td>Correct password</td>
-          </tr>
+          <tbody>
+            {data.map((item) => (
+              <tr>
+                <td>{item.Username}</td>
+                <td>{item.Login_date}</td>
+                <td>{item.Status}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </ReportGenerator>

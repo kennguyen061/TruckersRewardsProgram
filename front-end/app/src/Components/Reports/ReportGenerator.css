@@ -41,10 +41,12 @@
   width: 40%;
   max-height: 5rem;
   justify-content: center;
+  align-items: center;
   padding: 1rem 1rem;
   padding-top: 1rem;
   background-color: rgba(220, 240, 245, 0.298);
   margin: 2rem 0;
+  text-align: center;
 }
 
 .ButtonBlock {

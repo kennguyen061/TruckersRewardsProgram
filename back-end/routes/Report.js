@@ -50,7 +50,7 @@ router.get("/SponsorName", (req, res) => {
 
 router.get("/boughtDESC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
     [],
     (err, results) => {
       if (err) {
@@ -65,11 +65,26 @@ router.get("/boughtDESC", (req, res) => {
 
 router.get("/boughtASC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
     [],
     (err, results) => {
       if (err) {
         console.log("Problem getting itms ASC");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
+router.get("/sponsorLoginAttempts", (req, res) => {
+  db.query(
+    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
+    [req.query.SID],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting login info");
         res.send(false);
       } else {
         res.send(JSON.stringify(results));
