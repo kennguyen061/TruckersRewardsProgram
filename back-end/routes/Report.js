@@ -50,8 +50,8 @@ router.get("/SponsorName", (req, res) => {
 
 router.get("/boughtDESC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
-    [],
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM i JOIN ORDERS o ON i.OrderID = o.OrderID WHERE o.SID = ? GROUP BY ItemID ORDER BY COUNT(*) DESC;",
+    [req.query.SID],
     (err, results) => {
       if (err) {
         console.log("Problem getting itms desc");
@@ -65,8 +65,8 @@ router.get("/boughtDESC", (req, res) => {
 
 router.get("/boughtASC", (req, res) => {
   db.query(
-    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
-    [],
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM i JOIN ORDERS o ON i.OrderID = o.OrderID WHERE o.SID = ? GROUP BY ItemID ORDER BY COUNT(*) ASC;",
+    [req.query.SID],
     (err, results) => {
       if (err) {
         console.log("Problem getting itms ASC");
@@ -80,7 +80,7 @@ router.get("/boughtASC", (req, res) => {
 
 router.get("/sponsorLoginAttempts", (req, res) => {
   db.query(
-    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
+    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UID WHERE s.SID = ?;",
     [req.query.SID],
     (err, results) => {
       if (err) {
@@ -95,7 +95,7 @@ router.get("/sponsorLoginAttempts", (req, res) => {
 
 router.get("/sponsorPwdChanges", (req, res) => {
   db.query(
-    "SELECT r.Email, r.Pwd_date, r.User_type FROM PASSWORDCHANGES r JOIN DRIVER d ON d.Email = r.Email JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
+    "SELECT r.Email, r.Pwd_date, r.User_type FROM PASSWORDCHANGES r JOIN DRIVER d ON d.Email = r.Email JOIN SPONSORANDDRIVER s ON s.UID = d.UID WHERE s.SID = ?;",
     [req.query.SID],
     (err, results) => {
       if (err) {
@@ -124,11 +124,91 @@ router.get("/pointChangeSponsor", (req, res) => {
 });
 
 //get all drivers current
+router.get("/getAllDrivers", (req, res) => {
+  db.query("SELECT * FROM DRIVER;", [], (err, results) => {
+    if (err) {
+      console.log("problem getting points info");
+      res.send(false);
+    } else {
+      res.send(JSON.stringify(results));
+    }
+  });
+});
+
 //get all apps
+router.get("/getAllApps", (req, res) => {
+  db.query("SELECT * FROM APPLICATION;", [], (err, results) => {
+    if (err) {
+      console.log("problem getting application info");
+      res.send(false);
+    } else {
+      res.send(JSON.stringify(results));
+    }
+  });
+});
+
 //get least bought for all sponsors
+router.get("/getAllLeastBought", (req, res) => {
+  db.query(
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting least bought info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
+//get most bought for all
+router.get("/getAllMostBought", (req, res) => {
+  db.query(
+    "SELECT ItemName, COUNT(*) AS Count FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting most bought info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
 //get login for all
-//getr most bought for all
-//get all password changes
+router.get("/allLoginAttempts", (req, res) => {
+  db.query(
+    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UID ;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting login info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
 //get all points changes
+router.get("/pointChangeAll", (req, res) => {
+  db.query(
+    "SELECT p.Point_Update, p.Update_Status, p.PointDate,d.Email FROM POINTBALANCELOG p JOIN POINTBALANCE b ON p.PointID = b.PointID JOIN DRIVER d ON d.UID = b.UID;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting points info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
 
 module.exports = router;
