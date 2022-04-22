@@ -22,9 +22,7 @@ function Error() {
     nav = <SponsorNav />;
   } else if (role === "ADMIN") {
     nav = <AdminNav />;
-  } /*else {
-    nav = <NewNav />;
-  }*/
+  }
 
   return (
     <div>
