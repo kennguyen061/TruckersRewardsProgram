@@ -1,4 +1,7 @@
+import NewNav from "../UI/HomeNav";
 import DriverNav from "../UI/DriverNav";
+import SponsorNav from "../UI/SponsorNav";
+import AdminNav from "../UI/SponsorNav";
 import "./Catalog.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
@@ -17,6 +20,19 @@ export default function Catalog() {
   //temp driver id
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
+
+  //Setup dynamic navbar variable
+  let nav = <NewNav />;
+  if (role === "DRIVER") {
+    nav = <DriverNav />;
+  } else if (role === "SPONSOR") {
+    nav = <SponsorNav />;
+  } else if (role === "ADMIN") {
+    nav = <AdminNav />;
+  } else {
+    //this.setState({ redirect: "/pages/Error" });
+    this.props.history.push('/pages/error');
+  }
 
   //used for the search parameters
   const [q, setQ] = useState("");
@@ -120,7 +136,7 @@ export default function Catalog() {
   return (
     <div className="Catalog">
       <center>
-        <DriverNav />
+        {nav}
         <input
           className="search-input"
           type="search"
