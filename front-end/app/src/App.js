@@ -31,7 +31,7 @@ import Error from "./Components/pages/Error.js";
 import Orders from "./Components/pages/Orders.js";
 import AdminDrivers from "./Components/Reports/AdminReports/AdminCurentDrivers.js";
 import AdminApps from "./Components/Reports/AdminReports/AdminDriverApp";
-import AdminLeastBought from "./Components/Reports/AdminrReports/AdminLeastBought.js";
+import AdminLeastBought from "./Components/Reports/AdminReports/AdminLeastBought.js";
 import AdminMostBought from "./Components/Reports/AdminReports/AdminMostBought.js";
 import AdminPassword from "./Components/Reports/AdminReports/AdminPasswordChange.js";
 import AdminLogin from "./Components/Reports/AdminReports/AdminLoginAttemps.js";

@@ -54,4 +54,4 @@ const AdminDriverApp = () => {
   );
 };
 
-export default SponsorDriverApp;
+export default AdminDriverApp;
