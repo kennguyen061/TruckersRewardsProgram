@@ -39,7 +39,6 @@ const SponsorDriverApp = () => {
       title="Sponsor Driver Applications"
       filename="Sponsor-Driver-Apps.pdf"
     >
-      {/* You could dynamically generate this ... this example does not. */}
       <div className="ReportStyle">
         <h1>{`${sponsor}'s Driver Application Report1`}</h1>
         <p>This is a report of all driver apps</p>

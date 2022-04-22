@@ -71,11 +71,10 @@ function changePasswordlog(User_type, Email, Change_type) {
 //Change password route
 router.post("/updatepassword", (request, response) => {
   console.log("Hit update password of account");
-  if(!isAllPresent(request.newpassword)){
+  if (!isAllPresent(request.newpassword)) {
     console.log("NEW PASSWORD DOES NOT MEET REQUIREMENTS");
     response.send(false);
-  }
-  else{
+  } else {
     if (request.body.role == "DRIVER") {
       //check current password
       db.query(
@@ -83,24 +82,24 @@ router.post("/updatepassword", (request, response) => {
         [request.body.email],
         (error, result) => {
           if (error) throw error;
-  
+
           let salt = new Date(result[0].Password_salt).toISOString();
           let hash = crypto
             .createHash("sha256")
             .update(request.body.oldpassword + salt)
             .digest("base64");
-  
+
           if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
               .update(request.body.newpassword + newsalt)
               .digest("base64");
-  
+
             console.log("The new hash is: " + newhash);
             console.log("The new salt is: " + newsalt);
             console.log("The new password is: " + request.body.newpassword);
-  
+
             db.query(
               "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
               [newhash, newsalt, request.body.email],
@@ -123,24 +122,24 @@ router.post("/updatepassword", (request, response) => {
         [request.body.email],
         (error, result) => {
           if (error) throw error;
-  
+
           let salt = new Date(result[0].Password_salt).toISOString();
           let hash = crypto
             .createHash("sha256")
             .update(request.body.oldpassword + salt)
             .digest("base64");
-  
+
           if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
               .update(request.body.newpassword + newsalt)
               .digest("base64");
-  
+
             console.log("The new hash is: " + newhash);
             console.log("The new salt is: " + newsalt);
             console.log("The new password is: " + request.body.newpassword);
-  
+
             db.query(
               "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
               [newhash, newsalt, request.body.email],
@@ -163,24 +162,24 @@ router.post("/updatepassword", (request, response) => {
         [request.body.email],
         (error, result) => {
           if (error) throw error;
-  
+
           let salt = new Date(result[0].Password_salt).toISOString();
           let hash = crypto
             .createHash("sha256")
             .update(request.body.oldpassword + salt)
             .digest("base64");
-  
+
           if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
               .update(request.body.newpassword + newsalt)
               .digest("base64");
-  
+
             console.log("The new hash is: " + newhash);
             console.log("The new salt is: " + newsalt);
             console.log("The new password is: " + request.body.newpassword);
-  
+
             db.query(
               "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
               [newhash, newsalt, request.body.email],
@@ -467,39 +466,38 @@ router.post("/createsponsorsubuser", (request, response) => {
                 throw error2;
               } else {
                 console.log(result2[0].SID);
-                  org_id = result2[0].SID;
-                  db.query(
-                    "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                    [
-                      request.body.firstName,
-                      request.body.lastName,
-                      request.body.email,
-                      hash,
-                      salt,
-                      request.body.street,
-                      request.body.phoneNum,
-                      1,
-                      org_id,
-                    ],
-                    (errorInsert) => {
-                      if (errorInsert) {
-                        console.log("Error Creating Sponsor sub user");
-                        throw errorInsert;
-                      } else {
-                        response.send(true);
-                      }
+                org_id = result2[0].SID;
+                db.query(
+                  "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                  [
+                    request.body.firstName,
+                    request.body.lastName,
+                    request.body.email,
+                    hash,
+                    salt,
+                    request.body.street,
+                    request.body.phoneNum,
+                    1,
+                    org_id,
+                  ],
+                  (errorInsert) => {
+                    if (errorInsert) {
+                      console.log("Error Creating Sponsor sub user");
+                      throw errorInsert;
+                    } else {
+                      response.send(true);
                     }
-                  );                
-                }
-
+                  }
+                );
               }
-            );
-          }
-          //If it doesn't meet password complexity requirements
-          else {
-            console.log("SPONSOR SUB PASSWORD DOES NOT MEET REQUIREMENTS");
-            res.send(false);
-          }
+            }
+          );
+        }
+        //If it doesn't meet password complexity requirements
+        else {
+          console.log("SPONSOR SUB PASSWORD DOES NOT MEET REQUIREMENTS");
+          res.send(false);
+        }
       }
     }
   );
@@ -546,7 +544,7 @@ router.post("/createadminsubuser", (request, response) => {
                 response.send(true);
               }
             }
-          );                
+          );
         }
         //If it doesn't meet password complexity requirements
         else {
