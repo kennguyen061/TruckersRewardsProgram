@@ -48,4 +48,34 @@ router.get("/SponsorName", (req, res) => {
   console.log("hit end");
 });
 
+router.get("/boughtDESC", (req, res) => {
+  db.query(
+    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) DESC;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("Problem getting itms desc");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
+router.get("/boughtASC", (req, res) => {
+  db.query(
+    "SELECT ItemName, COUNT(*) FROM ITEM GROUP BY ItemID ORDER BY COUNT(*) ASC;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("Problem getting itms ASC");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
 module.exports = router;
