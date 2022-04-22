@@ -216,39 +216,39 @@ router.post("/", (request, response) => {
     [request.body.email],
     (error, result) => {
       if (error) throw error;
-      if (result.length === 0) return;
+      if (result.length != 0) {
+        let salt = new Date(result[0].Password_salt).toISOString();
 
-      let salt = new Date(result[0].Password_salt).toISOString();
-
-      db.query(
-        "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;",
-        [result[0].UID],
-        (err, ret) => {
-          if (err) {
-            console.log("problem getting sid");
-          } else {
-            if (ret.length === 1) {
-              responseBody.sid = ret[0].SID;
+        db.query(
+          "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;",
+          [result[0].UID],
+          (err, ret) => {
+            if (err) {
+              console.log("problem getting sid");
+            } else {
+              if (ret.length === 1) {
+                responseBody.sid = ret[0].SID;
+              }
             }
           }
+        );
+
+        let hash = crypto
+          .createHash("sha256")
+          .update(request.body.password + salt)
+          .digest("base64");
+
+        if (hash === result[0].Password_hash) {
+          responseBody.exists = true;
+          responseBody.id = result[0].UID;
+          responseBody.role = "DRIVER";
+          loginAttempt(request.body.email, "Success");
+          response.send(responseBody);
+        } else {
+          responseBody.exists = true;
+          loginAttempt(request.body.email, "Failure");
+          response.send(false);
         }
-      );
-
-      let hash = crypto
-        .createHash("sha256")
-        .update(request.body.password + salt)
-        .digest("base64");
-
-      if (hash === result[0].Password_hash) {
-        responseBody.exists = true;
-        responseBody.id = result[0].UID;
-        responseBody.role = "DRIVER";
-      }
-
-      if (responseBody.exists) {
-        loginAttempt(request.body.email, "Success");
-        response.send(responseBody);
-        return;
       }
     }
   );
@@ -260,25 +260,26 @@ router.post("/", (request, response) => {
       [request.body.email],
       (error, result) => {
         if (error) throw error;
-        if (result.length === 0) return;
+        if (result.length != 0) {
+          let salt = new Date(result[0].Password_salt).toISOString();
 
-        let salt = new Date(result[0].Password_salt).toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
 
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        if (hash === result[0].Password_hash) {
-          responseBody.exists = true;
-          responseBody.id = result[0].SUID;
-          responseBody.role = "SPONSOR";
-          responseBody.sid = result[0].SID;
-        }
-        if (responseBody.exists) {
-          loginAttempt(request.body.email, "Success");
-          response.send(responseBody);
-          return;
+          if (hash === result[0].Password_hash) {
+            responseBody.exists = true;
+            responseBody.id = result[0].SUID;
+            responseBody.role = "SPONSOR";
+            responseBody.sid = result[0].SID;
+            loginAttempt(request.body.email, "Success");
+            response.send(responseBody);
+          } else {
+            responseBody.exists = true;
+            loginAttempt(request.body.email, "Failure");
+            response.send(false);
+          }
         }
       }
     );
@@ -289,30 +290,31 @@ router.post("/", (request, response) => {
       [request.body.email],
       (error, result) => {
         if (error) throw error;
-        if (result.length === 0) return;
+        if (result.length != 0) {
+          let salt = new Date(result[0].Password_salt).toISOString();
 
-        let salt = new Date(result[0].Password_salt).toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
 
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        if (hash === result[0].Password_hash) {
-          responseBody.exists = true;
-          responseBody.id = result[0].A_ID;
-          responseBody.role = "ADMIN";
-        }
-
-        if (responseBody.exists) {
-          loginAttempt(request.body.email, "Success");
-          response.send(responseBody);
+          if (hash === result[0].Password_hash) {
+            responseBody.exists = true;
+            responseBody.id = result[0].A_ID;
+            responseBody.role = "ADMIN";
+            loginAttempt(request.body.email, "Success");
+            response.send(responseBody);
+          } else {
+            responseBody.exists = true;
+            loginAttempt(request.body.email, "Failure");
+            response.send(false);
+          }
+        } else {
+          loginAttempt(request.body.email, "Failure");
+          response.send(false);
         }
       }
     );
-  } else {
-    loginAttempt(request.body.email, "Failure");
-    response.send(responseBody);
   }
 });
 
