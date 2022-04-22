@@ -78,4 +78,19 @@ router.get("/boughtASC", (req, res) => {
   );
 });
 
+router.get("/sponsorLoginAttempts", (req, res) => {
+  db.query(
+    "SELECT r.Username, r.Login_date, r.Status FROM LOGINATTEMPTS r JOIN DRIVER d ON d.Email = r.Username JOIN SPONSORANDDRIVER s ON s.UID = d.UId WHERE s.SID = ?;",
+    [req.query.SID],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting login info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
+    }
+  );
+});
+
 module.exports = router;

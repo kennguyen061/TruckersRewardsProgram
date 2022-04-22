@@ -16,8 +16,8 @@ const SponsorLogin = () => {
           <tr>
             <th>Driver</th>
             <th>Login</th>
-            <th>Time</th>
-            <th> Reason</th>
+            <th>Date</th>
+            <th>Status</th>
           </tr>
 
           <tr>
