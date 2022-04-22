@@ -105,7 +105,7 @@ db.connect(function (err) {
 
   //Creates ADMIN Table
   db.query(
-    "CREATE TABLE IF NOT EXISTS ADMIN ( A_ID int auto_increment NOT NULL unique, First_name varchar(20) NOT NULL, Last_name varchar(20) NOT NULL, Email varchar(255) NOT NULL, Password_hash varchar(6383) NOT NULL, Password_salt varchar(60) NOT NULL, Address varchar(60) NOT NULL, Phone_number char(12) NOT NULL, VisibleFlag BIT NOT NULL, SID int NOT NULL, primary key (A_ID) );",
+    "CREATE TABLE IF NOT EXISTS ADMIN ( A_ID int auto_increment NOT NULL unique, First_name varchar(20) NOT NULL, Last_name varchar(20) NOT NULL, Email varchar(255) NOT NULL, Password_hash varchar(6383) NOT NULL, Password_salt varchar(60) NOT NULL, Address varchar(60) NOT NULL, Phone_number char(12) NOT NULL, VisibleFlag BIT NOT NULL, primary key (A_ID) );",
     function (error, result, fields) {
       console.log(result);
     }

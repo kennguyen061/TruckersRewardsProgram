@@ -57,7 +57,7 @@ function loginAttempt(email, status) {
   );
 }
 
-//TODO: Password change log
+//Password change log
 function changePasswordlog(User_type, Email, Change_type) {
   db.query(
     "INSERT INTO PASSWORDCHANGES(User_type, Pwd_date, Email, Change_type) VALUES(?,CURRENT_TIMESTAMP(), ?, ?);",
@@ -338,10 +338,9 @@ router.post("/create", (req, res) => {
           res.status(404);
           res.send(false);
         } else {
-          //TODO: CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
+          //CHECK PASSWORD (MIN 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)
           //If it meets requirements:
-          //isAllPresent(req.body.password)
-          if (true) {
+          if (isAllPresent(req.body.password)) {
             let salt = new Date().toISOString();
 
             let hash = crypto
@@ -417,26 +416,28 @@ router.post("/createsponsor", (req, res) => {
       if (result[0].RowCount != 0) {
         res.send(false);
       } else {
-        db.query(
-          "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
-          [
-            req.body.name,
-            req.body.dRules,
-            req.body.conversionScale,
-            req.body.cRules,
-          ],
-          (errorCreate, resultCreate) => {
-            if (errorCreate) {
-              console.log("Something went wrong creating a sponsor");
-            } else {
-              res.send(true);
-            }
-          }
-        );
+            db.query(
+              "INSERT INTO SPONSORORG(name, Driver_rules, Conversion_scale, Catalog_rules) VALUES(?,?,?,?);",
+              [
+                req.body.name,
+                req.body.dRules,
+                req.body.conversionScale,
+                req.body.cRules,
+              ],
+              (errorCreate, resultCreate) => {
+                if (errorCreate) {
+                  console.log("Something went wrong creating a sponsor");
+                } else {
+                  res.send(true);
+                }
+              }
+            );
       }
     }
   );
 });
+
+
 
 // create sponsor sub account (TODO: should only be accessed if a sponsor is authenticated)
 router.post("/createsponsorsubuser", (request, response) => {
@@ -451,51 +452,109 @@ router.post("/createsponsorsubuser", (request, response) => {
       } else if (result[0].RowCount != 0) {
         response.send(false);
       } else {
-        // create hash and salt
-        let salt = new Date().toISOString();
-        let hash = crypto
-          .createHash("sha256")
-          .update(request.body.password + salt)
-          .digest("base64");
-
-        let org_id = "";
-
-        db.query(
-          "SELECT SID FROM SPONSORORG WHERE name = ?;",
-          [request.body.sponsorName],
-          (error2, result2) => {
-            if (error2) {
-              console.log("Sponsor does not exists");
-              throw error2;
-            } else {
-              console.log(result2[0].SID);
-
-              org_id = result2[0].SID;
-              db.query(
-                "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [
-                  request.body.firstName,
-                  request.body.lastName,
-                  request.body.email,
-                  hash,
-                  salt,
-                  request.body.street,
-                  request.body.phoneNum,
-                  1,
-                  org_id,
-                ],
-                (errorInsert) => {
-                  if (errorInsert) {
-                    console.log("Error Creating Sponsor sub user");
-                    throw errorInsert;
-                  } else {
-                    response.send(true);
-                  }
+        if (isAllPresent(req.body.password)) {
+          // create hash and salt
+          let salt = new Date().toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
+          let org_id = "";
+          db.query(
+            "SELECT SID FROM SPONSORORG WHERE name = ?;",
+            [request.body.sponsorName],
+            (error2, result2) => {
+              if (error2) {
+                console.log("Sponsor does not exists");
+                throw error2;
+              } else {
+                console.log(result2[0].SID);
+                  org_id = result2[0].SID;
+                  db.query(
+                    "INSERT INTO SPONSORACCT( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag, SID ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                    [
+                      request.body.firstName,
+                      request.body.lastName,
+                      request.body.email,
+                      hash,
+                      salt,
+                      request.body.street,
+                      request.body.phoneNum,
+                      1,
+                      org_id,
+                    ],
+                    (errorInsert) => {
+                      if (errorInsert) {
+                        console.log("Error Creating Sponsor sub user");
+                        throw errorInsert;
+                      } else {
+                        response.send(true);
+                      }
+                    }
+                  );                
                 }
-              );
-            }
+
+              }
+            );
           }
-        );
+          //If it doesn't meet password complexity requirements
+          else {
+            console.log("SPONSOR SUB PASSWORD DOES NOT MEET REQUIREMENTS");
+            res.send(false);
+          }
+      }
+    }
+  );
+});
+
+// create Admin sub account (TODO: should only be accessed if a admin is authenticated)
+router.post("/createadminsubuser", (request, response) => {
+  // check if account already exists
+  console.log("Hit create admin subuser");
+  db.query(
+    "SELECT COUNT(*) AS RowCount FROM ADMIN WHERE Email = ?;",
+    [request.body.email],
+    (error, result) => {
+      if (error) {
+        throw error;
+      } else if (result[0].RowCount != 0) {
+        response.send(false);
+      } else {
+        if (isAllPresent(req.body.password)) {
+          // create hash and salt
+          let salt = new Date().toISOString();
+          let hash = crypto
+            .createHash("sha256")
+            .update(request.body.password + salt)
+            .digest("base64");
+
+          db.query(
+            "INSERT INTO ADMIN( First_name, Last_name, Email, Password_hash, Password_salt, Address, Phone_number, VisibleFlag) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
+            [
+              request.body.firstName,
+              request.body.lastName,
+              request.body.email,
+              hash,
+              salt,
+              request.body.street,
+              request.body.phoneNum,
+              1,
+            ],
+            (errorInsert) => {
+              if (errorInsert) {
+                console.log("Error Creating Admin sub user");
+                throw errorInsert;
+              } else {
+                response.send(true);
+              }
+            }
+          );                
+        }
+        //If it doesn't meet password complexity requirements
+        else {
+          console.log("ADMIN PASSWORD DOES NOT MEET REQUIREMENTS");
+          res.send(false);
+        }
       }
     }
   );
