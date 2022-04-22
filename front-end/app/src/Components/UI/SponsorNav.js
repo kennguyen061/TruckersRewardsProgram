@@ -18,9 +18,11 @@ function SponsorNav() {
   return (
     <div className={nav ? "navbar-bg" : "snavbar"}>
       <div className="logo">
+      <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
         <h2>
           Roger's Rewards <BsTruck className="icon" />
         </h2>
+      </Link>
       </div>
       <ul className="nav-menu">
         <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
@@ -33,12 +35,11 @@ function SponsorNav() {
           <li> Edit Catalog</li>
         </Link>
         <Link to="/Catalog/Catalog" smooth={true} duration={500}>
-          <li>Catalog</li>
+          <li>View Catalog</li>
         </Link>
         <Link to="/pages/PointTake" smooth={true} duration={50}>
-          <li>Point_Update</li>
+          <li>Manage Points</li>
         </Link>
-
         <Link to="/pages/Driver_Management" smooth={true} duration={500}>
           <li>Drivers</li>
         </Link>
@@ -67,15 +68,27 @@ function SponsorNav() {
           <Link to="/Reports/SponsorReports" smooth={true} duration={500}>
             <li>Reports</li>
           </Link>
-          <li>Catalog</li>
-          <Link to="/main/points" smooth={true} duration={500}>
-            <li>Dashboard</li>
+          <Link to="/Catalog/Sponsor_Catalog_Edit" smooth={true} duration={500}>
+            <li> Edit Catalog</li>
+          </Link>
+          <Link to="/Catalog/Catalog" smooth={true} duration={500}>
+            <li>View Catalog</li>
+          </Link>
+          <Link to="/pages/PointTake" smooth={true} duration={50}>
+            <li>Manage Points</li>
+          </Link>
+          <Link to="/pages/Driver_Management" smooth={true} duration={500}>
+           <li>Drivers</li>
           </Link>
         </ul>
         <div className="small-menu-bot">
           <div className="menu-icos">
+          <Link to="/" smooth={true} duration={500}>
             <button>LogOut</button>
+          </Link>
+          <Link to="/pages/Sponsor_Profile" smooth={true} duration={500}>
             <button>Account</button>
+          </Link>
           </div>
           <div className="socials">
             <FaFacebook className="icons" />
