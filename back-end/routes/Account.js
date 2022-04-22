@@ -520,7 +520,7 @@ router.post("/createadminsubuser", (request, response) => {
       } else if (result[0].RowCount != 0) {
         response.send(false);
       } else {
-        if (isAllPresent(req.body.password)) {
+        if (isAllPresent(request.body.password)) {
           // create hash and salt
           let salt = new Date().toISOString();
           let hash = crypto
