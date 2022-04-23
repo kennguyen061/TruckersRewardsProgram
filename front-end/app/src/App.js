@@ -36,6 +36,7 @@ import AdminMostBought from "./Components/Reports/AdminReports/AdminMostBought.j
 import AdminPassword from "./Components/Reports/AdminReports/AdminPasswordChange.js";
 import AdminLogin from "./Components/Reports/AdminReports/AdminLoginAttemps.js";
 import AdminPoints from "./Components/Reports/AdminReports/AdminPointsChange.js";
+import SponsorAppSelect from "./Components/pages/SponsorAppSelect.js";
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/pages/SponsorApplicants"
+            element={<SponsorAppSelect />}
+          />
           <Route path="/pages/Application" element={<Application />} />
           <Route path="/pages/Driver_Profile" element={<Profile />} />
           <Route path="/pages/Sponsor_Profile" element={<SponsorProfile />} />
