@@ -20,12 +20,24 @@ db.connect((error) => {
 
 // Etsy call
 router.get("/", async (request, response) => {
-  let url =
-    "https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
-  fetch(url, {
+  const url =
+    "https://community-etsy.p.rapidapi.com/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv%22";
+
+  const options = {
     method: "GET",
-    mode: "cors",
-  }).then((responseBody) => response.send(responseBody));
+    headers: {
+      "X-RapidAPI-Host": "community-etsy.p.rapidapi.com",
+      "X-RapidAPI-Key": "b316ed0269mshc4c209e54250f24p10903cjsnd9b3711e8461",
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => {
+      console.log(res);
+      res.json();
+    })
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
 });
 
 module.exports = router;
