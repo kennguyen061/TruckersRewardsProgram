@@ -1,58 +1,44 @@
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  width: 100%;
 }
 
 .spacer {
   height: 5rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.Container {
-  background-color: rgba(89, 167, 255, 0.781);
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 3rem;
-}
-
-.App-link {
-  color: #ffffff;
-  margin-right: 1rem;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .sponsor-filter {
-  color: white;
-  padding: 0 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(51, 51, 51, 0.175);
 }
 
 .expenses-filter_control {
   display: flex;
+  flex-direction: column;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   margin: 1rem 0;
+  padding: 1rem;
+}
+
+.sponsor-filter h1 {
+  font-size: 40pt;
+}
+
+.sponsor-filter h2 {
+  font-size: 30pt;
 }
 
 .sponsor-filter label {
@@ -62,7 +48,34 @@
 
 .sponsor-filter select {
   font: inherit;
-  padding: 0.5rem 3rem;
+  text-align: center;
+  font-size: 40pt;
+  min-width: 40%;
+  padding: 10rem 5rem;
   font-weight: bold;
   border-radius: 6px;
+  cursor: inherit;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  margin: 3rem 0;
+}
+
+.sponsor-filter button {
+  font: inherit;
+  font-size: 40px;
+  cursor: pointer;
+  border: 1px solid #0a93ee;
+  background-color: #0a81cf;
+  color: white;
+  border-radius: 30px;
+  margin-top: 2rem;
+  width: 30rem;
+  height: 7rem;
+  margin-bottom: 5rem;
+}
+
+.sponsor-filter button:hover,
+.sponsor-filter button:active {
+  background-color: #0886da;
+  border-color: #0a93ee;
 }
