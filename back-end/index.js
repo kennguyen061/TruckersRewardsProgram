@@ -8,6 +8,7 @@ const drivermgtRoute = require("./routes/Drivermanagement");
 const applicationRoute = require("./routes/Application");
 const catalogRoute = require("./routes/Catalog");
 const reportsRoute = require("./routes/Report");
+const etsyRoute = require("./routes/Etsy")
 const PORT = 8000;
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/drivermgt", drivermgtRoute);
 app.use("/application", applicationRoute);
 app.use("/catalog", catalogRoute);
 app.use("/reports", reportsRoute);
+app.use("/etsy", etsyRoute);
 app.use(express.json({limit: '40KB'}));
 app.use(express.urlencoded({limit: '40KB'}));
 

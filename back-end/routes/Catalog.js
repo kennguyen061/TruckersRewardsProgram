@@ -19,6 +19,24 @@ db.connect((error) => {
   console.log("Connected");
 });
 
+// delete all listing
+router.post('/delete-all', (request, response) => {
+    db.query("DELETE FROM SPONSORLISTINGS WHERE SID = ?;",
+        [
+            request.body.sid
+        ],
+        (error) => {
+            if (error) {
+                console.log("ERROR deleting from SPONSORLISTINGS");
+            } else {
+                response.send(true);
+            }
+        }
+    );
+});
+
+
+
 //update catalog rules
 router.post("/updatecatalogrules", (request, response) => {
   console.log("Hit update cart rules");
