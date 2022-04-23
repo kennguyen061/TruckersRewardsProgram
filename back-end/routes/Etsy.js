@@ -24,8 +24,9 @@ router.get("/", async (request, response) => {
     fetch(url, {
         method: "GET",
         mode: "cors",
-        cache: "no-cache",
-    }).then((responseBody) => response.send(responseBody));
+    }).then(
+        (responseBody) => response.send(responseBody)
+    );
 });
 
 module.exports = router;

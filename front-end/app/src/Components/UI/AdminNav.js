@@ -59,7 +59,7 @@ function AdminNav() {
           <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
             <li>Home</li>
           </Link>
-          <Link to="/pages/error" smooth={true} duration={500}>
+          <Link to="/Reports/AdminReports" smooth={true} duration={500}>
             <li>Reports</li>
           </Link>
           <Link to="/pages/error" smooth={true} duration={500}>

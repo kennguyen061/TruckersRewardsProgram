@@ -58,44 +58,20 @@ router.post('/add-list-item', (request, response) => {
     );
 });
 
-
-
-//update catalog rules
-router.post("/updatecatalogrules", (request, response) => {
-  console.log("Hit update cart rules");
-  console.log(request.body);
-  db.query(
-    "UPDATE SPONSORORG SET Catalog_rules = ? WHERE SID = ?;",
-    [request.body.rules, request.body.SID],
-    (error, result) => {
-      console.log("request made");
-      if (error) throw error;
-      if (result.affectedRows == 1) {
-        console.log("true");
-        response.send(true);
-      } else {
-        console.log("false");
-        response.send(false);
-      }
-    }
-  );
-});
-
-// read catalog rules
-router.get("/getcatalogrules", (request, response) => {
-  console.log("Hit get cat rules");
-  db.query(
-    "SELECT Catalog_rules FROM SPONSORORG WHERE SID = ?;",
-    [request.query.SID],
-    (error, result) => {
-      if (error) throw error;
-      if (result.length == 1) {
-        response.send(JSON.stringify(result[0]));
-      } else {
-        response.send(JSON.stringify(null));
-      }
-    }
-  );
+// get list items
+router.get('/get-list-items', (request, response) => {
+    db.query("SELECT ListingID, Title, Price, Quantity, Description FROM SPONSORLISTINGS WHERE SID = ?;",
+        [
+            request.query.sid
+        ],
+        (error, result) => {
+            if (error) {
+                console.log("ERROR selecting from SPONSORLISTINGS");
+            } else {
+                response.send(JSON.stringify(result));
+            }
+        }
+    );
 });
 
 module.exports = router;
