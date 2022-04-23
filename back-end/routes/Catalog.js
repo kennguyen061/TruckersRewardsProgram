@@ -37,13 +37,14 @@ router.post('/delete-all', (request, response) => {
 
 // add list item
 router.post('/add-list-item', (request, response) => {
-    db.query("INSERT INTO SPONSORLISTINGS (ListingID, Title, Price, Quantity, Description, SID)) VALUES (?, ?, ?, ?, ?, ?);",
+    db.query("INSERT INTO SPONSORLISTINGS (ListingID, Title, Price, Quantity, Description, ImageURL, SID) VALUES (?, ?, ?, ?, ?, ?);",
         [
             request.body.listID,
             request.body.title,
             request.body.price,
             request.body.quantity,
             request.body.description,
+            request.body.ImageURL,
             request.body.sid
         ],
         (error, result) => {
@@ -60,7 +61,7 @@ router.post('/add-list-item', (request, response) => {
 
 // get list items
 router.get('/get-list-items', (request, response) => {
-    db.query("SELECT ListingID, Title, Price, Quantity, Description FROM SPONSORLISTINGS WHERE SID = ?;",
+    db.query("SELECT ListingID, Title, Price, Quantity, Description, ImageURL FROM SPONSORLISTINGS WHERE SID = ?;",
         [
             request.query.sid
         ],
