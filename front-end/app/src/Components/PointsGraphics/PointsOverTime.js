@@ -16,7 +16,7 @@ import {
 
 function PointsOverTime() {
   let YearValue = 0;
-
+  /*
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
   const sid = window.localStorage.getItem("sid");
@@ -36,11 +36,8 @@ function PointsOverTime() {
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "points/json" },
-    })
-      .then((response) => response.json())
-      .then((info) => {
-        AllPointHandler(info);
-      });
+    }).then((res) => res.json());
+    //.then((database) => console.log(database));
   }, []);
 
   let everything = new Map();
@@ -52,8 +49,8 @@ function PointsOverTime() {
     const fuck = Array.from(ReturnListData.values());
     console.log(fuck);
   }, []);
-
-  //temp1 = 4000;
+*/
+  let temp1 = 4000;
   let temp2 = 5000;
   let temp3 = 3000;
   let temp4 = 2000;

@@ -36,7 +36,7 @@ const PointTake = () => {
           Enter Persons Email:
           <input
             type="text"
-            name="Email:"
+            name="Email"
             value={inputs.username || ""}
             onChange={handleChange}
           />
