@@ -1,18 +1,24 @@
 import DriverNav from "../UI/DriverNav";
 import "./Application.css";
-import { Dropdown, Option } from "../UI/Apply_2_SponsorDropBox.js";
+
 import { useEffect, useState } from "react";
 
 import Footer from "../Footer/Footer";
 
-function Application() {
+function Application(props) {
   //get sponsor names
   const [sponsors, setSponsors] = useState([]);
   const id = window.localStorage.getItem("id");
 
   useEffect(() => {
+    const url = new URL("http://18.235.52.212:8000/application/getAllSponsors");
     //fetch all sponsors
-    //set to state
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data2) => setSponsors(data2));
   }, []); //update on sponsors?
 
   const submitHandler = async (data) => {
@@ -23,25 +29,25 @@ function Application() {
     //send off - await
     //redirect back to profile
   };
+  const dropdownChangeHandler = (event) => {
+    props.onChangeFilter(event.target.value);
+  };
 
   return (
     <div>
       <DriverNav />
       <div className="spacer"></div>
       <div>
-        <div>
+        <div className="sponsor-filter">
           <h1>Which Sponsor would you like to apply to ?</h1>
-          <Dropdown
-            formLabel="Choose a Sponsor"
-            buttonText="Send form"
-            action="/"
-          >
-            <Option selected value="Click to see Sponsors" />
-            {/* Write dynamic code for each sponsor*/}
-            <Option value="Sponsor 1" />
-            <Option value="Sponsor 2" />
-            <Option value="Sponsor 3" />
-          </Dropdown>
+          <h2>Please choose the sponsor you would like to join</h2>
+          <div className="expenses-filter_control">
+            <select value={props.selected} onChange={dropdownChangeHandler}>
+              {sponsors.map((s) => (
+                <option value={s}> {s.name} </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </div>
