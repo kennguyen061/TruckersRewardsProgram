@@ -37,6 +37,7 @@ function Application() {
             action="/"
           >
             <Option selected value="Click to see Sponsors" />
+            {/* Write dynamic code for each sponsor*/}
             <Option value="Sponsor 1" />
             <Option value="Sponsor 2" />
             <Option value="Sponsor 3" />
