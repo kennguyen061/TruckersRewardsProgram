@@ -16,12 +16,13 @@ const PointTake = () => {
       Email: enteredEmail,
       Changa: enteredPointChange,
     };
-    go++;
+
     console.log(go);
     console.log(dataSet);
+    go++;
   };
 
-  const sid = 1;
+  const sid = window.localStorage.getItem("sid");
   //get the driver id from email
   useEffect(() => {
     //Start of url1 ****************************************************
@@ -35,7 +36,7 @@ const PointTake = () => {
 
     fetch(url1, {
       method: "GET",
-      headers: { "Content-Type": "Drivermanagement/json" },
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((num) => setDriversID(num));
@@ -55,7 +56,7 @@ const PointTake = () => {
 
     fetch(url2, {
       method: "GET",
-      headers: { "Content-Type": "Points/json" },
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((num) => setDriversCurrPoints(num));
@@ -81,14 +82,16 @@ const PointTake = () => {
       reason: "good work",
     };
 
+    console.log(stuff);
+
     fetch(url3, {
       method: "POST",
-      headers: { "Content-Type": "Points/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(stuff),
     });
 
     console.log("Thats all check points page for update");
-  }, [enteredEmail]);
+  }, [go]);
 
   return (
     <div className="PointTakePage">
