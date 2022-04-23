@@ -223,21 +223,6 @@ router.post("/", (request, response) => {
         console.log("Found driver by email");
         let salt = new Date(result[0].Password_salt).toISOString();
 
-        db.query(
-          "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;",
-          [result[0].UID],
-          (err, ret) => {
-            if (err) {
-              console.log("problem getting sid");
-            } else {
-              if (ret.length === 1) {
-                console.log("found driver SID");
-                responseBody.sid = ret[0].SID;
-              }
-            }
-          }
-        );
-
         let hash = crypto
           .createHash("sha256")
           .update(request.body.password + salt)
@@ -249,7 +234,22 @@ router.post("/", (request, response) => {
           responseBody.id = result[0].UID;
           responseBody.role = "DRIVER";
           loginAttempt(request.body.email, "Success");
-          response.send(responseBody);
+          db.query(
+            "SELECT SID FROM SPONSORANDDRIVER WHERE UID = ?;",
+            [result[0].UID],
+            (err, ret) => {
+              if (err) {
+                console.log("problem getting sid");
+              } else {
+                if (ret.length === 1) {
+                  console.log("found driver SID");
+                  responseBody.sid = ret[0].SID;
+                  console.log(responseBody.sid);
+                }
+                response.send(responseBody);
+              }
+            }
+          );
         } else {
           console.log("hash be false");
           responseBody.exists = true;

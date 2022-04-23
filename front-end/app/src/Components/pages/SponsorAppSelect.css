@@ -1,0 +1,15 @@
+.spacer {
+  height: 5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-box {
+  display: flex;
+  flex-direction: row;
+}
