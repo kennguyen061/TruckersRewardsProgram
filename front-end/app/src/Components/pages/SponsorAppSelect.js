@@ -38,8 +38,6 @@ function SponsorAppSelect(props) {
   const submitHandler = async (event) => {
     //stop normal submit
     event.preventDefault();
-    //console.log(appStatus);
-    //console.log(event.target.dataset.driver);
     let d;
     returnedDrivers.map((driver) => {
       if ((driver.UID = event.target.dataset.driver)) {
