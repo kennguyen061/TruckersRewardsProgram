@@ -9,28 +9,42 @@ const ProgressBar = () => {
   // var should never be used as it is bad syntax in new version of javascript like we are using
 
   const id = window.localStorage.getItem("id");
-  const sid = window.localStorage.getItem("sid");
+  const sid = 1; //window.localStorage.getItem("sid");
 
-  const [returnedCurrentPoints, setReturnedPoints] = useState("Ammount");
+  const [returnedCurrentPoints, setReturnedPoints] = useState(0);
+  let sick = 0;
+
+  const url = new URL("http://18.235.52.212:8000/points/");
 
   useEffect(() => {
-    const url = new URL("http://18.235.52.212:8000/points/");
+    url.searchParams.append("UID", id);
+    url.searchParams.append("SID", sid);
 
-    url.searchParams.append("UID", 1);
-    url.searchParams.append("SID", 4);
+    console.log(url);
 
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((num) => setReturnedPoints(num));
+  }, [sid]);
+
+  /*
+  useEffect(() => {
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "points/json" },
     })
-      .then((res) => res.json())
+      .then((res) =>{res.json())
       .then((data) => {
-        console.log(data);
-        setReturnedPoints(data);
+        
+       
       });
-  }, []);
+  }, [sick]);
+*/
 
-  let sick = 34;
+  sick = 36;
   console.log(sick);
   console.log(returnedCurrentPoints);
 
