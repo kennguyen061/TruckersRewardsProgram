@@ -1,5 +1,5 @@
 import "./ReportsHomepage.css";
-import NewNav from "../UI/SponsorNav";
+import NewNav from "../UI/AdminNav";
 import { Link } from "react-router-dom";
 
 const AdminReportsHomepage = () => {
@@ -9,7 +9,7 @@ const AdminReportsHomepage = () => {
       <div className="Spacer"></div>
       <div className="ReportsSection">
         <div className="ReportsTitle">
-          <h1>Sponsor Reports</h1>
+          <h1>Admin Reports</h1>
           <h2>Select your reports below</h2>
         </div>
         <div>
