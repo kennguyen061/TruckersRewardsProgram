@@ -10,47 +10,12 @@ toast.configure();
 
 export default function Edit_Catalog() {
   // set value for default selection
-  const [selectedValues, setSelectedValue] = useState([]);
+  const [selectedValues, setSelectedValue] = useState(["All"]);
 
   //used to grab the active listings
   const [listing, setlisting] = useState([]);
-  const [listing_1, setlisting_1] = useState([]);
 
-  //changed var to let
-  // var should never be used as it is bad syntax in new version of javascript like we are using
-  let new_listing = [];
-
-  const fetchData = () => {
-    const etsy_url =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
-
-    fetch(etsy_url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setlisting(data.results);
-      });
-
-    const etsy_url_2 =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=100&offset=100&api_key=dmmhikoeydunsffqrxyeubdv";
-
-    fetch(etsy_url_2)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setlisting_1(data.results);
-      });
-
-    toast("Retrieving Catalog");
-  };
-
-  // handle onChange event of the dropdown
-  const handleChange = (e) => {
-    setSelectedValue(Array.isArray(e) ? e.map((x) => x.value) : []);
-  };
-
+  //options for the category dropdown
   const options = [
     {
       value: "Art & Collectibles",
@@ -102,17 +67,31 @@ export default function Edit_Catalog() {
     },
   ];
 
-  new_listing = listing.concat(listing_1);
 
-  console.log(new_listing);
-  //console.log(selectedValues);
+  const fetchData = () => {
+    const etsy_url =
+      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
 
+    fetch(etsy_url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setlisting(data.results);
+      });
+
+
+    toast("Retrieving Catalog");
+  };
+
+
+  console.log(listing)
 
   let filtered_listing = [];
 
 
 
-  filtered_listing = new_listing.filter(
+  filtered_listing = listing.filter(
     (filtered_listing) =>
       !filtered_listing.title.includes("republican") ||
       !filtered_listing.title.includes("Republican") ||
@@ -170,8 +149,18 @@ export default function Edit_Catalog() {
       !filtered_listing.tags.includes("Erotic")
   );
 
+  console.log(filtered_listing);
+
+
+  // handle onChange event of the dropdown
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map((x) => x.value) : []);
+  };
+
   // list array is filtered based on multi-select dropdown
-  filtered_listing = filtered_listing.filter(
+  let category_filtered_listing = [];
+
+  category_filtered_listing = filtered_listing.filter(
     (listing) =>
       listing.taxonomy_path.includes(selectedValues[0]) ||
       listing.taxonomy_path.includes(selectedValues[1]) ||
@@ -185,23 +174,22 @@ export default function Edit_Catalog() {
       listing.taxonomy_path.includes(selectedValues[9]) ||
       listing.taxonomy_path.includes(selectedValues[10]) ||
       listing.taxonomy_path.includes(selectedValues[11])
-  );
+    );
 
-  //KENNY ADD filtered_listing in the Catalog table for the sponsor
-  // call updatecatalogrules route
+  //if filtered by category
+  if (category_filtered_listing.length > 0)
+  {
+    filtered_listing = category_filtered_listing
+  }
+  
+
+ 
   console.log(filtered_listing);
 
   const save_catalog_notify = (catalog)  => () => {
     console.log(catalog)
-    fetch("http://18.235.52.212:8000/catalog/updatecatalogrules/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        SID: 1,
-        rules: catalog
-      })
-    })
-    .catch(err => console.error(err))
+      //listingID, title, price, Inventory Quantity, Description (make it the biggest you can), SID
+  
 
     toast("Catalog has been saved for Drivers");
   };
