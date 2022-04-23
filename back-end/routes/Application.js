@@ -227,4 +227,15 @@ router.get("/getAllSponsorApps", (req, res) => {
   );
 });
 
+router.get("/getAllSponsors", (req, res) => {
+  db.query(" SELECT * FROM SPONSORORG;", [], (err, results) => {
+    if (err) {
+      console.log("somnething went wrong");
+      res.send(false);
+    } else {
+      res.send(JSON.stringify(results));
+    }
+  });
+});
+
 module.exports = router;
