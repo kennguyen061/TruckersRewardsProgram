@@ -11,12 +11,12 @@ import Cart from "./Components/pages/Cart.js";
 import Checkout from "./Components/pages/Checkout.js";
 import PointTake from "./Components/pages/PointTake.js";
 import Catalog from "./Components/Catalog/Catalog.js";
-import Edit_Catalog from "./Components/Catalog/Sponsor_Catalog_Edit.js";
-import Sponsor_Profile from "./Components/pages/Sponsor_Profile.js";
-import Driver_Sponsor_Dashboard from "./Components/pages/Driver_Sponsor_Dashboard.js";
-import Driver_Management from "./Components/pages/Driver_Management.js";
-import Apply_To_Sponsor from "./Components/pages/Apply_To_Sponsor.js";
-import Admin_Profile from "./Components/pages/Admin_Profile.js";
+import EditCatalog from "./Components/Catalog/Sponsor_Catalog_Edit.js";
+import SponsorProfile from "./Components/pages/Sponsor_Profile.js";
+import DriverSponsorDashboard from "./Components/pages/Driver_Sponsor_Dashboard.js";
+import DriverManagement from "./Components/pages/Driver_Management.js";
+import ApplyToSponsor from "./Components/pages/Apply_To_Sponsor.js";
+import AdminProfile from "./Components/pages/Admin_Profile.js";
 import SponsorReports from "./Components/Reports/SponsorReportsHomepage.js";
 import AdminReports from "./Components/Reports/AdminReportsHomepage.js";
 import SponsorCurrentDriver from "./Components/Reports/SponsorReports/SponsorCurentDrivers.js";
@@ -26,7 +26,7 @@ import SponsorMostBought from "./Components/Reports/SponsorReports/SponsorMostBo
 import SponsorPassword from "./Components/Reports/SponsorReports/SponsorPasswordChange.js";
 import SponsorLogin from "./Components/Reports/SponsorReports/SponsorLoginAttemps.js";
 import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChange.js";
-import Listing_details from "./Components/Catalog/listing_details.js";
+import Listingdetails from "./Components/Catalog/listing_details.js";
 import Error from "./Components/pages/Error.js";
 import Orders from "./Components/pages/Orders.js";
 import AdminDrivers from "./Components/Reports/AdminReports/AdminCurentDrivers.js";
@@ -45,34 +45,31 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pages/Application" element={<Application />} />
           <Route path="/pages/Driver_Profile" element={<Profile />} />
-          <Route path="/pages/Sponsor_Profile" element={<Sponsor_Profile />} />
-          <Route path="/pages/Admin_Profile" element={<Admin_Profile />} />
+          <Route path="/pages/Sponsor_Profile" element={<SponsorProfile />} />
+          <Route path="/pages/Admin_Profile" element={<AdminProfile />} />
           <Route path="/main/points" element={<Points />} />
           <Route path="/pages/Login" element={<Login />} />
           <Route path="/pages/Wishlist" element={<Wishlist />} />
           <Route path="/pages/Dev" element={<Dev />} />
           <Route path="/pages/PointTake" element={<PointTake />} />
           <Route path="/Catalog/Catalog" element={<Catalog />} />
-          <Route path="/Listing_details/:id" element={<Listing_details />} />
+          <Route path="/Listing_details/:id" element={<Listingdetails />} />
           <Route path="/pages/Error" element={<Error />} />
 
           <Route
             path="/pages/Driver_Sponsor_Dashboard"
-            element={<Driver_Sponsor_Dashboard />}
+            element={<DriverSponsorDashboard />}
           />
           <Route
             path="/pages/Driver_Management"
-            element={<Driver_Management />}
+            element={<DriverManagement />}
           />
-          <Route
-            path="/pages/Apply_To_Sponsor"
-            element={<Apply_To_Sponsor />}
-          />
+          <Route path="/pages/Apply_To_Sponsor" element={<ApplyToSponsor />} />
           <Route path="/Reports/SponsorReports" element={<SponsorReports />} />
           <Route path="/Reports/AdminReports" element={<AdminReports />} />
           <Route
             path="/Catalog/Sponsor_Catalog_Edit"
-            element={<Edit_Catalog />}
+            element={<EditCatalog />}
           />
           <Route path="/pages/Cart" element={<Cart />} />
           <Route path="/Checkout" element={<Checkout />} />

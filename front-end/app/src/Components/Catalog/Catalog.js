@@ -4,7 +4,7 @@ import SponsorNav from "../UI/SponsorNav";
 import AdminNav from "../UI/SponsorNav";
 import "./Catalog.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +32,7 @@ export default function Catalog() {
     nav = <AdminNav />;
   } else {
     //this.setState({ redirect: "/pages/Error" });
-    this.props.history.push('/pages/error');
+    this.props.history.push("/pages/error");
   }
 
   //used for the search parameters
@@ -56,16 +56,12 @@ export default function Catalog() {
         ItemName: item.title,
         Price: Math.round(item.price),
         Quantity: 1,
-        Availability:item.quantity
+        Availability: item.quantity,
+      }),
+    }).catch((err) => console.error(err));
 
-      })
-    })
-    .catch(err => console.error(err))
-    
     toast("Product has been added to the cart");
   };
-
-
 
   const fetchHighData = async () => {
     const high_etsy_url =
@@ -215,7 +211,6 @@ export default function Catalog() {
                   Points: {Math.round(listing.price)}
                 </h2>
                 <h4>Description: {listing.description}</h4>
-              
 
                 <button
                   className="button_1"

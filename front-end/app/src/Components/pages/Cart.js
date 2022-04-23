@@ -3,43 +3,36 @@ import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 import "./Cart.css";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Checkout from "./Checkout";
 toast.configure();
 
-
 export default function Cart() {
-
   const [cart, setCart] = useState([]);
   const [enteredAddress, setEnteredAddress] = useState("address");
-  
+
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
   const sid = window.localStorage.getItem("sid");
- 
-  var total_cost = localStorage.getItem('totalcost');
+
+  var total_cost = localStorage.getItem("totalcost");
 
   const addressHandler = (item) => {
     setEnteredAddress(item);
   };
 
-  if(!total_cost) {
+  if (!total_cost) {
     total_cost = 0;
   }
 
   function costFunc() {
     let total = 0;
-    cart.map((cart) => ( 
-      total += (cart.Quantity * cart.Price)
-    ))
-    return total
+    cart.map((cart) => (total += cart.Quantity * cart.Price));
+    return total;
   }
 
-
-  localStorage.setItem('totalcost', costFunc());
-
-
+  localStorage.setItem("totalcost", costFunc());
 
   const fetchCartData = () => {
     const url = new URL("http://18.235.52.212:8000/cart/");
@@ -56,7 +49,6 @@ export default function Cart() {
       .then((data) => {
         setCart(data);
       });
-      
   };
 
   const fetchDriverData = () => {
@@ -70,25 +62,19 @@ export default function Cart() {
     })
       .then((response) => response.json())
       .then((driver) => {
-      
         addressHandler(driver.address);
- 
       });
-
-  }
+  };
 
   useEffect(() => {
     fetchCartData();
     fetchDriverData();
   }, []);
 
-
-  console.log(enteredAddress)
-  
+  console.log(enteredAddress);
 
   const remove = (item) => () => {
     const url = new URL("http://18.235.52.212:8000/cart/remove");
-
 
     const body = {
       UID: id,
@@ -103,8 +89,6 @@ export default function Cart() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-
-    
 
     //window.location.reload(false);
   };
@@ -125,16 +109,12 @@ export default function Cart() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    
-    
-    window.location.reload(false);
 
+    window.location.reload(false);
   };
 
   const decrease_qty = (item) => () => {
-
     const url = new URL("http://18.235.52.212:8000/cart/decreasequantity");
-
 
     const body = {
       UID: id,
@@ -158,8 +138,8 @@ export default function Cart() {
     const body = {
       UID: id,
       SID: 1,
-      address:enteredAddress
-    }
+      address: enteredAddress,
+    };
 
     fetch(url, {
       method: "POST",
@@ -168,20 +148,14 @@ export default function Cart() {
     });
 
     //add toast to checkout page it is going to a blank page
-    
-  }
-  
-
+  };
 
   return (
-    
     <div>
-      
-      <DriverNav/>
+      <DriverNav />
 
       <div className="cart">
-        {cart.map((cart) => ( 
-          
+        {cart.map((cart) => (
           <div
             className="item"
             style={{ border: "2px solid black", marginTop: 10 }}
@@ -189,11 +163,12 @@ export default function Cart() {
             <center>
               <h2 style={{ marginTop: 5 }}>{cart.ItemName}</h2>
 
-              <br></br><h3>Availability: {cart.Availability}</h3>
-              <br></br><h3 style={{ color: "red", marginBottom: 10 }}>
+              <br></br>
+              <h3>Availability: {cart.Availability}</h3>
+              <br></br>
+              <h3 style={{ color: "red", marginBottom: 10 }}>
                 {" "}
                 Total Cost: {cart.Quantity * cart.Price} Points
-              
               </h3>
             </center>
 
@@ -209,9 +184,11 @@ export default function Cart() {
                 </button>
               </div>
 
-              <button className="button_1" 
-              style={{ float: "left" }}
-              onClick={decrease_qty(cart)}>
+              <button
+                className="button_1"
+                style={{ float: "left" }}
+                onClick={decrease_qty(cart)}
+              >
                 {" "}
                 -{" "}
               </button>
@@ -228,22 +205,20 @@ export default function Cart() {
               </button>
             </div>
           </div>
-         
         ))}
         <center>
           <h1> Orders are Non-Refundable </h1>
           <h1> Orders Cannot be Canceled Once Placed </h1>
           <h1>Cart Total : {total_cost} Points</h1>
           <Link to={`/Checkout`}>
-          <button 
-            className="button_1" 
-            style={{ marginTop: 30 }}
-
-            onClick = {Checkout}
+            <button
+              className="button_1"
+              style={{ marginTop: 30 }}
+              onClick={Checkout}
             >
-            {" "}
-            Place Your Order {" "}
-          </button>
+              {" "}
+              Place Your Order{" "}
+            </button>
           </Link>
           <Footer />
         </center>
