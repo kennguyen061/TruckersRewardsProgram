@@ -69,9 +69,30 @@ router.get('/get-list-items', (request, response) => {
             if (error) {
                 console.log("ERROR selecting from SPONSORLISTINGS");
             } else {
-                response.send(JSON.stringify(result));
+                //responsebody array
+                //loop through result[index]
+                for (const element of result) {
+                    console.log(element.ItemID);
+                    let responseBody = {
+                        ListingID: null,
+                        Title: null,
+                        Price: null,
+                        Quantity: null,
+                        Description: null,
+                        ImageURL: null,
+                    };
+        
+                    responseBody.ListingID = element.ListingID;
+                    responseBody.Title = element.Title;
+                    responseBody.Price = element.Price;
+                    responseBody.Quantity = element.Quantity;
+                    responseBody.Description = element.Description;
+                    responseBody.ImageURL = element.ImageURL;
+                    rbArray.push(responseBody);
             }
+            response.send(JSON.stringify(result));
         }
+    }
     );
 });
 
