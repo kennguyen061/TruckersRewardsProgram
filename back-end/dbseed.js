@@ -141,5 +141,13 @@ db.connect(function (err) {
     }
   );
 
+  //Creates SPONSORLISTINGS Table
+  db.query(
+    "CREATE TABLE IF NOT EXISTS SPONSORLISTINGS(ListingID BIGINT,Title varchar(1000),Price float,Quantity int,Description varchar(6383),SID int,primary key(ListingID, SID),foreign key(SID) REFERENCES SPONSORORG(SID));",
+    function (error, result, fields) {
+      console.log(result);
+    }
+  );
+
   db.end();
 });
