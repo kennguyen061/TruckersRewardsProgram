@@ -270,7 +270,7 @@ router.post("/checkout", (request, response) => {
             
             if(result[0].Amount < total) {
                 console.log("Insufficient points");
-                //response.send(False);
+                response.send(false);
             }
             else {
                 db.query(
