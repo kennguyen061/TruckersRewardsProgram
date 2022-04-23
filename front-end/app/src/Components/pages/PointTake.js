@@ -16,10 +16,9 @@ const PointTake = () => {
       Email: enteredEmail,
       Changa: enteredPointChange,
     };
-    go++;
+
     console.log(go);
     console.log(dataSet);
-
     const url1 = new URL(
       "http://18.235.52.212:8000/drivermgt/getDriverByEmail"
     ); //params are email

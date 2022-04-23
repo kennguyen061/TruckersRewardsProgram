@@ -40,6 +40,7 @@ export default function Cart() {
     url.searchParams.append("UID", id);
     //will need a call to find the SID soon
     url.searchParams.append("SID", 1);
+    
 
     fetch(url, {
       method: "GET",

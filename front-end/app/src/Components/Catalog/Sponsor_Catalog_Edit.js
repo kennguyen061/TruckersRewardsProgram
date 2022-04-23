@@ -11,6 +11,8 @@ toast.configure();
 export default function Edit_Catalog() {
   // set value for default selection
   const [selectedValues, setSelectedValue] = useState(["All"]);
+  const sid = window.localStorage.getItem("sid");
+
 
   //used to grab the active listings
   const [listing, setlisting] = useState([]);
@@ -68,16 +70,19 @@ export default function Edit_Catalog() {
   ];
 
 
-  const fetchData = () => {
-    const etsy_url =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
-
-    fetch(etsy_url)
-      .then((response) => {
-        return response.json();
-      })
+  const  fetchData =  () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Host': 'community-etsy.p.rapidapi.com',
+        'X-RapidAPI-Key': 'b316ed0269mshc4c209e54250f24p10903cjsnd9b3711e8461'
+      }
+    };
+    
+    fetch('https://community-etsy.p.rapidapi.com/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv', options)
+      .then(response => response.json())
       .then((data) => {
-        setlisting(data.results);
+       setlisting(data.results);
       });
 
 
@@ -85,7 +90,8 @@ export default function Edit_Catalog() {
   };
 
 
-  console.log(listing)
+  console.log(typeof(listing))
+  
 
   let filtered_listing = [];
 
@@ -149,7 +155,6 @@ export default function Edit_Catalog() {
       !filtered_listing.tags.includes("Erotic")
   );
 
-  console.log(filtered_listing);
 
 
   // handle onChange event of the dropdown
@@ -188,7 +193,41 @@ export default function Edit_Catalog() {
 
   const save_catalog_notify = (catalog)  => () => {
     console.log(catalog)
-      //listingID, title, price, Inventory Quantity, Description (make it the biggest you can), SID
+
+    //call delete endpoint
+    const body = {   
+      sid: sid,
+    };
+
+
+    fetch("http://18.235.52.212:8000/catalog/delete-all", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }).then(console.log("ehllo"))
+    
+
+
+    catalog.map((listing) => (
+
+      fetch("http://18.235.52.212:8000/catalog/add-list-item/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        listID: listing.listing_id,
+        title: listing.title,
+        price: listing.price,
+        quantity: listing.quantity,
+        description: listing.description,
+        sid: sid,
+        ImageURL:listing.MainImage.url_170x135
+        })
+      })
+
+
+
+      
+    ));
   
 
     toast("Catalog has been saved for Drivers");
