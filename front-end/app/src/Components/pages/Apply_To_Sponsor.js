@@ -1,10 +1,11 @@
 import DriverNav from "../UI/DriverNav";
 import "./Application.css";
-//import SponsorApplyForm from "../SponsorApplyForm/SponsorApplyForm";
-//import NewApplicant from "../SponsorApplyForm/SponsorApplyForm";
+
 import Footer from "../Footer/Footer";
 
 function Application() {
+  //get sponsor names
+
   return (
     <div>
       <DriverNav />
