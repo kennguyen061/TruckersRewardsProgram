@@ -30,24 +30,6 @@ const ProgressBar = () => {
       .then((num) => setReturnedPoints(num));
   }, [sid]);
 
-  /*
-  useEffect(() => {
-    fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "points/json" },
-    })
-      .then((res) =>{res.json())
-      .then((data) => {
-        
-       
-      });
-  }, [sick]);
-*/
-
-  sick = 36;
-  console.log(sick);
-  console.log(returnedCurrentPoints);
-
   return (
     <div className="progress-bar">
       <div className="container">
@@ -57,7 +39,7 @@ const ProgressBar = () => {
               <div className="tot">
                 <h2>{"You have"}</h2>
                 <h2>{`${returnedCurrentPoints}`}</h2>
-                <h2>{sick}</h2>
+                <h2>{"Points"}</h2>
               </div>
             </div>
           </div>
