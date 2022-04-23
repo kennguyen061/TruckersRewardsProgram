@@ -7,8 +7,7 @@ import "./SponsorAppSelect.css";
 function SponsorAppSelect(props) {
   const [returnedDrivers, setReturnedDrivers] = useState([]);
   const [numDrivers, setnumDrivers] = useState(false);
-  const [appStatus, setAppStatus] = useState("Approved");
-  const [userSubmited, setUserSubmited] = useState([]);
+
   const sid = window.localStorage.getItem("sid");
 
   const url = new URL(
@@ -32,7 +31,8 @@ function SponsorAppSelect(props) {
   }, [sid]);
 
   const dropdownChangeHandler = (event) => {
-    setAppStatus(event.target.value);
+    status = event.target.value;
+    console.log(status);
   };
 
   const submitHandler = async (event) => {
@@ -40,7 +40,23 @@ function SponsorAppSelect(props) {
     event.preventDefault();
     //console.log(appStatus);
     //console.log(event.target.dataset.driver);
+    let d;
+    returnedDrivers.map((driver) => {
+      if ((driver.UID = event.target.dataset.driver)) {
+        d = driver;
+      }
+    });
+
+    console.log(d);
+
+    if (status == "Approved") {
+      console.log("send approved");
+    } else {
+      console.log("send Reject");
+    }
   };
+
+  let status = "Approved";
 
   return (
     <div>
