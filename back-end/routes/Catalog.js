@@ -37,7 +37,7 @@ router.post('/delete-all', (request, response) => {
 
 // add list item
 router.post('/add-list-item', (request, response) => {
-    db.query("INSERT INTO SPONSORLISTINGS (ListingID, Title, Price, Quantity, Description, SID) VALUES (?, ?, ?, ?, ?, ?);",
+    db.query("INSERT INTO SPONSORLISTINGS (ListingID, Title, Price, Quantity, Description, ImageURL, SID) VALUES (?, ?, ?, ?, ?, ?);",
         [
             request.body.listID,
             request.body.title,
