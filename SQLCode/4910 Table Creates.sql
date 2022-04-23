@@ -153,3 +153,16 @@ CREATE TABLE IF NOT EXISTS REPORTING (
     );
     
 CREATE TABLE IF NOT EXISTS CARTITEM (ItemID int auto_increment NOT NULL,ItemName varchar(255) NOT NULL,Price float NOT NULL,Quantity int NOT NULL,UID int NOT NULL,SID int NOT NULL,primary key (ItemID),foreign key (UID) references DRIVER(UID), foreign key (SID) references SPONSORORG(SID));
+
+CREATE TABLE IF NOT EXISTS SPONSORLISTINGS(
+	ListingID BIGINT,
+    Title varchar(1000),
+    Price float,
+    Quantity int,
+    Description varchar(6383),
+    SID int,
+    primary key(ListingID, SID),
+    foreign key(SID) REFERENCES SPONSORORG(SID)
+);
+
+INSERT INTO SPONSORLISTINGS(ListingID, Title, Price, Quantity, Description, SID) VALUES(9223372036854775807,"COOL STUFF",12.38, 5, "SDJFKLSDJFLSDJFLSDJFLKSDJFLKSDJFLSDJFDS",1);
