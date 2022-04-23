@@ -40,12 +40,12 @@ const PointTake = () => {
       .then((res) => res.json())
       .then((num) => setDriversID(num));
 
-    let trueID = 0;
     console.log(driversID);
     //This returns {UID: 4} how do I get just the 4 to update UID param right?
-    trueID = parseInt(driversID);
+    let trueID = parseInt(driversID.UID);
     console.log(trueID);
 
+    /*
     //Start of url2 *****************************************************
     const url2 = new URL("http://18.235.52.212:8000/points/"); //params are id and sid
 
@@ -90,6 +90,7 @@ const PointTake = () => {
     });
 
     console.log("Thats all check points page for update");
+    */
   }, [enteredEmail]);
 
   return (
