@@ -20,7 +20,7 @@ db.connect((error) => {
 
 // Etsy call
 router.get('/', (request, response) => {
-    url = 'https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv';
+    let url = 'https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv';
     const responseBody = await fetch(url, {
             method: 'GET',
             mode: 'cors',
