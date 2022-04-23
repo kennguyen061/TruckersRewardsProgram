@@ -35,6 +35,29 @@ router.post('/delete-all', (request, response) => {
     );
 });
 
+// add list item
+router.post('/add-list-item', (request, response) => {
+    db.query("INSERT INTO SPONSORLISTINGS (ListingID, Title, Price, Quantity, Description, SID)) VALUES (?, ?, ?, ?, ?, ?);",
+        [
+            request.body.listID,
+            request.body.title,
+            request.body.price,
+            request.body.quantity,
+            request.body.description,
+            request.body.sid
+        ],
+        (error, result) => {
+            if (error) {
+                console.log("ERROR inserting into SPONSORLISTINGS");
+            } else if (result.affectedRows == 0) {
+                response.send(false);
+            } else {
+                response.send(true);
+            }
+        }
+    );
+});
+
 
 
 //update catalog rules
