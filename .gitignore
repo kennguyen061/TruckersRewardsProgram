@@ -4,3 +4,6 @@
 
 /.vs
 /back-end/node_modules
+*.zip
+.DS_Store
+.DS_Store?
