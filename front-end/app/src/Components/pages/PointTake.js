@@ -45,7 +45,6 @@ const PointTake = () => {
     let trueID = parseInt(driversID.UID);
     console.log(trueID);
 
-    /*
     //Start of url2 *****************************************************
     const url2 = new URL("http://18.235.52.212:8000/points/"); //params are id and sid
 
@@ -61,13 +60,12 @@ const PointTake = () => {
       .then((res) => res.json())
       .then((num) => setDriversCurrPoints(num));
 
-    console.log("This is current Points:");
-    console.log(typeof driversCurrPoints);
-    console.log(driversCurrPoints);
     //This should work right becuase it is the direct grab from ToGoal.
 
     let curr = parseInt(driversCurrPoints);
     let chan = parseInt(enteredPointChange);
+
+    console.log(curr + "fucking what" + chan);
 
     let newAmount = curr + chan;
     console.log("The new point amount:" + newAmount);
@@ -90,7 +88,6 @@ const PointTake = () => {
     });
 
     console.log("Thats all check points page for update");
-    */
   }, [enteredEmail]);
 
   return (
