@@ -8,8 +8,8 @@ const PointTake = () => {
   const [enteredPointChange, setEnteredPointChange] = useState(0);
   const [driversID, setDriversID] = useState(0);
   const [driversCurrPoints, setDriversCurrPoints] = useState(0);
+  const sid = window.localStorage.getItem("sid");
 
-  let go = 0;
   const SubmitHandler = (event) => {
     event.preventDefault();
     const dataSet = {
@@ -17,21 +17,21 @@ const PointTake = () => {
       Changa: enteredPointChange,
     };
 
-    console.log(go);
     console.log(dataSet);
     const url1 = new URL(
       "http://18.235.52.212:8000/drivermgt/getDriverByEmail"
     ); //params are email
 
     url1.searchParams.append("Email", enteredEmail);
+
     const url2 = new URL("http://18.235.52.212:8000/points/");
 
     const url3 = new URL("http://18.235.52.212:8000/points/update");
 
     const stuff = {
       SID: sid,
-      UID: trueID,
-      newAmount: newAmount,
+      UID: driversID,
+      newAmount: driversCurrPoints,
       reason: "good work",
     };
 
@@ -44,9 +44,10 @@ const PointTake = () => {
       .then(() => {
         let trueID = parseInt(driversID.UID);
         console.log(trueID);
+        setDriversID(trueID);
       })
       .then(() => {
-        url2.searchParams.append("UID", trueID);
+        url2.searchParams.append("UID", driversID);
         url2.searchParams.append("SID", sid);
       })
       .then(
@@ -74,9 +75,8 @@ const PointTake = () => {
         })
       );
     console.log("Thats all check points page for update");
+    console.log(stuff);
   };
-
-  const sid = 1;
 
   return (
     <div className="PointTakePage">
