@@ -45,7 +45,6 @@ function Driver_Profile() {
     })
       .then((response) => response.json())
       .then((driver) => {
-      
         nameHandler(driver.firstName);
         lastNameHandler(driver.lastName);
         emailHandler(driver.email);
