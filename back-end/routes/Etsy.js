@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
+import fetch from "node-fetch";
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -20,13 +21,12 @@ db.connect((error) => {
 
 // Etsy call
 router.get("/", async (request, response) => {
-    let url = "https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
-    fetch(url, {
-        method: "GET",
-        mode: "cors",
-    }).then(
-        (responseBody) => response.send(responseBody)
-    );
+  let url =
+    "https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=50&offset=0&api_key=dmmhikoeydunsffqrxyeubdv";
+  fetch(url, {
+    method: "GET",
+    mode: "cors",
+  }).then((responseBody) => response.send(responseBody));
 });
 
 module.exports = router;
