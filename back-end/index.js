@@ -10,7 +10,6 @@ const catalogRoute = require("./routes/Catalog");
 const reportsRoute = require("./routes/Report");
 const etsyRoute = require("./routes/Etsy");
 const PORT = 8000;
-import fetch from "node-fetch";
 
 const app = express();
 
