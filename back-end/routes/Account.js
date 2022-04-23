@@ -288,7 +288,7 @@ router.post("/", (request, response) => {
               console.log("No here 2");
               // check admin table
               db.query(
-                "SELECT Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
+                "SELECT Password_hash, Password_salt, A_ID FROM ADMIN WHERE Email = ?;",
                 [request.body.email],
                 (error, result) => {
                   if (error) throw error;

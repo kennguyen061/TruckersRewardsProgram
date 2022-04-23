@@ -18,17 +18,17 @@ function AdminNav() {
   return (
     <div className={nav ? "navbar-bg" : "anavbar"}>
       <div className="logo">
-       <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
-         <h2>
+        <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
+          <h2>
             Roger's Rewards <BsTruck className="icon" />
-         </h2>
+          </h2>
         </Link>
       </div>
       <ul className="nav-menu">
         <Link to="/pages/Admin_Profile" smooth={true} duration={500}>
           <li>Home</li>
         </Link>
-        <Link to="/pages/error" smooth={true} duration={500}>
+        <Link to="/Reports/AdminReports" smooth={true} duration={500}>
           <li>Reports</li>
         </Link>
         <Link to="/pages/error" smooth={true} duration={500}>
@@ -72,7 +72,7 @@ function AdminNav() {
         <div className="small-menu-bot">
           <div className="menu-icos">
             <Link to="/" smooth={true} duration={500}>
-             <button>LogOut</button>
+              <button>LogOut</button>
             </Link>
             <Link to="/Admin_Profile" smooth={true} duration={500}>
               <button>Account</button>

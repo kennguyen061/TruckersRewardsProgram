@@ -10,7 +10,7 @@ const SponsorMostBought = () => {
 
   useEffect(() => {
     const url = new URL("http://18.235.52.212:8000/reports/boughtASC");
-
+    url.searchParams.append("SID", SID);
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
