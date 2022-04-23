@@ -7,6 +7,7 @@ import "./SponsorAppSelect.css";
 function SponsorAppSelect(props) {
   const [returnedDrivers, setReturnedDrivers] = useState([]);
   const [numDrivers, setnumDrivers] = useState(false);
+  const [reason, setReason] = useState("");
 
   const sid = window.localStorage.getItem("sid");
 
@@ -46,12 +47,15 @@ function SponsorAppSelect(props) {
     });
 
     console.log(d);
+    console.log(reason);
 
     if (status == "Approved") {
       console.log("send approved");
     } else {
       console.log("send Reject");
     }
+
+    setReason("");
   };
 
   let status = "Approved";
@@ -85,6 +89,14 @@ function SponsorAppSelect(props) {
                         <option value={"Accepted"}>Accept</option>
                         <option value={"Rejected"}>Decline</option>
                       </select>
+                      <input
+                        type="text"
+                        name="firstName"
+                        placeholder="reason"
+                        value={reason}
+                        onChange={(event) => setReason(event.target.value)}
+                        required
+                      />
                       <button>Submit</button>
                     </form>
                   </div>
