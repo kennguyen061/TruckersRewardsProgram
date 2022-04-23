@@ -188,6 +188,7 @@ router.post("/changescale", (request, response) => {
 });
 
 router.get("/getDriverByEmail", (req, res) => {
+  console.log("Hit get id by email");
   db.query(
     "SELECT UID FROM DRIVER WHERE Email = ?;",
     [req.query.Email],
