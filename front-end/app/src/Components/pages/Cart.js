@@ -40,9 +40,6 @@ export default function Cart() {
   localStorage.setItem('totalcost', costFunc());
 
 
-  
-
-
 
   const fetchCartData = () => {
     const url = new URL("http://18.235.52.212:8000/cart/");
