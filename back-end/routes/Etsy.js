@@ -29,3 +29,5 @@ router.get("/", async (request, response) => {
   });
   response.send(responseBody);
 });
+
+module.exports = router;
