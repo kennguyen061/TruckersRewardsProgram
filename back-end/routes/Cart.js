@@ -254,7 +254,7 @@ router.post("/checkout", (request, response) => {
             let newpointbalance = result[0].Amount;
             //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE) 
             db.query(
-                    "SELECT Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                    "SELECT Price,Quantity FROM CARTITEM WHERE UID = ? AND SID = ?;",
                     [request.body.UID, request.body.SID],
                     (error2, result2) => {
                       if (error) {
@@ -263,7 +263,7 @@ router.post("/checkout", (request, response) => {
                         //responsebody array
                         //loop through result[index]
                         for (const element of result2) {                
-                          total = total + element.Price;
+                          total = total + (element.Price*element.Quantity);
                         }
                     }
                     console.log("Total:" +total);
