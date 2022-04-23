@@ -22,7 +22,7 @@ const AdminPassword = () => {
       filename="Admin-Driver-Password-Changes.pdf"
     >
       <div className="ReportStyle">
-        <h1>{`Roger's Rewards'sPassword Changes`}</h1>
+        <h1>{`Roger's Rewards's Password Changes`}</h1>
 
         <p>This is a report of all driver password changes </p>
         <table>
