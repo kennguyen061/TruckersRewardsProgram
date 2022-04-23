@@ -44,6 +44,7 @@ router.post('/add-list-item', (request, response) => {
             request.body.price,
             request.body.quantity,
             request.body.description,
+            request.body.ImageURL,
             request.body.sid
         ],
         (error, result) => {
@@ -60,7 +61,7 @@ router.post('/add-list-item', (request, response) => {
 
 // get list items
 router.get('/get-list-items', (request, response) => {
-    db.query("SELECT ListingID, Title, Price, Quantity, Description FROM SPONSORLISTINGS WHERE SID = ?;",
+    db.query("SELECT ListingID, Title, Price, Quantity, Description, ImageURL FROM SPONSORLISTINGS WHERE SID = ?;",
         [
             request.query.sid
         ],
