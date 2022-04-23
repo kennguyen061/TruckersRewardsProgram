@@ -45,7 +45,6 @@ export default function Catalog() {
   const [filterParam, setFilterParam] = useState("All");
 
   const notify_cart = (item) => () => {
-    console.log(item.quantity)
     fetch("http://18.235.52.212:8000/cart/notifycart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

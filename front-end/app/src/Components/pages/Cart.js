@@ -5,27 +5,27 @@ import "./Cart.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Link, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
+import Checkout from "./Checkout";
 toast.configure();
 
 
 export default function Cart() {
 
   const [cart, setCart] = useState([]);
-  
+  const [enteredAddress, setEnteredAddress] = useState("address");
   
   const role = window.localStorage.getItem("role");
   const id = window.localStorage.getItem("id");
   const sid = window.localStorage.getItem("sid");
-  const url = new URL("http://18.235.52.212:8000/cart/");
+ 
+  var total_cost = localStorage.getItem('totalcost');
 
-  url.searchParams.append("UID", id);
-  //will need a call to find the SID soon
-  url.searchParams.append("SID", 1);
-
-  var total_cost = localStorage.getItem('bannerViews');
+  const addressHandler = (item) => {
+    setEnteredAddress(item);
+  };
 
   if(!total_cost) {
-    total_cost = 5;
+    total_cost = 0;
   }
 
   function costFunc() {
@@ -36,13 +36,20 @@ export default function Cart() {
     return total
   }
 
-  function addTotalCost() {
-    localStorage.setItem('bannerViews', costFunc());
-  }
+
+  localStorage.setItem('totalcost', costFunc());
+
+
+  
 
 
 
-  const fetchData = () => {
+  const fetchCartData = () => {
+    const url = new URL("http://18.235.52.212:8000/cart/");
+
+    url.searchParams.append("UID", id);
+    //will need a call to find the SID soon
+    url.searchParams.append("SID", 1);
 
     fetch(url, {
       method: "GET",
@@ -55,20 +62,34 @@ export default function Cart() {
       
   };
 
+  const fetchDriverData = () => {
+    const url = new URL("http://18.235.52.212:8000/account/read");
+
+    url.searchParams.append("role", role);
+    url.searchParams.append("id", id);
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((driver) => {
+      
+        addressHandler(driver.address);
+ 
+      });
+
+  }
+
   useEffect(() => {
-    fetchData();
-  
+    fetchCartData();
+    fetchDriverData();
   }, []);
 
-  addTotalCost();
-  // cart.map((cart) => ( 
-  //   setCost(cart.Price)
-  // ))
 
+  console.log(enteredAddress)
   
 
   const remove = (item) => () => {
-  
     const url = new URL("http://18.235.52.212:8000/cart/remove");
 
 
@@ -108,7 +129,7 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
     
-    addTotalCost();
+    
     window.location.reload(false);
 
   };
@@ -132,6 +153,26 @@ export default function Cart() {
 
     window.location.reload(false);
   };
+
+  //will need to confirm this works
+  const Checkout = () => {
+    const url = new URL("http://18.235.52.212:8000/cart/checkout");
+
+    const body = {
+      UID: id,
+      SID: 1,
+      address:enteredAddress
+    }
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    //add toast to checkout page it is going to a blank page
+    
+  }
   
 
 
@@ -193,11 +234,18 @@ export default function Cart() {
          
         ))}
         <center>
+          <h1> Orders are Non-Refundable </h1>
+          <h1> Orders Cannot be Canceled Once Placed </h1>
           <h1>Cart Total : {total_cost} Points</h1>
           <Link to={`/Checkout`}>
-          <button className="button_1" style={{ marginTop: 30 }}>
+          <button 
+            className="button_1" 
+            style={{ marginTop: 30 }}
+
+            onClick = {Checkout}
+            >
             {" "}
-            Checkout{" "}
+            Place Your Order {" "}
           </button>
           </Link>
           <Footer />
