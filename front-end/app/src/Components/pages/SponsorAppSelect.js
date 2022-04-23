@@ -7,14 +7,16 @@ import "./SponsorAppSelect.css";
 function SponsorAppSelect(props) {
   const [returnedDrivers, setReturnedDrivers] = useState([]);
   const [numDrivers, setnumDrivers] = useState(false);
+  const [appStatus, setAppStatus] = useState("Approved");
+  const [userSubmited, setUserSubmited] = useState([]);
   const sid = window.localStorage.getItem("sid");
-  const url = new URL(
-    "http://18.235.52.212:8000/application/getAllSponsorApps"
-  );
-
-  url.searchParams.append("SID", 2);
 
   useEffect(() => {
+    const url = new URL(
+      "http://18.235.52.212:8000/application/getAllSponsorApps"
+    );
+
+    url.searchParams.append("SID", 2);
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -29,6 +31,17 @@ function SponsorAppSelect(props) {
         }
       });
   }, []);
+
+  const dropdownChangeHandler = (event) => {
+    setAppStatus(event.target.value);
+  };
+
+  const submitHandler = async (event) => {
+    //stop normal submit
+    event.preventDefault();
+    console.log(appStatus);
+    console.log(event.target.dataset.driver);
+  };
 
   return (
     <div>
@@ -47,7 +60,23 @@ function SponsorAppSelect(props) {
                 {returnedDrivers.map((driver) => (
                   <div>
                     {" "}
-                    <p>{driver.First_name}</p>
+                    <form
+                      onSubmit={submitHandler}
+                      data-driver={driver.First_name}
+                    >
+                      <div>{driver.First_name + " " + driver.Last_name}</div>
+                      <div>{driver.Email}</div>
+                      <div> {"In Progress"}</div>
+                      <div> {driver.AppDate}</div>
+                      <select
+                        value={props.selected}
+                        onChange={dropdownChangeHandler}
+                      >
+                        <option value={"Accepted"}>Accept</option>
+                        <option value={"Rejected"}>Decline</option>
+                      </select>
+                      <button>Submit</button>
+                    </form>
                   </div>
                 ))}
               </div>
