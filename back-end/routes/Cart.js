@@ -347,7 +347,29 @@ router.post("/checkout", (request, response) => {
                     request.body.SID,
                 ],
                 (error,result) => {
-                    console.log("Point balance updated")
+                  console.log("Point balance updated");
+                  db.query(
+                    "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+                    [request.body.UID, request.body.SID],
+                    (error2, result2) => {
+                      if (error) {
+                        console.log("Something went wrong getting pointid");
+                        response.send(false);
+                      } else if (result.length > 0) {
+                        pointId = result2[0].PointID;
+                        db.query("INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
+                        [
+                            newpointbalance-total,
+                            "Purchase made",
+                            pointId,
+                            request.body.SID,
+                        ],
+                        (error3,result3) => {
+                            console.log("Point balance updated")
+                        }
+                        );
+                      }
+                    });
                 }
                 );
             }
