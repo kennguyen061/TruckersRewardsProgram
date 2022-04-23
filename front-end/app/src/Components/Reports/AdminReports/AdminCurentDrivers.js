@@ -21,7 +21,9 @@ const AdminCurrentDrivers = () => {
     <ReportGenerator title="Admin Drivers" filename="Admin-Current-Drivers.pdf">
       <div className="ReportStyle">
         <h1>{`Roger's Rewards's Current Drivers`}</h1>
-        <p>This is a report of all drivers</p>
+        <p>
+          This is a report of all drivers regardless of if they have a sponsor
+        </p>
         <table>
           <thead>
             <tr>

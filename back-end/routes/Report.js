@@ -137,14 +137,18 @@ router.get("/getAllDrivers", (req, res) => {
 
 //get all apps
 router.get("/getAllApps", (req, res) => {
-  db.query("SELECT * FROM APPLICATION;", [], (err, results) => {
-    if (err) {
-      console.log("problem getting application info");
-      res.send(false);
-    } else {
-      res.send(JSON.stringify(results));
+  db.query(
+    "SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID;",
+    [],
+    (err, results) => {
+      if (err) {
+        console.log("problem getting application info");
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(results));
+      }
     }
-  });
+  );
 });
 
 //get least bought for all sponsors
