@@ -212,7 +212,7 @@ router.get("/retrieveallsponsorapplications", (request, response) => {
 router.get("/getAllSponsorApps", (req, res) => {
   //get all apps
   db.query(
-    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason,UID FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ? AND AppStatus = 'InProgress';",
+    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason,DRIVER.UID FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ? AND AppStatus = 'InProgress';",
     [req.query.SID],
     (err, result) => {
       if (err) {

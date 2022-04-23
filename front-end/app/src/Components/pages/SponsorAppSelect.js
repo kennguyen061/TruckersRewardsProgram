@@ -11,26 +11,25 @@ function SponsorAppSelect(props) {
   const [userSubmited, setUserSubmited] = useState([]);
   const sid = window.localStorage.getItem("sid");
 
-  useEffect(() => {
-    const url = new URL(
-      "http://18.235.52.212:8000/application/getAllSponsorApps"
-    );
+  const url = new URL(
+    "http://18.235.52.212:8000/application/getAllSponsorApps"
+  );
 
-    url.searchParams.append("SID", 2);
+  url.searchParams.append("SID", 2);
+
+  useEffect(() => {
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
-      .then((response) => response.json())
-      .then((driver) => {
-        if (driver === false) {
-          setnumDrivers(false);
-        } else {
+      .then((res) => res.json())
+      .then((data) => {
+        if (data != false) {
           setnumDrivers(true);
-          setReturnedDrivers(driver);
+          setReturnedDrivers(data);
         }
       });
-  }, []);
+  }, [sid]);
 
   const dropdownChangeHandler = (event) => {
     setAppStatus(event.target.value);
@@ -39,8 +38,8 @@ function SponsorAppSelect(props) {
   const submitHandler = async (event) => {
     //stop normal submit
     event.preventDefault();
-    console.log(appStatus);
-    console.log(event.target.dataset.driver);
+    //console.log(appStatus);
+    //console.log(event.target.dataset.driver);
   };
 
   return (
@@ -60,10 +59,7 @@ function SponsorAppSelect(props) {
                 {returnedDrivers.map((driver) => (
                   <div>
                     {" "}
-                    <form
-                      onSubmit={submitHandler}
-                      data-driver={driver.First_name}
-                    >
+                    <form onSubmit={submitHandler} data-driver={driver.UID}>
                       <div>{driver.First_name + " " + driver.Last_name}</div>
                       <div>{driver.Email}</div>
                       <div> {"In Progress"}</div>
