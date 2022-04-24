@@ -10,7 +10,8 @@ function SponsorAppSelect(props) {
   const [reason, setReason] = useState("");
 
   const sid = window.localStorage.getItem("sid");
-  let status = "";
+  window.localStorage.setItem("status", "Approved");
+
   const url = new URL(
     "http://18.235.52.212:8000/application/getAllSponsorApps"
   );
@@ -32,14 +33,15 @@ function SponsorAppSelect(props) {
   }, [sid]);
 
   const dropdownChangeHandler = (event) => {
-    status = event.target.value;
-    console.log(status);
+    window.localStorage.setItem("status", event.target.value);
   };
 
   const submitHandler = async (event) => {
     //stop normal submit
     event.preventDefault();
     let uid = event.target.dataset.driver;
+
+    let status = window.localStorage.getItem("status");
 
     console.log(uid);
     console.log(reason);
