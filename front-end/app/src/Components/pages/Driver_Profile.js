@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 import "./Driver_Profile.css";
+import { Link } from "react-router-dom";
+
 
 function Driver_Profile() {
   const role = window.localStorage.getItem("role");
@@ -83,6 +85,17 @@ function Driver_Profile() {
             </div>
             <div>
               <label className="Phone">Phone Number: {enteredPhone}</label>
+              <hr className="line_bold" />
+            </div>
+            <div>
+            <Link to={`/Driver_Password_Reset`}>
+              <button
+                className="button_2"
+                style={{ alignItems: "right" }}
+              >
+                Reset Passcode
+              </button>
+              </Link>
             </div>
           </div>
         </div>
