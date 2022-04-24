@@ -5,20 +5,19 @@ import Footer from "../Footer/Footer";
 import "./Driver_Password_Reset.css";
 
 export default function Driver_Password_Reset() {
+  const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [reenteredPassword, setReenteredPassword] = useState("");
   const navigate = useNavigate();
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
     const role = window.localStorage.getItem("role");
-    const uid = window.localStorage.getItem("uid");
 
     const info = {
       role: role,
       newpassword: enteredPassword,
-      UID: uid,
+      Email: enteredEmail,
     };
 
     console.log(info);
@@ -38,10 +37,12 @@ export default function Driver_Password_Reset() {
 
     if (value === false) {
       alert("There was a problem restting your password. Try again.");
+      setEnteredEmail("");
       setEnteredPassword("");
       setReenteredPassword("");
     } else {
       alert("Password Reset");
+      setEnteredEmail("");
       setEnteredPassword("");
       setReenteredPassword("");
     }
@@ -58,6 +59,17 @@ export default function Driver_Password_Reset() {
       </div>
       <div className="form-box">
         <form onSubmit={submitHandler} className="form">
+          <div className="item-box">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={enteredEmail}
+              placeholder="user@email.com"
+              onChange={(event) => setEnteredEmail(event.target.value)}
+              required
+            />
+          </div>
           <div className="item-box">
             <label>New Password</label>
             <p>8-15 character, 1 uppercase, 1 lowercase, 1 special character</p>

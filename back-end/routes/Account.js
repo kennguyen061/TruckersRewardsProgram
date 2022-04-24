@@ -87,12 +87,12 @@ router.post("/updatepassword", (request, response) => {
             console.log("The new password is: " + request.body.newpassword);
 
             db.query(
-              "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
-              [newhash, newsalt, request.body.UID],
+              "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+              [newhash, newsalt, request.body.Email],
               (error2) => {
                 if (error2) throw error2;
                 //call changepasswordlog
-                changePasswordlog("DRIVER", request.body.UID, newhash);
+                changePasswordlog("DRIVER", request.body.Email, newhash);
                 response.send(true);
               }
             );
@@ -109,12 +109,12 @@ router.post("/updatepassword", (request, response) => {
             console.log("The new password is: " + request.body.newpassword);
 
             db.query(
-              "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE SUID = ?;",
-              [newhash, newsalt, request.body.UID],
+              "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+              [newhash, newsalt, request.body.Email],
               (error2) => {
                 if (error2) throw error2;
                 //call changepasswordlog
-                changePasswordlog("SPONSOR", request.body.UID, newhash);
+                changePasswordlog("SPONSOR", request.body.Email, newhash);
                 response.send(true);
               }
             );
@@ -131,12 +131,12 @@ router.post("/updatepassword", (request, response) => {
             console.log("The new password is: " + request.body.newpassword);
 
             db.query(
-              "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE A_ID = ?;",
-              [newhash, newsalt, request.body.UID],
+              "UPDATE ADMIN SET Password_hash = ?,Password_salt = ? WHERE Email = ?;",
+              [newhash, newsalt, request.body.Email],
               (error2) => {
                 if (error2) throw error2;
                 //call changepasswordlog
-                changePasswordlog("ADMIN", request.body.UID, newhash);
+                changePasswordlog("ADMIN", request.body.Email, newhash);
                 response.send(true);
               }
             );
