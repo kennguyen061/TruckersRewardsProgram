@@ -76,13 +76,6 @@ router.post("/updatepassword", (request, response) => {
     response.send(false);
   } else {
     if (request.body.role == "DRIVER") {
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
-
-          if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -103,18 +96,8 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
           }
-
-    } else if (request.body.role == "SPONSOR") {
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
-
-          if (hash === result[0].Password_hash) {
+     else if (request.body.role == "SPONSOR") {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -135,17 +118,8 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
-          }
-    } else if (request.body.role == "ADMIN") {
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
 
-          if (hash === result[0].Password_hash) {
+    } else if (request.body.role == "ADMIN") {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -166,10 +140,7 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
           }
-    }
   }
 });
 
