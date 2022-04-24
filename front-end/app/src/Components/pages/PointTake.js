@@ -37,14 +37,14 @@ const PointTake = () => {
 
     fetch(url1, {
       method: "GET",
-      headers: { "Content-Type": "Drivermanagement/json" },
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((num) => setDriversID(num))
       .then(() => {
         let trueID = parseInt(driversID.UID);
-        console.log(trueID);
         setDriversID(trueID);
+        console.log(driversID);
       })
       .then(() => {
         url2.searchParams.append("UID", driversID);
@@ -53,7 +53,7 @@ const PointTake = () => {
       .then(
         fetch(url2, {
           method: "GET",
-          headers: { "Content-Type": "Points/json" },
+          headers: { "Content-Type": "application/json" },
         })
           .then((res) => res.json())
           .then((num) => setDriversCurrPoints(num))
@@ -70,7 +70,7 @@ const PointTake = () => {
       .then(
         fetch(url3, {
           method: "POST",
-          headers: { "Content-Type": "Points/json" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(stuff),
         })
       );
