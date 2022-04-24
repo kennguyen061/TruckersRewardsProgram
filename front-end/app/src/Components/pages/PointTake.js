@@ -45,17 +45,18 @@ const PointTake = () => {
         url2.searchParams.append("SID", 1);
         console.log(url2);
       })
-      .then(() => {
+      .then(
         fetch(url2, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         })
-          .then((res) => {
-            console.log(res.json());
-            res.json();
-          })
-          .then((num) => setDriversCurrPoints(num));
+      )
+      .then((res) => {
+        console.log(res.json());
+        res.json();
       })
+      .then((num) => setDriversCurrPoints(num))
+
       .then(() => {
         let curr = parseInt(driversCurrPoints);
         let chan = parseInt(enteredPointChange);
