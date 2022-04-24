@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DriverNav from "../UI/DriverNav";
+import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
 
 import "./SponsorAppSelect.css";
@@ -85,26 +85,27 @@ function SponsorAppSelect(props) {
 
   return (
     <div>
-      <DriverNav />
+      <SponsorNav />
       <div className="spacer"></div>
 
       <div className="content">
         <div>
           <h1>New Sponsor Applicants</h1>
           <h2> Please accept and reject all new applicants</h2>
+          <hr />
         </div>
-        <div className="app-box">
+        <div>
           <div>
             {numDrivers ? (
-              <div>
+              <div className="app-box">
                 {returnedDrivers.map((driver) => (
                   <div className="status-selector">
                     {" "}
                     <form onSubmit={submitHandler} data-driver={driver.UID}>
-                      <div>{driver.First_name + " " + driver.Last_name}</div>
-                      <div>{driver.Email}</div>
-                      <div> {"In Progress"}</div>
-                      <div> {driver.AppDate}</div>
+                      <h2>{driver.First_name + " " + driver.Last_name}</h2>
+                      <h2>{driver.Email}</h2>
+                      <h2> {"In Progress"}</h2>
+                      <h2> {driver.AppDate}</h2>
                       <select
                         value={props.selected}
                         onChange={dropdownChangeHandler}
@@ -122,6 +123,7 @@ function SponsorAppSelect(props) {
                       />
                       <button>Submit</button>
                     </form>
+                    <hr />
                   </div>
                 ))}
               </div>
