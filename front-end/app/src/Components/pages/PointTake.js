@@ -49,9 +49,7 @@ const PointTake = () => {
         fetch(url2, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-        })
-      )
-      .then((res) => {
+        }) .then((res) => {
         console.log(res.json());
         res.json();
       })
@@ -82,6 +80,8 @@ const PointTake = () => {
         console.log("Thats all check points page for update");
         console.log(stuff);
       });
+      )
+     
   };
 
   return (
