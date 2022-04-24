@@ -362,7 +362,10 @@ router.post("/checkout", (request, response) => {
                               );
                               response.send(false);
                             } else if (result.length > 0) {
-                              pointId = result2[0].PointID;
+                              let pointId = result2[0].PointID;
+                              console.log(
+                                "DYLAN LOOK ITS A POINT ID !!!!!!! - " + pointId
+                              );
                               db.query(
                                 "INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
                                 [
@@ -372,7 +375,7 @@ router.post("/checkout", (request, response) => {
                                   request.body.SID,
                                 ],
                                 (error3, result3) => {
-                                  console.log("Point balance updated");
+                                  console.log("Point balance updated in log");
                                   go = true;
                                   response.send(true);
                                 }
