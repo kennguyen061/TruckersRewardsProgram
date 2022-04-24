@@ -88,7 +88,7 @@ router.post("/updatepassword", (request, response) => {
 
             db.query(
               "UPDATE DRIVER SET Password_hash = ?,Password_salt = ? WHERE UID = ?;",
-              [newhash, newsalt, request.body.email],
+              [newhash, newsalt, request.body.UID],
               (error2) => {
                 if (error2) throw error2;
                 //call changepasswordlog
@@ -110,7 +110,7 @@ router.post("/updatepassword", (request, response) => {
 
             db.query(
               "UPDATE SPONSORACCT SET Password_hash = ?,Password_salt = ? WHERE SUID = ?;",
-              [newhash, newsalt, request.body.email],
+              [newhash, newsalt, request.body.UID],
               (error2) => {
                 if (error2) throw error2;
                 //call changepasswordlog
