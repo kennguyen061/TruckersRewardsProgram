@@ -327,7 +327,7 @@ router.post("/checkout", (request, response) => {
                               }
                             }
                           }
-                        ).then(
+                        ).then(() => {
                           db.query(
                             "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
                             [request.body.UID, request.body.SID],
@@ -374,8 +374,8 @@ router.post("/checkout", (request, response) => {
                                 }
                               );
                             }
-                          )
-                        );
+                          );
+                        });
                       }
                     );
                   }
