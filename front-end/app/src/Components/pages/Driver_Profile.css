@@ -67,11 +67,12 @@
   padding-top: 5px;
   padding-right: 3px;
   padding-bottom: 5px;
-  padding-left: 1px;
-  border-radius: 50px;
+  border-radius: 5px;
   width: 17rem;
   height: 3rem;
   border: 3px solid #0a93ee;
+
+  text-indent: 1rem;
 }
 
 ::-webkit-input-placeholder {
