@@ -8,8 +8,8 @@ const PointTake = () => {
   const [enteredPointChange, setEnteredPointChange] = useState(0);
   const [driversID, setDriversID] = useState(0);
   const [driversCurrPoints, setDriversCurrPoints] = useState(0);
+  const sid = window.localStorage.getItem("sid");
 
-  let go = 0;
   const SubmitHandler = (event) => {
     event.preventDefault();
     const dataSet = {
@@ -17,81 +17,66 @@ const PointTake = () => {
       Changa: enteredPointChange,
     };
 
-    console.log(go);
     console.log(dataSet);
-    go++;
-  };
-
-  const sid = window.localStorage.getItem("sid");
-  //get the driver id from email
-  useEffect(() => {
-    //Start of url1 ****************************************************
     const url1 = new URL(
       "http://18.235.52.212:8000/drivermgt/getDriverByEmail"
     ); //params are email
 
     url1.searchParams.append("Email", enteredEmail);
 
-    //console.log(url1);
+    const url2 = new URL("http://18.235.52.212:8000/points/");
+
+    const url3 = new URL("http://18.235.52.212:8000/points/update");
+
+    const stuff = {
+      SID: sid,
+      UID: driversID,
+      newAmount: driversCurrPoints,
+      reason: "good work",
+    };
 
     fetch(url1, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((num) => setDriversID(num));
+      .then((num) => setDriversID(num))
+      .then(() => {
+        let trueID = parseInt(driversID.UID);
+        setDriversID(trueID);
+        console.log(driversID);
+      })
+      .then(() => {
+        url2.searchParams.append("UID", driversID);
+        url2.searchParams.append("SID", sid);
+      })
+      .then(
+        fetch(url2, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then((num) => setDriversCurrPoints(num))
+      )
+      .then(() => {
+        let curr = parseInt(driversCurrPoints);
+        let chan = parseInt(enteredPointChange);
 
-    console.log(driversID);
-    //This returns {UID: 4} how do I get just the 4 to update UID param right?
-    let trueID = parseInt(driversID.UID);
-    console.log(trueID);
+        console.log(curr + "fucking what" + chan);
 
-    //Start of url2 *****************************************************
-    const url2 = new URL("http://18.235.52.212:8000/points/"); //params are id and sid
-
-    url2.searchParams.append("UID", trueID);
-    url2.searchParams.append("SID", sid);
-
-    //console.log(url2);
-
-    fetch(url2, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((num) => setDriversCurrPoints(num));
-
-    //This should work right becuase it is the direct grab from ToGoal.
-
-    let curr = parseInt(driversCurrPoints);
-    let chan = parseInt(enteredPointChange);
-
-    console.log(curr + "fucking what" + chan);
-
-    let newAmount = curr + chan;
-    console.log("The new point amount:" + newAmount);
-    console.log(typeof newAmount);
-
-    //start of url3 ***********************************************************
-    const url3 = new URL("http://18.235.52.212:8000/points/update"); //params are
-
-    const stuff = {
-      SID: sid,
-      UID: trueID,
-      newAmount: newAmount,
-      reason: "good work",
-    };
-
-    console.log(stuff);
-
-    fetch(url3, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(stuff),
-    });
-
+        setDriversCurrPoints(curr + chan);
+        console.log("The new point amount:" + driversCurrPoints);
+      })
+      .then(
+        fetch(url3, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(stuff),
+        })
+      );
     console.log("Thats all check points page for update");
-  }, [go]);
+    console.log(stuff);
+  };
 
   return (
     <div className="PointTakePage">

@@ -39,7 +39,7 @@ export default function Catalog() {
   const [q, setQ] = useState("");
 
   //search bar will only look at title and tags
-  const [searchParam] = useState(["title", "tags"]);
+  const [searchParam] = useState(["Title"]);
 
   //used for the filtering using dropdown
   const [filterParam, setFilterParam] = useState("All");
@@ -49,45 +49,38 @@ export default function Catalog() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ItemID: item.listing_id,
+        ItemID: item.ListingID,
         //need the user id
         UID: id,
-        SID: 1,
-        ItemName: item.title,
-        Price: Math.round(item.price),
+        SID: sid,
+        ItemName: item.Title,
+        Price: Math.round(item.Price),
         Quantity: 1,
-        Availability: item.quantity,
+        Availability: item.Quantity,
       }),
     }).catch((err) => console.error(err));
 
     toast("Product has been added to the cart");
   };
 
-  const fetchHighData = async () => {
-    const high_etsy_url =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?sort_on=price&sort_order=down&includes=MainImage&limit=10&api_key=dmmhikoeydunsffqrxyeubdv";
-    const response = await axios.get(high_etsy_url);
-    setlisting(response.data.results);
-  };
-
-  const fetchLowData = async () => {
-    const low_etsy_url =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?sort_on=price&sort_order=up&includes=MainImage&limit=10&api_key=dmmhikoeydunsffqrxyeubdv";
-    const response = await axios.get(low_etsy_url);
-    setlisting(response.data.results);
-  };
 
   const fetchData = () => {
-    const etsy_url =
-      "https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?includes=MainImage&limit=10&api_key=dmmhikoeydunsffqrxyeubdv";
 
-    fetch(etsy_url)
-      .then((response) => {
-        return response.json();
-      })
+    const url = new URL("http://18.235.52.212:8000/catalog/get-list-items");
+    url.searchParams.append("sid", 1);
+
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
       .then((data) => {
-        setlisting(data.results);
+        setlisting(data);
       });
+
+    console.log(listing)
+
+    
   };
 
   useEffect(() => {
@@ -119,6 +112,7 @@ export default function Catalog() {
     });
   }
 
+
   return (
     <div className="Catalog">
       <center>
@@ -133,44 +127,6 @@ export default function Catalog() {
         />
       </center>
 
-      <center>
-        <div
-          className="buttons has-addons is-centered"
-          style={{ marginTop: 30 }}
-        >
-          <button className="button_1" onClick={fetchData}>
-            {" "}
-            Sort by: Recent{" "}
-          </button>
-          <button className="button_1" onClick={fetchHighData}>
-            Sort by: Highest Price
-          </button>
-          <button className="button_1" onClick={fetchLowData}>
-            Sort by: Lowest Price
-          </button>
-
-          {/* <div className="select" style={{ marginLeft: 50, marginBottom: 8 }}>
-          <select
-            onChange={(e) => {
-              setFilterParam(e.target.value);
-            }}
-            className="custom-select"
-            aria-label="Filter Countries By Region"
-          >
-            <option value="All">Filter By Category</option>
-            <option value="Art & Collectibles">Art & Collectibles</option>
-            <option value="Jewelry">Jewelry</option>
-            <option value="Home & Living">Home & Living</option>
-            <option value="Craft Supplies & Tools">
-              Craft Supplies & Tools
-            </option>
-            <option value="Clothing">Clothing</option>
-            <option value="Toys & Games">Toys & Games</option>
-          </select>
-          <span className="focus"></span>
-        </div> */}
-        </div>
-      </center>
 
       <div
         className="columns"
@@ -191,26 +147,25 @@ export default function Catalog() {
               <center>
                 <img
                   style={{ marginTop: 10 }}
-                  src={listing.MainImage.url_170x135}
+                  src={listing.ImageURL}
                   alt="listing1"
                 ></img>{" "}
               </center>
-              {/* <Link to={`/Listing_details/${listing.listing_id}`}> */}
               <center>
                 <h1
                   style={{ fontSize: 25, color: "#EE730D", marginBottom: 10 }}
                 >
-                  <strong>{listing.title} </strong>
+                  <strong>{listing.Title} </strong>
                 </h1>
               </center>
-              {/* </Link> */}
+            
 
               <center>
                 <h2 style={{ color: "black", marginBottom: 10 }}>
                   {" "}
-                  Points: {Math.round(listing.price)}
+                  Points: {Math.round(listing.Price)}
                 </h2>
-                <h4>Description: {listing.description}</h4>
+                <h4>Description: {listing.Description}</h4>
 
                 <button
                   className="button_1"
@@ -221,14 +176,6 @@ export default function Catalog() {
                   Add to Cart{" "}
                 </button>
               </center>
-              {/* <button
-                className="button_1"
-                onClick={notify_wishlist(listing)}
-                style={{ float: "right", marginRight: 10, marginTop: 5 }}
-              >
-                {" "}
-                Add to Wishlist
-              </button> */}
             </div>
           ))}
         </div>

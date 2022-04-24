@@ -69,13 +69,6 @@ router.post("/approveapplication", (request, response) => {
   );
   //Creates a new point and wishlist record after application approval
   db.query(
-    "INSERT INTO DRIVERWISHLIST(UID,SID) VALUES(?,?);",
-    [request.body.UID, request.body.SID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-  db.query(
     "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0);",
     [request.body.UID, request.body.SID],
     (error, result) => {
