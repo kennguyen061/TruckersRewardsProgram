@@ -18,36 +18,40 @@ const PointsOverTime = () => {
   let data = [
     {
       name: "Jan",
-      Points: 1000,
+      Points: 100,
     },
     {
       name: "March",
-      Points: 2000,
+      Points: 200,
     },
     {
       name: "May",
-      Points: 3000,
+      Points: 300,
     },
     {
       name: "July",
-      Points: 4000,
+      Points: 400,
     },
     {
       name: "October",
-      Points: 5000,
+      Points: 500,
     },
     {
       name: "December",
-      Points: 6000,
+      Points: 600,
     },
   ];
-  let YearValue = 0;
+
+  const [myYear, setmyYear] = useState("2022");
 
   const SubmitHandler = async (event) => {
+    event.preventDefault();
+    setmyYear(event.target.value);
+
     const url = new URL("http://18.235.52.212:8000/points/history");
 
-    url.searchParams.append("id", window.localStorage.getItem("id"));
-    url.searchParams.append("sid", window.localStorage.getItem("sid"));
+    url.searchParams.append("UID", window.localStorage.getItem("id"));
+    url.searchParams.append("SID", window.localStorage.getItem("sid"));
 
     const res1 = await fetch(url, {
       method: "GET",
@@ -58,30 +62,64 @@ const PointsOverTime = () => {
 
     console.log(res1J);
 
-    let temp1 = 4000;
-    let temp2 = 5000;
-    let temp3 = 3000;
-    let temp4 = 2000;
-    let temp5 = 1000;
-    let temp6 = 3500;
+    //2022
+    window.localStorage.setItem("2022VAL1", parseInt(res1J[12].Point_Update));
+    window.localStorage.setItem("2022VAL2", parseInt(res1J[13].Point_Update));
+    window.localStorage.setItem("2022VAL3", parseInt(res1J[14].Point_Update));
+    window.localStorage.setItem("2022VAL4", parseInt(res1J[15].Point_Update));
+    window.localStorage.setItem("2022VAL5", parseInt(res1J[16].Point_Update));
+    window.localStorage.setItem("2022VAL6", parseInt(res1J[17].Point_Update));
+    //2021
+    window.localStorage.setItem("2021VAL1", parseInt(res1J[6].Point_Update));
+    window.localStorage.setItem("2021VAL2", parseInt(res1J[7].Point_Update));
+    window.localStorage.setItem("2021VAL3", parseInt(res1J[8].Point_Update));
+    window.localStorage.setItem("2021VAL4", parseInt(res1J[9].Point_Update));
+    window.localStorage.setItem("2021VAL5", parseInt(res1J[10].Point_Update));
+    window.localStorage.setItem("2021VAL6", parseInt(res1J[11].Point_Update));
+    //2020
+    window.localStorage.setItem("2020VAL1", parseInt(res1J[0].Point_Update));
+    window.localStorage.setItem("2020VAL2", parseInt(res1J[1].Point_Update));
+    window.localStorage.setItem("2020VAL3", parseInt(res1J[2].Point_Update));
+    window.localStorage.setItem("2020VAL4", parseInt(res1J[3].Point_Update));
+    window.localStorage.setItem("2020VAL5", parseInt(res1J[4].Point_Update));
+    window.localStorage.setItem("2020VAL6", parseInt(res1J[5].Point_Update));
+
+    console.log(myYear);
+    let year = myYear;
+    if (year == "2022") {
+      data[0].Points = window.localStorage.getItem("2022VAL1");
+      data[1].Points = window.localStorage.getItem("2022VAL2");
+      data[2].Points = window.localStorage.getItem("2022VAL3");
+      data[3].Points = window.localStorage.getItem("2022VAL4");
+      data[4].Points = window.localStorage.getItem("2022VAL5");
+      data[5].Points = window.localStorage.getItem("2022VAL6");
+    } else if (year == "2021") {
+      data[0].Points = window.localStorage.getItem("2021VAL1");
+      data[1].Points = window.localStorage.getItem("2021VAL2");
+      data[2].Points = window.localStorage.getItem("2021VAL3");
+      data[3].Points = window.localStorage.getItem("2021VAL4");
+      data[4].Points = window.localStorage.getItem("2021VAL5");
+      data[5].Points = window.localStorage.getItem("2021VAL6");
+    } else if (year == "2020") {
+      data[0].Points = window.localStorage.getItem("2020VAL1");
+      data[1].Points = window.localStorage.getItem("2020VAL2");
+      data[2].Points = window.localStorage.getItem("2020VAL3");
+      data[3].Points = window.localStorage.getItem("2020VAL4");
+      data[4].Points = window.localStorage.getItem("2020VAL5");
+      data[5].Points = window.localStorage.getItem("2020VAL6");
+    } else {
+    }
   };
   return (
     <div className="Graph">
-      <div className="dropdown">
-        <form onSubmit={SubmitHandler}>
-          <label className="butt">Enter the year you'd Like to see:</label>
-          <input
-            type="text"
-            name="year"
-            value={window.localStorage.getItem("SELECTEDYEAR")}
-            onChange={(event) =>
-              window.localStorage.setItem("SELECTEDYEAR", event.target.value)
-            }
-          />
-
-          <input type="submit" />
-        </form>
-      </div>
+      <form>
+        <label className="butt">Enter the year you'd Like to see:</label>
+        <select value={myYear} onChange={SubmitHandler}>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
+      </form>
       <h3>Points Over Time</h3>
       <ResponsiveContainer width="90%" aspect={3}>
         <LineChart
