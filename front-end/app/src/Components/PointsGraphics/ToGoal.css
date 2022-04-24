@@ -1,12 +1,9 @@
 .progress-bar {
   width: 100%;
-  padding: 3rem 0;
+  padding: 5rem 3rem;
 }
 
 .progress-bar .container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 1rem;
   padding: 0 1rem;
 }
 
@@ -38,16 +35,4 @@
 
 .box p {
   color: #fff;
-}
-
-.featuredChart {
-  width: 100px;
-  height: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
-}
-
-.togoal .box {
-  margin-top: 2rem;
 }
