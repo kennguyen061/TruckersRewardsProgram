@@ -12,19 +12,29 @@ export default function Driver_Password_Reset() {
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    const role = window.localStorage.getItem("role");
+    const uid = window.localStorage.getItem("uid");
+
     const info = {
-      role: window.localStorage.getItem("role"),
+      role: role,
       newpassword: enteredPassword,
-      UID: window.localStorage.getItem("uid"),
+      UID: uid,
     };
 
-    const response = await fetch("http://18.235.52.212:8000/account/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info),
-    });
+    console.log(info);
+
+    const response = await fetch(
+      "http://18.235.52.212:8000/account/updatepassword",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(info),
+      }
+    );
 
     const value = await response.json();
+
+    console.log(value);
 
     if (value === false) {
       alert("There was a problem restting your password. Try again.");
@@ -34,7 +44,6 @@ export default function Driver_Password_Reset() {
       alert("Password Reset");
       setEnteredPassword("");
       setReenteredPassword("");
-      navigate("/pages/Driver_Profile", { replace: false });
     }
   };
 
