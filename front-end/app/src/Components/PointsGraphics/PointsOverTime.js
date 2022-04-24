@@ -115,7 +115,7 @@ const PointsOverTime = () => {
   let reason2 = window.localStorage.getItem("REASON2");
   /******************************Dont change the values in option they are supposed to be backwords******* */
   return (
-    <div className="page">
+    <div className="pageThis">
       <div className="boxed">
         <Collapsible trigger="latest Change">
           <p>{reason1}</p>

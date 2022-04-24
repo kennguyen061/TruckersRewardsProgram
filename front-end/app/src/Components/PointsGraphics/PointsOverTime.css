@@ -1,3 +1,6 @@
+.pageThis {
+  margin-bottom: 7rem;
+}
 .Graph {
   height: 75%;
   width: 80%;
@@ -17,6 +20,7 @@
   width: 60%;
   background-color: #1f2025;
   border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .Graph h3 {
