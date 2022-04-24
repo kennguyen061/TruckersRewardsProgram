@@ -76,20 +76,6 @@ router.post("/updatepassword", (request, response) => {
     response.send(false);
   } else {
     if (request.body.role == "DRIVER") {
-      //check current password
-      db.query(
-        "SELECT UID, Password_hash, Password_salt FROM DRIVER WHERE Email = ?;",
-        [request.body.email],
-        (error, result) => {
-          if (error) throw error;
-
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
-
-          if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -110,26 +96,8 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
           }
-        }
-      );
-    } else if (request.body.role == "SPONSOR") {
-      //check current password
-      db.query(
-        "SELECT UID, Password_hash, Password_salt FROM SPONSORACCT WHERE Email = ?;",
-        [request.body.email],
-        (error, result) => {
-          if (error) throw error;
-
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
-
-          if (hash === result[0].Password_hash) {
+     else if (request.body.role == "SPONSOR") {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -150,26 +118,8 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
-          }
-        }
-      );
+
     } else if (request.body.role == "ADMIN") {
-      //check current password
-      db.query(
-        "SELECT UID, Password_hash, Password_salt FROM ADMIN WHERE Email = ?;",
-        [request.body.email],
-        (error, result) => {
-          if (error) throw error;
-
-          let salt = new Date(result[0].Password_salt).toISOString();
-          let hash = crypto
-            .createHash("sha256")
-            .update(request.body.oldpassword + salt)
-            .digest("base64");
-
-          if (hash === result[0].Password_hash) {
             let newsalt = new Date().toISOString();
             let newhash = crypto
               .createHash("sha256")
@@ -190,12 +140,7 @@ router.post("/updatepassword", (request, response) => {
                 response.send(true);
               }
             );
-          } else {
-            response.send(false);
           }
-        }
-      );
-    }
   }
 });
 
