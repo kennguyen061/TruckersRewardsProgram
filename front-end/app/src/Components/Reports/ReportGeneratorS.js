@@ -49,7 +49,7 @@ const ReportGenerator = ({
 
   return (
     <div className="ReportPage">
-      <AdminNav />
+      <SponsorNav />
       <div className="Spacer"></div>
       <div className="InfoBox">
         <h1>{title}</h1>

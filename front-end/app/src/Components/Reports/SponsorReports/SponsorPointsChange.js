@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ReportGenerator from "../ReportGenerator";
+import ReportGenerator from "../ReportGeneratorS";
 import "./SponsorReport.css";
 
 const SponsorPoints = () => {
