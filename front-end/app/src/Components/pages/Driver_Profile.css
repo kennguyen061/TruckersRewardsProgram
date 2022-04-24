@@ -17,6 +17,20 @@
   align-items: center;
 }
 
+.reset_password {
+  font: inherit;
+  font-size: 30px;
+  cursor: pointer;
+  border: 1px solid #0a93ee;
+  background-color: #cf4f0a;
+  color: white;
+  border-radius: 30px;
+  margin-top: 1rem;
+  width: 20rem;
+  height: 4rem;
+  margin-bottom: 2rem;
+}
+
 .button button {
   font: inherit;
   font-size: 30px;
