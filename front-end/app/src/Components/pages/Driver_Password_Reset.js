@@ -12,6 +12,7 @@ export default function Driver_Password_Reset() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    const role = window.localStorage.getItem("role");
 
     const info = {
       role: role,
