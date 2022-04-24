@@ -33,9 +33,10 @@ function Apply_To_Sponsor(props) {
     //get driver data - await
 
     const appInfo = {
-      UID: chosen,
-      SID: id,
+      UID: id,
+      SID: chosen,
     };
+    console.log(appInfo);
 
     const url2 = new URL(
       "http://18.235.52.212:8000/application/createApplication"
@@ -50,7 +51,7 @@ function Apply_To_Sponsor(props) {
     });
 
     //redirect back to profile
-    navigate("/pages/Driver_Profile", { replace: true });
+    navigate("/pages/Driver_Profile", { replace: false });
   };
   const dropdownChangeHandler = (event) => {
     setChosen(event.target.value);

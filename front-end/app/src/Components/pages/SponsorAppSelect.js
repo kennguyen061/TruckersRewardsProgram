@@ -10,6 +10,7 @@ function SponsorAppSelect(props) {
   const [reason, setReason] = useState("");
 
   const sid = window.localStorage.getItem("sid");
+  window.localStorage.setItem("status", "Approved");
 
   const url = new URL(
     "http://18.235.52.212:8000/application/getAllSponsorApps"
@@ -32,8 +33,7 @@ function SponsorAppSelect(props) {
   }, [sid]);
 
   const dropdownChangeHandler = (event) => {
-    status = event.target.value;
-    console.log(status);
+    window.localStorage.setItem("status", event.target.value);
   };
 
   const submitHandler = async (event) => {
@@ -41,9 +41,11 @@ function SponsorAppSelect(props) {
     event.preventDefault();
     let uid = event.target.dataset.driver;
 
+    let status = window.localStorage.getItem("status");
+
     console.log(uid);
     console.log(reason);
-
+    console.log(status);
     const data = {
       UID: uid,
       SID: sid,
@@ -69,7 +71,6 @@ function SponsorAppSelect(props) {
       console.log(res);
     } else {
       console.log("send Reject");
-      console.log("send approved");
       const response = await fetch(rejectURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,8 +82,6 @@ function SponsorAppSelect(props) {
 
     setReason("");
   };
-
-  let status = "Approved";
 
   return (
     <div>
@@ -99,7 +98,7 @@ function SponsorAppSelect(props) {
             {numDrivers ? (
               <div>
                 {returnedDrivers.map((driver) => (
-                  <div>
+                  <div className="status-selector">
                     {" "}
                     <form onSubmit={submitHandler} data-driver={driver.UID}>
                       <div>{driver.First_name + " " + driver.Last_name}</div>

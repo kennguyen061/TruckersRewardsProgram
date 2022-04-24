@@ -12,7 +12,7 @@ function Driver_Management(props) {
         <label className="dashboard_header">Driver Management</label>
         <hr className="line_50" />
         <br></br>
-        <Link to="/pages/Apply_To_Sponsor" className="Link">
+        <Link to="/pages/SponsorApplicants" className="Link">
           <button type="submit">
             <label className="sponsor_button"> Manage Applicants</label>
           </button>

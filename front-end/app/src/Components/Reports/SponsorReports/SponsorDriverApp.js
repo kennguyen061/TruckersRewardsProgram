@@ -10,7 +10,7 @@ const SponsorDriverApp = () => {
 
   useEffect(() => {
     const url = new URL(
-      "http://18.235.52.212:8000/application/getAllSponsorApps"
+      "http://18.235.52.212:8000/application/getAllSponsorAppsReports"
     );
 
     url.searchParams.append("SID", SID);

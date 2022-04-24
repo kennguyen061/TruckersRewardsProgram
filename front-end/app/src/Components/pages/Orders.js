@@ -35,6 +35,23 @@ export default function Orders() {
     fetchOrders();
   }, []);
 
+  const cancelOrder = (orderID) => () => {
+
+    const url = new URL("http://18.235.52.212:8000/cart/cancelorder");
+
+    const body = {
+     OrderID: orderID
+    };
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    window.location.reload(false);
+
+  }
   return (
     <div>
       <DriverNav />
@@ -57,6 +74,9 @@ export default function Orders() {
             <td>
               <h2>Order Status</h2>
             </td>
+            <td>
+              <h2>Cancel Order?</h2>
+            </td>
           </tr>
 
           {orders.map((orders) => (
@@ -66,6 +86,14 @@ export default function Orders() {
               <td>{orders.Total}</td>
               <td>{orders.Address}</td>
               <td>{orders.Orderstatus}</td>
+              <td>  <button
+                  className="button_2"
+                  style={{ alignItems: "right" }}
+                  onClick={cancelOrder(orders.OrderID)}
+                >
+                  {" "}
+                  Cancel {" "}
+                </button> </td>
             </tr>
           ))}
         </table>
