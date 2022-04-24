@@ -19,8 +19,6 @@ const PointTake = () => {
       Changa: enteredPointChange,
     };
 
-    let trueID = 0;
-
     console.log(dataSet);
     const url1 = new URL(
       "http://18.235.52.212:8000/drivermgt/getDriverByEmail"
@@ -39,27 +37,25 @@ const PointTake = () => {
       .then((res) => res.json())
       .then((num) => setDriversID(num))
       .then(() => {
-        trueID = parseInt(driversID.UID);
-        console.log(driversID);
-        console.log(trueID);
+        setUseID(parseInt(driversID.UID));
       })
       .then(() => {
-        setUseID(trueID);
-        console.log(trueID);
-        console.log(useThisID);
+        console.log("changed");
+        url2.searchParams.append("UID", 4);
+        url2.searchParams.append("SID", 1);
+        console.log(url2);
       })
       .then(() => {
-        url2.searchParams.append("UID", useThisID);
-        url2.searchParams.append("SID", sid);
-      })
-      .then(
         fetch(url2, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         })
-          .then((res) => res.json())
-          .then((num) => setDriversCurrPoints(num))
-      )
+          .then((res) => {
+            console.log(res.json());
+            res.json();
+          })
+          .then((num) => setDriversCurrPoints(num));
+      })
       .then(() => {
         let curr = parseInt(driversCurrPoints);
         let chan = parseInt(enteredPointChange);
