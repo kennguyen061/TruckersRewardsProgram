@@ -14,84 +14,73 @@ import {
 //changed var to let
 // var should never be used as it is bad syntax in new version of javascript like we are using
 
-function PointsOverTime() {
-  let YearValue = 0;
-  /*
-  const role = window.localStorage.getItem("role");
-  const id = window.localStorage.getItem("id");
-  const sid = window.localStorage.getItem("sid");
-
-  const [ReturnListData, setReturnedListData] = useState([]);
-
-  const url = new URL("http://18.235.52.212:8000/points/history");
-
-  url.searchParams.append("id", id);
-  url.searchParams.append("sid", sid);
-
-  const AllPointHandler = (item) => {
-    setReturnedListData(item);
-  };
-
-  useEffect(() => {
-    fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "points/json" },
-    }).then((res) => res.json());
-    //.then((database) => console.log(database));
-  }, []);
-
-  let everything = new Map();
-  let temp1 = 0;
-  useEffect(() => {
-    ReturnListData.map((item) => (temp1 = item.Point_Update[0]));
-  }, []);
-  useEffect(() => {
-    const fuck = Array.from(ReturnListData.values());
-    console.log(fuck);
-  }, []);
-*/
-  let temp1 = 4000;
-  let temp2 = 5000;
-  let temp3 = 3000;
-  let temp4 = 2000;
-  let temp5 = 1000;
-  let temp6 = 3500;
-
+const PointsOverTime = () => {
   let data = [
     {
       name: "Jan",
-      Points: temp1,
+      Points: 1000,
     },
     {
       name: "March",
-      Points: temp2,
+      Points: 2000,
     },
     {
       name: "May",
-      Points: temp3,
+      Points: 3000,
     },
     {
       name: "July",
-      Points: temp4,
+      Points: 4000,
     },
     {
       name: "October",
-      Points: temp5,
+      Points: 5000,
     },
     {
       name: "December",
-      Points: temp6,
+      Points: 6000,
     },
   ];
+  let YearValue = 0;
 
+  const SubmitHandler = async (event) => {
+    const url = new URL("http://18.235.52.212:8000/points/history");
+
+    url.searchParams.append("id", window.localStorage.getItem("id"));
+    url.searchParams.append("sid", window.localStorage.getItem("sid"));
+
+    const res1 = await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const res1J = await res1.json();
+
+    console.log(res1J);
+
+    let temp1 = 4000;
+    let temp2 = 5000;
+    let temp3 = 3000;
+    let temp4 = 2000;
+    let temp5 = 1000;
+    let temp6 = 3500;
+  };
   return (
     <div className="Graph">
       <div className="dropdown">
-        <select className="year">
-          <option Yearvalue="2022">2022</option>
-          <option Yearvalue="2021">2021</option>
-          <option YearValue="2020">2020</option>
-        </select>
+        <form onSubmit={SubmitHandler}>
+          <label className="butt">Enter the year you'd Like to see:</label>
+          <input
+            type="text"
+            name="year"
+            value={window.localStorage.getItem("SELECTEDYEAR")}
+            onChange={(event) =>
+              window.localStorage.setItem("SELECTEDYEAR", event.target.value)
+            }
+          />
+
+          <input type="submit" />
+        </form>
       </div>
       <h3>Points Over Time</h3>
       <ResponsiveContainer width="90%" aspect={3}>
@@ -110,7 +99,10 @@ function PointsOverTime() {
           <XAxis dataKey="name" tick={{ fill: "#fff" }} />
           <YAxis tick={{ fill: "#fff" }} />
           <Tooltip
-            contentStyle={{ backgroundColor: "#8884d8", color: "#fff" }}
+            contentStyle={{
+              backgroundColor: "#8884d8",
+              color: "#fff",
+            }}
             itemStyle={{ color: "#fff" }}
             cursor={false}
           />
@@ -119,7 +111,12 @@ function PointsOverTime() {
             dataKey="Points"
             stroke="#709dff"
             strokeWidth="5"
-            dot={{ fill: "#2e4355", stroke: "#709dff", strokeWidth: 2, r: 5 }}
+            dot={{
+              fill: "#2e4355",
+              stroke: "#709dff",
+              strokeWidth: 2,
+              r: 5,
+            }}
             activeDot={{
               fill: "#2e4355",
               stroke: "#709dff",
@@ -131,6 +128,6 @@ function PointsOverTime() {
       </ResponsiveContainer>
     </div>
   );
-}
+};
 
 export default PointsOverTime;
