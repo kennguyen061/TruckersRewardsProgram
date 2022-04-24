@@ -15,37 +15,9 @@ import {
 // var should never be used as it is bad syntax in new version of javascript like we are using
 
 const PointsOverTime = () => {
-  let data = [
-    {
-      name: "Jan",
-      Points: 100,
-    },
-    {
-      name: "March",
-      Points: 200,
-    },
-    {
-      name: "May",
-      Points: 300,
-    },
-    {
-      name: "July",
-      Points: 400,
-    },
-    {
-      name: "October",
-      Points: 500,
-    },
-    {
-      name: "December",
-      Points: 600,
-    },
-  ];
-
   const [myYear, setmyYear] = useState("2022");
 
-  const SubmitHandler = async (event) => {
-    event.preventDefault();
+  const changeHandler = async (event) => {
     setmyYear(event.target.value);
 
     const url = new URL("http://18.235.52.212:8000/points/history");
@@ -62,62 +34,66 @@ const PointsOverTime = () => {
 
     console.log(res1J);
 
-    //2022
-    window.localStorage.setItem("2022VAL1", parseInt(res1J[12].Point_Update));
-    window.localStorage.setItem("2022VAL2", parseInt(res1J[13].Point_Update));
-    window.localStorage.setItem("2022VAL3", parseInt(res1J[14].Point_Update));
-    window.localStorage.setItem("2022VAL4", parseInt(res1J[15].Point_Update));
-    window.localStorage.setItem("2022VAL5", parseInt(res1J[16].Point_Update));
-    window.localStorage.setItem("2022VAL6", parseInt(res1J[17].Point_Update));
-    //2021
-    window.localStorage.setItem("2021VAL1", parseInt(res1J[6].Point_Update));
-    window.localStorage.setItem("2021VAL2", parseInt(res1J[7].Point_Update));
-    window.localStorage.setItem("2021VAL3", parseInt(res1J[8].Point_Update));
-    window.localStorage.setItem("2021VAL4", parseInt(res1J[9].Point_Update));
-    window.localStorage.setItem("2021VAL5", parseInt(res1J[10].Point_Update));
-    window.localStorage.setItem("2021VAL6", parseInt(res1J[11].Point_Update));
-    //2020
-    window.localStorage.setItem("2020VAL1", parseInt(res1J[0].Point_Update));
-    window.localStorage.setItem("2020VAL2", parseInt(res1J[1].Point_Update));
-    window.localStorage.setItem("2020VAL3", parseInt(res1J[2].Point_Update));
-    window.localStorage.setItem("2020VAL4", parseInt(res1J[3].Point_Update));
-    window.localStorage.setItem("2020VAL5", parseInt(res1J[4].Point_Update));
-    window.localStorage.setItem("2020VAL6", parseInt(res1J[5].Point_Update));
-
-    console.log(myYear);
-    let year = myYear;
-    if (year == "2022") {
-      data[0].Points = window.localStorage.getItem("2022VAL1");
-      data[1].Points = window.localStorage.getItem("2022VAL2");
-      data[2].Points = window.localStorage.getItem("2022VAL3");
-      data[3].Points = window.localStorage.getItem("2022VAL4");
-      data[4].Points = window.localStorage.getItem("2022VAL5");
-      data[5].Points = window.localStorage.getItem("2022VAL6");
-    } else if (year == "2021") {
-      data[0].Points = window.localStorage.getItem("2021VAL1");
-      data[1].Points = window.localStorage.getItem("2021VAL2");
-      data[2].Points = window.localStorage.getItem("2021VAL3");
-      data[3].Points = window.localStorage.getItem("2021VAL4");
-      data[4].Points = window.localStorage.getItem("2021VAL5");
-      data[5].Points = window.localStorage.getItem("2021VAL6");
-    } else if (year == "2020") {
-      data[0].Points = window.localStorage.getItem("2020VAL1");
-      data[1].Points = window.localStorage.getItem("2020VAL2");
-      data[2].Points = window.localStorage.getItem("2020VAL3");
-      data[3].Points = window.localStorage.getItem("2020VAL4");
-      data[4].Points = window.localStorage.getItem("2020VAL5");
-      data[5].Points = window.localStorage.getItem("2020VAL6");
-    } else {
+    if (myYear === "2022") {
+      window.localStorage.setItem("2022VAL1", res1J[12].Point_Update);
+      window.localStorage.setItem("2022VAL2", res1J[13].Point_Update);
+      window.localStorage.setItem("2022VAL3", res1J[14].Point_Update);
+      window.localStorage.setItem("2022VAL4", res1J[15].Point_Update);
+      window.localStorage.setItem("2022VAL5", res1J[16].Point_Update);
+      window.localStorage.setItem("2022VAL6", res1J[17].Point_Update);
+    } else if (myYear === "2021") {
+      //2021
+      window.localStorage.setItem("2022VAL1", res1J[6].Point_Update);
+      window.localStorage.setItem("2022VAL2", res1J[7].Point_Update);
+      window.localStorage.setItem("2022VAL3", res1J[8].Point_Update);
+      window.localStorage.setItem("2022VAL4", res1J[9].Point_Update);
+      window.localStorage.setItem("2022VAL5", res1J[10].Point_Update);
+      window.localStorage.setItem("2022VAL6", res1J[11].Point_Update);
     }
+
+    console.log(
+      window.localStorage.getItem("2022VAL1") +
+        typeof window.localStorage.getItem("2022VAL1")
+    );
+    let temp1 = parseInt(window.localStorage.getItem("2022VAL1"));
+
+    console.log(temp1 + typeof temp1);
+    console.log(myYear);
   };
+  let data = [
+    {
+      name: "Jan",
+      Points: window.localStorage.getItem("2022VAL1"),
+    },
+    {
+      name: "March",
+      Points: window.localStorage.getItem("2022VAL2"),
+    },
+    {
+      name: "May",
+      Points: window.localStorage.getItem("2022VAL3"),
+    },
+    {
+      name: "July",
+      Points: window.localStorage.getItem("2022VAL4"),
+    },
+    {
+      name: "October",
+      Points: window.localStorage.getItem("2022VAL5"),
+    },
+    {
+      name: "December",
+      Points: window.localStorage.getItem("2022VAL6"),
+    },
+  ];
+  /******************************Dont change the values in option they are supposed to be backwords******* */
   return (
     <div className="Graph">
       <form>
         <label className="butt">Enter the year you'd Like to see:</label>
-        <select value={myYear} onChange={SubmitHandler}>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2020">2020</option>
+        <select value={myYear} onChange={changeHandler}>
+          <option value="2022">2021</option>
+          <option value="2021">2022</option>
         </select>
       </form>
       <h3>Points Over Time</h3>
