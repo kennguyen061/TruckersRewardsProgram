@@ -1,19 +1,24 @@
 import "./PannelBar";
 import Collapsible from "react-collapsible";
 
-function Accord() {
-  const updateReason = async (event) => {
-    const url = new URL("http://18.235.52.212:8000/points/history");
+const Accord = () => {
+  const url = new URL("http://18.235.52.212:8000/points/history");
 
-    url.searchParams.append("UID", window.localStorage.getItem("id"));
-    url.searchParams.append("SID", window.localStorage.getItem("sid"));
+  const id = window.localStorage.getItem("id");
+  const sid = window.localStorage.getItem("sid");
 
-    const res1 = await fetch(url, {
+  url.searchParams.append("UID", id);
+  url.searchParams.append("SID", sid);
+
+  console.log(url);
+
+  const fuck = async () => {
+    const res1 = fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
 
-    const res1J = await res1.json();
+    const res1J = res1.json();
 
     let length = Object.keys(res1J).length;
     console.log(length);
@@ -37,18 +42,19 @@ function Accord() {
         res1J[length - 2].Update_Status
     );
   };
+
   let reason1 = window.localStorage.getItem("REASON1");
   let reason2 = window.localStorage.getItem("REASON2");
   return (
     <div className="boxed">
-      <Collapsible trigger="latest Change" onTriggerOpening={updateReason}>
+      <Collapsible trigger="latest Change">
         <p>{reason1}</p>
       </Collapsible>
-      <Collapsible trigger="latest Change" onTriggerOpening={updateReason}>
+      <Collapsible trigger="latest Change">
         <p>{reason2}</p>
       </Collapsible>
     </div>
   );
-}
+};
 
 export default Accord;
