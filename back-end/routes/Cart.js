@@ -367,9 +367,9 @@ router.post("/checkout", (request, response) => {
                                 ],
                                 (error3, result3) => {
                                   console.log("Point balance updated");
+                                  response.send(true);
                                 }
                               );
-                              response.send(true);
                             }
                           }
                         );
