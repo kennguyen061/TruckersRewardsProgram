@@ -17,7 +17,7 @@ export default function Orders() {
 
     url.searchParams.append("UID", id);
     //will need a call to find the SID soon
-    url.searchParams.append("SID", 1);
+    url.searchParams.append("SID", sid);
 
     fetch(url, {
       method: "GET",
@@ -53,10 +53,11 @@ export default function Orders() {
 
   }
   return (
-    <div>
+    <div className="orderpage">
       <DriverNav />
+      <div className="Spacer"></div>
 
-      <div className="cart">
+      <div className="orders">
         <table style={{ border: "1px solid black" }}>
           <tr>
             <td>
@@ -97,7 +98,7 @@ export default function Orders() {
             </tr>
           ))}
         </table>
-      </div>
+      </div> 
       <Footer />
     </div>
   );

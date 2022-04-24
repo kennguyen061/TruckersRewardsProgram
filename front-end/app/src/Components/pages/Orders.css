@@ -1,11 +1,15 @@
+.orderpage {
+  height: 100%;
+}
 .orders {
-    height: 3000;
-    width: 100%;
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    padding-top: 6rem;
-    background-color: rgba(89, 167, 255, 0.781);
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: left;
+  position:relative;
+  flex-direction: column;
+  padding-top: 6rem;
+  background-color: rgba(89, 167, 255, 0.781);
   }
   
 
@@ -13,7 +17,7 @@
     background-color: #D3232E;
     border: none;
     border-radius: 8px;
-    color: white;
+    color: #ffffff;
     padding: 20px;
     text-align: center;
     text-decoration: none;
@@ -21,3 +25,8 @@
     font-size: 16px;
     margin: 4px 2px;
   }
+
+.Spacer {
+  height: 5rem;
+}
+
