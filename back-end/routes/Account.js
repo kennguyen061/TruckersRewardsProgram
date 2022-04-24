@@ -71,7 +71,7 @@ function changePasswordlog(User_type, Email, Change_type) {
 //Change password route
 router.post("/updatepassword", (request, response) => {
   console.log("Hit update password of account");
-  if (!isAllPresent(request.newpassword)) {
+  if (!isAllPresent(request.body.newpassword)) {
     console.log("NEW PASSWORD DOES NOT MEET REQUIREMENTS");
     response.send(false);
   } else {
