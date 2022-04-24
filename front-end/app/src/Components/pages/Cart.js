@@ -40,7 +40,7 @@ export default function Cart() {
     url.searchParams.append("UID", id);
     //will need a call to find the SID soon
     url.searchParams.append("SID", 1);
-    
+
 
     fetch(url, {
       method: "GET",
@@ -91,7 +91,7 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    //window.location.reload(false);
+    window.location.reload(false);
   };
 
   const increase_qty = (item) => () => {
