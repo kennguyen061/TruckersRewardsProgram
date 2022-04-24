@@ -238,11 +238,12 @@ router.post("/checkout", (request, response) => {
     [request.body.UID, request.body.SID],
     (Err, Res) => {
       if (Res[0].RowCount === 0) {
-        response.send(false);
         console.log("EMPTY CART");
 
         if ((go = true)) {
           response.send(true);
+        } else {
+          response.send(false);
         }
       } else {
         let total = 0;
