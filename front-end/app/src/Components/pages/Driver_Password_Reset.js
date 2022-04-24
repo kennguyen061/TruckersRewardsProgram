@@ -15,7 +15,7 @@ export default function Driver_Password_Reset() {
     const info = {
       role: window.localStorage.getItem("role"),
       newpassword: enteredPassword,
-      sid: window.localStorage.getItem("sid"),
+      UID: window.localStorage.getItem("uid"),
     };
 
     const response = await fetch("http://18.235.52.212:8000/account/", {
