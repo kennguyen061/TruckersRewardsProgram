@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "6cbd6a73-1479-4c58-b4ba-27de23358b03",
+		"name": "R. Listings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add a listing item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"listID\": 12345678910,\r\n    \"title\": \"NEW LISTING ITEM\",\r\n    \"price\": 14.99,\r\n    \"quantity\": 3,\r\n    \"description\": \"VERY COOL AND LONG DESCRIPTION FOR THIS NEW COOL ITEM IS VERY COOL IS VERY COOL\",\r\n    \"ImageURL\": \"www.google.com/megamindmeme.jpg\",\r\n    \"sid\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/catalog/add-list-item",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"catalog",
+						"add-list-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all listing items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sid\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/catalog/get-list-items",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"catalog",
+						"get-list-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all listing items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sid\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/catalog/delete-all",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"catalog",
+						"delete-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

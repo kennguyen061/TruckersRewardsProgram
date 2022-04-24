@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "46160359-ae5b-4015-9df1-8da3b2b61afb",
+		"name": "Test Report.js",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bought DESC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/boughtDESC?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"boughtDESC"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bought ASC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/boughtASC?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"boughtASC"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SponsorLogins",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/sponsorLoginAttempts?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"sponsorLoginAttempts"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sponsor Password",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/sponsorPwdChanges?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"sponsorPwdChanges"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sponsor Ppoints change",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/pointChangeSponsor?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"pointChangeSponsor"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin report - drivers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/getAllDrivers",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"getAllDrivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin report - L Bought",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/getAllLeastBought",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"getAllLeastBought"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin report - M Bought",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/getAllMostBought",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"getAllMostBought"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin report - Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/allLoginAttempts",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"allLoginAttempts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin report - Points",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/pointChangeAll",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"pointChangeAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sponsors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/getAllSponsors",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"getAllSponsors"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

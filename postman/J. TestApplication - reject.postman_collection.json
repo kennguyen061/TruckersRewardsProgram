@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "57fec8e4-f718-41fe-b7c1-a408aa4288a1",
+		"name": "J. TestApplication - reject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reject Jimmy Pesto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\": 9,\n    \"SID\": 1,\n    \"Reason\": \"Jimmy is a liar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/rejectapplication",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"rejectapplication"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

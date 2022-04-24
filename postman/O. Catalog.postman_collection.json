@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "4e9e603f-a8fc-440a-b3cd-3efa07e31c9f",
+		"name": "O. Catalog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Change catalog rules",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/catalog/updatecatalogrules",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"catalog",
+						"updatecatalogrules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get catalog rules Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/catalog/getcatalogrules?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"catalog",
+						"getcatalogrules"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
