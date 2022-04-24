@@ -5,84 +5,140 @@ import "./Sponsor_Profile.css";
 
 function Sponsor_Profile() {
   const role = window.localStorage.getItem("role");
-  const id = window.localStorage.getItem("id");
+    const id = window.localStorage.getItem("id");
+    
+    const [firstName, setFirstName] = useState("name");
+    const [lastName, setLastName] = useState("lastName");
+    const [email, setEmail] = useState("email");
+    const [address, setAddress] = useState("address");
+    const [phoneNumber, setPhoneNumber] = useState("phoneNumber");
 
-  const [returnedName, setReturnedName] = useState("name");
-  const [returnedLastName, setReturnedLastName] = useState("lastName");
-  const [enteredEmail, setEnteredEmail] = useState("email");
-  const [enteredAddress, setEnteredAddress] = useState("address");
-  const [enteredPhone, setEnteredPhone] = useState("phoneNumber");
-
-  const nameHandler = (item) => {
-    setReturnedName(item);
+    const firstNameHandler = (event) => {
+      setFirstName(event.target.value);
   };
 
-  const lastNameHandler = (item) => {
-    setReturnedLastName(item);
+  const lastNameHandler = (event) => {
+      setLastName(event.target.value);
   };
 
-  const emailHandler = (item) => {
-    setEnteredEmail(item);
+  const emailHandler = (event) => {
+      setEmail(event.target.value);
   };
 
-  const addressHandler = (item) => {
-    setEnteredAddress(item);
+  const addressHandler = (event) => {
+      setAddress(event.target.value);
   };
 
-  const phoneHandler = (item) => {
-    setEnteredPhone(item);
+  const phoneNumberHandler = (event) => {
+      setPhoneNumber(event.target.value);
   };
+  const updateHandler = (event) => {
+    const url = "http://18.235.52.212:8000/account/update";
+    const userInfo = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        street: address,
+        phoneNum: phoneNumber,
+        role: role,
+        id: id
+    };
 
-  const url = new URL("http://18.235.52.212:8000/account/read");
-
-  url.searchParams.append("role", role);
-  url.searchParams.append("id", id);
-
-  useEffect(() => {
     fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((sponsor) => {
-      
-        nameHandler(sponsor.firstName);
-        lastNameHandler(sponsor.lastName);
-        emailHandler(sponsor.email);
-        addressHandler(sponsor.address);
-        phoneHandler(sponsor.phoneNumber);
-      });
-  }, [returnedName]);
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
+    }).then((response) => {
+        console.log(response);
+    }).catch((error) => {
+        console.log("Error: ", error);
+    });
+}
 
-  return (
-    <div>
+const url = new URL("http://18.235.52.212:8000/account/read");
+url.searchParams.append("role", role);
+url.searchParams.append("id", id);
+
+useEffect(() => {
+    fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+        .then((response) => response.json())
+        .then((sponsor) => {
+            setFirstName(sponsor.firstName);
+            setLastName(sponsor.lastName);
+            setEmail(sponsor.email);
+            setAddress(sponsor.address);
+            setPhoneNumber(sponsor.phoneNumber);
+        });
+}, [firstName]);
+
+return (
+  <div>
       <SponsorNav />
       <div className="Sponsor_Profile">
-        <div>
-          <label className="Login-Header">Welcome Back {returnedName} {returnedLastName} !</label>
-          <hr className="line_50" />
-        </div>
-        <div>
-          <label className="Name">Name: {returnedName} {returnedLastName}</label>
-          <hr className="line_bold" />
-        </div>
-        <div>
-          <label className="Email">{"Email:"} {enteredEmail}</label>
-          <hr className="line_bold" />
-        </div>
-        <div>
-          <label className="Address">Address: {enteredAddress}</label>
-          <hr className="line_bold" />
-        </div>
-        <div>
-          <label className="Phone">Phone Number: {enteredPhone}</label>
-        </div>
+          <div className="Main_Component">
+              <form onSubmit={updateHandler}>
+                  <div className="Cards">
+                      <div>
+                          <label className="Login-Header">
+                              Welcome Back {firstName} {lastName} !
+                          </label>
+                          <hr className="line" />
+                      </div>
+                      <div className='pii-field'>
+                          <label className="Name">First Name</label>
+                          <input
+                              type={"text"}
+                              placeholder={firstName}
+                              onChange={firstNameHandler}
+                          />
+                      </div>
+                      <div className='pii-field'>
+                          <label className="Name">Last Name</label>
+                          <input
+                              type={"text"}
+                              placeholder={lastName}
+                              onChange={lastNameHandler}
+                          />
+                      </div>
+                      <div className='pii-field'>
+                          <label className="Email">Email</label>
+                          <input
+                              type={"text"}
+                              placeholder={email}
+                              onChange={emailHandler}
+                          />
+                      </div>
+                      <div className='pii-field'>
+                          <label className="Address">Address</label>
+                          <input
+                              type={"text"}
+                              placeholder={address}
+                              onChange={addressHandler}
+                          />
+                      </div>
+                      <div className='pii-field'>
+                          <label className="Phone">Phone Number</label>
+                          <input
+                              type={"text"}
+                              placeholder={phoneNumber}
+                              onChange={phoneNumberHandler}
+                          />
+                      </div>
+                      <div>
+                          <button type="submit" onClick={updateHandler}>Update</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
       </div>
       <div className="bottom_here">
-        <Footer />
+          <Footer />
       </div>
-    </div>
-  );
+  </div>
+);
 }
 
 export default Sponsor_Profile;
