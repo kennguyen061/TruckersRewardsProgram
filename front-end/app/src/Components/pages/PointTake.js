@@ -10,7 +10,7 @@ const PointTake = () => {
   const [driversCurrPoints, setDriversCurrPoints] = useState(0);
   const [useThisID, setUseID] = useState(0);
   const [useThisPoints, setUsePoints] = useState(0);
-  const sid = window.localStorage.getItem("sid");
+  const sid = 1; //window.localStorage.getItem("sid");
 
   const SubmitHandler = (event) => {
     event.preventDefault();
@@ -18,6 +18,8 @@ const PointTake = () => {
       Email: enteredEmail,
       Changa: enteredPointChange,
     };
+
+    let trueID = 0;
 
     console.log(dataSet);
     const url1 = new URL(
@@ -30,13 +32,6 @@ const PointTake = () => {
 
     const url3 = new URL("http://18.235.52.212:8000/points/update");
 
-    const stuff = {
-      SID: sid,
-      UID: useThisID,
-      newAmount: useThisPoints,
-      reason: "good work",
-    };
-
     fetch(url1, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -44,7 +39,11 @@ const PointTake = () => {
       .then((res) => res.json())
       .then((num) => setDriversID(num))
       .then(() => {
-        let trueID = parseInt(driversID.UID);
+        trueID = parseInt(driversID.UID);
+        console.log(driversID);
+        console.log(trueID);
+      })
+      .then(() => {
         setUseID(trueID);
         console.log(trueID);
         console.log(useThisID);
@@ -70,14 +69,19 @@ const PointTake = () => {
         setUsePoints(curr + chan);
         console.log("The new point amount:" + useThisPoints);
       })
-      .then(
+      .then(() => {
+        const stuff = {
+          SID: sid,
+          UID: useThisID,
+          newAmount: useThisPoints,
+          reason: "good work",
+        };
+
         fetch(url3, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(stuff),
-        })
-      )
-      .then(() => {
+        });
         console.log("Thats all check points page for update");
         console.log(stuff);
       });
