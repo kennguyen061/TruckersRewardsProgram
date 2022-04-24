@@ -5,7 +5,6 @@ import Application from "./Components/pages/Application.js";
 import Points from "./Components/pages/Points.js";
 import Profile from "./Components/pages/Driver_Profile.js";
 import Login from "./Components/pages/Login.js";
-import Wishlist from "./Components/pages/Wishlist.js";
 import Dev from "./Components/pages/Dev.js";
 import Cart from "./Components/pages/Cart.js";
 import Checkout from "./Components/pages/Checkout.js";
@@ -26,7 +25,6 @@ import SponsorMostBought from "./Components/Reports/SponsorReports/SponsorMostBo
 import SponsorPassword from "./Components/Reports/SponsorReports/SponsorPasswordChange.js";
 import SponsorLogin from "./Components/Reports/SponsorReports/SponsorLoginAttemps.js";
 import SponsorPoints from "./Components/Reports/SponsorReports/SponsorPointsChange.js";
-import Listingdetails from "./Components/Catalog/listing_details.js";
 import Error from "./Components/pages/Error.js";
 import Orders from "./Components/pages/Orders.js";
 import AdminDrivers from "./Components/Reports/AdminReports/AdminCurentDrivers.js";
@@ -37,6 +35,7 @@ import AdminPassword from "./Components/Reports/AdminReports/AdminPasswordChange
 import AdminLogin from "./Components/Reports/AdminReports/AdminLoginAttemps.js";
 import AdminPoints from "./Components/Reports/AdminReports/AdminPointsChange.js";
 import SponsorAppSelect from "./Components/pages/SponsorAppSelect.js";
+import Driver_Password_Reset from "./Components/pages/Driver_Password_Reset.js";
 
 function App() {
   return (
@@ -54,12 +53,11 @@ function App() {
           <Route path="/pages/Admin_Profile" element={<AdminProfile />} />
           <Route path="/main/points" element={<Points />} />
           <Route path="/pages/Login" element={<Login />} />
-          <Route path="/pages/Wishlist" element={<Wishlist />} />
           <Route path="/pages/Dev" element={<Dev />} />
           <Route path="/pages/PointTake" element={<PointTake />} />
           <Route path="/Catalog/Catalog" element={<Catalog />} />
-          <Route path="/Listing_details/:id" element={<Listingdetails />} />
           <Route path="/pages/Error" element={<Error />} />
+          <Route path="/Driver_Password_Reset" element = {<Driver_Password_Reset />} />
 
           <Route
             path="/pages/Driver_Sponsor_Dashboard"
