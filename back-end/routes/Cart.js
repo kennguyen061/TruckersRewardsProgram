@@ -418,4 +418,31 @@ router.get("/driverorders", (request, response) => {
   );
 });
 
+// cancel an order
+router.post("/cancelorder", (request, response) => {
+  console.log("Hit remove");
+  db.query(
+    "DELETE FROM ITEM WHERE OrderID = ?;",
+    [request.body.OrderID],
+    (error, result) => {
+      if (error) {
+        console.log("No such order found");
+        response.send(false);
+      }
+      db.query(
+        "DELETE FROM ORDERS WHERE OrderID = ?;",
+        [request.body.OrderID],
+        (error2, result2) => {
+          if (error2) {
+            console.log("No such order found");
+          }
+          console.log("Items removed");
+        }
+      );
+      console.log("Order cancelled.");
+      response.send(true);
+    }
+  );
+});
+
 module.exports = router;
