@@ -12,7 +12,7 @@ const PointTake = () => {
   const [useThisPoints, setUsePoints] = useState(0);
   const sid = 1; //window.localStorage.getItem("sid");
 
-  const SubmitHandler = (event) => {
+  const SubmitHandler = async (event) => {
     event.preventDefault();
     const dataSet = {
       Email: enteredEmail,
@@ -30,6 +30,53 @@ const PointTake = () => {
 
     const url3 = new URL("http://18.235.52.212:8000/points/update");
 
+    const res1 = await fetch(url1, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const res1J = await res1.json();
+
+    setDriversID(res1J);
+    setUseID(parseInt(driversID.UID));
+
+    console.log("changed");
+    url2.searchParams.append("UID", 4);
+    url2.searchParams.append("SID", 1);
+    console.log(url2);
+
+    const res2 = await fetch(url2, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const res2J = await res2.json();
+    setDriversCurrPoints(res2J);
+
+    let curr = parseInt(driversCurrPoints);
+    let chan = parseInt(enteredPointChange);
+
+    console.log(curr + "fucking what" + chan);
+
+    setUsePoints(curr + chan);
+    console.log("The new point amount:" + useThisPoints);
+
+    const stuff = {
+      SID: sid,
+      UID: useThisID,
+      newAmount: useThisPoints,
+      reason: "good work",
+    };
+
+    fetch(url3, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(stuff),
+    });
+    console.log("Thats all check points page for update");
+    console.log(stuff);
+
+    /*
     fetch(url1, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -54,6 +101,7 @@ const PointTake = () => {
             console.log(res.json());
             res.json();
           })
+          //
           .then((num) => setDriversCurrPoints(num))
 
           .then(() => {
@@ -64,6 +112,7 @@ const PointTake = () => {
 
             setUsePoints(curr + chan);
             console.log("The new point amount:" + useThisPoints);
+            //
           })
           .then(() => {
             const stuff = {
@@ -81,7 +130,8 @@ const PointTake = () => {
             console.log("Thats all check points page for update");
             console.log(stuff);
           })
-      );
+          
+          */
   };
 
   return (
