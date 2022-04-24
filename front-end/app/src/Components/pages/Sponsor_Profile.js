@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import SponsorNav from "../UI/SponsorNav";
 import Footer from "../Footer/Footer";
 import "./Sponsor_Profile.css";
+import { Link } from "react-router-dom";
+
 
 function Sponsor_Profile() {
   const role = window.localStorage.getItem("role");
@@ -149,7 +151,18 @@ function Sponsor_Profile() {
             </div>
           </div>
         </form>
+        <Link to="/Driver_Password_Reset" className="Link">
+
+        <button
+          className="reset_password" 
+          >
+          Reset Password     
+        </button>
+
+      </Link>
       </div>
+
+      
   
         <Footer />
       </div>

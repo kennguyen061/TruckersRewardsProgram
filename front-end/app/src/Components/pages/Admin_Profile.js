@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import AdminNav from "../UI/AdminNav";
 import Footer from "../Footer/Footer";
 import "./Admin_Profile.css";
+import { Link } from "react-router-dom";
+
 
 function Admin_Profile() {
   const role = window.localStorage.getItem("role");
@@ -148,7 +150,15 @@ function Admin_Profile() {
               </div>
             </div>
           </div>
-        </form>
+        </form> 
+        <Link to="/Driver_Password_Reset" className="Link">
+
+          <button
+            className="reset_password" 
+            >
+            Reset Password     
+          </button>
+          </Link>
       </div>
 
       <Footer />
