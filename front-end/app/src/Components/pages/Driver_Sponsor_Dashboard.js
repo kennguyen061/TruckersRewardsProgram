@@ -9,7 +9,7 @@ function Driver_Sponsor_Dashboard(props) {
     <div>
       <DriverNav />
       <div className="Dashboard_Profile">
-        <label className="dashboard_header">Sponsor Dashboard</label>
+        <label className="dashboard_header">Dashboard</label>
         <hr className="line_50" />
         <br></br>
         <Link to="/pages/Apply_To_Sponsor" className="Link">
