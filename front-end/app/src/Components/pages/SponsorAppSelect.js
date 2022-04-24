@@ -39,20 +39,44 @@ function SponsorAppSelect(props) {
   const submitHandler = async (event) => {
     //stop normal submit
     event.preventDefault();
-    let d;
-    returnedDrivers.map((driver) => {
-      if ((driver.UID = event.target.dataset.driver)) {
-        d = driver;
-      }
-    });
+    let uid = event.target.dataset.driver;
 
-    console.log(d);
+    console.log(uid);
     console.log(reason);
+
+    const data = {
+      UID: uid,
+      SID: sid,
+      reason: reason,
+    };
+
+    let approveURL = new URL(
+      "http://18.235.52.212:8000/application/approveapplication"
+    );
+
+    let rejectURL = new URL(
+      "http://18.235.52.212:8000/application/rejectapplication"
+    );
 
     if (status == "Approved") {
       console.log("send approved");
+      const response = await fetch(approveURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      console.log(res);
     } else {
       console.log("send Reject");
+      console.log("send approved");
+      const response = await fetch(rejectURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      console.log(res);
     }
 
     setReason("");
