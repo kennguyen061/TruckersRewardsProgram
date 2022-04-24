@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
+import "./Orders.css";
 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -36,11 +37,10 @@ export default function Orders() {
   }, []);
 
   const cancelOrder = (orderID) => () => {
-
     const url = new URL("http://18.235.52.212:8000/cart/cancelorder");
 
     const body = {
-     OrderID: orderID
+      OrderID: orderID,
     };
 
     fetch(url, {
@@ -50,55 +50,58 @@ export default function Orders() {
     });
 
     window.location.reload(false);
-
-  }
+  };
   return (
     <div className="orderpage">
       <DriverNav />
-      <div className="Spacer"></div>
 
       <div className="orders">
-        <table style={{ border: "1px solid black" }}>
-          <tr>
-            <td>
-              <h2>OrderID</h2>
-            </td>
-            <td>
-              <h2>Order Date</h2>
-            </td>
-            <td>
-              <h2>Quantity Ordered</h2>
-            </td>
-            <td>
-              <h2>Address</h2>
-            </td>
-            <td>
-              <h2>Order Status</h2>
-            </td>
-            <td>
-              <h2>Cancel Order?</h2>
-            </td>
-          </tr>
-
-          {orders.map((orders) => (
+        <div className="tBox">
+          <table>
             <tr>
-              <td>{orders.OrderID}</td>
-              <td>{orders.OrderDate}</td>
-              <td>{orders.Total}</td>
-              <td>{orders.Address}</td>
-              <td>{orders.Orderstatus}</td>
-              <td>  <button
-                  className="button_2"
-                  style={{ alignItems: "right" }}
-                  onClick={cancelOrder(orders.OrderID)}
-                >
-                  {" "}
-                  Cancel {" "}
-                </button> </td>
+              <td>
+                <h2>OrderID</h2>
+              </td>
+              <td>
+                <h2>Order Date</h2>
+              </td>
+              <td>
+                <h2>Quantity Ordered</h2>
+              </td>
+              <td>
+                <h2>Address</h2>
+              </td>
+              <td>
+                <h2>Order Status</h2>
+              </td>
+              <td>
+                <h2>Cancel Order?</h2>
+              </td>
             </tr>
-          ))}
-        </table>
-      </div> 
+
+            {orders.map((orders) => (
+              <tr>
+                <td>{orders.OrderID}</td>
+                <td>{orders.OrderDate}</td>
+                <td>{orders.Total}</td>
+                <td>{orders.Address}</td>
+                <td>{orders.Orderstatus}</td>
+                <td>
+                  {" "}
+                  <button
+                    className="button_2"
+                    style={{ alignItems: "right" }}
+                    onClick={cancelOrder(orders.OrderID)}
+                  >
+                    {" "}
+                    Cancel{" "}
+                  </button>{" "}
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      </div>
       <Footer />
     </div>
   );
