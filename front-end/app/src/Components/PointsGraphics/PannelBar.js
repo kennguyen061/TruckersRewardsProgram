@@ -17,7 +17,7 @@ function Accord() {
 
     let length = Object.keys(res1J).length;
     console.log(length);
-
+    console.log("Yea its the at the set items");
     window.localStorage.setItem(
       "REASON1",
       "On " +
@@ -41,10 +41,10 @@ function Accord() {
   let reason2 = window.localStorage.getItem("REASON2");
   return (
     <div className="boxed">
-      <Collapsible trigger="First">
+      <Collapsible trigger="latest Change" onTriggerOpening={updateReason}>
         <p>{reason1}</p>
       </Collapsible>
-      <Collapsible trigger="second">
+      <Collapsible trigger="latest Change" onTriggerOpening={updateReason}>
         <p>{reason2}</p>
       </Collapsible>
     </div>
