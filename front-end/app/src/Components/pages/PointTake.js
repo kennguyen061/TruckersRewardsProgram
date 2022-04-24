@@ -8,6 +8,8 @@ const PointTake = () => {
   const [enteredPointChange, setEnteredPointChange] = useState(0);
   const [driversID, setDriversID] = useState(0);
   const [driversCurrPoints, setDriversCurrPoints] = useState(0);
+  const [useThisID, setUseID] = useState(0);
+  const [useThisPoints, setUsePoints] = useState(0);
   const sid = window.localStorage.getItem("sid");
 
   const SubmitHandler = (event) => {
@@ -30,8 +32,8 @@ const PointTake = () => {
 
     const stuff = {
       SID: sid,
-      UID: driversID,
-      newAmount: driversCurrPoints,
+      UID: useThisID,
+      newAmount: useThisPoints,
       reason: "good work",
     };
 
@@ -43,11 +45,12 @@ const PointTake = () => {
       .then((num) => setDriversID(num))
       .then(() => {
         let trueID = parseInt(driversID.UID);
-        setDriversID(trueID);
-        console.log(driversID);
+        setUseID(trueID);
+        console.log(trueID);
+        console.log(useThisID);
       })
       .then(() => {
-        url2.searchParams.append("UID", driversID);
+        url2.searchParams.append("UID", useThisID);
         url2.searchParams.append("SID", sid);
       })
       .then(
@@ -64,8 +67,8 @@ const PointTake = () => {
 
         console.log(curr + "fucking what" + chan);
 
-        setDriversCurrPoints(curr + chan);
-        console.log("The new point amount:" + driversCurrPoints);
+        setUsePoints(curr + chan);
+        console.log("The new point amount:" + useThisPoints);
       })
       .then(
         fetch(url3, {
@@ -73,9 +76,11 @@ const PointTake = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(stuff),
         })
-      );
-    console.log("Thats all check points page for update");
-    console.log(stuff);
+      )
+      .then(() => {
+        console.log("Thats all check points page for update");
+        console.log(stuff);
+      });
   };
 
   return (
