@@ -29,9 +29,13 @@ function Driver_Profile() {
     setEnteredAddress(item);
   };
 
-  const phoneHandler = (item) => {
-    setEnteredPhone(item);
-  };
+    const phoneHandler = (item) => {
+        setEnteredPhone(item);
+    };
+
+    const updateHandler = (event) => {
+        event.preventDefault();
+    }
 
   const url = new URL("http://18.235.52.212:8000/account/read");
 
@@ -53,45 +57,64 @@ function Driver_Profile() {
       });
   }, [returnedName]);
 
-  return (
-    <div>
-      <DriverNav />
-      <div className="Driver_Profile">
-        <div className="Main_Component">
-          <div className="Cards">
-            <div>
-              <label className="Login-Header">
-                Welcome Back {returnedName} {returnedLastName} !
-              </label>
-              <hr className="line" />
+    return (
+        <div>
+            <DriverNav />
+            <div className="Driver_Profile">
+                <div className="Main_Component">
+                    <div className="Cards">
+                        <div>
+                            <label className="Login-Header">
+                                Welcome Back {returnedName} {returnedLastName} !
+                            </label>
+                            <hr className="line" />
+                        </div>
+                        <div className='pii-field'>
+                            <label className="Name">First Name</label>
+                            <input
+                                type={"text"}
+                                placeholder={returnedName}
+                            />
+                        </div>
+                        <div className='pii-field'>
+                            <label className="Name">Last Name</label>
+                            <input
+                                type={"text"}
+                                placeholder={returnedLastName}
+                            />
+                        </div>
+                        <div className='pii-field'>
+                            <label className="Email">Email</label>
+                            <input
+                                type={"text"}
+                                placeholder={enteredEmail}
+                            />
+                        </div>
+                        <div className='pii-field'>
+                            <label className="Address">Address</label>
+                            <input
+                                type={"text"}
+                                placeholder={enteredAddress}
+                            />
+                        </div>
+                        <div className='pii-field'>
+                            <label className="Phone">Phone Number</label>
+                            <input
+                                type={"text"}
+                                placeholder={enteredPhone}
+                            />
+                        </div>
+                        <div className="update-button">
+                            <button type="submit">Update</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <label className="Name">
-                Name: {returnedName} {returnedLastName}
-              </label>
-              <hr className="line_bold" />
+            <div className="bottom_here">
+                <Footer />
             </div>
-            <div>
-              <label className="Email">
-                {"Email: "} {enteredEmail}
-              </label>
-              <hr className="line_bold" />
-            </div>
-            <div>
-              <label className="Address">Address: {enteredAddress} </label>
-              <hr className="line_bold" />
-            </div>
-            <div>
-              <label className="Phone">Phone Number: {enteredPhone}</label>
-            </div>
-          </div>
         </div>
-      </div>
-      <div className="bottom_here">
-        <Footer />
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Driver_Profile;

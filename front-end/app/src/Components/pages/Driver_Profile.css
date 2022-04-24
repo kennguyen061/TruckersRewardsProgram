@@ -14,35 +14,63 @@
   font-weight: bold;
 }
 
-.Name {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+.pii-field {
+    display: flex;
 }
 
-.Email {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+    .pii-field label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-size: 25px;
+        margin-top: 1rem;
+    }
+
+    .pii-field input {
+        font-size: 25px;
+        padding-top: 5px;
+        padding-right: 3px;
+        padding-bottom: 5px;
+        padding-left: 25px;
+        border-radius: 50px;
+        width: 17rem;
+        height: 3rem;
+        border: 3px solid #0a93ee;
+        margin-bottom: 1rem;
+    }
+
+.update-button {
+    text-align: center;
 }
 
-.Address {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+::-webkit-input-placeholder {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-left: 25px;
 }
 
-.Phone {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+::-moz-placeholder {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-left: 25px;
 }
 
-.line {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 5px;
-  background-color: rgb(16, 19, 245);
-  opacity: 0.5;
+:-ms-input-placeholder {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+}
+
+::placeholder {
+    font-size: 25px;
+    padding-top: 5px;
+    padding-right: 3px;
+    padding-bottom: 5px;
+    padding-left: 25px;
 }
