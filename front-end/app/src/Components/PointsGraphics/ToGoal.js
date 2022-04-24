@@ -12,7 +12,6 @@ const ProgressBar = () => {
   const sid = 1; //window.localStorage.getItem("sid");
 
   const [returnedCurrentPoints, setReturnedPoints] = useState(0);
-  let sick = 0;
 
   const url = new URL("http://18.235.52.212:8000/points/");
 
