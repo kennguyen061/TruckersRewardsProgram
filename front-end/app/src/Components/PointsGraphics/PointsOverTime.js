@@ -95,8 +95,8 @@ const PointsOverTime = () => {
       <form>
         <label className="butt">Year:</label>
         <select value={myYear} onChange={changeHandler}>
-          <option value="2022">2021</option>
-          <option value="2021">2022</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
         </select>
       </form>
       <h3>Points Over Time</h3>

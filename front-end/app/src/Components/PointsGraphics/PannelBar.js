@@ -2,7 +2,7 @@ import "./PannelBar";
 import Collapsible from "react-collapsible";
 
 function Accord() {
-  const gogo = async (event) => {
+  const updateReason = async (event) => {
     const url = new URL("http://18.235.52.212:8000/points/history");
 
     url.searchParams.append("UID", window.localStorage.getItem("id"));
@@ -36,16 +36,16 @@ function Accord() {
         " for the reason of " +
         res1J[length - 2].Update_Status
     );
-    let reason1 = window.localStorage.getItem("REASON1");
-    let reason2 = window.localStorage.getItem("REASON2");
   };
+  let reason1 = window.localStorage.getItem("REASON1");
+  let reason2 = window.localStorage.getItem("REASON2");
   return (
     <div className="boxed">
-      <Collapsible trigger="First" onChange={gogo}>
-        <p color="black">{window.localStorage.getItem("REASON1")}</p>
+      <Collapsible trigger="First">
+        <p>{reason1}</p>
       </Collapsible>
-      <Collapsible trigger="second" onChange={gogo}>
-        <p>{window.localStorage.getItem("REASON2")}</p>
+      <Collapsible trigger="second">
+        <p>{reason2}</p>
       </Collapsible>
     </div>
   );
