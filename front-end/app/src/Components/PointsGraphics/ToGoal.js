@@ -9,7 +9,7 @@ const ProgressBar = () => {
   // var should never be used as it is bad syntax in new version of javascript like we are using
 
   const id = window.localStorage.getItem("id");
-  const sid = 1; //window.localStorage.getItem("sid");
+  const sid = window.localStorage.getItem("sid");
 
   const [returnedCurrentPoints, setReturnedPoints] = useState(0);
 
