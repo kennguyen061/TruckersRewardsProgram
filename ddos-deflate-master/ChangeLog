@@ -1,0 +1,115 @@
+Changes Log
+==========================================================================
+
+Version 1.3 - Date 21/11/2018
+
+  * Implemented bandwidth rate control.
+  * Traffic shaping works on both directions: ingress/outgress.
+  * Introduced usage of ifb kernel module to redirect ingress
+    and be able to filter it.
+  * Added iftop as new dependency.
+  * Added tc as new dependency needed for traffic shaping.
+
+Version 1.2 - Date 17/11/2018
+
+  * Implemented banning rules per incoming port.
+  * Print remaining time on bans list.
+  * Renamed PORT_MAX_CONNECTIONS to PORT_CONNECTIONS
+  * Updated man page.
+  * Updated ddos.conf file.
+  * Restored bsd support by using netstat if ss is unavailable.
+  * Use ipfw to block ipv6 addresses on bsd.
+
+Version 1.1 - Date 11/11/2018
+
+  * Fixed syntax error introduced in 1.0 thanks to @MarcelFox
+  * Fixed issue #36 (cron file created incorrectly).
+  * Added cron job deprecation warning, daemon mode should be used instead.
+  * Fixed many issues reported by shellcheck.
+  * Added IPv6 support
+  * Use ss instead of netstat.
+  * started some drafting to add blocking by port support.
+  * Improved ban_incoming_only
+  * Eliminate some command steps to improve performance.
+  * Removed HOST_IP since it is no longer necessary.
+  * Fixed improper call to grepcidr.
+  * Minor man page changes.
+  * Added ip6tables to dependencies list and removed netstat.
+
+Version 1.0 - Date 06/11/2018
+
+  * Support for ip ranges (CIDR) on the ignore.ip.list thanks to
+    safly (https://github.com/safly)
+  * grepcidr install requirement introduced with the support for CIDR
+  * New syntax supported on ignore.ip.list
+       a.b.c.d/xy        (CIDR format)
+       a.b.c.d-e.f.g.h   (IP range)
+    For more details read the grepcidr man page.
+  * Fixed bug $CONF not found thanks to
+    WoozyMasta (https://github.com/WoozyMasta)
+  * Added unban flag -u --unban
+  * Added logrotate configuration file to uninstall script.
+  * Prioritize systemd detection on install script.
+
+Version 0.9 - Date 05/03/2017
+
+  * Support for freebsd and many other improvements thanks to
+    Marc S. Brook (https://github.com/nuxy)
+  * Added option to only block incoming connections thanks to
+    Fathardie (https://github.com/Fathardie)
+  * Optional automatic installation of dependencies on the install script
+    thanks to gloomy-ghost (https://github.com/gloomy-ghost)
+  * Some other fixes and improvements thanks to
+    mean-cj (https://github.com/mean-cj)
+
+
+Version 0.8 - Date 25/09/2015
+
+  * Use a separate bans list file instead of reusing the ignore
+    whitelisted file which is more secure on case of unexpected
+    system reboot.
+  * Added default settings to ddos script.
+  * Added --bans-list|-b option to view currently banned ip's.
+  * Added check for missing dependencies on installer script.
+  * Unban ip's on the daemon loop instead of creating new unban processes.
+  * Added hostname to email notification.
+  * Execute tcpkill when ip is banned for 60 seconds and kill it.
+
+
+Version 0.7 - Date 26/06/2015
+
+  * Moved configuration files to /etc/ddos/
+  * Whitelist hostnames, via /etc/ddos/ignore.host.list.
+  * The script can run as a daemon with monitoring frequency in seconds
+    defined by DAEMON_FREQ
+  * Auto-detection of available firewall for use.
+  * Added support for CSF file.
+  * Added man page.
+  * Added init.d script.
+  * Added systemd service support.
+  * Added support for DESTDIR and a Makefile for easier packaging.
+  * Added command option to list whitelisted addresses.
+  * Added --view|-v option.
+  * Added logging.
+  * Improved installer and uninstaller.
+  * Installer does not overrides configuration files.
+  * New configuration option FIREWALL (see man ddos).
+  * New configuration option CONN_STATES (see man ddos).
+  * Check ip of local interfaces and whitelist them to prevent self bans.
+  * Improved netstat command to support ipv6 (experimental).
+  * Removed .cron extension of generated cron file because it seems
+    to cause issues.
+  * Removed KILL from conf (use -v|--view instead).
+
+
+Version 0.6 - Date 01/01/2005
+
+  * Original work by Zaf <zaf@vsnl.com> from which this work is based.
+  * It is possible to whitelist IP addresses, via
+    /usr/local/ddos/ignore.ip.list.
+  * Simple configuration file: /usr/local/ddos/ddos.conf
+  * IP addresses are automatically unblocked after a preconfigured time
+    limit (default: 600 seconds)
+  * The script can run at a chosen frequency in cron via the
+    configuration file (default: 1 minute)
+  * You can receive email alerts when IP addresses are blocked.
