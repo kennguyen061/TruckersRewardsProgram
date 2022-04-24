@@ -61,63 +61,6 @@ const PointTake = () => {
     });
     console.log("Thats all check points page for update");
     console.log(stuff);
-
-    /*
-    fetch(url1, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((num) => setDriversID(num))
-      .then(() => {
-        setUseID(parseInt(driversID.UID));
-      })
-      .then(() => {
-        console.log("changed");
-        url2.searchParams.append("UID", 4);
-        url2.searchParams.append("SID", 1);
-        console.log(url2);
-      })
-      .then(
-        fetch(url2, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((res) => {
-            console.log(res.json());
-            res.json();
-          })
-          //
-          .then((num) => setDriversCurrPoints(num))
-
-          .then(() => {
-            let curr = parseInt(driversCurrPoints);
-            let chan = parseInt(enteredPointChange);
-
-            console.log(curr + "fucking what" + chan);
-
-            setUsePoints(curr + chan);
-            console.log("The new point amount:" + useThisPoints);
-            //
-          })
-          .then(() => {
-            const stuff = {
-              SID: sid,
-              UID: useThisID,
-              newAmount: useThisPoints,
-              reason: "good work",
-            };
-
-            fetch(url3, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(stuff),
-            });
-            console.log("Thats all check points page for update");
-            console.log(stuff);
-          })
-          
-          */
   };
 
   return (
