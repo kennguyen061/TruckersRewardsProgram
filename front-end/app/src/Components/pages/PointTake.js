@@ -124,9 +124,11 @@ const PointTake = () => {
     <div className="PointTakePage">
       <SponsorNav />
       <div className="spacer"></div>
-      <h2>Please Change the Points first!</h2>
+      <h2 className="Header">
+        Hello, please input the email of the driver you'd like to input
+      </h2>
       <form onSubmit={SubmitHandler}>
-        <label>Enter Persons Email:</label>
+        <label className="Tags">Enter Persons Email:</label>
         <input
           type="text"
           name="Email"
@@ -136,7 +138,7 @@ const PointTake = () => {
           }
         />
 
-        <label>Enter point Change:</label>
+        <label className="Tags">Enter point Change:</label>
         <input
           type="number"
           name="Changa:"
@@ -148,7 +150,7 @@ const PointTake = () => {
             )
           }
         />
-        <label>Reason for changing points:</label>
+        <label className="Tags">Reason for changing points:</label>
         <input
           type="text"
           name="WhyTho"
