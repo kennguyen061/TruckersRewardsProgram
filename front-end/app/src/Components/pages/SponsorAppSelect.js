@@ -15,7 +15,7 @@ function SponsorAppSelect(props) {
     "http://18.235.52.212:8000/application/getAllSponsorApps"
   );
 
-  url.searchParams.append("SID", 2);
+  url.searchParams.append("SID", sid);
 
   useEffect(() => {
     fetch(url, {
