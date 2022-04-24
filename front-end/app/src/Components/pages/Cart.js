@@ -41,6 +41,7 @@ export default function Cart() {
     //will need a call to find the SID soon
     url.searchParams.append("SID", 1);
 
+
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -145,13 +146,27 @@ export default function Cart() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
+    })
+    .then(response => response.json())
+    .then((res) => {
+      //console.log(res)
+      if (res === false)
+      {
+        toast("Insufficient Points to Complete Order")
+      }
+      else 
+      {
+        toast("Order Submitted")
+      }
     });
+    
 
+   
     //add toast to checkout page it is going to a blank page
   };
 
   return (
-    <div className="page">
+    <div>
       <DriverNav />
 
       <div className="cart">
@@ -210,7 +225,6 @@ export default function Cart() {
           <h1> Orders are Non-Refundable </h1>
           <h1> Orders Cannot be Canceled Once Placed </h1>
           <h1>Cart Total : {total_cost} Points</h1>
-          <Link to={`/Checkout`}>
             <button
               className="button_1"
               style={{ marginTop: 30 }}
@@ -219,7 +233,7 @@ export default function Cart() {
               {" "}
               Place Your Order{" "}
             </button>
-          </Link>
+          {/* <Footer /> */}
         </center>
       </div>
       <Footer />
