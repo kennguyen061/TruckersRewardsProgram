@@ -8,3 +8,16 @@
     background-color: rgba(89, 167, 255, 0.781);
   }
   
+
+.button_2 {
+    background-color: #D3232E;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
