@@ -150,6 +150,15 @@ function Driver_Profile() {
             </div>
           </div>
         </form>
+
+        <Link to="/Driver_Password_Reset" className="Link">
+
+          <button
+            className="reset_password" 
+            >
+            Reset Password     
+          </button>
+       </Link>
       </div>
 
       <Footer />

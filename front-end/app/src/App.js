@@ -7,7 +7,6 @@ import Profile from "./Components/pages/Driver_Profile.js";
 import Login from "./Components/pages/Login.js";
 import Dev from "./Components/pages/Dev.js";
 import Cart from "./Components/pages/Cart.js";
-import Checkout from "./Components/pages/Checkout.js";
 import PointTake from "./Components/pages/PointTake.js";
 import Catalog from "./Components/Catalog/Catalog.js";
 import EditCatalog from "./Components/Catalog/Sponsor_Catalog_Edit.js";
@@ -75,7 +74,6 @@ function App() {
             element={<EditCatalog />}
           />
           <Route path="/pages/Cart" element={<Cart />} />
-          <Route path="/Checkout" element={<Checkout />} />
           <Route path="/pages/Orders" element={<Orders />} />
           <Route
             path="/Reports/SponsorReports/CurrentDrivers"
