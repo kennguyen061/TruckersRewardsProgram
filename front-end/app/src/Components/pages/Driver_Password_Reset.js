@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DriverNav from "../UI/DriverNav";
 import Footer from "../Footer/Footer";
 import "./Driver_Password_Reset.css";
@@ -6,13 +7,35 @@ import "./Driver_Password_Reset.css";
 export default function Driver_Password_Reset() {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [reenteredPassword, setReenteredPassword] = useState("");
+  const navigate = useNavigate();
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    //send call to update password
-    setEnteredPassword("");
-    setReenteredPassword("");
+    const info = {
+      role: window.localStorage.getItem("role"),
+      newpassword: enteredPassword,
+      sid: window.localStorage.getItem("sid"),
+    };
+
+    const response = await fetch("http://18.235.52.212:8000/account/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(info),
+    });
+
+    const value = await response.json();
+
+    if (value === false) {
+      alert("There was a problem restting your password. Try again.");
+      setEnteredPassword("");
+      setReenteredPassword("");
+    } else {
+      alert("Password Reset");
+      setEnteredPassword("");
+      setReenteredPassword("");
+      navigate("/pages/Driver_Profile", { replace: false });
+    }
   };
 
   return (
