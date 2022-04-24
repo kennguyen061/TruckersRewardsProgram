@@ -1,5 +1,7 @@
 import "./PointsOverTime.css";
 import { useEffect, useState } from "react";
+import "./PannelBar.css";
+import Collapsible from "react-collapsible";
 
 import {
   LineChart,
@@ -62,6 +64,25 @@ const PointsOverTime = () => {
 
     console.log(temp1 + typeof temp1);
     console.log(myYear);
+
+    window.localStorage.setItem(
+      "REASON1",
+      "On " +
+        res1J[length - 1].PointDate +
+        " you went to " +
+        res1J[length - 1].Point_Update +
+        " for the reason of " +
+        res1J[length - 1].Update_Status
+    );
+    window.localStorage.setItem(
+      "REASON2",
+      "On " +
+        res1J[length - 2].PointDate +
+        " you went to " +
+        res1J[length - 2].Point_Update +
+        " for the reason of " +
+        res1J[length - 2].Update_Status
+    );
   };
   let data = [
     {
@@ -89,60 +110,73 @@ const PointsOverTime = () => {
       Points: window.localStorage.getItem("2022VAL6"),
     },
   ];
+
+  let reason1 = window.localStorage.getItem("REASON1");
+  let reason2 = window.localStorage.getItem("REASON2");
   /******************************Dont change the values in option they are supposed to be backwords******* */
   return (
-    <div className="Graph">
-      <form>
-        <label className="butt">Year:</label>
-        <select value={myYear} onChange={changeHandler}>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-        </select>
-      </form>
-      <h3>Points Over Time</h3>
-      <ResponsiveContainer width="90%" aspect={3}>
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 15,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid horizontal="true" vertical="" stroke="#fff" />
-          <XAxis dataKey="name" tick={{ fill: "#fff" }} />
-          <YAxis tick={{ fill: "#fff" }} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "#8884d8",
-              color: "#fff",
+    <div className="page">
+      <div className="boxed">
+        <Collapsible trigger="latest Change">
+          <p>{reason1}</p>
+        </Collapsible>
+        <Collapsible trigger="latest Change">
+          <p>{reason2}</p>
+        </Collapsible>
+      </div>
+      <div className="Graph">
+        <form>
+          <label className="butt">Year:</label>
+          <select value={myYear} onChange={changeHandler}>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+          </select>
+        </form>
+        <h3>Points Over Time</h3>
+        <ResponsiveContainer width="90%" aspect={3}>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 15,
+              right: 30,
+              left: 20,
+              bottom: 5,
             }}
-            itemStyle={{ color: "#fff" }}
-            cursor={false}
-          />
-          <Line
-            type="monotone"
-            dataKey="Points"
-            stroke="#709dff"
-            strokeWidth="5"
-            dot={{
-              fill: "#2e4355",
-              stroke: "#709dff",
-              strokeWidth: 2,
-              r: 5,
-            }}
-            activeDot={{
-              fill: "#2e4355",
-              stroke: "#709dff",
-              strokeWidth: 5,
-              r: 10,
-            }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+          >
+            <CartesianGrid horizontal="true" vertical="" stroke="#fff" />
+            <XAxis dataKey="name" tick={{ fill: "#fff" }} />
+            <YAxis tick={{ fill: "#fff" }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#8884d8",
+                color: "#fff",
+              }}
+              itemStyle={{ color: "#fff" }}
+              cursor={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="Points"
+              stroke="#709dff"
+              strokeWidth="5"
+              dot={{
+                fill: "#2e4355",
+                stroke: "#709dff",
+                strokeWidth: 2,
+                r: 5,
+              }}
+              activeDot={{
+                fill: "#2e4355",
+                stroke: "#709dff",
+                strokeWidth: 5,
+                r: 10,
+              }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
