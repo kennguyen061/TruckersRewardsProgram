@@ -34,9 +34,6 @@ function AdminNav() {
         <Link to="/pages/error" smooth={true} duration={500}>
           <li>Accounts</li>
         </Link>
-        <Link to="/pages/error" smooth={true} duration={500}>
-          <li>Dashboard</li>
-        </Link>
       </ul>
       <div className="nav-icons">
         <Link to="/" smooth={true} duration={500}>
@@ -64,9 +61,6 @@ function AdminNav() {
           </Link>
           <Link to="/pages/error" smooth={true} duration={500}>
             <li>Accounts</li>
-          </Link>
-          <Link to="/pages/error" smooth={true} duration={500}>
-            <li>Dashboard</li>
           </Link>
         </ul>
         <div className="small-menu-bot">
