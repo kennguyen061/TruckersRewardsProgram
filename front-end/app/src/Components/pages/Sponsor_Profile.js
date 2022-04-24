@@ -75,68 +75,70 @@ useEffect(() => {
 }, [firstName]);
 
 return (
-  <div>
-      <SponsorNav />
-      <div className="Sponsor_Profile">
-          <div className="Main_Component">
-              <form onSubmit={updateHandler}>
-                  <div className="Cards">
-                      <div>
-                          <label className="Login-Header">
-                              Welcome Back {firstName} {lastName} !
-                          </label>
-                          <hr className="line" />
-                      </div>
-                      <div className='pii-field'>
-                          <label className="Name">First Name</label>
-                          <input
-                              type={"text"}
-                              placeholder={firstName}
-                              onChange={firstNameHandler}
-                          />
-                      </div>
-                      <div className='pii-field'>
-                          <label className="Name">Last Name</label>
-                          <input
-                              type={"text"}
-                              placeholder={lastName}
-                              onChange={lastNameHandler}
-                          />
-                      </div>
-                      <div className='pii-field'>
-                          <label className="Email">Email</label>
-                          <input
-                              type={"text"}
-                              placeholder={email}
-                              onChange={emailHandler}
-                          />
-                      </div>
-                      <div className='pii-field'>
-                          <label className="Address">Address</label>
-                          <input
-                              type={"text"}
-                              placeholder={address}
-                              onChange={addressHandler}
-                          />
-                      </div>
-                      <div className='pii-field'>
-                          <label className="Phone">Phone Number</label>
-                          <input
-                              type={"text"}
-                              placeholder={phoneNumber}
-                              onChange={phoneNumberHandler}
-                          />
-                      </div>
-                      <div>
-                          <button type="submit" onClick={updateHandler}>Update</button>
-                      </div>
-                  </div>
-              </form>
+  <div className="card">
+    <SponsorNav />
+    <div className="Sponsor_Profile">
+      <form onSubmit={updateHandler}>
+        <div>
+          <div className="header">
+            <label className="Login-Header">
+              Welcome Back {firstName} {lastName} !
+            </label>
+            <hr className="line" />
+            <h5>Fill in all text bubbles to update personal information</h5>
           </div>
-      </div>
-      <div className="bottom_here">
-          <Footer />
-      </div>
+          <div>
+            <div className="pii-field">
+              <label className="Name">First Name</label>
+              <input
+                type={"text"}
+                placeholder={firstName}
+                onChange={firstNameHandler}
+              />
+            </div>
+            <div className="pii-field">
+              <label className="Name">Last Name</label>
+              <input
+                type={"text"}
+                placeholder={lastName}
+                onChange={lastNameHandler}
+              />
+            </div>
+            <div className="pii-field">
+              <label className="Email">Email</label>
+              <input
+                type={"text"}
+                placeholder={email}
+                onChange={emailHandler}
+              />
+            </div>
+            <div className="pii-field">
+              <label className="Address">Address</label>
+              <input
+                type={"text"}
+                placeholder={address}
+                onChange={addressHandler}
+              />
+            </div>
+            <div className="pii-field">
+              <label className="Phone">Phone Number</label>
+              <input
+                type={"text"}
+                placeholder={phoneNumber}
+                onChange={phoneNumberHandler}
+              />
+            </div>
+            <div className="button">
+              <button type="submit" onClick={updateHandler}>
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <Footer />
   </div>
 );
 }
