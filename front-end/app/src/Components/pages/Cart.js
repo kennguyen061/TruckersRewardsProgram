@@ -233,9 +233,10 @@ export default function Cart() {
               {" "}
               Place Your Order{" "}
             </button>
-          <Footer />
+          {/* <Footer /> */}
         </center>
       </div>
+      <Footer />
     </div>
   );
 }
