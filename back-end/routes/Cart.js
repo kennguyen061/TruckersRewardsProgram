@@ -234,150 +234,156 @@ router.post("/checkout", (request, response) => {
   console.log("Hit checkout");
   db.query(
     "SELECT COUNT(*) AS RowCount FROM CARTITEM WHERE UID = ? AND SID = ?;",
-    [request.body.UID,request.body.SID],
+    [request.body.UID, request.body.SID],
     (Err, Res) => {
       if (Res[0].RowCount === 0) {
         response.send(false);
         console.log("EMPTY CART");
-      }
-      else {
-
+      } else {
         let total = 0;
-        db.query("SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
-        [request.body.UID,request.body.SID],
-        (error,result) => {
-          if(result.length === 0) {
-            console.log("NO AMOUNT");
-            response.send(false);
-          }
-          else {
-            let newpointbalance = result[0].Amount;
-            //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE) 
-            db.query(
-                    "SELECT Price,Quantity FROM CARTITEM WHERE UID = ? AND SID = ?;",
-                    [request.body.UID, request.body.SID],
-                    (error2, result2) => {
-                      if (error) {
-                        throw error2;
-                      } else {
-                        //responsebody array
-                        //loop through result[index]
-                        for (const element of result2) {                
-                          total = total + (element.Price*element.Quantity);
-                        }
+        db.query(
+          "SELECT Amount FROM POINTBALANCE WHERE UID = ? AND SID = ?",
+          [request.body.UID, request.body.SID],
+          (error, result) => {
+            if (result.length === 0) {
+              console.log("NO AMOUNT");
+              response.send(false);
+            } else {
+              let newpointbalance = result[0].Amount;
+              //CREATE A NEW ORDER BASED OFF request.body.UID, request.body.SID, Orderdate, request.body.address ADD ALL CARTITEMS TO ITEM (foreign key of the ORDER BASED OFF THE THREE)
+              db.query(
+                "SELECT Price,Quantity FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                [request.body.UID, request.body.SID],
+                (error2, result2) => {
+                  if (error) {
+                    throw error2;
+                  } else {
+                    //responsebody array
+                    //loop through result[index]
+                    for (const element of result2) {
+                      total = total + element.Price * element.Quantity;
                     }
-                    console.log("Total:" +total);
-            
-            if(result[0].Amount < total) {
-                console.log("Insufficient points");
-                response.send(false);
-            }
-            else {
-                db.query(
-                    "INSERT INTO ORDERS(Total,UID,SID,Orderdate,Address,Orderstatus) VALUES(?,?,?,CURRENT_TIMESTAMP(),?,?);",
-                    [
-                      total,
-                      request.body.UID,
-                      request.body.SID,
-                      request.body.address,
-                      "In Progress"
-                    ],
-                    (error, result) => {
-                      if (error) throw error;
-                      console.log("Order created");
-                      console.log("Result id: " + result.insertId);
-                      //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID  
-                      let rbArray = Array();
-                      db.query(
-                        "SELECT ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
-                        [request.body.UID, request.body.SID],
-                        (error2, result2) => {
-                          if (error2) {
-                            throw error2;
-                          } else {
-                            //responsebody array
-                            //loop through result[index]
-                            for (const element of result2) {
-                              let responseBody = {
-                                ItemName: null,
-                                Quantity: null,
-                                Price: null,
-                              };
-                              
-                              responseBody.ItemName = element.ItemName;
-                              responseBody.Price = element.Price;
-                              responseBody.Quantity = element.Quantity;
-                              console.log(responseBody);
-                              rbArray.push(responseBody);
-                            }
-                            console.log(rbArray);
-                            console.log("rbArray.length: " + rbArray.length)
-                            for(const element of rbArray) {
-                              db.query(
-                                "INSERT INTO ITEM(ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?);",
-                                [
-                                  element.ItemName,
-                                  result.insertId,
-                                  element.Quantity,
-                                  element.Price,
-                                ],
-                                (error3, result3) => {
-                                  if (error3) throw error3;
-                                  console.log("ITEM ADDED TO ORDER");
-                                }
-                              ); 
+                  }
+                  console.log("Total:" + total);
+
+                  if (result[0].Amount < total) {
+                    console.log("Insufficient points");
+                    response.send(false);
+                  } else {
+                    db.query(
+                      "INSERT INTO ORDERS(Total,UID,SID,Orderdate,Address,Orderstatus) VALUES(?,?,?,CURRENT_TIMESTAMP(),?,?);",
+                      [
+                        total,
+                        request.body.UID,
+                        request.body.SID,
+                        request.body.address,
+                        "In Progress",
+                      ],
+                      (error, result) => {
+                        if (error) throw error;
+                        console.log("Order created");
+                        console.log("Result id: " + result.insertId);
+                        //TODO: INSERT CATALOGITEMS INTO THE ITEM TABLE, find OrderID
+                        let rbArray = Array();
+                        db.query(
+                          "SELECT ItemName, Quantity, Price FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                          [request.body.UID, request.body.SID],
+                          (error2, result2) => {
+                            if (error2) {
+                              throw error2;
+                            } else {
+                              //responsebody array
+                              //loop through result[index]
+                              for (const element of result2) {
+                                let responseBody = {
+                                  ItemName: null,
+                                  Quantity: null,
+                                  Price: null,
+                                };
+
+                                responseBody.ItemName = element.ItemName;
+                                responseBody.Price = element.Price;
+                                responseBody.Quantity = element.Quantity;
+                                console.log(responseBody);
+                                rbArray.push(responseBody);
+                              }
+                              console.log(rbArray);
+                              console.log("rbArray.length: " + rbArray.length);
+                              for (const element of rbArray) {
+                                db.query(
+                                  "INSERT INTO ITEM(ItemName,OrderID,Quantity,Price) VALUES(?,?,?,?);",
+                                  [
+                                    element.ItemName,
+                                    result.insertId,
+                                    element.Quantity,
+                                    element.Price,
+                                  ],
+                                  (error3, result3) => {
+                                    if (error3) throw error3;
+                                    console.log("ITEM ADDED TO ORDER");
+                                  }
+                                );
+                              }
                             }
                           }
-                        }
-                      );
-                      //DELETE ALL CARTITEMS FOR A UID AND SID
-                      db.query(
-                      "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-                      [request.body.UID, request.body.SID],
-                      (error, result) => {
-                        console.log("Cart items removed for Order.");
-                      }
-                    );
-                    }
-                  );
-                db.query("UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?;",
-                [
-                    newpointbalance-total,
-                    request.body.UID,
-                    request.body.SID,
-                ],
-                (error,result) => {
-                  console.log("Point balance updated");
-                  db.query(
-                    "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
-                    [request.body.UID, request.body.SID],
-                    (error2, result2) => {
-                      if (error) {
-                        console.log("Something went wrong getting pointid");
-                        response.send(false);
-                      } else if (result.length > 0) {
-                        pointId = result2[0].PointID;
-                        db.query("INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
-                        [
-                            newpointbalance-total,
-                            "Purchase made",
-                            pointId,
-                            request.body.SID,
-                        ],
-                        (error3,result3) => {
-                            console.log("Point balance updated")
-                        }
+                        );
+                        //DELETE ALL CARTITEMS FOR A UID AND SID
+                        db.query(
+                          "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                          [request.body.UID, request.body.SID],
+                          (error, result) => {
+                            console.log("Cart items removed for Order.");
+                          }
                         );
                       }
-                    });
+                    );
+                    db.query(
+                      "UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?;",
+                      [
+                        newpointbalance - total,
+                        request.body.UID,
+                        request.body.SID,
+                      ],
+                      (error, result) => {
+                        console.log("Point balance updated");
+                        db.query(
+                          "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+                          [request.body.UID, request.body.SID],
+                          (error2, result2) => {
+                            if (error) {
+                              console.log(
+                                "Something went wrong getting pointid"
+                              );
+                              response.send(false);
+                            } else if (result.length > 0) {
+                              pointId = result2[0].PointID;
+                              db.query(
+                                "INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
+                                [
+                                  newpointbalance - total,
+                                  "Purchase made",
+                                  pointId,
+                                  request.body.SID,
+                                ],
+                                (error3, result3) => {
+                                  console.log("Point balance updated");
+                                  response.send(true);
+                                }
+                              );
+                            }
+                          }
+                        );
+                      }
+                    );
+                  }
                 }
-                );
+              );
             }
-            });            
           }
-        });
+        );
       }
-    });
+    }
+  );
 });
 
 // access orders of a user

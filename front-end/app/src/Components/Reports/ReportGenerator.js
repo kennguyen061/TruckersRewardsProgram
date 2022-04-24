@@ -9,14 +9,9 @@ const STATUS_GENERATING = "generating";
 const STATUS_ERROR = "error";
 const STATUS_READY = "ready";
 
-  const role = window.localStorage.getItem("role");
-  //Setup dynamic navbar variable
-  let nav = <AdminNav />;
-  if (role === "ADMIN") {
-    nav = <AdminNav />;
-  } else if (role === "SPONSOR") {
-    nav = <SponsorNav />;
-  }
+const role = window.localStorage.getItem("role");
+//Setup dynamic navbar variable
+
 const ReportGenerator = ({
   title = "Report",
   filename = "report.pdf",
@@ -54,7 +49,7 @@ const ReportGenerator = ({
 
   return (
     <div className="ReportPage">
-      {nav}
+      <AdminNav />
       <div className="Spacer"></div>
       <div className="InfoBox">
         <h1>{title}</h1>

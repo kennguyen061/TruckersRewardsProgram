@@ -41,7 +41,6 @@ export default function Cart() {
     //will need a call to find the SID soon
     url.searchParams.append("SID", 1);
 
-
     fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -152,7 +151,7 @@ export default function Cart() {
   };
 
   return (
-    <div>
+    <div className="page">
       <DriverNav />
 
       <div className="cart">
@@ -221,9 +220,9 @@ export default function Cart() {
               Place Your Order{" "}
             </button>
           </Link>
-          <Footer />
         </center>
       </div>
+      <Footer />
     </div>
   );
 }

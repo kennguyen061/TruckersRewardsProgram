@@ -1,11 +1,15 @@
 .cart {
-  height: 100%;
+  height: 93vh;
   width: 100%;
   display: flex;
   align-items: left;
   flex-direction: column;
   padding-top: 6rem;
   background-color: rgba(89, 167, 255, 0.781);
+}
+
+.page {
+  height: 100vh;
 }
 
 .button_1 {
@@ -22,7 +26,7 @@
 }
 
 .button_2 {
-  background-color: #D3232E;
+  background-color: #d3232e;
   border: none;
   border-radius: 8px;
   color: white;
@@ -35,11 +39,11 @@
 }
 
 .quantity {
-  text-align:center;
+  text-align: center;
 
   margin-top: 500;
-  width:333px; 
-  margin:auto; 
+  width: 333px;
+  margin: auto;
 }
 
 .item {

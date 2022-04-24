@@ -67,7 +67,7 @@ export default function Catalog() {
   const fetchData = () => {
 
     const url = new URL("http://18.235.52.212:8000/catalog/get-list-items");
-    url.searchParams.append("sid", 1);
+    url.searchParams.append("sid", sid);
 
     fetch(url, {
       method: "GET",
@@ -79,8 +79,6 @@ export default function Catalog() {
       });
 
     console.log(listing)
-
-    
   };
 
   useEffect(() => {

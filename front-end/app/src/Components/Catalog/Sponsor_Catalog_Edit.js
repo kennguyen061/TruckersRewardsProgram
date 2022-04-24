@@ -12,6 +12,7 @@ export default function Edit_Catalog() {
   // set value for default selection
   const [selectedValues, setSelectedValue] = useState(["All"]);
   const sid = window.localStorage.getItem("sid");
+  console.log(sid)
 
 
   //used to grab the active listings
@@ -90,7 +91,7 @@ export default function Edit_Catalog() {
   };
 
 
-  console.log(typeof(listing))
+  console.log(listing)
   
 
   let filtered_listing = [];
