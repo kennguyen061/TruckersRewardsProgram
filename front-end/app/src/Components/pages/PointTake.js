@@ -49,39 +49,39 @@ const PointTake = () => {
         fetch(url2, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-        }) .then((res) => {
-        console.log(res.json());
-        res.json();
-      })
-      .then((num) => setDriversCurrPoints(num))
+        })
+          .then((res) => {
+            console.log(res.json());
+            res.json();
+          })
+          .then((num) => setDriversCurrPoints(num))
 
-      .then(() => {
-        let curr = parseInt(driversCurrPoints);
-        let chan = parseInt(enteredPointChange);
+          .then(() => {
+            let curr = parseInt(driversCurrPoints);
+            let chan = parseInt(enteredPointChange);
 
-        console.log(curr + "fucking what" + chan);
+            console.log(curr + "fucking what" + chan);
 
-        setUsePoints(curr + chan);
-        console.log("The new point amount:" + useThisPoints);
-      })
-      .then(() => {
-        const stuff = {
-          SID: sid,
-          UID: useThisID,
-          newAmount: useThisPoints,
-          reason: "good work",
-        };
+            setUsePoints(curr + chan);
+            console.log("The new point amount:" + useThisPoints);
+          })
+          .then(() => {
+            const stuff = {
+              SID: sid,
+              UID: useThisID,
+              newAmount: useThisPoints,
+              reason: "good work",
+            };
 
-        fetch(url3, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(stuff),
-        });
-        console.log("Thats all check points page for update");
-        console.log(stuff);
-      });
-      )
-     
+            fetch(url3, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(stuff),
+            });
+            console.log("Thats all check points page for update");
+            console.log(stuff);
+          })
+      );
   };
 
   return (
