@@ -5,7 +5,6 @@ import "./Cart.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Checkout from "./Checkout";
 toast.configure();
 
 export default function Cart() {
