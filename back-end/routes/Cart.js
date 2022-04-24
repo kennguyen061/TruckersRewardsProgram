@@ -322,65 +322,59 @@ router.post("/checkout", (request, response) => {
                                     if (error3) throw error3;
                                     console.log("ITEM ADDED TO ORDER");
                                     //DELETE ALL CARTITEMS FOR A UID AND SID
-                                    db.query(
-                                      "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
-                                      [request.body.UID, request.body.SID],
-                                      (error, result) => {
-                                        console.log(
-                                          "Cart items removed for Order."
-                                        );
-                                        db.query(
-                                          "UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?;",
-                                          [
-                                            newpointbalance - total,
-                                            request.body.UID,
-                                            request.body.SID,
-                                          ],
-                                          (error, result) => {
-                                            console.log(
-                                              "Point balance updated"
-                                            );
-                                            db.query(
-                                              "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
-                                              [
-                                                request.body.UID,
-                                                request.body.SID,
-                                              ],
-                                              (error2, result2) => {
-                                                if (error) {
-                                                  console.log(
-                                                    "Something went wrong getting pointid"
-                                                  );
-                                                  response.send(false);
-                                                } else if (result.length > 0) {
-                                                  pointId = result2[0].PointID;
-                                                  db.query(
-                                                    "INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
-                                                    [
-                                                      newpointbalance - total,
-                                                      "Purchase made",
-                                                      pointId,
-                                                      request.body.SID,
-                                                    ],
-                                                    (error3, result3) => {
-                                                      console.log(
-                                                        "Point balance updated"
-                                                      );
-                                                      response.send(true);
-                                                    }
-                                                  );
-                                                }
-                                              }
-                                            );
-                                          }
-                                        );
-                                      }
-                                    );
                                   }
                                 );
                               }
                             }
                           }
+                        ).then(
+                          db.query(
+                            "DELETE FROM CARTITEM WHERE UID = ? AND SID = ?;",
+                            [request.body.UID, request.body.SID],
+                            (error, result) => {
+                              console.log("Cart items removed for Order.");
+                              db.query(
+                                "UPDATE POINTBALANCE SET Amount = ? WHERE UID = ? AND SID = ?;",
+                                [
+                                  newpointbalance - total,
+                                  request.body.UID,
+                                  request.body.SID,
+                                ],
+                                (error, result) => {
+                                  console.log("Point balance updated");
+                                  db.query(
+                                    "SELECT PointID FROM POINTBALANCE WHERE UID = ? AND SID = ?;",
+                                    [request.body.UID, request.body.SID],
+                                    (error2, result2) => {
+                                      if (error) {
+                                        console.log(
+                                          "Something went wrong getting pointid"
+                                        );
+                                        response.send(false);
+                                      } else if (result.length > 0) {
+                                        pointId = result2[0].PointID;
+                                        db.query(
+                                          "INSERT INTO POINTBALANCELOG(Point_update,Update_Status,PointDate,PointID,SID) VALUES(?,?,CURRENT_TIMESTAMP(),?,?);",
+                                          [
+                                            newpointbalance - total,
+                                            "Purchase made",
+                                            pointId,
+                                            request.body.SID,
+                                          ],
+                                          (error3, result3) => {
+                                            console.log(
+                                              "Point balance updated"
+                                            );
+                                            response.send(true);
+                                          }
+                                        );
+                                      }
+                                    }
+                                  );
+                                }
+                              );
+                            }
+                          )
                         );
                       }
                     );
