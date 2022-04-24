@@ -9,6 +9,8 @@ function Driver_Profile() {
   const id = window.localStorage.getItem("id");
   const [firstName, setFirstName] = useState("name");
   const [lastName, setLastName] = useState("lastName");
+  const [firstNameUpdated, setFirstNameUp] = useState("name");
+  const [lastNameUpdated, setLastNameUp] = useState("lastName");
   const [email, setEmail] = useState("email");
   const [address, setAddress] = useState("address");
   const [phoneNumber, setPhoneNumber] = useState("phoneNumber");
@@ -19,6 +21,14 @@ function Driver_Profile() {
 
   const lastNameHandler = (event) => {
     setLastName(event.target.value);
+  };
+
+  const firstNameUpdateHandler = (event) => {
+    setFirstNameUp(event.target.value);
+  };
+
+  const lastNameUpdateHandler = (event) => {
+    setLastNameUp(event.target.value);
   };
 
   const emailHandler = (event) => {
@@ -34,6 +44,7 @@ function Driver_Profile() {
   };
 
   const updateHandler = (event) => {
+    event.preventDefault();
     const url = "http://18.235.52.212:8000/account/update";
     const userInfo = {
       firstName: firstName,
@@ -96,7 +107,7 @@ function Driver_Profile() {
                 <input
                   type={"text"}
                   placeholder={firstName}
-                  onChange={firstNameHandler}
+                  onChange={firstNameUpdateHandler}
                 />
               </div>
               <div className="pii-field">
@@ -104,7 +115,7 @@ function Driver_Profile() {
                 <input
                   type={"text"}
                   placeholder={lastName}
-                  onChange={lastNameHandler}
+                  onChange={lastNameUpdateHandler}
                 />
               </div>
               <div className="pii-field">

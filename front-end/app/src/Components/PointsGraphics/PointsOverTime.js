@@ -32,23 +32,26 @@ const PointsOverTime = () => {
 
     const res1J = await res1.json();
 
+    let length = Object.keys(res1J).length;
+    console.log(length);
+
     console.log(res1J);
 
     if (myYear === "2022") {
-      window.localStorage.setItem("2022VAL1", res1J[12].Point_Update);
-      window.localStorage.setItem("2022VAL2", res1J[13].Point_Update);
-      window.localStorage.setItem("2022VAL3", res1J[14].Point_Update);
-      window.localStorage.setItem("2022VAL4", res1J[15].Point_Update);
-      window.localStorage.setItem("2022VAL5", res1J[16].Point_Update);
-      window.localStorage.setItem("2022VAL6", res1J[17].Point_Update);
+      window.localStorage.setItem("2022VAL1", res1J[length - 7].Point_Update);
+      window.localStorage.setItem("2022VAL2", res1J[length - 5].Point_Update);
+      window.localStorage.setItem("2022VAL3", res1J[length - 4].Point_Update);
+      window.localStorage.setItem("2022VAL4", res1J[length - 3].Point_Update);
+      window.localStorage.setItem("2022VAL5", res1J[length - 2].Point_Update);
+      window.localStorage.setItem("2022VAL6", res1J[length - 1].Point_Update);
     } else if (myYear === "2021") {
       //2021
-      window.localStorage.setItem("2022VAL1", res1J[6].Point_Update);
-      window.localStorage.setItem("2022VAL2", res1J[7].Point_Update);
-      window.localStorage.setItem("2022VAL3", res1J[8].Point_Update);
-      window.localStorage.setItem("2022VAL4", res1J[9].Point_Update);
-      window.localStorage.setItem("2022VAL5", res1J[10].Point_Update);
-      window.localStorage.setItem("2022VAL6", res1J[11].Point_Update);
+      window.localStorage.setItem("2022VAL1", res1J[length - 12].Point_Update);
+      window.localStorage.setItem("2022VAL2", res1J[length - 11].Point_Update);
+      window.localStorage.setItem("2022VAL3", res1J[length - 10].Point_Update);
+      window.localStorage.setItem("2022VAL4", res1J[length - 9].Point_Update);
+      window.localStorage.setItem("2022VAL5", res1J[length - 8].Point_Update);
+      window.localStorage.setItem("2022VAL6", res1J[length - 7].Point_Update);
     }
 
     console.log(
@@ -90,10 +93,10 @@ const PointsOverTime = () => {
   return (
     <div className="Graph">
       <form>
-        <label className="butt">Enter the year you'd Like to see:</label>
+        <label className="butt">Year:</label>
         <select value={myYear} onChange={changeHandler}>
-          <option value="2022">2021</option>
-          <option value="2021">2022</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
         </select>
       </form>
       <h3>Points Over Time</h3>

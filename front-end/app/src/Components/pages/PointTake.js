@@ -51,7 +51,7 @@ const PointTake = () => {
       SID: window.localStorage.getItem("sid"),
       UID: window.localStorage.getItem("DRIVERID"),
       newAmount: window.localStorage.getItem("POINTSPOST"),
-      reason: "good work",
+      reason: window.localStorage.getItem("BECAUSE"),
     };
 
     fetch(url3, {
@@ -146,6 +146,15 @@ const PointTake = () => {
               "POINTCHG",
               parseInt(event.target.value)
             )
+          }
+        />
+        <label>Reason for changing points:</label>
+        <input
+          type="text"
+          name="WhyTho"
+          value={window.localStorage.getItem("BECAUSE")}
+          onChange={(event) =>
+            window.localStorage.setItem("BECAUSE", event.target.value)
           }
         />
 
