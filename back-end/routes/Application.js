@@ -220,6 +220,24 @@ router.get("/getAllSponsorApps", (req, res) => {
   );
 });
 
+router.get("/getAllSponsorAppsReports", (req, res) => {
+  //get all apps
+  db.query(
+    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason,DRIVER.UID FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ?;",
+    [req.query.SID],
+    (err, result) => {
+      if (err) {
+        console.log("problem with get all sponsor apps");
+        res.send(false);
+      } else if (result.length == 0) {
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(result));
+      }
+    }
+  );
+});
+
 router.get("/getAllSponsors", (req, res) => {
   db.query(" SELECT * FROM SPONSORORG;", [], (err, results) => {
     if (err) {
