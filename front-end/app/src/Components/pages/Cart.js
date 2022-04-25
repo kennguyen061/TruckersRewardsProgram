@@ -90,7 +90,7 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    window.location.reload(false);
+    toast("Removed Item for Cart, Refresh Page to see Changes")
   };
 
   const increase_qty = (item) => () => {
@@ -110,7 +110,8 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    window.location.reload(false);
+    toast("Incresed  Quantity, Refresh Page to see Changes")
+
   };
 
   const decrease_qty = (item) => () => {
@@ -128,7 +129,8 @@ export default function Cart() {
       body: JSON.stringify(body),
     });
 
-    window.location.reload(false);
+    toast("Decreased Quantity, Refresh Page to see Changes")
+
   };
 
   //will need to confirm this works
@@ -188,35 +190,14 @@ export default function Cart() {
 
             <div className="quantity">
               <div style={{ marginLeft: 50, float: "right" }}>
-                <button
-                  className="button_2"
-                  style={{ alignItems: "right" }}
-                  onClick={remove(cart)}
-                >
-                  {" "}
-                  Remove{" "}
-                </button>
+              
               </div>
 
-              <button
-                className="button_1"
-                style={{ float: "left" }}
-                onClick={decrease_qty(cart)}
-              >
-                {" "}
-                -{" "}
-              </button>
+           
 
               <b> Qty: {cart.Quantity}</b>
 
-              <button
-                className="button_1"
-                style={{ float: "right" }}
-                onClick={increase_qty(cart)}
-              >
-                {" "}
-                +{" "}
-              </button>
+           
             </div>
           </div>
         ))}

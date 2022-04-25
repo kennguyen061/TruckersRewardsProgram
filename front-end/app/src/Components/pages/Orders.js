@@ -49,7 +49,7 @@ export default function Orders() {
       body: JSON.stringify(body),
     });
 
-    window.location.reload(false);
+    toast("Canceled Order, Refresh Page to see Changes")
   };
   return (
     <div className="orderpage">
@@ -74,9 +74,6 @@ export default function Orders() {
               <td>
                 <h2>Order Status</h2>
               </td>
-              <td>
-                <h2>Cancel Order?</h2>
-              </td>
             </tr>
 
             {orders.map((orders) => (
@@ -86,17 +83,6 @@ export default function Orders() {
                 <td>{orders.Total}</td>
                 <td>{orders.Address}</td>
                 <td>{orders.Orderstatus}</td>
-                <td>
-                  {" "}
-                  <button
-                    className="button_2"
-                    style={{ alignItems: "right" }}
-                    onClick={cancelOrder(orders.OrderID)}
-                  >
-                    {" "}
-                    Cancel{" "}
-                  </button>{" "}
-                </td>
               </tr>
             ))}
           </table>
