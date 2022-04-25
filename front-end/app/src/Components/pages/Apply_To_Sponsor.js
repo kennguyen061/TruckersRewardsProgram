@@ -78,7 +78,7 @@ function Apply_To_Sponsor(props) {
           </form>
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 }

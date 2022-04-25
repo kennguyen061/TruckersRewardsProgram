@@ -135,8 +135,6 @@ function SponsorAppSelect(props) {
             )}
           </div>
         </div>
-
-        <Footer />
       </div>
     </div>
   );
