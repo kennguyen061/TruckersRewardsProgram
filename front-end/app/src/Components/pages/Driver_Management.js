@@ -17,9 +17,6 @@ function Driver_Management(props) {
             <label className="sponsor_button"> Manage Applicants</label>
           </button>
         </Link>
-        <hr className="line_30" />
-        <label className="current_sponsors">Current Drivers</label>
-        <hr className="line_30" />
         <div className="bottom_here">
           <Footer />
         </div>
