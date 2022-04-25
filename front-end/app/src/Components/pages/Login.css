@@ -205,3 +205,6 @@
   padding-bottom: 5px;
   padding-left: 25px;
 }
+
+@media screen and (max-width: 940px) {
+}

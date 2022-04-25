@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "c397053a-29d7-4a64-90d9-a6c6e7f3f781",
+		"name": "K. Test App - Retrieve user app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "retrieve linda app",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/retrieveapplication?UID=5&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"retrieveapplication"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieve all from sponsor 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/getAllSponsorApps?SID=2",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"getAllSponsorApps"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

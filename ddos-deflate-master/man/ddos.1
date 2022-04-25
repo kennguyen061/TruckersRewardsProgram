@@ -1,0 +1,241 @@
+.TH ddos 1
+
+.SH NAME
+ddos \- script to mitigate small denial of service attacks.
+
+.SH SYNOPSIS
+.B ddos
+[OPTION]
+.br
+.B ddos
+(-k|--kill) <NUMBER_OF_CONNECTIONS>
+.br
+.B ddos
+(-u|--unban) <IP_ADDRESS>
+
+.SH DESCRIPTION
+.PP
+(D)DoS Deflate is a lightweight bash shell script designed to assist in
+the process of blocking a denial of service attack. It utilizes the
+command below to create a list of IP addresses connected to the server,
+along with their total number of connections. It is one of the simplest
+and easiest to install solutions at the software level.
+
+.B ss
+-Hntu state connected |
+.B awk
+\'{print $6}\' |
+.B cut
+-d: -f1 |
+.B sort
+|
+.B uniq
+-c |
+.B sort
+-nr
+
+.PP
+IP addresses with over a pre-configured number of connections are
+automatically blocked in the server's firewall, which can be direct
+ipfw, iptables, or Advanced Policy Firewall (APF).
+
+.SH OPTIONS
+
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+display the script options
+.TP
+\fB\-c\fR, \fB\-\-cron\fR
+update or create cron job to run this script regularly
+.RS 7
+.B Warning:
+this feature is deprecated and ddos-deflate should be run on
+daemon mode.
+.RE
+.TP
+\fB\-i\fR, \fB\-\-ignore\-list\fR
+dsiplay a list of currently whitelisted ip addresses
+.TP
+\fB\-b\fR, \fB\-\-bans\-list\fR
+display a list of currently banned ip addresses
+.TP
+\fB\-u\fR, \fB\-\-unban\fR <IP_ADDRESS>
+unbans a given \fIIP_ADDRESS\fR
+.TP
+\fB\-d\fR, \fB\-\-start\fR
+initialize a daemon to monitor connections
+.TP
+\fB\-s\fR, \fB\-\-stop\fR
+stop the daemon
+.TP
+\fB\-t\fR, \fB\-\-status\fR
+display the daemon status and pid if running
+.TP
+\fB\-p\fR, \fB\-\-ports\fR
+display ports blocking configuration
+.TP
+\fB\-v[4|6]\fR, \fB\-\-view [4|6]\fR
+display active connections to the server, combine with 4 or 6 to define
+the ip version.
+.TP
+\fB\-y[4|6]\fR, \fB\-\-view-port [4|6]\fR
+display active connections to the server including the port #, combine
+with 4 or 6 to define the ip version.
+.TP
+\fB\-k\fR, \fB\-\-kill\fR <NUMBER_OF_CONNECTIONS>
+block ip's making \fINUMBER_OF_CONNECTIONS\fR or more
+
+.SH WHITELISTING
+
+.PP
+It is possible to whitelist IP addresses by adding a
+.B new-line
+separated list of ip's to /etc/ddos/ignore.ip.list,
+you can use IP range syntax and CIDR syntax, for example:
+
+.RS 4
+192.168.1.0/24           (CIDR format)
+.br
+24.12.34.1-24.12.34.30   (IP range)
+.br
+192.168.1.156            (Single IP)
+.RE
+
+.PP
+It is also possible to whitelist hostnames by adding a
+.B new-line
+separated list of hosts to /etc/ddos/ignore.host.list, for example:
+
+.RS 4
+googlebot.com
+.br
+dynamic-ip.somehost.com
+.RE
+
+.SH SETTINGS
+You can modify the script settings by editing /etc/ddos/ddos.conf
+
+.TP
+.B FIREWALL = '<value>'
+The firewall to use for blocking/unblocking, valid values are:
+auto, apf, csf, ipfw and iptables. (Default: "auto")
+
+.TP
+.B EMAIL_TO = '<email>'
+An email is sent to the following address when an IP is banned.
+Leaving this value empty would suppress sending of mails. (Default: root)
+
+.TP
+.B FREQ = <number>
+Frequency in minutes for running the script. Every time this setting is
+changed, run the script with --cron option so that the new frequency
+takes effect. (Default: 1)
+
+.TP
+.B DAEMON_FREQ = <number>
+Frequency in seconds to monitor connections when running the script
+in daemon mode. (Default: 5)
+
+.TP
+.B NO_OF_CONNECTIONS = <number>
+How many connections define a bad IP? Indicate that below. (Default: 150)
+
+.TP
+.B BAN_PERIOD = <number>
+Number of seconds the banned ip should remain in blacklist. (Default: 600)
+
+.TP
+.B CONN_STATES = '<valid ss states>'
+Connection states separated by colon operator (:) to block. See:
+.B ss(1).
+(Default: "connected")
+
+.TP
+.B CONN_STATES_NS = '<valid netstat states>'
+Connection states to block separated by pipe operator when using netstat. See:
+.B netstat(1).
+(Default: "ESTABLISHED|SYN_SENT|SYN_RECV|FIN_WAIT1|FIN_WAIT2|TIME_WAIT|CLOSE_WAIT|LAST_ACK|CLOSING")
+
+.TP
+.B ONLY_INCOMING = <false|true>
+Only count incoming connections to listening services, which will
+prevent the server from banning multiple outgoing connections to
+a single ip address. Slower than default in/out method.
+(Default: false)
+
+.TP
+.B ENABLE_CLOUDFLARE = <false|true>
+If set to true the script will also use tcpdump to scan for ip
+addresses given in the CF-Connecting-IP header tag sent by cloudflare
+servers and ban using iptables string matching module.
+(Default: false)
+
+.TP
+.B ENABLE_PORTS = <false|true>
+This option enables the usage of PORT_CONNECTIONS and overrides the
+ONLY_INCOMING option. Same as ONLY_INCOMING but you can also assing
+blocking rules per port using PORT_CONNECTIONS. Slower than
+ONLY_INCOMING method.
+(Default: false)
+
+.TP
+.B PORT_CONNECTIONS = '<from_port[-to_port]>:<max_conn>:<ban_period> ...'
+Maximum amount of connections per port before blocking. If a user
+is making all its connections to a single port the max connections
+specified for the port will take precedence over the
+NO_OF_CONNECTIONS value.
+You should specify a rule for all the service ports your server is
+running since those ports not defined on this list will be ignored
+when ENABLE_PORTS is enabled, making those ports not listed on this
+configuration flag vulnerable to attacks. Example:
+"80:150:600 443:150:600 20-21:250:600"
+
+.TP
+.B BANDWIDTH_CONTROL = <false|true>
+Monitor bandwidth usage per ip and slows down data transfer rate/s if
+the BANDWIDTH_CONTROL_LIMIT is exceeded. Requires iftop and tc.
+(Default: false)
+
+.TP
+.B BANDWIDTH_CONTROL_LIMIT = '<number{kbit|mbit}>'
+The data transfer rate/s that triggers a rate drop to the speed
+defined in BANDWIDTH_DROP_RATE, can be expressed in mbit or kbit.
+(Default: 1896kbit)
+
+.TP
+.B BANDWIDTH_DROP_RATE = '<number{kbit|mbit}>'
+When the maximum data transfer rate defined in BANDWIDTH_CONTROL_LIMIT
+is reached, the speed of the transfer will be reduced to this value
+for the amount of seconds specified in BANDWIDTH_DROP_PERIOD.
+(Default: 512kbit)
+
+.TP
+.B BANDWIDTH_DROP_PERIOD = <number>
+The amount of time in seconds to keep a client transfer at the speed
+defined on BANDWIDTH_DROP_RATE. (Default: 600)
+
+.TP
+.B BANDWIDTH_ONLY_INCOMING = <false|true>
+If true, takes into consideration only the data received from
+client and not the data sent by server to client. (Default: true)
+
+.SH FILES
+.B /usr/local/ddos/LICENSE
+.br
+.B /usr/local/ddos/ddos.sh
+.br
+.B /usr/local/sbin/ddos
+.br
+.B /etc/ddos/ddos.conf
+.br
+.B /etc/ddos/ignore.ip.list
+.br
+.B /etc/ddos/ignore.host.list
+
+.SH AUTHOR
+Zaf <zaf@vsnl.com> (Copyright (C) 2005)
+
+.SH CONTRIBUTORS
+Jefferson González <jgmdev@gmail.com> (Fixes and improvements)
+.br
+Marc S. Brooks <devel@mbrooks.info> (BSD support)

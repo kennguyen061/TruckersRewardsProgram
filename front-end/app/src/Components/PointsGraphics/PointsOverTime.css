@@ -1,12 +1,15 @@
+.pageThis {
+  margin-bottom: 7rem;
+}
 .Graph {
-  height: 100%;
+  height: 75%;
   width: 80%;
   background-color: #1f2025;
   border-radius: 10px;
   position: relative;
   align-items: center;
-  top: 80px;
-  margin-bottom: 6rem;
+  top: 5rem;
+  margin-bottom: 5rem;
   left: 10%;
 
   box-shadow: #fff;
@@ -17,15 +20,20 @@
   width: 60%;
   background-color: #1f2025;
   border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .Graph h3 {
-  padding: 1rem 1rem;
+  padding: 2rem 2rem;
   color: #fff;
 }
 
 .dropdown {
   align-self: right;
-  padding: 1rem;
+  padding-top: 2rem;
   background-color: #1f2025;
+}
+
+.butt {
+  color: #fff;
 }

@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "d8c2d872-1b45-48af-91f5-ff1da664f045",
+		"name": "I. Test Application - Approve",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Approve Linda App",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\": 4,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/approveapplication",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"approveapplication"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

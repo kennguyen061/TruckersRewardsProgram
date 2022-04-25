@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "60b5eca0-62f9-438d-bbd4-10b35db9fa3d",
+		"name": "H. TestApplication - delete",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete linda app",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\": 5,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/deleteapplication",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"deleteapplication"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

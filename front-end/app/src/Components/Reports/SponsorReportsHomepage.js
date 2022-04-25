@@ -1,4 +1,4 @@
-import "./SponsorReportsHomepage.css";
+import "./ReportsHomepage.css";
 import NewNav from "../UI/SponsorNav";
 import { Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const SponsorReportsHomepage = () => {
             <tr>
               <td>
                 <Link
-                  to="/Reports/SponsorReports/CurrenDrivers"
+                  to="/Reports/SponsorReports/CurrentDrivers"
                   className="Reports-Link"
                 >
                   Current Drivers Report

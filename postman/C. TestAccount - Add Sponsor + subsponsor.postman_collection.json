@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "791b2f7a-ea8e-408c-a3b7-848a0c7702cb",
+		"name": "C. TestAccount - Add Sponsor + subsponsor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Sponsor A",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Sponsor A\",\n    \"dRules\": \"NONE\",\n    \"conversionScale\": \"0.1\",\n    \"cRules\": \"NONE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/createsponsor",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"createsponsor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Sponsor B",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Sponsor B\",\n    \"dRules\": \"NONE\",\n    \"conversionScale\": \"0.1\",\n    \"cRules\": \"NONE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/createsponsor",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"createsponsor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Sponsor A false",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Sponsor A\",\n    \"dRules\": \"NONE\",\n    \"conversionScale\": \"0.1\",\n    \"cRules\": \"NONE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/createsponsor",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"createsponsor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new sup sponsor account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\":\"Jill\",\n    \"lastName\":\"Peppercorn\",\n    \"email\": \"jill@sponsora.org\",\n    \"street\": \"123 Fourth ST\",\n    \"phoneNum\": \"888-888-8888\",\n    \"sponsorName\": \"Sponsor A\",\n    \"password\": \"Hello22!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/createsponsorsubuser",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"createsponsorsubuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new sup sponsor account - Fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\":\"Jill\",\n    \"lastName\":\"Peppercorn\",\n    \"email\": \"jill@sponsora.org\",\n    \"street\": \"123 Fourth ST\",\n    \"phoneNum\": \"888-888-8888\",\n    \"sponsorName\": \"Sponsor A\",\n    \"password\": \"Hello22!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/createsponsorsubuser",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"createsponsorsubuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sponsor login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jill@sponsora.org\",\n    \"password\": \"Hello22!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sponsor login - bad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(fales);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jill@sponsora.org\",\n    \"password\": \"Hello222!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get company ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/reports/SponsorName?sid=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"reports",
+						"SponsorName"
+					],
+					"query": [
+						{
+							"key": "sid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

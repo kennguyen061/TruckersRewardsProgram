@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "7e0977ff-611d-48c2-b593-3d06a8c1e2b5",
+		"name": "G. TestApplication - create app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create App - linda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\": 4,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/createApplication",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"createApplication"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App - jimmy pesto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\": 8,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/createApplication",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"createApplication"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

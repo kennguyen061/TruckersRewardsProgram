@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "80201a34-4b58-441c-868e-6bf9220881df",
+		"name": "F. Delete users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete extra ben",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"DRIVER\",\n    \"id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/delete",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete fake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"DRIVER\",\n    \"id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/delete",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "2104aebf-76bf-4b28-8c48-5af7f823f6ab",
+		"name": "B. TestAccount - Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bob Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"pm.collectionVariables.get(\"variable_key\");",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"email\": \"bob@bobburger.com\",\n      \"password\": \"Burgers22!\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Linda Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"email\": \"linda@bobburger.com\",\n      \"password\": \"LoveBoobyBob22!\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jimmy Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"email\": \"jimmy@jimmypestos.com\",\n      \"password\": \"burgers\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"email\": \"admin@roger.com\",\n      \"password\": \"Admin22!\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Login -bad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.exists).to.eql(false);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"email\": \"admin@roger.com\",\n      \"password\": \"Admin21!\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

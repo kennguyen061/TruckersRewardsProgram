@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "3ade8c25-15a7-4daa-a2a9-b5265f3920c8",
+		"name": "E. Update Account info",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tina get a phone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Change test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"role\": \"DRIVER\",\n            \"id\": \"5\",\n            \"firstName\": \"Tina\",\n             \"lastName\": \"Belcher\",\n            \"email\": \"tina@bobburger.com\",\n             \"street\": \"5 Ocean Avenue\",\n            \"city\": \"Wonder Warf\",\n            \"state\": \"NJ\",\n            \"zip\": \"88883\",\n            \"phoneNum\":\"555-555-5569\",\n            \"password\":\"ButtsButtsIloveButts\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/update",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sponsor user update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Exist test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson).to.eql(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"SPONSOR\",\n    \"id\": \"3\",\n    \"firstName\":\"Jill\",\n    \"lastName\":\"Peppercorn\",\n    \"email\": \"jill@sponsora.org\",\n    \"street\": \"123 Fifth ST\",\n    \"phoneNum\": \"888-888-8888\",\n    \"sponsorName\": \"Sponsor A\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/update",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Ben password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\": \"DRIVER\",\r\n    \"Email\": \"ben@lucid.links\",\r\n    \"newpassword\": \"Go0dpass#1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/updatepassword",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"updatepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Ben password back to normal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\": \"DRIVER\",\r\n    \"Email\": \"ben@lucid.links\",\r\n    \"newpassword\": \"YoMomma5!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/account/updatepassword",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"updatepassword"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

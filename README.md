@@ -18,3 +18,15 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+# REST API
+Make requests to the REST API hosted at http://18.235.52.212 to access the AWS RDS instance A seed file, `dbseed.js`, ensures that necessary 
+RDS tables are always created upon starting the EC2 instance. `Node index.js` starts the s.erver to make available for client requests. The API
+is comprised of several Express.js routes that allow the client to create, read, update, and delete database entities.
+## Account
+## Application
+## Cart
+## DriverManagement
+## Points
+## Report
+## WishList

@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "09c3baa2-6d90-4868-94fd-cda20456c200",
+		"name": "L.  Retrieve all Sponsor apps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gett all of sponsor 1's apps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/application/retrieveallsponsorapplications?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"application",
+						"retrieveallsponsorapplications"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

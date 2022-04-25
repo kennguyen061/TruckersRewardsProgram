@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "49f46ec9-89fe-496a-8288-dcabc3ece3c1",
+		"name": "Q. points",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPoints/Goal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/main/point/?UID=1&SID=5",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"main",
+						"point",
+						""
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "1"
+						},
+						{
+							"key": "SID",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

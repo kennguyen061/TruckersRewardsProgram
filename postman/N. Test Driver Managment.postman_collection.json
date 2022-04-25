@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "8b585ba9-cfbd-45bc-b1b8-c9383e3270e3",
+		"name": "N. Test Driver Managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "View All Drivers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/viewdrivers?SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"viewdrivers"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View driver",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/viewdriver?UID=5&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"viewdriver"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View driver points",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/viewdriverpoints?UID=5&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"viewdriverpoints"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View driver orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/viewdriverorders?UID=5&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"viewdriverorders"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Linda :(",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"UID\":1,\n    \"SID\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/removedriver",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"removedriver"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "SID",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change point conversion factor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SID\": 1,\n\"conversion_scale\":1.5}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/changescale",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"changescale"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "SID",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get driver",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function () {",
+							"    const responseJson = pm.response.json();",
+							"     pm.expect(responseJson.UID).to.eql(4);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/drivermgt/getDriverByEmail?Email=linda@bobburger.com",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"drivermgt",
+						"getDriverByEmail"
+					],
+					"query": [
+						{
+							"key": "Email",
+							"value": "linda@bobburger.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

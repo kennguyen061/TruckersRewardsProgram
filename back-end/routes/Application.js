@@ -10,6 +10,7 @@ const db = mysql.createConnection({
   host: "team1-db.cobd8enwsupz.us-east-1.rds.amazonaws.com",
   user: "admin",
   password: "y4PVPHuqVq52Pvp",
+  database: "CPSC4910",
 });
 
 // connect to database
@@ -18,123 +19,234 @@ db.connect((error) => {
   console.log("Connected");
 });
 
-//Checks if two months have passed for an application, use before create application if one already exists of same UID and SID?
-const checkapplicationtime = (UID, SID) => {
+router.post("/createApplication", (request, response) => {
+  // check if application already exists
+  console.log("Hit create applicaiton");
   db.query(
-    "SELECT Appdate FROM Application WHERE UID = ? AND SID = ? AND CURRENT_TIMESTAMP() > (SELECT DATEADD(month,2,Appdate) FROM Application WHERE UID = ? AND SID = ?);",
-    [UID, SID, UID, SID],
+    "SELECT COUNT(*) AS RowCount FROM APPLICATION WHERE UID = ? AND SID = ?;",
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
-      //if there is more than 1 result, then return true
-      if (result.length >= 1) {
-        return true;
+      if (result.RowCount >= 1) {
+        response.send(false);
       } else {
-        return false;
+        //Creates the new application
+        db.query(
+          "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP());",
+          [request.body.UID, request.body.SID],
+          (error, result) => {
+            if (error) throw error;
+            response.send(true);
+          }
+        );
       }
     }
   );
-};
+});
 
-//Creates a new application, check 2 months
-function createApplication(UID, SID) {
+// driver delete application
+router.post("/deleteapplication", (request, response) => {
+  console.log("Hit delete app");
   db.query(
-    "INSERT INTO APPLICATION(UID,SID,Appstatus,Appdate) VALUES(?,?,'InProgress',CURRENT_TIMESTAMP()",
-    [UID, SID],
+    "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?;",
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
+      response.send(true);
     }
   );
-}
+});
 
-//Used by drivers when cancelling applications
-function deleteApplication(UID, SID) {
+// approve application
+router.post("/approveapplication", (request, response) => {
+  console.log("Hit approve app");
   db.query(
-    "DELETE FROM APPLICATION WHERE UID = ? AND SID = ?",
-    [UID, SID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
-
-//Sponsors/admins approving applications
-function approveApplication(UID, SID) {
-  db.query(
-    "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?",
-    [UID, SID],
+    "UPDATE APPLICATION SET Appstatus = 'Approved' WHERE UID = ? AND SID = ?;",
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   //Creates a new point and wishlist record after application approval
   db.query(
-    "INSERT INTO DRIVERWISHLIST(UID,SID) VALUES(?,?)",
-    [UID, SID],
+    "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0);",
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
     }
   );
   db.query(
-    "INSERT INTO POINTBALANCE(UID,SID,Amount) VALUES(?,?,0)",
-    [UID, SID],
+    "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?);",
+    [request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
+      response.send(true);
     }
   );
-  db.query(
-    "INSERT INTO SPONSORANDDRIVER(UID,SID) VALUES(?,?)",
-    [UID, SID],
-    (error, result) => {
-      if (error) throw error;
-    }
-  );
-}
+});
 
-//Sponsors/admins rejecting applications with a reason
-function rejectApplication(UID, SID, Reason) {
+// reject app
+router.post("/rejectapplication", (request, response) => {
+  console.log("rejectapp");
   db.query(
-    "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?",
-    [Reason, UID, SID],
+    "UPDATE APPLICATION SET Appstatus = 'Rejected', Reason = ? WHERE UID = ? AND SID = ?;",
+    [request.body.Reason, request.body.UID, request.body.SID],
     (error, result) => {
       if (error) throw error;
+      response.send(true);
     }
   );
-}
+});
 
-//Retrieves a specific application
-const retrieveApplication = (UID, SID) => {
-  db.query(
-    "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?",
-    [UID, SID],
-    (error, result) => {
-      if (error) throw error;
-      return result;
-    }
-  );
-};
+// read specific application
+router.get("/retrieveapplication", (request, response) => {
+  console.log("Hit retrieve app");
 
-//retrieve all applications of a user
-const retrieveallUserApplications = (UID) => {
-  db.query(
-    "SELECT * FROM APPLICATION WHERE UID = ?",
-    [UID],
-    (error, result) => {
-      if (error) throw error;
-      return result;
-    }
-  );
-};
+  let responseBody = {
+    exists: false,
+    Appstatus: "",
+    Reason: "",
+    UID: "",
+    SID: "",
+  };
 
-//retrieve all user applications of a sponsor
-const retrieveallSponsorApplications = (SID) => {
   db.query(
-    "SELECT * FROM APPLICATION WHERE SID = ?",
-    [SID],
+    "SELECT * FROM APPLICATION WHERE UID = ? AND SID = ?;",
+    [request.query.UID, request.query.SID],
     (error, result) => {
-      if (error) throw error;
-      return result;
+      if (error) {
+        throw error;
+      } else {
+        if (result.length == 0) {
+          response.send(false);
+        } else {
+          responseBody.exists = true;
+          responseBody.Appstatus = result[0].Appstatus;
+          responseBody.Reason = result[0].Reason;
+          responseBody.UID = result[0].UID;
+          responseBody.SID = result[0].SID;
+        }
+
+        response.send(JSON.stringify(responseBody));
+      }
     }
   );
-};
+});
+
+// read specific application
+router.get("/retrievealluserapplications", (request, response) => {
+  console.log("Hit get all apps");
+
+  db.query(
+    "SELECT * FROM APPLICATION WHERE UID = ?;",
+    [request.query.UID],
+    (error, result) => {
+      //responsebody array
+      let rbArray = Array();
+      if (error) {
+        throw error;
+      } else {
+        //loop through result[index]
+        for (const element of result) {
+          let responseBody = {
+            Appstatus: null,
+            Reason: null,
+            UID: null,
+            SID: null,
+          };
+
+          responseBody.Appstatus = element.Appstatus;
+          responseBody.Reason = element.Reason;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          rbArray.push(responseBody);
+        }
+
+        response.send(JSON.stringify(rbArray));
+      }
+    }
+  );
+});
+
+// read specific application
+router.get("/retrieveallsponsorapplications", (request, response) => {
+  console.log("Hit get all sponsor apps");
+
+  db.query(
+    "SELECT * FROM APPLICATION WHERE SID = ?;",
+    [request.query.SID],
+    (error, result) => {
+      let rbArray = Array();
+      if (error) {
+        throw error;
+      } else {
+        //loop through result[index]
+        for (const element of result) {
+          let responseBody = {
+            Appstatus: null,
+            Reason: null,
+            UID: null,
+            SID: null,
+          };
+
+          responseBody.Appstatus = element.Appstatus;
+          responseBody.Reason = element.Reason;
+          responseBody.UID = element.UID;
+          responseBody.SID = element.SID;
+          rbArray.push(responseBody);
+        }
+
+        response.send(JSON.stringify(rbArray));
+      }
+    }
+  );
+});
+
+router.get("/getAllSponsorApps", (req, res) => {
+  //get all apps
+  db.query(
+    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason,DRIVER.UID FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ? AND AppStatus = 'InProgress';",
+    [req.query.SID],
+    (err, result) => {
+      if (err) {
+        console.log("problem with get all sponsor apps");
+        res.send(false);
+      } else if (result.length == 0) {
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(result));
+      }
+    }
+  );
+});
+
+router.get("/getAllSponsorAppsReports", (req, res) => {
+  //get all apps
+  db.query(
+    " SELECT First_name, Last_name, Email, Phone_number, AppStatus, AppDate, Reason,DRIVER.UID FROM APPLICATION JOIN DRIVER ON DRIVER.UID = APPLICATION.UID WHERE SID = ?;",
+    [req.query.SID],
+    (err, result) => {
+      if (err) {
+        console.log("problem with get all sponsor apps");
+        res.send(false);
+      } else if (result.length == 0) {
+        res.send(false);
+      } else {
+        res.send(JSON.stringify(result));
+      }
+    }
+  );
+});
+
+router.get("/getAllSponsors", (req, res) => {
+  db.query(" SELECT * FROM SPONSORORG;", [], (err, results) => {
+    if (err) {
+      console.log("somnething went wrong");
+      res.send(false);
+    } else {
+      res.send(JSON.stringify(results));
+    }
+  });
+});
 
 module.exports = router;

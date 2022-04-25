@@ -1,7 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
-button:focus{
-  background:lightgreen;
+button:focus {
+  background: rgb(6, 48, 238);
 }
 
 .btn-group button {
@@ -9,15 +9,14 @@ button:focus{
 }
 
 .buttons has-addons is-centered {
-  float:left
+  float: left;
 }
 
 .select {
   overflow: hidden;
 }
 
-::placeholder { 
+::placeholder {
   font-size: large;
   color: black;
-  
 }

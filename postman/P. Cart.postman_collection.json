@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "9f0978b2-7613-4ef9-a1e3-e76b256c51da",
+		"name": "P. Cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GEt Cart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/?UID=1&SID=5",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						""
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "1"
+						},
+						{
+							"key": "SID",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1,\n    \"ItemName\": \"The crown jewels of her majesty the queen\",\n    \"Price\": 1.00,\n    \"Quantity\": 1,\n    \"Availability\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/update",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cart increase quantity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/increasequantity",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"increasequantity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cart decrease quantity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/decreasequantity",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"decreasequantity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notify Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1,\n    \"ItemName\": \"The crown jewels of her majesty the queen\",\n    \"Price\": 1.00,\n    \"Quantity\":1,\n    \"Availability\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/notifycart",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"notifycart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notify Cart Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1,\n    \"ItemName\": \"The crown jewels of her majesty the queen\",\n    \"Price\": 1.00,\n    \"Quantity\":2,\n    \"Availability\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/notifycart",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"notifycart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ItemID\": 1,\n    \"UID\": 5,\n    \"SID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/cart/remove",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"cart",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

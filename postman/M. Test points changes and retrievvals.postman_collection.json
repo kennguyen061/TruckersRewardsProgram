@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "3cdfe5e2-2a9f-43e7-9290-b94d10294e0a",
+		"name": "M. Test points changes and retrievvals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add get linda's points",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/points/?UID=4&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"points",
+						""
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "4"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add point to Linda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SID\":1,\n\"UID\": 4,\n\"newAmount\": 20,\n\"reason\": \"good work\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/points/update",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"points",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subtract points from linda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SID\":1,\n\"UID\": 5,\n\"newAmount\": 15,\n\"reason\": \"bad work\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://18.235.52.212:8000/points/update",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"points",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Linda's Point History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.235.52.212:8000/points/history?UID=4&SID=1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"235",
+						"52",
+						"212"
+					],
+					"port": "8000",
+					"path": [
+						"points",
+						"history"
+					],
+					"query": [
+						{
+							"key": "UID",
+							"value": "4"
+						},
+						{
+							"key": "SID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

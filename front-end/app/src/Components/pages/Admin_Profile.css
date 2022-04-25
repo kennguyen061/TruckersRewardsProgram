@@ -1,5 +1,8 @@
-.Admin_Profile {
+.card {
   height: 100vh;
+}
+
+.Admin_Profile {
   width: 100%;
   display: flex;
   align-items: center;
@@ -8,41 +11,98 @@
   background-color: rgba(89, 167, 255, 0.781);
 }
 
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button button {
+  font: inherit;
+  font-size: 30px;
+  cursor: pointer;
+  border: 1px solid #0a93ee;
+  background-color: #0a81cf;
+  color: white;
+  border-radius: 30px;
+  margin-top: 1rem;
+  width: 20rem;
+  height: 4rem;
+  margin-bottom: 2rem;
+}
+
 .Login-Header {
   font: inherit;
   font-size: 40px;
   font-weight: bold;
 }
-
-.Name {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.3rem;
 }
 
-.Email {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+.header h5 {
+  margin-top: 0.3rem;
 }
 
-.Address {
-  font: inherit;
-  font-size: 16px;
-  font-weight: bold;
+.pii-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 1rem;
 }
 
-.Phone {
-  font: inherit;
-  font-size: 16px;
+.pii-field label {
   font-weight: bold;
+  display: block;
+  font-size: 25px;
+  margin-right: 1rem;
 }
 
-.line {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 5px;
-  background-color:rgb(16, 19, 245);
-  opacity: 0.5;
+.pii-field input {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  width: 17rem;
+  height: 3rem;
+  border: 3px solid #0a93ee;
+
+  text-indent: 1rem;
+}
+
+::-webkit-input-placeholder {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+::-moz-placeholder {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+:-ms-input-placeholder {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+}
+
+::placeholder {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 25px;
 }
